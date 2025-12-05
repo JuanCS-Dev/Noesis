@@ -1,0 +1,86 @@
+/home/maximus/Área de trabalho/Digital Daimon/.venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py:208: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+[1m============================= test session starts ==============================[0m
+platform linux -- Python 3.12.3, pytest-8.3.3, pluggy-1.6.0 -- /home/maximus/Área de trabalho/Digital Daimon/.venv/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/maximus/Área de trabalho/Digital Daimon/backend/services/maximus_core_service
+configfile: pytest.ini
+plugins: anyio-4.12.0, cov-6.0.0, asyncio-0.24.0
+asyncio: mode=Mode.STRICT, default_loop_scope=None
+[1mcollecting ... [0mcollected 24 items
+
+services/maximus_core_service/tests/unit/consciousness/test_biomimetic_safety_bridge.py::test_bridge_initialization_default_config [32mPASSED[0m[32m [  4%][0m
+services/maximus_core_service/tests/unit/consciousness/test_biomimetic_safety_bridge.py::test_bridge_initialization_custom_config [32mPASSED[0m[32m [  8%][0m
+services/maximus_core_service/tests/unit/consciousness/test_biomimetic_safety_bridge.py::test_bridge_initialization_with_kill_switch [32mPASSED[0m[32m [ 12%][0m
+services/maximus_core_service/tests/unit/consciousness/test_biomimetic_safety_bridge.py::test_coordinate_processing_success [32mPASSED[0m[32m [ 16%][0m
+services/maximus_core_service/tests/unit/consciousness/test_biomimetic_safety_bridge.py::test_coordinate_processing_increments_counter [32mPASSED[0m[33m [ 20%][0m
+services/maximus_core_service/tests/unit/consciousness/test_biomimetic_safety_bridge.py::test_coordinate_processing_with_explicit_modulation [32mPASSED[0m[33m [ 25%][0m
+services/maximus_core_service/tests/unit/consciousness/test_biomimetic_safety_bridge.py::test_system_isolation_predictive_failure [32mPASSED[0m[33m [ 29%][0m
+services/maximus_core_service/tests/unit/consciousness/test_biomimetic_safety_bridge.py::test_system_isolation_neuromod_failure [32mPASSED[0m[33m [ 33%][0m
+services/maximus_core_service/tests/unit/consciousness/test_biomimetic_safety_bridge.py::test_auto_generated_modulation_high_error [32mPASSED[0m[33m [ 37%][0m
+services/maximus_core_service/tests/unit/consciousness/test_biomimetic_safety_bridge.py::test_auto_generated_modulation_low_error [32mPASSED[0m[33m [ 41%][0m
+services/maximus_core_service/tests/unit/consciousness/test_biomimetic_safety_bridge.py::test_cross_system_anomaly_high_error_high_conflict [32mPASSED[0m[33m [ 45%][0m
+services/maximus_core_service/tests/unit/consciousness/test_biomimetic_safety_bridge.py::test_cross_system_anomaly_multiple_breakers [32mPASSED[0m[33m [ 50%][0m
+services/maximus_core_service/tests/unit/consciousness/test_biomimetic_safety_bridge.py::test_aggregate_circuit_breaker_opens_on_consecutive_failures [32mPASSED[0m[33m [ 54%][0m
+services/maximus_core_service/tests/unit/consciousness/test_biomimetic_safety_bridge.py::test_aggregate_circuit_breaker_rejects_processing [32mPASSED[0m[33m [ 58%][0m
+services/maximus_core_service/tests/unit/consciousness/test_biomimetic_safety_bridge.py::test_aggregate_circuit_breaker_calls_kill_switch [32mPASSED[0m[33m [ 62%][0m
+services/maximus_core_service/tests/unit/consciousness/test_biomimetic_safety_bridge.py::test_rate_limiting_enforced [32mPASSED[0m[33m [ 66%][0m
+services/maximus_core_service/tests/unit/consciousness/test_biomimetic_safety_bridge.py::test_emergency_stop_shuts_down_both_systems [32mPASSED[0m[33m [ 70%][0m
+services/maximus_core_service/tests/unit/consciousness/test_biomimetic_safety_bridge.py::test_emergency_stop_prevents_further_processing [32mPASSED[0m[33m [ 75%][0m
+services/maximus_core_service/tests/unit/consciousness/test_biomimetic_safety_bridge.py::test_get_state_returns_correct_structure [32mPASSED[0m[33m [ 79%][0m
+services/maximus_core_service/tests/unit/consciousness/test_biomimetic_safety_bridge.py::test_get_health_metrics_aggregates_both_systems [32mPASSED[0m[33m [ 83%][0m
+services/maximus_core_service/tests/unit/consciousness/test_biomimetic_safety_bridge.py::test_get_health_metrics_all_numeric [32mPASSED[0m[33m [ 87%][0m
+services/maximus_core_service/tests/unit/consciousness/test_biomimetic_safety_bridge.py::test_repr_formatting [32mPASSED[0m[33m [ 91%][0m
+services/maximus_core_service/tests/unit/consciousness/test_biomimetic_safety_bridge.py::test_scenario_normal_operation [32mPASSED[0m[33m [ 95%][0m
+services/maximus_core_service/tests/unit/consciousness/test_biomimetic_safety_bridge.py::test_scenario_one_system_fails_other_continues [32mPASSED[0m[33m [100%][0m
+
+[33m=============================== warnings summary ===============================[0m
+tests/unit/consciousness/test_biomimetic_safety_bridge.py: 17 warnings
+  /home/maximus/Área de trabalho/Digital Daimon/.venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py:783: DeprecationWarning: The event_loop fixture provided by pytest-asyncio has been redefined in
+  /home/maximus/Área de trabalho/Digital Daimon/backend/services/maximus_core_service/tests/unit/consciousness/conftest.py:14
+  Replacing the event_loop fixture with a custom implementation is deprecated
+  and will lead to errors in the future.
+  If you want to request an asyncio event loop with a scope other than function
+  scope, use the "scope" argument to the asyncio mark when marking the tests.
+  If you want to return different types of event loops, use the event_loop_policy
+  fixture.
+  
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+
+---------- coverage: platform linux, python 3.12.3-final-0 -----------
+Name                                                                                           Stmts   Miss  Cover   Missing
+----------------------------------------------------------------------------------------------------------------------------
+services/maximus_core_service/__init__.py                                                          1      0   100%
+services/maximus_core_service/consciousness/__init__.py                                            5      0   100%
+services/maximus_core_service/consciousness/biomimetic_safety_bridge.py                          168     14    92%   154, 175, 205-219, 273-275, 298, 313
+services/maximus_core_service/consciousness/neuromodulation/__init__.py                            1      0   100%
+services/maximus_core_service/consciousness/neuromodulation/acetylcholine_hardened.py             10      0   100%
+services/maximus_core_service/consciousness/neuromodulation/coordinator_hardened.py              127     33    74%   175-177, 193-200, 210-211, 221-224, 263-284, 311-317, 325-331, 420-423
+services/maximus_core_service/consciousness/neuromodulation/dopamine_hardened.py                 111     23    79%   205, 241-249, 257-259, 279-294, 325, 351-353, 403
+services/maximus_core_service/consciousness/neuromodulation/modulator_base.py                    120     25    79%   197, 235-241, 249-251, 272-290, 321, 347-350, 393-394
+services/maximus_core_service/consciousness/neuromodulation/norepinephrine_hardened.py            10      0   100%
+services/maximus_core_service/consciousness/neuromodulation/serotonin_hardened.py                 10      0   100%
+services/maximus_core_service/consciousness/predictive_coding/__init__.py                          1      0   100%
+services/maximus_core_service/consciousness/predictive_coding/hierarchy_hardened.py              185     41    78%   224, 229, 238-248, 251-259, 290-291, 294-295, 308-313, 326-331, 344-349, 361-364, 476-479
+services/maximus_core_service/consciousness/predictive_coding/layer1_sensory_hardened.py          45      5    89%   105, 156, 158, 188, 190
+services/maximus_core_service/consciousness/predictive_coding/layer2_behavioral_hardened.py       41      4    90%   106, 135, 158, 195
+services/maximus_core_service/consciousness/predictive_coding/layer3_operational_hardened.py      58      6    90%   105, 109, 139, 157, 164, 220
+services/maximus_core_service/consciousness/predictive_coding/layer4_tactical_hardened.py         54      9    83%   94, 126, 174, 190-199, 217, 231-232
+services/maximus_core_service/consciousness/predictive_coding/layer5_strategic_hardened.py        70     20    71%   105, 134, 171, 287-306, 310-313
+services/maximus_core_service/consciousness/predictive_coding/layer_base_hardened.py             142     32    77%   203-209, 213-216, 230, 248-259, 263-271, 295-296, 303, 317-325, 383-386
+services/maximus_core_service/tests/__init__.py                                                    2      0   100%
+services/maximus_core_service/tests/conftest.py                                                  175    118    33%   27-35, 44-45, 51, 57-73, 79, 96, 110, 123, 129, 139, 151-176, 185-192, 198-205, 214-225, 234-258, 264-274, 283-308, 314-323, 332-346
+services/maximus_core_service/tests/unit/__init__.py                                               1      0   100%
+services/maximus_core_service/tests/unit/consciousness/conftest.py                                20      2    90%   26, 29
+services/maximus_core_service/tests/unit/consciousness/test_biomimetic_safety_bridge.py          209      3    99%   67, 273, 507
+----------------------------------------------------------------------------------------------------------------------------
+TOTAL                                                                                           1566    335    79%
+Coverage HTML written to dir htmlcov
+Coverage XML written to file coverage_5_biomimetic.xml
+
+[32mRequired test coverage of 70% reached. Total coverage: 78.61%
+[0m[33m======================= [32m24 passed[0m, [33m[1m17 warnings[0m[33m in 6.58s[0m[33m ========================[0m

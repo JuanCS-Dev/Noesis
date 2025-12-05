@@ -11,12 +11,16 @@ excluded from ignition events to preserve phenomenal unity.
 from __future__ import annotations
 
 import asyncio
+import logging
 import time
 from collections.abc import Callable
 
 import numpy as np
 
 from consciousness.tig.sync_models import ClockOffset, ClockRole, SyncResult, SyncState
+
+logger = logging.getLogger(__name__)
+
 
 
 class PTPSynchronizer:

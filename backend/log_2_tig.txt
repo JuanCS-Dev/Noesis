@@ -1,0 +1,660 @@
+/home/maximus/Área de trabalho/Digital Daimon/.venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py:208: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+[1m============================= test session starts ==============================[0m
+platform linux -- Python 3.12.3, pytest-8.3.3, pluggy-1.6.0 -- /home/maximus/Área de trabalho/Digital Daimon/.venv/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/maximus/Área de trabalho/Digital Daimon/backend/services/maximus_core_service
+configfile: pytest.ini
+plugins: anyio-4.12.0, cov-6.0.0, asyncio-0.24.0
+asyncio: mode=Mode.STRICT, default_loop_scope=None
+[1mcollecting ... [0mcollected 108 items
+
+services/maximus_core_service/tests/unit/consciousness/tig/test_fabric_100pct.py::test_tig_node_neighbors_property [32mPASSED[0m[32m [  0%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_fabric_100pct.py::test_tig_node_get_degree [32mPASSED[0m[32m [  1%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_fabric_100pct.py::test_fabric_metrics_eci_property_alias [32mPASSED[0m[32m [  2%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_fabric_100pct.py::test_fabric_metrics_clustering_coefficient_property_alias [32mPASSED[0m[32m [  3%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_fabric_100pct.py::test_fabric_metrics_connectivity_ratio_property [32mPASSED[0m[32m [  4%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_fabric_100pct.py::test_topology_config_num_nodes_alias [32mPASSED[0m[32m [  5%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_fabric_100pct.py::test_topology_config_avg_degree_alias [32mPASSED[0m[32m [  6%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_fabric_100pct.py::test_topology_config_rewire_probability_alias [32mPASSED[0m[32m [  7%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_fabric_100pct.py::test_tig_node_clustering_coefficient_less_than_2_neighbors [32mPASSED[0m[32m [  8%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_fabric_100pct.py::test_tig_node_clustering_coefficient_with_triangles [32mPASSED[0m[32m [  9%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_fabric_100pct.py::test_tig_node_broadcast_to_neighbors_no_quality_connections [32mPASSED[0m[32m [ 10%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_fabric_100pct.py::test_tig_node_broadcast_to_neighbors_with_quality_connections [32mPASSED[0m[33m [ 11%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_fabric_100pct.py::test_tig_node_send_to_neighbor_success [32mPASSED[0m[33m [ 12%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_fabric_100pct.py::test_tig_node_send_to_neighbor_exception [32mPASSED[0m[33m [ 12%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_fabric_100pct.py::test_fabric_already_initialized_runtime_error [31mFAILED[0m[31m [ 13%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_fabric_100pct.py::test_fabric_initialize_with_iit_violations_print [31mFAILED[0m[31m [ 14%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_fabric_100pct.py::test_apply_small_world_rewiring_with_isolated_nodes [32mPASSED[0m[31m [ 15%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_fabric_100pct.py::test_fabric_metrics_connectivity_ratio_less_than_2_nodes [32mPASSED[0m[31m [ 16%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_fabric_100pct.py::test_first_push_coverage_targets [32mPASSED[0m[31m [ 17%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestClockOffset::test_clock_offset_creation [32mPASSED[0m[31m [ 18%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestClockOffset::test_is_acceptable_for_esgt_pass_simulation_thresholds [32mPASSED[0m[31m [ 19%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestClockOffset::test_is_acceptable_for_esgt_fail_high_jitter [32mPASSED[0m[31m [ 20%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestClockOffset::test_is_acceptable_for_esgt_fail_low_quality [32mPASSED[0m[31m [ 21%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestClockOffset::test_is_acceptable_for_esgt_hardware_thresholds [32mPASSED[0m[31m [ 22%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestClockOffset::test_is_acceptable_for_esgt_boundary_jitter [32mPASSED[0m[31m [ 23%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestClockOffset::test_is_acceptable_for_esgt_boundary_quality [32mPASSED[0m[31m [ 24%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestSyncResult::test_sync_result_success_creation [32mPASSED[0m[31m [ 25%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestSyncResult::test_sync_result_failure_creation [32mPASSED[0m[31m [ 25%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestSyncResult::test_sync_result_default_values [32mPASSED[0m[31m [ 26%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestPTPSynchronizerLifecycle::test_synchronizer_initialization_slave [32mPASSED[0m[31m [ 27%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestPTPSynchronizerLifecycle::test_synchronizer_initialization_grand_master [32mPASSED[0m[31m [ 28%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestPTPSynchronizerLifecycle::test_start_grand_master [31mFAILED[0m[31m [ 29%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestPTPSynchronizerLifecycle::test_start_slave [31mFAILED[0m[31m [ 30%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestPTPSynchronizerLifecycle::test_start_idempotent [31mFAILED[0m[31m [ 31%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestPTPSynchronizerLifecycle::test_stop_synchronizer [31mFAILED[0m[31m [ 32%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestPTPSynchronizerLifecycle::test_update_grand_master_time_loop [31mFAILED[0m[31m [ 33%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestSyncToMaster::test_sync_to_master_grand_master_rejects [32mPASSED[0m[31m [ 34%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestSyncToMaster::test_sync_to_master_slave_success [32mPASSED[0m[31m [ 35%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestSyncToMaster::test_sync_to_master_multiple_iterations_converge [32mPASSED[0m[31m [ 36%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestSyncToMaster::test_sync_to_master_offset_calculation [32mPASSED[0m[31m [ 37%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestSyncToMaster::test_sync_to_master_state_transitions [32mPASSED[0m[31m [ 37%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestSyncToMaster::test_sync_to_master_exception_handling [32mPASSED[0m[31m [ 38%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestSyncToMaster::test_sync_to_master_jitter_history_accumulation [32mPASSED[0m[31m [ 39%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestSyncToMaster::test_sync_to_master_offset_history_accumulation [32mPASSED[0m[31m [ 40%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestSyncToMaster::test_sync_to_master_ema_initialization [32mPASSED[0m[31m [ 41%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestSyncToMaster::test_sync_to_master_integral_anti_windup [32mPASSED[0m[31m [ 42%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestSyncToMaster::test_sync_to_master_drift_calculation [32mPASSED[0m[31m [ 43%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestPTPSynchronizerHelpers::test_calculate_quality_perfect [32mPASSED[0m[31m [ 44%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestPTPSynchronizerHelpers::test_calculate_quality_poor [32mPASSED[0m[31m [ 45%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestPTPSynchronizerHelpers::test_calculate_quality_insufficient_history [32mPASSED[0m[31m [ 46%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestPTPSynchronizerHelpers::test_get_time_ns_grand_master [32mPASSED[0m[31m [ 47%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestPTPSynchronizerHelpers::test_get_time_ns_slave [32mPASSED[0m[31m [ 48%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestPTPSynchronizerHelpers::test_get_offset [32mPASSED[0m[31m [ 49%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestPTPSynchronizerHelpers::test_is_ready_for_esgt [32mPASSED[0m[31m [ 50%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestPTPSynchronizerHelpers::test_is_not_ready_for_esgt [32mPASSED[0m[31m [ 50%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestPTPSynchronizerHelpers::test_repr [32mPASSED[0m[31m [ 51%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestContinuousSync::test_continuous_sync_runs [31mFAILED[0m[31m [ 52%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestContinuousSync::test_continuous_sync_handles_failure [31mFAILED[0m[31m [ 53%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestContinuousSync::test_continuous_sync_respects_interval [31mFAILED[0m[31m [ 54%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestPTPCluster::test_cluster_initialization [32mPASSED[0m[31m [ 55%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestPTPCluster::test_add_grand_master [31mFAILED[0m[31m [ 56%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestPTPCluster::test_add_grand_master_duplicate_fails [31mFAILED[0m[31m [ 57%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestPTPCluster::test_add_slave [31mFAILED[0m[31m [ 58%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestPTPCluster::test_synchronize_all [31mFAILED[0m[31m [ 59%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestPTPCluster::test_synchronize_all_no_grand_master_fails [31mFAILED[0m[31m [ 60%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestPTPCluster::test_is_esgt_ready_true [31mFAILED[0m[31m [ 61%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestPTPCluster::test_is_esgt_ready_false_no_grand_master [32mPASSED[0m[31m [ 62%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestPTPCluster::test_is_esgt_ready_false_poor_sync [31mFAILED[0m[31m [ 62%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestPTPCluster::test_get_cluster_metrics [31mFAILED[0m[31m [ 63%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestPTPCluster::test_stop_all [31mFAILED[0m[31m [ 64%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::TestPTPCluster::test_cluster_repr [32mPASSED[0m[31m [ 65%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_tig.py::test_fabric_initialization [31mFAILED[0m[31m [ 66%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_tig.py::test_scale_free_topology [31mFAILED[0m[31m [ 67%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_tig.py::test_small_world_properties [31mFAILED[0m[31m [ 68%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_tig.py::test_no_isolated_nodes [31mFAILED[0m[31m [ 69%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_tig.py::test_iit_structural_compliance [31mFAILED[0m[31m [ 70%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_tig.py::test_effective_connectivity_index [31mFAILED[0m[31m [ 71%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_tig.py::test_bottleneck_detection [31mFAILED[0m[31m [ 72%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_tig.py::test_path_redundancy [31mFAILED[0m[31m [ 73%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_tig.py::test_broadcast_performance [31mFAILED[0m[31m [ 74%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_tig.py::test_esgt_mode_transition [31mFAILED[0m[31m [ 75%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_tig.py::test_ptp_basic_sync [31mFAILED[0m[31m [ 75%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_tig.py::test_ptp_jitter_quality [31mFAILED[0m[31m [ 76%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_tig.py::test_ptp_cluster_sync [31mFAILED[0m[31m [ 77%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_tig.py::test_phi_proxy_computation [31mFAILED[0m[31m [ 78%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_tig.py::test_phi_proxy_correlation_with_density [31mFAILED[0m[31m [ 79%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_tig.py::test_compliance_score [31mFAILED[0m[31m [ 80%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_tig.py::test_full_consciousness_substrate [31mFAILED[0m[31m [ 81%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py::TestPTPMasterFailure::test_grand_master_failure_triggers_election [31mFAILED[0m[31m [ 82%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py::TestPTPMasterFailure::test_master_failover_preserves_sync_quality [31mFAILED[0m[31m [ 83%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py::TestPTPMasterFailure::test_network_partition_during_sync [31mFAILED[0m[31m [ 84%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py::TestPTPMasterFailure::test_clock_drift_exceeds_threshold [31mFAILED[0m[31m [ 85%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py::TestPTPMasterFailure::test_jitter_spike_handling [31mFAILED[0m[31m [ 86%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py::TestTopologyBreakdown::test_hub_node_failure_cascades [31mFAILED[0m[31m [ 87%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py::TestTopologyBreakdown::test_bridge_node_failure_bisects_network [31mFAILED[0m[31m [ 87%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py::TestTopologyBreakdown::test_small_world_property_lost [31mFAILED[0m[31m [ 88%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py::TestTopologyBreakdown::test_clustering_coefficient_below_threshold [31mFAILED[0m[31m [ 89%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py::TestTopologyBreakdown::test_diameter_explosion [31mFAILED[0m[31m [ 90%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py::TestECIValidation::test_eci_calculation_degenerate_topology [31mFAILED[0m[31m [ 91%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py::TestECIValidation::test_eci_below_consciousness_threshold [31mFAILED[0m[31m [ 92%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py::TestECIValidation::test_eci_stability_under_churn [31mFAILED[0m[31m [ 93%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py::TestECIValidation::test_eci_theoretical_maximum [31mFAILED[0m[31m [ 94%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py::TestECIValidation::test_eci_response_to_node_dropout [31mFAILED[0m[31m [ 95%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py::TestESGTIntegration::test_esgt_ignition_with_degraded_ptp [31mFAILED[0m[31m [ 96%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py::TestESGTIntegration::test_esgt_phase_coherence_validation [31mFAILED[0m[31m [ 97%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py::TestESGTIntegration::test_esgt_broadcast_latency_impact [31mFAILED[0m[31m [ 98%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py::TestESGTIntegration::test_tig_esgt_temporal_coordination [31mFAILED[0m[31m [ 99%][0m
+services/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py::TestESGTIntegration::test_esgt_event_timing_under_jitter [31mFAILED[0m[31m [100%][0m/home/maximus/Área de trabalho/Digital Daimon/.venv/lib/python3.12/site-packages/coverage/inorout.py:521: CoverageWarning: Module services/maximus_core_service/src/consciousness/tig was never imported. (module-not-imported); see https://coverage.readthedocs.io/en/7.12.0/messages.html#warning-module-not-imported
+  self.warn(f"Module {pkg} was never imported.", slug="module-not-imported")
+/home/maximus/Área de trabalho/Digital Daimon/.venv/lib/python3.12/site-packages/pytest_cov/plugin.py:355: CovFailUnderWarning: Coverage failure: total of 44 is less than fail-under=70
+  warnings.warn(CovFailUnderWarning(message), stacklevel=1)
+[31m[1m
+ERROR: Coverage failure: total of 44 is less than fail-under=70
+[0m
+
+=================================== FAILURES ===================================
+[31m[1m________________ test_fabric_already_initialized_runtime_error _________________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_fabric_100pct.py[0m:282: in test_fabric_already_initialized_runtime_error
+    [0m[94mawait[39;49;00m fabric.initialize()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/fabric/core.py[0m:89: in initialize
+    [0mlogger.info([33m"[39;49;00m[33m🧠 Initializing TIG Fabric with [39;49;00m[33m%s[39;49;00m[33m nodes...[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.config.node_count)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m_______________ test_fabric_initialize_with_iit_violations_print _______________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_fabric_100pct.py[0m:308: in test_fabric_initialize_with_iit_violations_print
+    [0m[94mawait[39;49;00m fabric.initialize()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/fabric/core.py[0m:89: in initialize
+    [0mlogger.info([33m"[39;49;00m[33m🧠 Initializing TIG Fabric with [39;49;00m[33m%s[39;49;00m[33m nodes...[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.config.node_count)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m_____________ TestPTPSynchronizerLifecycle.test_start_grand_master _____________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_sync.py[0m:268: in test_start_grand_master
+    [0m[94mawait[39;49;00m sync.start()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync.py[0m:69: in start
+    [0mlogger.info([33m"[39;49;00m[33m⏰ [39;49;00m[33m%s[39;49;00m[33m: Grand Master clock started[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.node_id)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m________________ TestPTPSynchronizerLifecycle.test_start_slave _________________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_sync.py[0m:288: in test_start_slave
+    [0m[94mawait[39;49;00m sync.start()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync.py[0m:73: in start
+    [0mlogger.info([33m"[39;49;00m[33m⏰ [39;49;00m[33m%s[39;49;00m[33m: Slave mode - waiting for master[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.node_id)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m______________ TestPTPSynchronizerLifecycle.test_start_idempotent ______________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_sync.py[0m:302: in test_start_idempotent
+    [0m[94mawait[39;49;00m sync.start()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync.py[0m:73: in start
+    [0mlogger.info([33m"[39;49;00m[33m⏰ [39;49;00m[33m%s[39;49;00m[33m: Slave mode - waiting for master[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.node_id)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m_____________ TestPTPSynchronizerLifecycle.test_stop_synchronizer ______________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_sync.py[0m:319: in test_stop_synchronizer
+    [0m[94mawait[39;49;00m sync.start()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync.py[0m:69: in start
+    [0mlogger.info([33m"[39;49;00m[33m⏰ [39;49;00m[33m%s[39;49;00m[33m: Grand Master clock started[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.node_id)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m_______ TestPTPSynchronizerLifecycle.test_update_grand_master_time_loop ________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_sync.py[0m:338: in test_update_grand_master_time_loop
+    [0m[94mawait[39;49;00m sync.start()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync.py[0m:69: in start
+    [0mlogger.info([33m"[39;49;00m[33m⏰ [39;49;00m[33m%s[39;49;00m[33m: Grand Master clock started[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.node_id)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m_________________ TestContinuousSync.test_continuous_sync_runs _________________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_sync.py[0m:711: in test_continuous_sync_runs
+    [0m[94mawait[39;49;00m sync.start()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync.py[0m:73: in start
+    [0mlogger.info([33m"[39;49;00m[33m⏰ [39;49;00m[33m%s[39;49;00m[33m: Slave mode - waiting for master[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.node_id)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m___________ TestContinuousSync.test_continuous_sync_handles_failure ____________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_sync.py[0m:746: in test_continuous_sync_handles_failure
+    [0m[94mawait[39;49;00m sync.start()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync.py[0m:73: in start
+    [0mlogger.info([33m"[39;49;00m[33m⏰ [39;49;00m[33m%s[39;49;00m[33m: Slave mode - waiting for master[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.node_id)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m__________ TestContinuousSync.test_continuous_sync_respects_interval ___________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_sync.py[0m:777: in test_continuous_sync_respects_interval
+    [0m[94mawait[39;49;00m sync.start()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync.py[0m:73: in start
+    [0mlogger.info([33m"[39;49;00m[33m⏰ [39;49;00m[33m%s[39;49;00m[33m: Slave mode - waiting for master[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.node_id)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m_____________________ TestPTPCluster.test_add_grand_master _____________________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_sync.py[0m:836: in test_add_grand_master
+    [0mgm_sync = [94mawait[39;49;00m cluster.add_grand_master([33m"[39;49;00m[33mgm-cluster-01[39;49;00m[33m"[39;49;00m)[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync_cluster.py[0m:37: in add_grand_master
+    [0m[94mawait[39;49;00m sync.start()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync.py[0m:69: in start
+    [0mlogger.info([33m"[39;49;00m[33m⏰ [39;49;00m[33m%s[39;49;00m[33m: Grand Master clock started[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.node_id)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m_____________ TestPTPCluster.test_add_grand_master_duplicate_fails _____________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_sync.py[0m:853: in test_add_grand_master_duplicate_fails
+    [0m[94mawait[39;49;00m cluster.add_grand_master([33m"[39;49;00m[33mgm-first[39;49;00m[33m"[39;49;00m)[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync_cluster.py[0m:37: in add_grand_master
+    [0m[94mawait[39;49;00m sync.start()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync.py[0m:69: in start
+    [0mlogger.info([33m"[39;49;00m[33m⏰ [39;49;00m[33m%s[39;49;00m[33m: Grand Master clock started[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.node_id)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m________________________ TestPTPCluster.test_add_slave _________________________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_sync.py[0m:869: in test_add_slave
+    [0mslave_sync = [94mawait[39;49;00m cluster.add_slave([33m"[39;49;00m[33mslave-cluster-01[39;49;00m[33m"[39;49;00m)[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync_cluster.py[0m:49: in add_slave
+    [0m[94mawait[39;49;00m sync.start()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync.py[0m:73: in start
+    [0mlogger.info([33m"[39;49;00m[33m⏰ [39;49;00m[33m%s[39;49;00m[33m: Slave mode - waiting for master[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.node_id)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m_____________________ TestPTPCluster.test_synchronize_all ______________________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_sync.py[0m:886: in test_synchronize_all
+    [0m[94mawait[39;49;00m cluster.add_grand_master([33m"[39;49;00m[33mgm-sync-all-01[39;49;00m[33m"[39;49;00m)[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync_cluster.py[0m:37: in add_grand_master
+    [0m[94mawait[39;49;00m sync.start()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync.py[0m:69: in start
+    [0mlogger.info([33m"[39;49;00m[33m⏰ [39;49;00m[33m%s[39;49;00m[33m: Grand Master clock started[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.node_id)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m__________ TestPTPCluster.test_synchronize_all_no_grand_master_fails ___________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_sync.py[0m:912: in test_synchronize_all_no_grand_master_fails
+    [0m[94mawait[39;49;00m cluster.add_slave([33m"[39;49;00m[33mslave-no-gm-01[39;49;00m[33m"[39;49;00m)[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync_cluster.py[0m:49: in add_slave
+    [0m[94mawait[39;49;00m sync.start()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync.py[0m:73: in start
+    [0mlogger.info([33m"[39;49;00m[33m⏰ [39;49;00m[33m%s[39;49;00m[33m: Slave mode - waiting for master[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.node_id)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m____________________ TestPTPCluster.test_is_esgt_ready_true ____________________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_sync.py[0m:926: in test_is_esgt_ready_true
+    [0m[94mawait[39;49;00m cluster.add_grand_master([33m"[39;49;00m[33mgm-esgt-01[39;49;00m[33m"[39;49;00m)[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync_cluster.py[0m:37: in add_grand_master
+    [0m[94mawait[39;49;00m sync.start()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync.py[0m:69: in start
+    [0mlogger.info([33m"[39;49;00m[33m⏰ [39;49;00m[33m%s[39;49;00m[33m: Grand Master clock started[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.node_id)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m______________ TestPTPCluster.test_is_esgt_ready_false_poor_sync _______________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_sync.py[0m:961: in test_is_esgt_ready_false_poor_sync
+    [0m[94mawait[39;49;00m cluster.add_grand_master([33m"[39;49;00m[33mgm-esgt-tight-01[39;49;00m[33m"[39;49;00m)[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync_cluster.py[0m:37: in add_grand_master
+    [0m[94mawait[39;49;00m sync.start()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync.py[0m:69: in start
+    [0mlogger.info([33m"[39;49;00m[33m⏰ [39;49;00m[33m%s[39;49;00m[33m: Grand Master clock started[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.node_id)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m___________________ TestPTPCluster.test_get_cluster_metrics ____________________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_sync.py[0m:984: in test_get_cluster_metrics
+    [0m[94mawait[39;49;00m cluster.add_grand_master([33m"[39;49;00m[33mgm-metrics-01[39;49;00m[33m"[39;49;00m)[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync_cluster.py[0m:37: in add_grand_master
+    [0m[94mawait[39;49;00m sync.start()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync.py[0m:69: in start
+    [0mlogger.info([33m"[39;49;00m[33m⏰ [39;49;00m[33m%s[39;49;00m[33m: Grand Master clock started[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.node_id)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m_________________________ TestPTPCluster.test_stop_all _________________________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_sync.py[0m:1014: in test_stop_all
+    [0m[94mawait[39;49;00m cluster.add_grand_master([33m"[39;49;00m[33mgm-stop-01[39;49;00m[33m"[39;49;00m)[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync_cluster.py[0m:37: in add_grand_master
+    [0m[94mawait[39;49;00m sync.start()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync.py[0m:69: in start
+    [0mlogger.info([33m"[39;49;00m[33m⏰ [39;49;00m[33m%s[39;49;00m[33m: Grand Master clock started[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.node_id)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m__________________________ test_fabric_initialization __________________________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_tig.py[0m:59: in test_fabric_initialization
+    [0m[94mawait[39;49;00m fabric.initialize()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/fabric/core.py[0m:89: in initialize
+    [0mlogger.info([33m"[39;49;00m[33m🧠 Initializing TIG Fabric with [39;49;00m[33m%s[39;49;00m[33m nodes...[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.config.node_count)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m___________________________ test_scale_free_topology ___________________________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_tig.py[0m:76: in test_scale_free_topology
+    [0m[94mawait[39;49;00m fabric.initialize()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/fabric/core.py[0m:89: in initialize
+    [0mlogger.info([33m"[39;49;00m[33m🧠 Initializing TIG Fabric with [39;49;00m[33m%s[39;49;00m[33m nodes...[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.config.node_count)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m_________________________ test_small_world_properties __________________________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_tig.py[0m:109: in test_small_world_properties
+    [0m[94mawait[39;49;00m fabric.initialize()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/fabric/core.py[0m:89: in initialize
+    [0mlogger.info([33m"[39;49;00m[33m🧠 Initializing TIG Fabric with [39;49;00m[33m%s[39;49;00m[33m nodes...[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.config.node_count)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m____________________________ test_no_isolated_nodes ____________________________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_tig.py[0m:130: in test_no_isolated_nodes
+    [0m[94mawait[39;49;00m fabric.initialize()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/fabric/core.py[0m:89: in initialize
+    [0mlogger.info([33m"[39;49;00m[33m🧠 Initializing TIG Fabric with [39;49;00m[33m%s[39;49;00m[33m nodes...[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.config.node_count)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m________________________ test_iit_structural_compliance ________________________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_tig.py[0m:152: in test_iit_structural_compliance
+    [0m[94mawait[39;49;00m fabric.initialize()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/fabric/core.py[0m:89: in initialize
+    [0mlogger.info([33m"[39;49;00m[33m🧠 Initializing TIG Fabric with [39;49;00m[33m%s[39;49;00m[33m nodes...[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.config.node_count)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m______________________ test_effective_connectivity_index _______________________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_tig.py[0m:175: in test_effective_connectivity_index
+    [0m[94mawait[39;49;00m fabric.initialize()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/fabric/core.py[0m:89: in initialize
+    [0mlogger.info([33m"[39;49;00m[33m🧠 Initializing TIG Fabric with [39;49;00m[33m%s[39;49;00m[33m nodes...[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.config.node_count)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m__________________________ test_bottleneck_detection ___________________________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_tig.py[0m:201: in test_bottleneck_detection
+    [0m[94mawait[39;49;00m fabric.initialize()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/fabric/core.py[0m:89: in initialize
+    [0mlogger.info([33m"[39;49;00m[33m🧠 Initializing TIG Fabric with [39;49;00m[33m%s[39;49;00m[33m nodes...[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.config.node_count)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m_____________________________ test_path_redundancy _____________________________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_tig.py[0m:215: in test_path_redundancy
+    [0m[94mawait[39;49;00m fabric.initialize()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/fabric/core.py[0m:89: in initialize
+    [0mlogger.info([33m"[39;49;00m[33m🧠 Initializing TIG Fabric with [39;49;00m[33m%s[39;49;00m[33m nodes...[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.config.node_count)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m__________________________ test_broadcast_performance __________________________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_tig.py[0m:234: in test_broadcast_performance
+    [0m[94mawait[39;49;00m fabric.initialize()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/fabric/core.py[0m:89: in initialize
+    [0mlogger.info([33m"[39;49;00m[33m🧠 Initializing TIG Fabric with [39;49;00m[33m%s[39;49;00m[33m nodes...[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.config.node_count)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m__________________________ test_esgt_mode_transition ___________________________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_tig.py[0m:256: in test_esgt_mode_transition
+    [0m[94mawait[39;49;00m fabric.initialize()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/fabric/core.py[0m:89: in initialize
+    [0mlogger.info([33m"[39;49;00m[33m🧠 Initializing TIG Fabric with [39;49;00m[33m%s[39;49;00m[33m nodes...[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.config.node_count)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m_____________________________ test_ptp_basic_sync ______________________________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_tig.py[0m:290: in test_ptp_basic_sync
+    [0m[94mawait[39;49;00m master.start()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync.py[0m:69: in start
+    [0mlogger.info([33m"[39;49;00m[33m⏰ [39;49;00m[33m%s[39;49;00m[33m: Grand Master clock started[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.node_id)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m___________________________ test_ptp_jitter_quality ____________________________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_tig.py[0m:318: in test_ptp_jitter_quality
+    [0m[94mawait[39;49;00m master.start()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync.py[0m:69: in start
+    [0mlogger.info([33m"[39;49;00m[33m⏰ [39;49;00m[33m%s[39;49;00m[33m: Grand Master clock started[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.node_id)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m____________________________ test_ptp_cluster_sync _____________________________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_tig.py[0m:348: in test_ptp_cluster_sync
+    [0m[94mawait[39;49;00m cluster.add_grand_master([33m"[39;49;00m[33mmaster-01[39;49;00m[33m"[39;49;00m)[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync_cluster.py[0m:37: in add_grand_master
+    [0m[94mawait[39;49;00m sync.start()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync.py[0m:69: in start
+    [0mlogger.info([33m"[39;49;00m[33m⏰ [39;49;00m[33m%s[39;49;00m[33m: Grand Master clock started[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.node_id)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m__________________________ test_phi_proxy_computation __________________________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_tig.py[0m:391: in test_phi_proxy_computation
+    [0m[94mawait[39;49;00m fabric.initialize()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/fabric/core.py[0m:89: in initialize
+    [0mlogger.info([33m"[39;49;00m[33m🧠 Initializing TIG Fabric with [39;49;00m[33m%s[39;49;00m[33m nodes...[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.config.node_count)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m___________________ test_phi_proxy_correlation_with_density ____________________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_tig.py[0m:411: in test_phi_proxy_correlation_with_density
+    [0m[94mawait[39;49;00m fabric_low.initialize()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/fabric/core.py[0m:89: in initialize
+    [0mlogger.info([33m"[39;49;00m[33m🧠 Initializing TIG Fabric with [39;49;00m[33m%s[39;49;00m[33m nodes...[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.config.node_count)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m____________________________ test_compliance_score _____________________________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_tig.py[0m:430: in test_compliance_score
+    [0m[94mawait[39;49;00m fabric.initialize()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/fabric/core.py[0m:89: in initialize
+    [0mlogger.info([33m"[39;49;00m[33m🧠 Initializing TIG Fabric with [39;49;00m[33m%s[39;49;00m[33m nodes...[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.config.node_count)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m______________________ test_full_consciousness_substrate _______________________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_tig.py[0m:466: in test_full_consciousness_substrate
+    [0m[94mawait[39;49;00m fabric.initialize()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/fabric/core.py[0m:89: in initialize
+    [0mlogger.info([33m"[39;49;00m[33m🧠 Initializing TIG Fabric with [39;49;00m[33m%s[39;49;00m[33m nodes...[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.config.node_count)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+----------------------------- Captured stdout call -----------------------------
+
+======================================================================
+ CONSCIOUSNESS SUBSTRATE VALIDATION
+======================================================================
+
+1. Initializing TIG Fabric...
+[31m[1m_______ TestPTPMasterFailure.test_grand_master_failure_triggers_election _______[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py[0m:67: in test_grand_master_failure_triggers_election
+    [0mgm = [94mawait[39;49;00m cluster.add_grand_master([33m"[39;49;00m[33mgm-01[39;49;00m[33m"[39;49;00m)[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync_cluster.py[0m:37: in add_grand_master
+    [0m[94mawait[39;49;00m sync.start()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync.py[0m:69: in start
+    [0mlogger.info([33m"[39;49;00m[33m⏰ [39;49;00m[33m%s[39;49;00m[33m: Grand Master clock started[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.node_id)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m_______ TestPTPMasterFailure.test_master_failover_preserves_sync_quality _______[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py[0m:118: in test_master_failover_preserves_sync_quality
+    [0mprimary = [94mawait[39;49;00m cluster.add_grand_master([33m"[39;49;00m[33mprimary-gm[39;49;00m[33m"[39;49;00m)[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync_cluster.py[0m:37: in add_grand_master
+    [0m[94mawait[39;49;00m sync.start()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync.py[0m:69: in start
+    [0mlogger.info([33m"[39;49;00m[33m⏰ [39;49;00m[33m%s[39;49;00m[33m: Grand Master clock started[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.node_id)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m___________ TestPTPMasterFailure.test_network_partition_during_sync ____________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py[0m:156: in test_network_partition_during_sync
+    [0mmaster = [94mawait[39;49;00m cluster.add_grand_master([33m"[39;49;00m[33mmaster-01[39;49;00m[33m"[39;49;00m)[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync_cluster.py[0m:37: in add_grand_master
+    [0m[94mawait[39;49;00m sync.start()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync.py[0m:69: in start
+    [0mlogger.info([33m"[39;49;00m[33m⏰ [39;49;00m[33m%s[39;49;00m[33m: Grand Master clock started[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.node_id)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m___________ TestPTPMasterFailure.test_clock_drift_exceeds_threshold ____________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py[0m:191: in test_clock_drift_exceeds_threshold
+    [0mmaster = [94mawait[39;49;00m cluster.add_grand_master([33m"[39;49;00m[33mmaster-01[39;49;00m[33m"[39;49;00m)[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync_cluster.py[0m:37: in add_grand_master
+    [0m[94mawait[39;49;00m sync.start()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync.py[0m:69: in start
+    [0mlogger.info([33m"[39;49;00m[33m⏰ [39;49;00m[33m%s[39;49;00m[33m: Grand Master clock started[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.node_id)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m_______________ TestPTPMasterFailure.test_jitter_spike_handling ________________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py[0m:229: in test_jitter_spike_handling
+    [0mmaster = [94mawait[39;49;00m cluster.add_grand_master([33m"[39;49;00m[33mmaster-01[39;49;00m[33m"[39;49;00m)[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync_cluster.py[0m:37: in add_grand_master
+    [0m[94mawait[39;49;00m sync.start()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync.py[0m:69: in start
+    [0mlogger.info([33m"[39;49;00m[33m⏰ [39;49;00m[33m%s[39;49;00m[33m: Grand Master clock started[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.node_id)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m_____________ TestTopologyBreakdown.test_hub_node_failure_cascades _____________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py[0m:278: in test_hub_node_failure_cascades
+    [0m[94mawait[39;49;00m fabric.initialize()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/fabric/core.py[0m:89: in initialize
+    [0mlogger.info([33m"[39;49;00m[33m🧠 Initializing TIG Fabric with [39;49;00m[33m%s[39;49;00m[33m nodes...[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.config.node_count)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m________ TestTopologyBreakdown.test_bridge_node_failure_bisects_network ________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py[0m:324: in test_bridge_node_failure_bisects_network
+    [0m[94mawait[39;49;00m fabric.initialize()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/fabric/core.py[0m:89: in initialize
+    [0mlogger.info([33m"[39;49;00m[33m🧠 Initializing TIG Fabric with [39;49;00m[33m%s[39;49;00m[33m nodes...[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.config.node_count)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m_____________ TestTopologyBreakdown.test_small_world_property_lost _____________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py[0m:366: in test_small_world_property_lost
+    [0m[94mawait[39;49;00m fabric.initialize()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/fabric/core.py[0m:89: in initialize
+    [0mlogger.info([33m"[39;49;00m[33m🧠 Initializing TIG Fabric with [39;49;00m[33m%s[39;49;00m[33m nodes...[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.config.node_count)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m______ TestTopologyBreakdown.test_clustering_coefficient_below_threshold _______[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py[0m:419: in test_clustering_coefficient_below_threshold
+    [0m[94mawait[39;49;00m fabric.initialize()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/fabric/core.py[0m:89: in initialize
+    [0mlogger.info([33m"[39;49;00m[33m🧠 Initializing TIG Fabric with [39;49;00m[33m%s[39;49;00m[33m nodes...[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.config.node_count)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m________________ TestTopologyBreakdown.test_diameter_explosion _________________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py[0m:452: in test_diameter_explosion
+    [0m[94mawait[39;49;00m fabric.initialize()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/fabric/core.py[0m:89: in initialize
+    [0mlogger.info([33m"[39;49;00m[33m🧠 Initializing TIG Fabric with [39;49;00m[33m%s[39;49;00m[33m nodes...[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.config.node_count)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m__________ TestECIValidation.test_eci_calculation_degenerate_topology __________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py[0m:498: in test_eci_calculation_degenerate_topology
+    [0m[94mawait[39;49;00m fabric_full.initialize()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/fabric/core.py[0m:89: in initialize
+    [0mlogger.info([33m"[39;49;00m[33m🧠 Initializing TIG Fabric with [39;49;00m[33m%s[39;49;00m[33m nodes...[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.config.node_count)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m___________ TestECIValidation.test_eci_below_consciousness_threshold ___________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py[0m:550: in test_eci_below_consciousness_threshold
+    [0m[94mawait[39;49;00m fabric.initialize()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/fabric/core.py[0m:89: in initialize
+    [0mlogger.info([33m"[39;49;00m[33m🧠 Initializing TIG Fabric with [39;49;00m[33m%s[39;49;00m[33m nodes...[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.config.node_count)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m_______________ TestECIValidation.test_eci_stability_under_churn _______________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py[0m:580: in test_eci_stability_under_churn
+    [0m[94mawait[39;49;00m fabric.initialize()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/fabric/core.py[0m:89: in initialize
+    [0mlogger.info([33m"[39;49;00m[33m🧠 Initializing TIG Fabric with [39;49;00m[33m%s[39;49;00m[33m nodes...[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.config.node_count)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m________________ TestECIValidation.test_eci_theoretical_maximum ________________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py[0m:617: in test_eci_theoretical_maximum
+    [0m[94mawait[39;49;00m fabric.initialize()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/fabric/core.py[0m:89: in initialize
+    [0mlogger.info([33m"[39;49;00m[33m🧠 Initializing TIG Fabric with [39;49;00m[33m%s[39;49;00m[33m nodes...[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.config.node_count)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m_____________ TestECIValidation.test_eci_response_to_node_dropout ______________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py[0m:644: in test_eci_response_to_node_dropout
+    [0m[94mawait[39;49;00m fabric.initialize()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/fabric/core.py[0m:89: in initialize
+    [0mlogger.info([33m"[39;49;00m[33m🧠 Initializing TIG Fabric with [39;49;00m[33m%s[39;49;00m[33m nodes...[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.config.node_count)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m___________ TestESGTIntegration.test_esgt_ignition_with_degraded_ptp ___________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py[0m:693: in test_esgt_ignition_with_degraded_ptp
+    [0mgood_node = [94mawait[39;49;00m cluster.add_slave([33m"[39;49;00m[33mgood[39;49;00m[33m"[39;49;00m)[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync_cluster.py[0m:49: in add_slave
+    [0m[94mawait[39;49;00m sync.start()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync.py[0m:73: in start
+    [0mlogger.info([33m"[39;49;00m[33m⏰ [39;49;00m[33m%s[39;49;00m[33m: Slave mode - waiting for master[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.node_id)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m___________ TestESGTIntegration.test_esgt_phase_coherence_validation ___________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py[0m:728: in test_esgt_phase_coherence_validation
+    [0mmaster = [94mawait[39;49;00m cluster.add_grand_master([33m"[39;49;00m[33mmaster[39;49;00m[33m"[39;49;00m)[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync_cluster.py[0m:37: in add_grand_master
+    [0m[94mawait[39;49;00m sync.start()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync.py[0m:69: in start
+    [0mlogger.info([33m"[39;49;00m[33m⏰ [39;49;00m[33m%s[39;49;00m[33m: Grand Master clock started[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.node_id)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m____________ TestESGTIntegration.test_esgt_broadcast_latency_impact ____________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py[0m:765: in test_esgt_broadcast_latency_impact
+    [0m[94mawait[39;49;00m fabric.initialize()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/fabric/core.py[0m:89: in initialize
+    [0mlogger.info([33m"[39;49;00m[33m🧠 Initializing TIG Fabric with [39;49;00m[33m%s[39;49;00m[33m nodes...[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.config.node_count)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m___________ TestESGTIntegration.test_tig_esgt_temporal_coordination ____________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py[0m:806: in test_tig_esgt_temporal_coordination
+    [0mmaster = [94mawait[39;49;00m cluster.add_grand_master([33m"[39;49;00m[33mmaster[39;49;00m[33m"[39;49;00m)[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync_cluster.py[0m:37: in add_grand_master
+    [0m[94mawait[39;49;00m sync.start()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync.py[0m:69: in start
+    [0mlogger.info([33m"[39;49;00m[33m⏰ [39;49;00m[33m%s[39;49;00m[33m: Grand Master clock started[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.node_id)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[31m[1m___________ TestESGTIntegration.test_esgt_event_timing_under_jitter ____________[0m
+[1m[31mservices/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py[0m:843: in test_esgt_event_timing_under_jitter
+    [0mmaster = [94mawait[39;49;00m cluster.add_grand_master([33m"[39;49;00m[33mmaster[39;49;00m[33m"[39;49;00m)[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync_cluster.py[0m:37: in add_grand_master
+    [0m[94mawait[39;49;00m sync.start()[90m[39;49;00m
+[1m[31mservices/maximus_core_service/consciousness/tig/sync.py[0m:69: in start
+    [0mlogger.info([33m"[39;49;00m[33m⏰ [39;49;00m[33m%s[39;49;00m[33m: Grand Master clock started[39;49;00m[33m"[39;49;00m, [96mself[39;49;00m.node_id)[90m[39;49;00m
+[1m[31mE   NameError: name 'logger' is not defined[0m
+[33m=============================== warnings summary ===============================[0m
+tests/unit/consciousness/tig/test_fabric_100pct.py: 6 warnings
+tests/unit/consciousness/tig/test_sync.py: 30 warnings
+tests/unit/consciousness/tig/test_tig.py: 17 warnings
+tests/unit/consciousness/tig/test_tig_edge_cases.py: 20 warnings
+  /home/maximus/Área de trabalho/Digital Daimon/.venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py:783: DeprecationWarning: The event_loop fixture provided by pytest-asyncio has been redefined in
+  /home/maximus/Área de trabalho/Digital Daimon/backend/services/maximus_core_service/tests/unit/consciousness/conftest.py:14
+  Replacing the event_loop fixture with a custom implementation is deprecated
+  and will lead to errors in the future.
+  If you want to request an asyncio event loop with a scope other than function
+  scope, use the "scope" argument to the asyncio mark when marking the tests.
+  If you want to return different types of event loops, use the event_loop_policy
+  fixture.
+  
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+
+---------- coverage: platform linux, python 3.12.3-final-0 -----------
+Name                                                                                           Stmts   Miss  Cover   Missing
+----------------------------------------------------------------------------------------------------------------------------
+services/maximus_core_service/__init__.py                                                          1      0   100%
+services/maximus_core_service/consciousness/__init__.py                                            5      0   100%
+services/maximus_core_service/consciousness/esgt/__init__.py                                       8      0   100%
+services/maximus_core_service/consciousness/esgt/arousal_integration.py                           82     54    34%   140-154, 158-164, 172-182, 190-232, 250-261, 266, 274-279, 287, 295-297, 306, 316
+services/maximus_core_service/consciousness/esgt/attention_helpers.py                             30     25    17%   35-68, 85-103
+services/maximus_core_service/consciousness/esgt/coordinator.py                                  151    121    20%   81-125, 129-138, 142-150, 156-165, 177-357, 366, 374, 377
+services/maximus_core_service/consciousness/esgt/enums.py                                         17      0   100%
+services/maximus_core_service/consciousness/esgt/health_metrics.py                                29     19    34%   19-21, 25-30, 34-36, 43-45, 50-63
+services/maximus_core_service/consciousness/esgt/kuramoto.py                                     167    141    16%   37-45, 55-67, 77-114, 118, 122, 126-128, 131, 143-147, 151-152, 156-157, 161-164, 173-192, 201-255, 259-288, 292-294, 298-300, 310-326, 330, 333-334
+services/maximus_core_service/consciousness/esgt/kuramoto_models.py                               57     23    60%   51, 55-59, 74-76, 80-98
+services/maximus_core_service/consciousness/esgt/models.py                                        87     32    63%   46, 55-64, 94, 100, 111-119, 123, 170-172, 176-181, 185-187, 191
+services/maximus_core_service/consciousness/esgt/pfc_integration.py                               30     26    13%   40-90, 95-104
+services/maximus_core_service/consciousness/esgt/phase_operations.py                              22     15    32%   28-41, 46-57
+services/maximus_core_service/consciousness/esgt/safety.py                                        19     13    32%   32-35, 44-57
+services/maximus_core_service/consciousness/esgt/trigger_validation.py                            35     28    20%   21-73, 86-94, 100-113
+services/maximus_core_service/consciousness/lrr/__init__.py                                       11      0   100%
+services/maximus_core_service/consciousness/lrr/belief_graph.py                                  121    102    16%   40-43, 53-64, 73-88, 92-119, 128-167, 171-204, 213-240, 250-289, 302-316
+services/maximus_core_service/consciousness/lrr/belief_models.py                                  72     31    57%   92-97, 101, 105-107, 117-141, 146, 151-154
+services/maximus_core_service/consciousness/lrr/contradiction_detector.py                        132     92    30%   63-79, 114-116, 126-133, 137, 150-184, 187-188, 191-219, 228, 236-274, 281-295, 300-308, 320-322, 325-327, 330-332, 335-337, 340-342, 345-347
+services/maximus_core_service/consciousness/lrr/contradiction_models.py                           27      2    93%   47-48
+services/maximus_core_service/consciousness/lrr/introspection_engine.py                           64     39    39%   43-55, 62-72, 79-80, 85-104, 113-128
+services/maximus_core_service/consciousness/lrr/meta_monitor.py                                   96     58    40%   54-65, 76-99, 102-104, 107, 114-130, 137-146, 152-163, 170-172, 178-183, 199-221
+services/maximus_core_service/consciousness/lrr/reasoning_models.py                               36      0   100%
+services/maximus_core_service/consciousness/lrr/recursive_reasoner.py                            169    139    18%   92-110, 134-204, 220-241, 245-254, 264-273, 279-283, 287, 301-305, 309-405, 418-431, 443-444, 454-467
+services/maximus_core_service/consciousness/mcea/__init__.py                                       4      0   100%
+services/maximus_core_service/consciousness/mcea/controller.py                                   195    160    18%   44-71, 75-84, 90, 94-98, 102-109, 113-121, 125-178, 182-196, 200-205, 209-213, 217-224, 228, 232, 242-249, 253-262, 266-267, 271, 275, 279, 294-307, 311-322, 326-331, 335-343, 362
+services/maximus_core_service/consciousness/mcea/models.py                                        78     24    69%   45, 49-57, 61, 65-66, 69, 87-89, 93-99
+services/maximus_core_service/consciousness/mcea/safety.py                                        32     20    38%   28-30, 34-54, 67
+services/maximus_core_service/consciousness/mcea/stress.py                                       182    154    15%   45-64, 72, 76-82, 88-95, 99-120, 124-143, 147-159, 163-170, 180-268, 278, 304-323, 329-335, 339, 345-349, 353, 357-360, 364-366, 380
+services/maximus_core_service/consciousness/mcea/stress_models.py                                 74     18    76%   74-89, 93, 101-103
+services/maximus_core_service/consciousness/mmei/__init__.py                                       7      0   100%
+services/maximus_core_service/consciousness/mmei/goal_manager.py                                  75     60    20%   72-83, 106-147, 156-165, 169-180, 189-213, 225-230, 245-251, 263, 276
+services/maximus_core_service/consciousness/mmei/goals.py                                        126     99    21%   37-48, 52, 56-115, 119-122, 126-145, 149, 153-161, 165-173, 177-178, 198-199, 213-214, 230-231, 247, 261, 275-279, 283-285, 289, 293, 297-303, 313
+services/maximus_core_service/consciousness/mmei/goals_models.py                                  76     15    80%   64-66, 70, 74-75, 79-80, 84, 88-91, 94-95
+services/maximus_core_service/consciousness/mmei/models.py                                        88     22    75%   69, 121-134, 138-145, 149-157, 160-161, 208-209, 212
+services/maximus_core_service/consciousness/mmei/monitor.py                                      130    100    23%   103-135, 149, 163, 167-176, 180-189, 198-238, 242-260, 274, 279-299, 303, 307, 320-325, 338-346, 350-356, 390, 402, 414-417, 441-443
+services/maximus_core_service/consciousness/mmei/needs_computation.py                             52     39    25%   63-67, 84-112, 132-147, 160-168, 183-192, 208-211, 215-216, 220
+services/maximus_core_service/consciousness/mmei/rate_limiter.py                                  19     12    37%   52-54, 63-75, 79-81
+services/maximus_core_service/consciousness/tig/__init__.py                                        4      0   100%
+services/maximus_core_service/consciousness/tig/fabric/__init__.py                                 9      0   100%
+services/maximus_core_service/consciousness/tig/fabric/config.py                                  25      0   100%
+services/maximus_core_service/consciousness/tig/fabric/core.py                                   169    125    26%   87, 90-131, 151-165, 169-222, 230, 238, 250-257, 267-269, 273-290, 311-321, 325, 329, 337, 345, 353-369, 386-404, 413-418, 422-427, 430
+services/maximus_core_service/consciousness/tig/fabric/health.py                                 137    110    20%   50-52, 56-57, 61-73, 82-100, 109-118, 127-136, 145-178, 196-231, 240-253, 265-285, 303-317
+services/maximus_core_service/consciousness/tig/fabric/metrics.py                                 47     14    70%   75-101
+services/maximus_core_service/consciousness/tig/fabric/metrics_computation.py                     47     39    17%   30-76, 103-111, 119-149
+services/maximus_core_service/consciousness/tig/fabric/models.py                                  70     26    63%   50-59, 82, 99-104, 113-122, 126-129, 133-137, 141, 144
+services/maximus_core_service/consciousness/tig/fabric/node.py                                    51      0   100%
+services/maximus_core_service/consciousness/tig/fabric/topology.py                                49     21    57%   36-42, 71, 105-135
+services/maximus_core_service/consciousness/tig/sync.py                                          144     27    81%   63, 70, 74-76, 80-87, 104, 162, 174, 181-182, 202-204, 232-242
+services/maximus_core_service/consciousness/tig/sync_cluster.py                                   60     27    55%   32, 39-42, 51-53, 57-67, 74-79, 88-93, 111-112
+services/maximus_core_service/consciousness/tig/sync_models.py                                    37      2    95%   46, 48
+services/maximus_core_service/consciousness/validation/__init__.py                                 5      0   100%
+services/maximus_core_service/consciousness/validation/coherence.py                              148     96    35%   135-159, 208-213, 225-270, 282-353, 357-363, 367-369, 383-420
+services/maximus_core_service/consciousness/validation/metacognition.py                           56     38    32%   24, 36-85, 95-100
+services/maximus_core_service/consciousness/validation/phi_models.py                              44     11    75%   70-96
+services/maximus_core_service/consciousness/validation/phi_proxies.py                            117     96    18%   125-128, 134-167, 178-199, 213-239, 243-284, 290-331, 340-371, 380-386, 398-400
+services/maximus_core_service/tests/__init__.py                                                    2      0   100%
+services/maximus_core_service/tests/conftest.py                                                  175    118    33%   27-35, 44-45, 51, 57-73, 79, 96, 110, 123, 129, 139, 151-176, 185-192, 198-205, 214-225, 234-258, 264-274, 283-308, 314-323, 332-346
+services/maximus_core_service/tests/unit/__init__.py                                               1      0   100%
+services/maximus_core_service/tests/unit/consciousness/conftest.py                                20      2    90%   26, 29
+services/maximus_core_service/tests/unit/consciousness/tig/archived_obsolete_api/conftest.py       3      0   100%
+services/maximus_core_service/tests/unit/consciousness/tig/test_fabric_100pct.py                 128      5    96%   285-286, 311-316
+services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py                          468    131    72%   271-279, 291-295, 303-312, 320-329, 341-351, 714-739, 749-767, 780-809, 839-846, 856-860, 872-879, 887-905, 915-919, 927-942, 962-977, 985-1007, 1015-1028
+services/maximus_core_service/tests/unit/consciousness/tig/test_tig.py                           243    145    40%   61-67, 79-96, 111-119, 133-138, 154-166, 177-189, 203-206, 217-220, 237-247, 259-276, 291-300, 319-336, 349-377, 393-400, 412-421, 432-439, 469-529, 537-543
+services/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py                302    199    34%   68-105, 119-144, 157-179, 192-216, 230-245, 281-308, 327-349, 369-403, 421-436, 455-465, 500-533, 552-563, 582-599, 619-627, 646-665, 694-716, 729-748, 768-791, 809-830, 844-870
+----------------------------------------------------------------------------------------------------------------------------
+TOTAL                                                                                           5167   2915    44%
+Coverage HTML written to dir htmlcov
+Coverage XML written to file coverage_2_tig.xml
+
+[31m[1mFAIL Required test coverage of 70% not reached. Total coverage: 43.58%
+[0m[36m[1m=========================== short test summary info ============================[0m
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_fabric_100pct.py::[1mtest_fabric_already_initialized_runtime_error[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_fabric_100pct.py::[1mtest_fabric_initialize_with_iit_violations_print[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::[1mTestPTPSynchronizerLifecycle::test_start_grand_master[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::[1mTestPTPSynchronizerLifecycle::test_start_slave[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::[1mTestPTPSynchronizerLifecycle::test_start_idempotent[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::[1mTestPTPSynchronizerLifecycle::test_stop_synchronizer[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::[1mTestPTPSynchronizerLifecycle::test_update_grand_master_time_loop[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::[1mTestContinuousSync::test_continuous_sync_runs[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::[1mTestContinuousSync::test_continuous_sync_handles_failure[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::[1mTestContinuousSync::test_continuous_sync_respects_interval[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::[1mTestPTPCluster::test_add_grand_master[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::[1mTestPTPCluster::test_add_grand_master_duplicate_fails[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::[1mTestPTPCluster::test_add_slave[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::[1mTestPTPCluster::test_synchronize_all[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::[1mTestPTPCluster::test_synchronize_all_no_grand_master_fails[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::[1mTestPTPCluster::test_is_esgt_ready_true[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::[1mTestPTPCluster::test_is_esgt_ready_false_poor_sync[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::[1mTestPTPCluster::test_get_cluster_metrics[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_sync.py::[1mTestPTPCluster::test_stop_all[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_tig.py::[1mtest_fabric_initialization[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_tig.py::[1mtest_scale_free_topology[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_tig.py::[1mtest_small_world_properties[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_tig.py::[1mtest_no_isolated_nodes[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_tig.py::[1mtest_iit_structural_compliance[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_tig.py::[1mtest_effective_connectivity_index[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_tig.py::[1mtest_bottleneck_detection[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_tig.py::[1mtest_path_redundancy[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_tig.py::[1mtest_broadcast_performance[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_tig.py::[1mtest_esgt_mode_transition[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_tig.py::[1mtest_ptp_basic_sync[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_tig.py::[1mtest_ptp_jitter_quality[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_tig.py::[1mtest_ptp_cluster_sync[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_tig.py::[1mtest_phi_proxy_computation[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_tig.py::[1mtest_phi_proxy_correlation_with_density[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_tig.py::[1mtest_compliance_score[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_tig.py::[1mtest_full_consciousness_substrate[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py::[1mTestPTPMasterFailure::test_grand_master_failure_triggers_election[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py::[1mTestPTPMasterFailure::test_master_failover_preserves_sync_quality[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py::[1mTestPTPMasterFailure::test_network_partition_during_sync[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py::[1mTestPTPMasterFailure::test_clock_drift_exceeds_threshold[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py::[1mTestPTPMasterFailure::test_jitter_spike_handling[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py::[1mTestTopologyBreakdown::test_hub_node_failure_cascades[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py::[1mTestTopologyBreakdown::test_bridge_node_failure_bisects_network[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py::[1mTestTopologyBreakdown::test_small_world_property_lost[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py::[1mTestTopologyBreakdown::test_clustering_coefficient_below_threshold[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py::[1mTestTopologyBreakdown::test_diameter_explosion[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py::[1mTestECIValidation::test_eci_calculation_degenerate_topology[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py::[1mTestECIValidation::test_eci_below_consciousness_threshold[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py::[1mTestECIValidation::test_eci_stability_under_churn[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py::[1mTestECIValidation::test_eci_theoretical_maximum[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py::[1mTestECIValidation::test_eci_response_to_node_dropout[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py::[1mTestESGTIntegration::test_esgt_ignition_with_degraded_ptp[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py::[1mTestESGTIntegration::test_esgt_phase_coherence_validation[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py::[1mTestESGTIntegration::test_esgt_broadcast_latency_impact[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py::[1mTestESGTIntegration::test_tig_esgt_temporal_coordination[0m - NameError: name 'logger' is not defined
+[31mFAILED[0m services/maximus_core_service/tests/unit/consciousness/tig/test_tig_edge_cases.py::[1mTestESGTIntegration::test_esgt_event_timing_under_jitter[0m - NameError: name 'logger' is not defined
+[31m================= [31m[1m56 failed[0m, [32m52 passed[0m, [33m73 warnings[0m[31m in 17.10s[0m[31m ==================[0m

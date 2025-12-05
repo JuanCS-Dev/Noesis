@@ -8,6 +8,7 @@ The Global Interconnect Fabric - consciousness substrate.
 from __future__ import annotations
 
 import asyncio
+import logging
 from typing import Any
 
 import networkx as nx
@@ -20,6 +21,8 @@ from .metrics_computation import MetricsComputationMixin
 from .models import NodeState, TIGConnection
 from .node import TIGNode
 from .topology import TopologyGenerator
+
+logger = logging.getLogger(__name__)
 
 
 class TIGFabric(MetricsComputationMixin):

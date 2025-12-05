@@ -9,6 +9,7 @@ FASE VII (Safety Hardening) components.
 from __future__ import annotations
 
 import asyncio
+import logging
 import time
 from typing import TYPE_CHECKING, Any
 
@@ -17,8 +18,11 @@ import numpy as np
 
 from .models import CircuitBreaker, NodeHealth, NodeState, TIGConnection
 
+logger = logging.getLogger(__name__)
+
 if TYPE_CHECKING:
     from .core import TIGFabric
+
 
 
 class HealthManager:
