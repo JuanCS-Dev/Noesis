@@ -20,7 +20,7 @@ except ImportError:
     HYPOTHESIS_AVAILABLE = False
     # Install: pip install hypothesis
 
-from hitl.base import AutomationLevel, RiskLevel, DecisionStatus, ActionType, SLAConfig, EscalationConfig, HITLConfig, DecisionContext, HITLDecision, OperatorAction, AuditEntry
+from services.maximus_core_service.hitl.base_pkg import AutomationLevel, RiskLevel, DecisionStatus, ActionType, SLAConfig, EscalationConfig, HITLConfig, DecisionContext, HITLDecision, OperatorAction, AuditEntry
 
 
 class TestAutomationLevel:

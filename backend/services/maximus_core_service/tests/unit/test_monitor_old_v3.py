@@ -14,7 +14,7 @@ from datetime import datetime
 from typing import Any, Dict, List, Optional
 import uuid
 
-from consciousness.mmei.monitor_old import NeedUrgency, PhysicalMetrics, AbstractNeeds, InteroceptionConfig, InternalStateMonitor
+from consciousness.mmei.monitor import NeedUrgency, PhysicalMetrics, AbstractNeeds, InteroceptionConfig, InternalStateMonitor
 
 
 class TestNeedUrgency:

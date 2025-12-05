@@ -14,7 +14,7 @@ from datetime import datetime
 from typing import Any, Dict, List, Optional
 import uuid
 
-from hitl.risk_assessor import RiskFactors, RiskScore, RiskAssessor
+from services.maximus_core_service.hitl.risk_assessor import RiskFactors, RiskScore, RiskAssessor
 
 
 class TestRiskFactors:

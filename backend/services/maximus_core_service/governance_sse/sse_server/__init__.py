@@ -7,6 +7,18 @@ Refactored: 2025-12-03
 
 from __future__ import annotations
 
-# TODO: Import refactored components
+from ..sse_server_legacy import (
+    ConnectionManager,
+    GovernanceSSEServer,
+    OperatorConnection,
+    SSEEvent,
+    decision_to_sse_data,
+)
 
-__all__ = []
+__all__ = [
+    "SSEEvent",
+    "OperatorConnection",
+    "ConnectionManager",
+    "GovernanceSSEServer",
+    "decision_to_sse_data",
+]

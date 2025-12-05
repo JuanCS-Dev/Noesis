@@ -1,0 +1,236 @@
+/home/maximus/Área de trabalho/Digital Daimon/.venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py:208: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+[1m============================= test session starts ==============================[0m
+platform linux -- Python 3.12.3, pytest-8.3.3, pluggy-1.6.0 -- /home/maximus/Área de trabalho/Digital Daimon/.venv/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/maximus/Área de trabalho/Digital Daimon/backend/services/maximus_core_service
+configfile: pytest.ini
+plugins: anyio-4.12.0, cov-6.0.0, asyncio-0.24.0
+asyncio: mode=Mode.STRICT, default_loop_scope=None
+[1mcollecting ... [0mcollected 6 items
+
+services/maximus_core_service/tests/exocortex/test_integration.py::test_audit_endpoint [32mPASSED[0m
+services/maximus_core_service/tests/exocortex/test_integration.py::test_override_endpoint [32mPASSED[0m
+services/maximus_core_service/tests/exocortex/test_integration.py::test_confrontation_flow [32mPASSED[0m
+services/maximus_core_service/tests/exocortex/test_integration.py::test_repository_error_handling [32mPASSED[0m
+services/maximus_core_service/tests/exocortex/test_integration.py::test_confrontation_fallback [32mPASSED[0m
+services/maximus_core_service/tests/exocortex/test_integration.py::test_check_impulse_endpoint Traceback (most recent call last):
+  File "/home/maximus/Área de trabalho/Digital Daimon/backend/services/maximus_core_service/src/consciousness/exocortex/impulse_inhibitor.py", line 93, in _analyze_risk
+    response = await self.client.generate_text(prompt, response_schema={
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/maximus/Área de trabalho/Digital Daimon/backend/services/maximus_core_service/utils/gemini_client.py", line 190, in generate_text
+    raise GeminiError(error_msg)
+services.maximus_core_service.utils.gemini_client.GeminiError: Gemini Error: 400 - {
+  "error": {
+    "code": 400,
+    "message": "API key not valid. Please pass a valid API key.",
+    "status": "INVALID_ARGUMENT",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+        "reason": "API_KEY_INVALID",
+        "domain": "googleapis.com",
+        "metadata": {
+          "service": "generativelanguage.googleapis.com"
+        }
+      },
+      {
+        "@type": "type.googleapis.com/google.rpc.LocalizedMessage",
+        "locale": "en-US",
+        "message": "API key not valid. Please pass a valid API key."
+      }
+    ]
+  }
+}
+
+DEBUG TEST: Inhibitor Client: <services.maximus_core_service.utils.gemini_client.GeminiClient object at 0x7ec2415751f0>
+DEBUG TEST: Mock Gemini: <MagicMock id='139372795100096'>
+DEBUG EXCEPTION: Gemini Error: 400 - {
+  "error": {
+    "code": 400,
+    "message": "API key not valid. Please pass a valid API key.",
+    "status": "INVALID_ARGUMENT",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+        "reason": "API_KEY_INVALID",
+        "domain": "googleapis.com",
+        "metadata": {
+          "service": "generativelanguage.googleapis.com"
+        }
+      },
+      {
+        "@type": "type.googleapis.com/google.rpc.LocalizedMessage",
+        "locale": "en-US",
+        "message": "API key not valid. Please pass a valid API key."
+      }
+    ]
+  }
+}
+
+[31mFAILED[0m/home/maximus/Área de trabalho/Digital Daimon/.venv/lib/python3.12/site-packages/pytest_cov/plugin.py:355: CovFailUnderWarning: Coverage failure: total of 45 is less than fail-under=70
+  warnings.warn(CovFailUnderWarning(message), stacklevel=1)
+[31m[1m
+ERROR: Coverage failure: total of 45 is less than fail-under=70
+[0m
+
+=================================== FAILURES ===================================
+[31m[1m_________________________ test_check_impulse_endpoint __________________________[0m
+[1m[31mservices/maximus_core_service/tests/exocortex/test_integration.py[0m:154: in test_check_impulse_endpoint
+    [0m[94massert[39;49;00m data[[33m"[39;49;00m[33mlevel[39;49;00m[33m"[39;49;00m] == [33m"[39;49;00m[33mPAUSE[39;49;00m[33m"[39;49;00m[90m[39;49;00m
+[1m[31mE   AssertionError: assert 'NONE' == 'PAUSE'[0m
+[1m[31mE     [0m
+[1m[31mE     - PAUSE[0m
+[1m[31mE     + NONE[0m
+------------------------------ Captured log call -------------------------------
+[31m[1mERROR   [0m services.maximus_core_service.utils.gemini_client:gemini_client.py:189 Gemini Error: 400 - {
+  "error": {
+    "code": 400,
+    "message": "API key not valid. Please pass a valid API key.",
+    "status": "INVALID_ARGUMENT",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+        "reason": "API_KEY_INVALID",
+        "domain": "googleapis.com",
+        "metadata": {
+          "service": "generativelanguage.googleapis.com"
+        }
+      },
+      {
+        "@type": "type.googleapis.com/google.rpc.LocalizedMessage",
+        "locale": "en-US",
+        "message": "API key not valid. Please pass a valid API key."
+      }
+    ]
+  }
+}
+
+[31m[1mERROR   [0m services.maximus_core_service.src.consciousness.exocortex.impulse_inhibitor:impulse_inhibitor.py:105 Inhibitor analysis failed: Gemini Error: 400 - {
+  "error": {
+    "code": 400,
+    "message": "API key not valid. Please pass a valid API key.",
+    "status": "INVALID_ARGUMENT",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+        "reason": "API_KEY_INVALID",
+        "domain": "googleapis.com",
+        "metadata": {
+          "service": "generativelanguage.googleapis.com"
+        }
+      },
+      {
+        "@type": "type.googleapis.com/google.rpc.LocalizedMessage",
+        "locale": "en-US",
+        "message": "API key not valid. Please pass a valid API key."
+      }
+    ]
+  }
+}
+[33m=============================== warnings summary ===============================[0m
+../.venv/lib/python3.12/site-packages/starlette/formparsers.py:12
+  /home/maximus/Área de trabalho/Digital Daimon/.venv/lib/python3.12/site-packages/starlette/formparsers.py:12: PendingDeprecationWarning: Please use `import python_multipart` instead.
+    import multipart
+
+../.venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:291
+../.venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:291
+../.venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:291
+../.venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:291
+  /home/maximus/Área de trabalho/Digital Daimon/.venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:291: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.9/migration/
+    warnings.warn(DEPRECATION_MESSAGE, DeprecationWarning)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+
+---------- coverage: platform linux, python 3.12.3-final-0 -----------
+Name                                                                                 Stmts   Miss  Cover   Missing
+------------------------------------------------------------------------------------------------------------------
+services/maximus_core_service/__init__.py                                                1      0   100%
+services/maximus_core_service/api/__init__.py                                            1      0   100%
+services/maximus_core_service/api/dependencies.py                                       24     12    50%   25, 30-46, 51-55, 60-64
+services/maximus_core_service/api/routes.py                                             27      7    74%   34, 50, 66, 84-85, 103-104
+services/maximus_core_service/config.py                                                 44      0   100%
+services/maximus_core_service/consciousness/__init__.py                                  5      0   100%
+services/maximus_core_service/consciousness/esgt/__init__.py                             8      0   100%
+services/maximus_core_service/consciousness/esgt/arousal_integration.py                 82     54    34%   140-154, 158-164, 172-182, 190-232, 250-261, 266, 274-279, 287, 295-297, 306, 316
+services/maximus_core_service/consciousness/esgt/attention_helpers.py                   30     25    17%   35-68, 85-103
+services/maximus_core_service/consciousness/esgt/coordinator.py                        151    121    20%   81-125, 129-138, 142-150, 156-165, 177-357, 366, 374, 377
+services/maximus_core_service/consciousness/esgt/enums.py                               17      0   100%
+services/maximus_core_service/consciousness/esgt/health_metrics.py                      29     19    34%   19-21, 25-30, 34-36, 43-45, 50-63
+services/maximus_core_service/consciousness/esgt/kuramoto.py                           167    141    16%   37-45, 55-67, 77-114, 118, 122, 126-128, 131, 143-147, 151-152, 156-157, 161-164, 173-192, 201-255, 259-288, 292-294, 298-300, 310-326, 330, 333-334
+services/maximus_core_service/consciousness/esgt/kuramoto_models.py                     57     23    60%   51, 55-59, 74-76, 80-98
+services/maximus_core_service/consciousness/esgt/models.py                              87     32    63%   46, 55-64, 94, 100, 111-119, 123, 170-172, 176-181, 185-187, 191
+services/maximus_core_service/consciousness/esgt/pfc_integration.py                     30     26    13%   40-90, 95-104
+services/maximus_core_service/consciousness/esgt/phase_operations.py                    22     15    32%   28-41, 46-57
+services/maximus_core_service/consciousness/esgt/safety.py                              19     13    32%   32-35, 44-57
+services/maximus_core_service/consciousness/esgt/trigger_validation.py                  35     28    20%   21-73, 86-94, 100-113
+services/maximus_core_service/consciousness/florescimento/__init__.py                    5      0   100%
+services/maximus_core_service/consciousness/florescimento/consciousness_bridge.py       68     40    41%   18-24, 52-53, 61-88, 103-108, 112-115, 133-142, 147-152
+services/maximus_core_service/consciousness/florescimento/introspection_api.py          73     29    60%   55-58, 61-63, 66-68, 71-73, 85-87, 100, 110-112, 128-142
+services/maximus_core_service/consciousness/florescimento/mirror_test.py               100     54    46%   42-46, 78-79, 84-88, 101-104, 108-109, 123-159, 167-199, 203-232, 239-240
+services/maximus_core_service/consciousness/florescimento/unified_self.py               91     53    42%   28-31, 74-88, 92-110, 118-122, 129-151, 156-169, 175-181
+services/maximus_core_service/consciousness/mcea/__init__.py                             4      0   100%
+services/maximus_core_service/consciousness/mcea/controller.py                         195    160    18%   44-71, 75-84, 90, 94-98, 102-109, 113-121, 125-178, 182-196, 200-205, 209-213, 217-224, 228, 232, 242-249, 253-262, 266-267, 271, 275, 279, 294-307, 311-322, 326-331, 335-343, 362
+services/maximus_core_service/consciousness/mcea/models.py                              78     24    69%   45, 49-57, 61, 65-66, 69, 87-89, 93-99
+services/maximus_core_service/consciousness/mcea/safety.py                              32     20    38%   28-30, 34-54, 67
+services/maximus_core_service/consciousness/mcea/stress.py                             182    154    15%   45-64, 72, 76-82, 88-95, 99-120, 124-143, 147-159, 163-170, 180-268, 278, 304-323, 329-335, 339, 345-349, 353, 357-360, 364-366, 380
+services/maximus_core_service/consciousness/mcea/stress_models.py                       74     18    76%   74-89, 93, 101-103
+services/maximus_core_service/consciousness/mea/__init__.py                              6      0   100%
+services/maximus_core_service/consciousness/mea/attention_schema.py                    103     63    39%   54-55, 100-102, 116-138, 144-153, 159-163, 169-186, 192-196, 201-205, 208-213, 216-217, 220-222, 225-232
+services/maximus_core_service/consciousness/mea/boundary_detector.py                    50     31    38%   43-45, 52-64, 74-82, 85-86, 94-95, 98-108
+services/maximus_core_service/consciousness/mea/prediction_validator.py                 38     23    39%   43-53, 65-70, 77-90, 93-101
+services/maximus_core_service/consciousness/mea/self_model.py                           57     30    47%   45-48, 60-64, 67-69, 72-74, 77-79, 83-94, 104, 112-122
+services/maximus_core_service/consciousness/mmei/__init__.py                             7      0   100%
+services/maximus_core_service/consciousness/mmei/goal_manager.py                        75     60    20%   72-83, 106-147, 156-165, 169-180, 189-213, 225-230, 245-251, 263, 276
+services/maximus_core_service/consciousness/mmei/goals.py                              126     99    21%   37-48, 52, 56-115, 119-122, 126-145, 149, 153-161, 165-173, 177-178, 198-199, 213-214, 230-231, 247, 261, 275-279, 283-285, 289, 293, 297-303, 313
+services/maximus_core_service/consciousness/mmei/goals_models.py                        76     15    80%   64-66, 70, 74-75, 79-80, 84, 88-91, 94-95
+services/maximus_core_service/consciousness/mmei/models.py                              88     22    75%   69, 121-134, 138-145, 149-157, 160-161, 208-209, 212
+services/maximus_core_service/consciousness/mmei/monitor.py                            130    100    23%   103-135, 149, 163, 167-176, 180-189, 198-238, 242-260, 274, 279-299, 303, 307, 320-325, 338-346, 350-356, 390, 402, 414-417, 441-443
+services/maximus_core_service/consciousness/mmei/needs_computation.py                   52     39    25%   63-67, 84-112, 132-147, 160-168, 183-192, 208-211, 215-216, 220
+services/maximus_core_service/consciousness/mmei/rate_limiter.py                        19     12    37%   52-54, 63-75, 79-81
+services/maximus_core_service/consciousness/tig/__init__.py                              4      0   100%
+services/maximus_core_service/consciousness/tig/fabric/__init__.py                       9      0   100%
+services/maximus_core_service/consciousness/tig/fabric/config.py                        25     13    48%   58-75
+services/maximus_core_service/consciousness/tig/fabric/core.py                         169    137    19%   61-77, 86-131, 151-165, 169-222, 230, 238, 250-257, 267-269, 273-290, 311-321, 325, 329, 337, 345, 353-369, 386-404, 413-418, 422-427, 430
+services/maximus_core_service/consciousness/tig/fabric/health.py                       137    117    15%   36-46, 50-52, 56-57, 61-73, 82-100, 109-118, 127-136, 145-178, 196-231, 240-253, 265-285, 303-317
+services/maximus_core_service/consciousness/tig/fabric/metrics.py                       47     20    57%   53, 58, 63-66, 75-101
+services/maximus_core_service/consciousness/tig/fabric/metrics_computation.py           47     39    17%   30-76, 103-111, 119-149
+services/maximus_core_service/consciousness/tig/fabric/models.py                        70     26    63%   50-59, 82, 99-104, 113-122, 126-129, 133-137, 141, 144
+services/maximus_core_service/consciousness/tig/fabric/node.py                          51     30    41%   52, 56, 67-83, 100-111, 119-129
+services/maximus_core_service/consciousness/tig/fabric/topology.py                      49     40    18%   25-26, 36-42, 47-48, 68-135
+services/maximus_core_service/consciousness/tig/sync.py                                144    125    13%   33-58, 62-76, 80-87, 93-185, 189-198, 202-204, 208-210, 214-217, 227-228, 232-242, 245-246
+services/maximus_core_service/consciousness/tig/sync_cluster.py                         60     47    22%   22-27, 31-42, 46-53, 57-67, 71-79, 83-97, 111-112, 115-116
+services/maximus_core_service/consciousness/tig/sync_models.py                          37      5    86%   45-49
+services/maximus_core_service/core/__init__.py                                           1      0   100%
+services/maximus_core_service/core/coordinator.py                                       20     10    50%   37-39, 52-54, 63-65, 74
+services/maximus_core_service/core/health_aggregator.py                                 19      9    53%   30-31, 47-54, 67-77
+services/maximus_core_service/main.py                                                   21      4    81%   37-40, 64
+services/maximus_core_service/models/__init__.py                                         1      0   100%
+services/maximus_core_service/models/system.py                                          15      0   100%
+services/maximus_core_service/src/consciousness/exocortex/api/exocortex_router.py       53      7    87%   42-44, 122, 152-166
+services/maximus_core_service/src/consciousness/exocortex/api/schemas.py                58      0   100%
+services/maximus_core_service/src/consciousness/exocortex/confrontation_engine.py       68      8    88%   69, 110, 175-176, 181-184
+services/maximus_core_service/src/consciousness/exocortex/constitution_guardian.py      75      8    89%   178-180, 191-193, 197-198
+services/maximus_core_service/src/consciousness/exocortex/digital_thalamus.py           68     28    59%   64, 77-91, 95-130, 141-162
+services/maximus_core_service/src/consciousness/exocortex/factory.py                    36      1    97%   89
+services/maximus_core_service/src/consciousness/exocortex/impulse_inhibitor.py          61      5    92%   103, 129, 138, 147, 157
+services/maximus_core_service/src/consciousness/exocortex/memory/__init__.py             0      0   100%
+services/maximus_core_service/src/consciousness/exocortex/memory/repository.py          62      5    92%   65, 107-108, 156-157
+services/maximus_core_service/tests/__init__.py                                          2      0   100%
+services/maximus_core_service/tests/conftest.py                                        175    118    33%   27-35, 41-43, 51, 57-73, 79, 96, 110, 123, 129, 139, 151-176, 185-192, 198-205, 214-225, 234-258, 264-274, 283-308, 314-323, 332-346
+services/maximus_core_service/tests/exocortex/test_integration.py                       71      1    99%   155
+services/maximus_core_service/utils/__init__.py                                          1      0   100%
+services/maximus_core_service/utils/config.py                                           16      0   100%
+services/maximus_core_service/utils/gemini_client.py                                    90     34    62%   80, 175, 192, 204-215, 227-248, 268-285
+services/maximus_core_service/utils/logging_config.py                                   11      3    73%   25-43
+------------------------------------------------------------------------------------------------------------------
+TOTAL                                                                                 4338   2402    45%
+Coverage HTML written to dir htmlcov
+Coverage XML written to file coverage.xml
+
+[31m[1mFAIL Required test coverage of 70% not reached. Total coverage: 44.63%
+[0m[36m[1m=========================== short test summary info ============================[0m
+[31mFAILED[0m services/maximus_core_service/tests/exocortex/test_integration.py::[1mtest_check_impulse_endpoint[0m - AssertionError: assert 'NONE' == 'PAUSE'
+[31m=================== [31m[1m1 failed[0m, [32m5 passed[0m, [33m5 warnings[0m[31m in 2.74s[0m[31m ====================[0m

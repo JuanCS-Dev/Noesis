@@ -14,7 +14,7 @@ from datetime import datetime
 from typing import Any, Dict, List, Optional
 import uuid
 
-from hitl.decision_framework import DecisionResult, HITLDecisionFramework
+from services.maximus_core_service.hitl.decision_framework import DecisionResult, HITLDecisionFramework
 
 
 class TestDecisionResult:

@@ -81,7 +81,7 @@ from .base import (
 )
 
 # Certification modules
-from .certifications import (
+from .certifications_pkg import (
     CertificationResult,
     IEEE7000Checker,
     ISO27001Checker,

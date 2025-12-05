@@ -14,8 +14,8 @@ from datetime import datetime
 from typing import Any, Dict, List, Optional
 import uuid
 
-from scripts.generate_tests import TestGenerator
-from scripts.generate_tests import main
+from services.maximus_core_service.scripts.generate_tests import TestGenerator
+from services.maximus_core_service.scripts.generate_tests import main
 
 
 class TestTestGenerator:

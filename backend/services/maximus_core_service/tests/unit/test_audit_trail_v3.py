@@ -14,7 +14,7 @@ from datetime import datetime
 from typing import Any, Dict, List, Optional
 import uuid
 
-from hitl.audit_trail import AuditQuery, ComplianceReport, AuditTrail
+from services.maximus_core_service.hitl.audit_trail import AuditQuery, ComplianceReport, AuditTrail
 
 
 class TestAuditQuery:

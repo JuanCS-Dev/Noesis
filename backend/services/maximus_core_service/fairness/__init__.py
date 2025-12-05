@@ -30,7 +30,7 @@ from .base import BiasDetectionResult, FairnessMetric, FairnessResult, Mitigatio
 from .bias_detector import BiasDetector
 from .constraints import FairnessConstraints
 from .mitigation import MitigationEngine
-from .monitor import FairnessMonitor
+from .monitor_legacy import FairnessMonitor
 
 __all__ = [
     "ProtectedAttribute",

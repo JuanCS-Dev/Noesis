@@ -14,7 +14,7 @@ from datetime import datetime
 from typing import Any, Dict, List, Optional
 import uuid
 
-from hitl.operator_interface import OperatorSession, OperatorMetrics, OperatorInterface
+from services.maximus_core_service.hitl.operator_interface import OperatorSession, OperatorMetrics, OperatorInterface
 
 
 class TestOperatorSession:

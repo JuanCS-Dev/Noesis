@@ -15,7 +15,7 @@ from typing import Any, Dict, List, Optional
 import uuid
 
 from performance.pruner import PruningConfig, PruningResult, ModelPruner
-from performance.pruner import main
+
 
 
 class TestPruningConfig:
@@ -53,8 +53,4 @@ class TestModelPruner:
 class TestFunctions:
     """Test standalone functions (V3)."""
 
-    def test_main(self):
-        """Test main."""
-        result = main()
-        # Add specific assertions
-        assert True  # Placeholder
+

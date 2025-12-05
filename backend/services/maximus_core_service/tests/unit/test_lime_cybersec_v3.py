@@ -14,7 +14,7 @@ from datetime import datetime
 from typing import Any, Dict, List, Optional
 import uuid
 
-from xai.lime_cybersec import PerturbationConfig, CyberSecLIME
+from xai.lime import PerturbationConfig, CyberSecLIME
 
 
 class TestPerturbationConfig:

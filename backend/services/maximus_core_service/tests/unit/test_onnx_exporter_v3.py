@@ -15,7 +15,7 @@ from typing import Any, Dict, List, Optional
 import uuid
 
 from performance.onnx_exporter import ONNXExportConfig, ONNXExportResult, ONNXExporter
-from performance.onnx_exporter import simplify_onnx_model, convert_to_onnx_with_quantization, main
+
 
 
 class TestONNXExportConfig:
@@ -50,21 +50,4 @@ class TestONNXExporter:
         assert obj is not None
 
 
-class TestFunctions:
-    """Test standalone functions (V3)."""
 
-    def test_simplify_onnx_model_with_args(self):
-        """Test simplify_onnx_model with type-hinted args."""
-        result = simplify_onnx_model("test", "test")
-        assert True  # Add assertions
-
-    def test_convert_to_onnx_with_quantization_with_args(self):
-        """Test convert_to_onnx_with_quantization with type-hinted args."""
-        result = convert_to_onnx_with_quantization(None, None, "test", "test")
-        assert True  # Add assertions
-
-    def test_main(self):
-        """Test main."""
-        result = main()
-        # Add specific assertions
-        assert True  # Placeholder

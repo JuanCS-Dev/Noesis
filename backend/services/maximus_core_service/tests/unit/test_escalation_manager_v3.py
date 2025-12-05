@@ -14,7 +14,7 @@ from datetime import datetime
 from typing import Any, Dict, List, Optional
 import uuid
 
-from hitl.escalation_manager import EscalationType, EscalationRule, EscalationEvent, EscalationManager
+from services.maximus_core_service.hitl.escalation_manager import EscalationType, EscalationRule, EscalationEvent, EscalationManager
 
 
 class TestEscalationType:

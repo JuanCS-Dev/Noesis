@@ -20,7 +20,7 @@ except ImportError:
     HYPOTHESIS_AVAILABLE = False
     # Install: pip install hypothesis
 
-from gemini_client import GeminiConfig, GeminiClient
+from services.maximus_core_service.gemini_client import GeminiConfig, GeminiClient
 
 
 class TestGeminiConfig:

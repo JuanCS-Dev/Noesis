@@ -14,7 +14,7 @@ from datetime import datetime
 from typing import Any, Dict, List, Optional
 import uuid
 
-from gemini_client import GeminiConfig, GeminiClient
+from services.maximus_core_service.gemini_client import GeminiConfig, GeminiClient
 
 
 class TestGeminiConfig:

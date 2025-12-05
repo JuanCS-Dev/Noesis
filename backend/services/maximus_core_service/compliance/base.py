@@ -1,0 +1,38 @@
+"""Shim for backward compatibility."""
+from .base_legacy import (
+    RegulationType,
+    ControlCategory,
+    ComplianceStatus,
+    ViolationSeverity,
+    EvidenceType,
+    RemediationStatus,
+    Control,
+    Regulation,
+    Evidence,
+    ComplianceViolation,
+    ComplianceResult,
+    Gap,
+    RemediationAction,
+    RemediationPlan,
+    GapAnalysisResult,
+    ComplianceConfig,
+)
+
+__all__ = [
+    "RegulationType",
+    "ControlCategory",
+    "ComplianceStatus",
+    "ViolationSeverity",
+    "EvidenceType",
+    "RemediationStatus",
+    "Control",
+    "Regulation",
+    "Evidence",
+    "ComplianceViolation",
+    "ComplianceResult",
+    "Gap",
+    "RemediationAction",
+    "RemediationPlan",
+    "GapAnalysisResult",
+    "ComplianceConfig",
+]

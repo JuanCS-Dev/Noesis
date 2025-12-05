@@ -14,7 +14,7 @@ from datetime import datetime
 from typing import Any, Dict, List, Optional
 import uuid
 
-from hitl.decision_queue import QueuedDecision, SLAMonitor, DecisionQueue
+from services.maximus_core_service.hitl.decision_queue import QueuedDecision, SLAMonitor, DecisionQueue
 
 
 class TestQueuedDecision:

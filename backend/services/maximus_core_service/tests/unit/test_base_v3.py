@@ -14,7 +14,7 @@ from datetime import datetime
 from typing import Any, Dict, List, Optional
 import uuid
 
-from hitl.base import AutomationLevel, RiskLevel, DecisionStatus, ActionType, SLAConfig, EscalationConfig, HITLConfig, DecisionContext, HITLDecision, OperatorAction, AuditEntry
+from services.maximus_core_service.hitl.base_pkg import AutomationLevel, RiskLevel, DecisionStatus, ActionType, SLAConfig, EscalationConfig, HITLConfig, DecisionContext, HITLDecision, OperatorAction, AuditEntry
 
 
 class TestAutomationLevel:

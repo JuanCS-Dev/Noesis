@@ -33,7 +33,8 @@ class TestDistributedTrainer:
     def test_init_with_args(self):
         """Test initialization with type-hinted args."""
         # V3: Type hint intelligence
-        obj = DistributedTrainer(model=None, optimizer=None, loss_fn=None, config=None)
+        mock_model = MagicMock()
+        obj = DistributedTrainer(model=mock_model, optimizer=None, loss_fn=None, config=None)
         assert obj is not None
 
 

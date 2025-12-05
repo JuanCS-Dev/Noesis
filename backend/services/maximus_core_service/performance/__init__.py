@@ -18,13 +18,13 @@ Date: 2025-10-06
 from __future__ import annotations
 
 
-from .batch_predictor import BatchConfig, BatchPredictor, Priority
+from .batch_predictor import BatchPredictorConfig, BatchPredictor
 from .benchmark_suite import BenchmarkMetrics, BenchmarkResult, BenchmarkSuite
 from .distributed_trainer import DistributedConfig, DistributedTrainer
 from .gpu_trainer import GPUTrainer, GPUTrainingConfig
 from .inference_engine import InferenceConfig, InferenceEngine
 from .onnx_exporter import ONNXExportConfig, ONNXExporter, ONNXExportResult
-from .profiler import Profiler, ProfilerConfig, ProfileResult
+from .profiler_pkg import ModelProfiler as Profiler, ProfilerConfig, ProfilingResult as ProfileResult
 from .pruner import ModelPruner, PruningConfig, PruningResult
 from .quantizer import ModelQuantizer, QuantizationConfig
 
@@ -59,8 +59,7 @@ __all__ = [
     "InferenceConfig",
     # Batch Prediction
     "BatchPredictor",
-    "BatchConfig",
-    "Priority",
+    "BatchPredictorConfig",
 ]
 
 __version__ = "1.0.0"

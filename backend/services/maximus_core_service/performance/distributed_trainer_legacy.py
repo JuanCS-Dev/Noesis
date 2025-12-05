@@ -101,7 +101,7 @@ class DistributedTrainer:
         if not TORCH_AVAILABLE:
             raise ImportError("PyTorch is required. Install with: pip install torch")
 
-        self.config = config
+        self.config = config or DistributedConfig()
         self.loss_fn = loss_fn
 
         # Initialize distributed

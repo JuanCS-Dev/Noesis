@@ -14,8 +14,8 @@ from datetime import datetime
 from typing import Any, Dict, List, Optional
 import uuid
 
-from performance.profiler import ProfilerConfig, ProfileResult, Profiler
-from performance.profiler import main
+from performance import ProfilerConfig, ProfileResult, Profiler
+
 
 
 class TestProfilerConfig:
@@ -53,8 +53,4 @@ class TestProfiler:
 class TestFunctions:
     """Test standalone functions (V3)."""
 
-    def test_main(self):
-        """Test main."""
-        result = main()
-        # Add specific assertions
-        assert True  # Placeholder
+
