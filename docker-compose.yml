@@ -63,16 +63,6 @@ services:
       - qdrant
     restart: unless-stopped
 
-  # --- Orchestration Layer ---
-  meta_orchestrator:
-    build: ./backend/services/meta_orchestrator
-    container_name: meta_orchestrator
-    environment:
-      - ENVIRONMENT=development
-    volumes:
-      - ./backend/services/meta_orchestrator:/app
-    restart: unless-stopped
-
   # --- HCL Infrastructure Layer ---
   hcl_planner_service:
     build: ./backend/services/hcl_planner_service

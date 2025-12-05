@@ -17,7 +17,7 @@ from enum import IntEnum
 
 import httpx
 
-from ..metacognitive_reflector.models.reflection import ExecutionLog, ReflectionResponse
+from .models import ExecutionLog, ReflectionResponse
 from .logging_config import get_logger
 
 logger = get_logger(__name__)
@@ -43,7 +43,7 @@ class ReflectorClient:
     Synchronous baseline implementation for backward compatibility.
     """
 
-    def __init__(self, base_url: str = "http://localhost:8002"):
+    def __init__(self, base_url: str = "http://metacognitive_reflector:8101"):
         """
         Initialize Reflector client.
 
@@ -147,7 +147,7 @@ class PrioritizedReflectorClient(ReflectorClient):
 
     def __init__(
         self,
-        base_url: str = "http://localhost:8002",
+        base_url: str = "http://metacognitive_reflector:8101",
         batch_size: int = 10,
         batch_timeout: float = 0.5,
         max_queue_size: int = 1000
