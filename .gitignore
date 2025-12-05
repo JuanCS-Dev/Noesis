@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.venv/
+venv/
+env/
+.env
+.env.*
+!.env.example
+
+# IDE
+.vscode/
+.idea/
+
+# Docker
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Maximus
+legacy/
+backups/
+
+# Security
+*.key
+*.pem
+*.p12
+*.pfx
+secrets/
+.secrets/
+*.secret.*

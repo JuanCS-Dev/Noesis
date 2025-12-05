@@ -1,0 +1,145 @@
+version: '3.8'
+
+services:
+  # --- Consciousness Layer ---
+  maximus_core_service:
+    build: ./backend/services/maximus_core_service
+    container_name: maximus_core
+    environment:
+      - ENVIRONMENT=development
+    volumes:
+      - ./backend/services/maximus_core_service:/app
+    restart: unless-stopped
+
+  digital_thalamus_service:
+    build: ./backend/services/digital_thalamus_service
+    container_name: digital_thalamus
+    environment:
+      - ENVIRONMENT=development
+    volumes:
+      - ./backend/services/digital_thalamus_service:/app
+    restart: unless-stopped
+
+  prefrontal_cortex_service:
+    build: ./backend/services/prefrontal_cortex_service
+    container_name: prefrontal_cortex
+    environment:
+      - ENVIRONMENT=development
+    volumes:
+      - ./backend/services/prefrontal_cortex_service:/app
+    restart: unless-stopped
+
+  metacognitive_reflector:
+    build: ./backend/services/metacognitive_reflector
+    container_name: metacognitive_reflector
+    environment:
+      - ENVIRONMENT=development
+    volumes:
+      - ./backend/services/metacognitive_reflector:/app
+    restart: unless-stopped
+
+  # --- Vector Database ---
+  qdrant:
+    image: qdrant/qdrant:v1.7.4
+    container_name: qdrant
+    ports:
+      - "6333:6333"  # HTTP API
+      - "6334:6334"  # gRPC API
+    volumes:
+      - qdrant_storage:/qdrant/storage
+    environment:
+      - QDRANT__SERVICE__GRPC_PORT=6334
+    restart: unless-stopped
+
+  episodic_memory:
+    build: ./backend/services/episodic_memory
+    container_name: episodic_memory
+    environment:
+      - ENVIRONMENT=development
+      - QDRANT_URL=http://qdrant:6333
+    volumes:
+      - ./backend/services/episodic_memory:/app
+    depends_on:
+      - qdrant
+    restart: unless-stopped
+
+  # --- Orchestration Layer ---
+  meta_orchestrator:
+    build: ./backend/services/meta_orchestrator
+    container_name: meta_orchestrator
+    environment:
+      - ENVIRONMENT=development
+    volumes:
+      - ./backend/services/meta_orchestrator:/app
+    restart: unless-stopped
+
+  # --- HCL Infrastructure Layer ---
+  hcl_planner_service:
+    build: ./backend/services/hcl_planner_service
+    container_name: hcl_planner
+    environment:
+      - ENVIRONMENT=development
+    volumes:
+      - ./backend/services/hcl_planner_service:/app
+    restart: unless-stopped
+
+  hcl_executor_service:
+    build: ./backend/services/hcl_executor_service
+    container_name: hcl_executor
+    environment:
+      - ENVIRONMENT=development
+    volumes:
+      - ./backend/services/hcl_executor_service:/app
+    restart: unless-stopped
+
+  hcl_analyzer_service:
+    build: ./backend/services/hcl_analyzer_service
+    container_name: hcl_analyzer
+    environment:
+      - ENVIRONMENT=development
+    volumes:
+      - ./backend/services/hcl_analyzer_service:/app
+    restart: unless-stopped
+
+  hcl_monitor_service:
+    build: ./backend/services/hcl_monitor_service
+    container_name: hcl_monitor
+    environment:
+      - ENVIRONMENT=development
+    volumes:
+      - ./backend/services/hcl_monitor_service:/app
+    restart: unless-stopped
+
+  # --- Immune System Layer ---
+  ethical_audit_service:
+    build: ./backend/services/ethical_audit_service
+    container_name: ethical_audit
+    environment:
+      - ENVIRONMENT=development
+    volumes:
+      - ./backend/services/ethical_audit_service:/app
+    restart: unless-stopped
+
+  reactive_fabric_core:
+    build: ./backend/services/reactive_fabric_core
+    container_name: reactive_fabric
+    environment:
+      - ENVIRONMENT=development
+    volumes:
+      - ./backend/services/reactive_fabric_core:/app
+    restart: unless-stopped
+
+  # --- Gateway ---
+  api_gateway:
+    build: ./backend/services/api_gateway
+    container_name: api_gateway
+    ports:
+      - "8000:8000"
+    environment:
+      - ENVIRONMENT=development
+    volumes:
+      - ./backend/services/api_gateway:/app
+    restart: unless-stopped
+
+volumes:
+  qdrant_storage:

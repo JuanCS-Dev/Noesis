@@ -1,0 +1,28 @@
+[MESSAGES CONTROL]
+# Disable warnings that are acceptable in this codebase
+disable=
+    duplicate-code,
+    too-many-arguments,
+    too-many-positional-arguments,
+    too-many-locals,
+    too-many-instance-attributes,
+    too-few-public-methods,
+    broad-exception-caught,
+    unused-argument,
+    redefined-outer-name,
+    import-error,
+    protected-access,
+    import-outside-toplevel,
+    unused-variable,
+    unused-import,
+    line-too-long,
+    no-member,
+    missing-class-docstring
+
+[FORMAT]
+max-line-length=100
+
+[DESIGN]
+max-args=10
+max-locals=20
+max-attributes=12

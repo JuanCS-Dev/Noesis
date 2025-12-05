@@ -1,0 +1,17 @@
+[MAIN]
+ignore=archived_old_v4,integration_archive_dead_code
+
+[MESSAGES CONTROL]
+# E0401: import-error - disabled because PYTHONPATH may not be set when running standalone
+# R0801: duplicate-code - SPM modules have intentional structural similarity
+# R0902: too-many-instance-attributes - consciousness system requires complex state
+# W0212: protected-access - internal coordination between consciousness components
+# W0718: broad-exception-caught - safety modules need to catch all exceptions
+# C0412: ungrouped-imports - re-exports grouped separately from regular imports
+# C0413: wrong-import-position - scripts may set up environment before imports
+# C0415: import-outside-toplevel - some modules import lazily for performance
+# W1203: logging-fstring-interpolation - f-strings are more readable
+disable=E0401,R0801,R0902,W0212,W0718,C0412,C0413,C0415,W1203
+
+[FORMAT]
+max-line-length=120

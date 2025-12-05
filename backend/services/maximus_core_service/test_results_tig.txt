@@ -1,0 +1,1848 @@
+[1m============================= test session starts ==============================[0m
+platform linux -- Python 3.11.13, pytest-8.4.2, pluggy-1.6.0 -- /home/juan/.pyenv/versions/3.11.13/bin/python
+cachedir: .pytest_cache
+hypothesis profile 'default'
+rootdir: /media/juan/DATA/projetos/PROJETO-MAXIMUS-AGENTIC/backend/services/maximus_core_service
+configfile: pytest.ini
+plugins: locust-2.41.6, mock-3.12.0, hypothesis-6.148.2, cov-4.1.0, pytest_httpserver-1.1.3, forked-1.6.0, respx-0.22.0, anyio-4.11.0, httpx-0.35.0, base-url-2.1.0, langsmith-0.4.42, asyncio-1.3.0, playwright-0.7.1, recording-0.13.4
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+[1mcollecting ... [0mcollected 254 items
+
+tests/unit/consciousness/tig/test_fabric_100pct.py::test_tig_node_neighbors_property [32mPASSED[0m[33m [  0%][0m
+tests/unit/consciousness/tig/test_fabric_100pct.py::test_tig_node_get_degree [32mPASSED[0m[33m [  0%][0m
+tests/unit/consciousness/tig/test_fabric_100pct.py::test_fabric_metrics_eci_property_alias [32mPASSED[0m[33m [  1%][0m
+tests/unit/consciousness/tig/test_fabric_100pct.py::test_fabric_metrics_clustering_coefficient_property_alias [32mPASSED[0m[33m [  1%][0m
+tests/unit/consciousness/tig/test_fabric_100pct.py::test_fabric_metrics_connectivity_ratio_property [32mPASSED[0m[33m [  1%][0m
+tests/unit/consciousness/tig/test_fabric_100pct.py::test_topology_config_num_nodes_alias [32mPASSED[0m[33m [  2%][0m
+tests/unit/consciousness/tig/test_fabric_100pct.py::test_topology_config_avg_degree_alias [32mPASSED[0m[33m [  2%][0m
+tests/unit/consciousness/tig/test_fabric_100pct.py::test_topology_config_rewire_probability_alias [32mPASSED[0m[33m [  3%][0m
+tests/unit/consciousness/tig/test_fabric_100pct.py::test_tig_node_clustering_coefficient_less_than_2_neighbors [32mPASSED[0m[33m [  3%][0m
+tests/unit/consciousness/tig/test_fabric_100pct.py::test_tig_node_clustering_coefficient_with_triangles [32mPASSED[0m[33m [  3%][0m
+tests/unit/consciousness/tig/test_fabric_100pct.py::test_tig_node_broadcast_to_neighbors_no_quality_connections [32mPASSED[0m[33m [  4%][0m
+tests/unit/consciousness/tig/test_fabric_100pct.py::test_tig_node_broadcast_to_neighbors_with_quality_connections [32mPASSED[0m[33m [  4%][0m
+tests/unit/consciousness/tig/test_fabric_100pct.py::test_tig_node_send_to_neighbor_success [32mPASSED[0m[33m [  5%][0m
+tests/unit/consciousness/tig/test_fabric_100pct.py::test_tig_node_send_to_neighbor_exception [31mFAILED[0m[31m [  5%][0m
+tests/unit/consciousness/tig/test_fabric_100pct.py::test_fabric_already_initialized_runtime_error [32mPASSED[0m[31m [  5%][0m
+tests/unit/consciousness/tig/test_fabric_100pct.py::test_fabric_initialize_with_iit_violations_print [32mPASSED[0m[31m [  6%][0m
+tests/unit/consciousness/tig/test_fabric_100pct.py::test_apply_small_world_rewiring_with_isolated_nodes [31mFAILED[0m[31m [  6%][0m
+tests/unit/consciousness/tig/test_fabric_100pct.py::test_fabric_metrics_connectivity_ratio_less_than_2_nodes [32mPASSED[0m[31m [  7%][0m
+tests/unit/consciousness/tig/test_fabric_100pct.py::test_first_push_coverage_targets [32mPASSED[0m[31m [  7%][0m
+tests/unit/consciousness/tig/test_fabric_coverage_complete.py::TestTIGNodeEdgeCases::test_neighbors_property_when_no_active_connections [32mPASSED[0m[31m [  7%][0m
+tests/unit/consciousness/tig/test_fabric_coverage_complete.py::TestTIGNodeEdgeCases::test_clustering_coefficient_with_single_neighbor [32mPASSED[0m[31m [  8%][0m
+tests/unit/consciousness/tig/test_fabric_coverage_complete.py::TestTopologyConfigAliases::test_topology_config_num_nodes_alias [32mPASSED[0m[31m [  8%][0m
+tests/unit/consciousness/tig/test_fabric_coverage_complete.py::TestTopologyConfigAliases::test_topology_config_avg_degree_alias [32mPASSED[0m[31m [  9%][0m
+tests/unit/consciousness/tig/test_fabric_coverage_complete.py::TestTopologyConfigAliases::test_topology_config_rewire_probability_alias [32mPASSED[0m[31m [  9%][0m
+tests/unit/consciousness/tig/test_fabric_coverage_complete.py::TestTopologyConfigAliases::test_topology_config_all_aliases_together [32mPASSED[0m[31m [  9%][0m
+tests/unit/consciousness/tig/test_fabric_coverage_complete.py::TestFabricMetricsProperties::test_metrics_eci_property_alias [32mPASSED[0m[31m [ 10%][0m
+tests/unit/consciousness/tig/test_fabric_coverage_complete.py::TestFabricMetricsProperties::test_metrics_clustering_coefficient_property_alias [32mPASSED[0m[31m [ 10%][0m
+tests/unit/consciousness/tig/test_fabric_coverage_complete.py::TestFabricMetricsProperties::test_metrics_connectivity_ratio_when_node_count_less_than_2 [32mPASSED[0m[31m [ 11%][0m
+tests/unit/consciousness/tig/test_fabric_coverage_complete.py::TestFabricMetricsProperties::test_metrics_connectivity_ratio_normal_case [32mPASSED[0m[31m [ 11%][0m
+tests/unit/consciousness/tig/test_fabric_coverage_complete.py::TestIITValidationEdgeCases::test_validate_iit_compliance_path_length_violation [32mPASSED[0m[31m [ 11%][0m
+tests/unit/consciousness/tig/test_fabric_coverage_complete.py::TestInitializationEdgeCases::test_initialize_raises_error_when_already_initialized [32mPASSED[0m[31m [ 12%][0m
+tests/unit/consciousness/tig/test_fabric_coverage_complete.py::TestIITViolationsPrint::test_initialization_prints_violations_for_bad_config [32mPASSED[0m[31m [ 12%][0m
+tests/unit/consciousness/tig/test_fabric_coverage_complete.py::TestSmallWorldRewiringEdgeCases::test_rewiring_skips_nodes_with_less_than_2_neighbors [32mPASSED[0m[31m [ 12%][0m
+tests/unit/consciousness/tig/test_fabric_coverage_complete.py::TestSmallWorldRewiringEdgeCases::test_rewiring_skips_hub_enhancement_for_small_graphs [32mPASSED[0m[31m [ 13%][0m
+tests/unit/consciousness/tig/test_fabric_coverage_complete.py::TestSmallWorldRewiringEdgeCases::test_rewiring_skips_hub_enhancement_for_degenerate_graphs [31mFAILED[0m[31m [ 13%][0m
+tests/unit/consciousness/tig/test_fabric_coverage_complete.py::TestSmallWorldRewiringEdgeCases::test_hub_enhancement_with_insufficient_neighbors [32mPASSED[0m[31m [ 14%][0m
+tests/unit/consciousness/tig/test_fabric_coverage_complete.py::TestMetricsComputationEdgeCases::test_metrics_handles_disconnected_graph [31mFAILED[0m[31m [ 14%][0m
+tests/unit/consciousness/tig/test_fabric_coverage_complete.py::TestMetricsComputationEdgeCases::test_algebraic_connectivity_with_empty_graph [32mPASSED[0m[31m [ 14%][0m
+tests/unit/consciousness/tig/test_fabric_coverage_complete.py::TestMetricsComputationEdgeCases::test_eci_with_less_than_2_nodes [32mPASSED[0m[31m [ 15%][0m
+tests/unit/consciousness/tig/test_fabric_coverage_complete.py::TestBottleneckDetectionEdgeCases::test_bottleneck_detection_handles_no_path_exception [31mFAILED[0m[31m [ 15%][0m
+tests/unit/consciousness/tig/test_fabric_coverage_complete.py::TestGlobalBroadcastEdgeCases::test_broadcast_global_raises_error_when_not_initialized [32mPASSED[0m[31m [ 16%][0m
+tests/unit/consciousness/tig/test_fabric_coverage_complete.py::TestGlobalBroadcastEdgeCases::test_broadcast_global_handles_exceptions_in_node_broadcasts [32mPASSED[0m[31m [ 16%][0m
+tests/unit/consciousness/tig/test_fabric_coverage_complete.py::TestTopologyRepairEdgeCases::test_repair_topology_handles_nonexistent_node [31mFAILED[0m[31m [ 16%][0m
+tests/unit/consciousness/tig/test_fabric_coverage_complete.py::TestTopologyRepairEdgeCases::test_repair_topology_handles_node_with_less_than_2_neighbors [32mPASSED[0m[31m [ 17%][0m
+tests/unit/consciousness/tig/test_fabric_coverage_complete.py::TestSendFailureHandling::test_send_handles_timeout_error [31mFAILED[0m[31m [ 17%][0m
+tests/unit/consciousness/tig/test_fabric_coverage_complete.py::TestSendFailureHandling::test_handle_send_failure_opens_circuit_breaker_at_threshold [31mFAILED[0m[31m [ 18%][0m
+tests/unit/consciousness/tig/test_fabric_coverage_complete.py::TestNetworkPartitionDetection::test_detect_network_partition_with_less_than_2_nodes [31mFAILED[0m[31m [ 18%][0m
+tests/unit/consciousness/tig/test_fabric_coverage_complete.py::TestNetworkPartitionDetection::test_detect_network_partition_handles_exceptions [31mFAILED[0m[31m [ 18%][0m
+tests/unit/consciousness/tig/test_fabric_coverage_complete.py::TestNetworkPartitionDetection::test_get_health_metrics_connectivity_zero_when_no_nodes [31mFAILED[0m[31m [ 19%][0m
+tests/unit/consciousness/tig/test_fabric_coverage_complete.py::TestAsyncBroadcastMethods::test_broadcast_to_neighbors_with_low_weight_connections [32mPASSED[0m[31m [ 19%][0m
+tests/unit/consciousness/tig/test_fabric_coverage_complete.py::TestAsyncBroadcastMethods::test_send_to_neighbor_simulates_network_latency [32mPASSED[0m[31m [ 20%][0m
+tests/unit/consciousness/tig/test_fabric_coverage_complete.py::TestAsyncBroadcastMethods::test_send_to_neighbor_handles_exceptions [32mPASSED[0m[31m [ 20%][0m
+tests/unit/consciousness/tig/test_fabric_faith_100pct.py::TestTIGConnectionEdgeCases::test_inactive_connection_zero_capacity_lines_73_82 [32mPASSED[0m[31m [ 20%][0m
+tests/unit/consciousness/tig/test_fabric_faith_100pct.py::TestCircuitBreakerRecovery::test_circuit_breaker_recovery_timeout_line_105 [32mPASSED[0m[31m [ 21%][0m
+tests/unit/consciousness/tig/test_fabric_faith_100pct.py::TestNodeHealthAndProcessing::test_node_degree_and_clustering_lines_156_186 [32mPASSED[0m[31m [ 21%][0m
+tests/unit/consciousness/tig/test_fabric_faith_100pct.py::TestNodeHealthAndProcessing::test_broadcast_to_neighbors_lines_187_213 [32mPASSED[0m[31m [ 22%][0m
+tests/unit/consciousness/tig/test_fabric_faith_100pct.py::TestHealthMonitoringFaultTolerance::test_avg_path_length_disconnected_graph_lines_620_626 [32mPASSED[0m[31m [ 22%][0m
+tests/unit/consciousness/tig/test_fabric_faith_100pct.py::TestHealthMonitoringFaultTolerance::test_isolate_and_reintegrate_node_lines_789_823 [31mFAILED[0m[31m [ 22%][0m
+tests/unit/consciousness/tig/test_fabric_faith_100pct.py::TestHealthMonitoringFaultTolerance::test_repair_topology_around_dead_node_lines_825_865 [31mFAILED[0m[31m [ 23%][0m
+tests/unit/consciousness/tig/test_fabric_faith_100pct.py::TestHealthMonitoringFaultTolerance::test_send_to_node_with_circuit_breaker_lines_867_918 [31mFAILED[0m[31m [ 23%][0m
+tests/unit/consciousness/tig/test_fabric_faith_100pct.py::TestHealthMonitoringFaultTolerance::test_handle_send_failure_opens_circuit_breaker_lines_920_938 [31mFAILED[0m[31m [ 24%][0m
+tests/unit/consciousness/tig/test_fabric_faith_100pct.py::TestPartitionDetectionAndESGT::test_detect_network_partition_lines_940_969 [31mFAILED[0m[31m [ 24%][0m
+tests/unit/consciousness/tig/test_fabric_faith_100pct.py::TestPartitionDetectionAndESGT::test_get_health_metrics_lines_971_1009 [31mFAILED[0m[31m [ 24%][0m
+tests/unit/consciousness/tig/test_fabric_faith_100pct.py::TestPartitionDetectionAndESGT::test_esgt_mode_enter_exit_lines_1029_1050 [32mPASSED[0m[31m [ 25%][0m
+tests/unit/consciousness/tig/test_fabric_faith_100pct.py::TestPartitionDetectionAndESGT::test_repr_line_1052_1058 [32mPASSED[0m[31m [ 25%][0m
+tests/unit/consciousness/tig/test_fabric_faith_100pct.py::TestSmallGraphEdgeCases::test_small_graph_skips_hub_enhancement_lines_545_553 [32mPASSED[0m[31m [ 25%][0m
+tests/unit/consciousness/tig/test_fabric_final_100pct.py::TestGetEffectiveCapacityActive::test_active_connection_full_calculation_lines_77_82 [32mPASSED[0m[31m [ 26%][0m
+tests/unit/consciousness/tig/test_fabric_final_100pct.py::TestNodeHealthIsHealthy::test_is_healthy_all_branches_line_105 [32mPASSED[0m[31m [ 26%][0m
+tests/unit/consciousness/tig/test_fabric_final_100pct.py::TestCircuitBreakerRecordSuccess::test_record_success_half_open_state_lines_148_149 [32mPASSED[0m[31m [ 27%][0m
+tests/unit/consciousness/tig/test_fabric_final_100pct.py::TestHubEnhancementUniformDegree::test_uniform_degree_distribution_line_620 [32mPASSED[0m[31m [ 27%][0m
+tests/unit/consciousness/tig/test_fabric_final_100pct.py::TestHealthMonitoringDeadNodeIsolation::test_monitoring_loop_isolates_dead_node_lines_843_844 [31mFAILED[0m[31m [ 27%][0m
+tests/unit/consciousness/tig/test_fabric_final_100pct.py::TestHealthMonitoringReintegration::test_monitoring_loop_reintegrates_recovered_node_lines_848_851 [31mFAILED[0m[31m [ 28%][0m
+tests/unit/consciousness/tig/test_fabric_final_100pct.py::TestBypassConnectionCreation::test_bypass_connection_creation_lines_918_932 [31mFAILED[0m[31m [ 28%][0m
+tests/unit/consciousness/tig/test_fabric_final_100pct.py::TestSendToNodeExceptions::test_send_to_nonexistent_node_line_966 [32mPASSED[0m[31m [ 29%][0m
+tests/unit/consciousness/tig/test_fabric_final_100pct.py::TestSendToNodeExceptions::test_send_to_node_timeout_lines_983_985 [32mPASSED[0m[31m [ 29%][0m
+tests/unit/consciousness/tig/test_fabric_final_100pct.py::TestDetectNetworkPartition::test_partition_detection_with_isolated_nodes [31mFAILED[0m[31m [ 29%][0m
+tests/unit/consciousness/tig/test_fabric_final_100pct.py::TestSmallGraphDegeneracy::test_very_small_graph_line_620 [32mPASSED[0m[31m [ 30%][0m
+tests/unit/consciousness/tig/test_fabric_final_5_lines.py::TestFinal5LinesToPerfection::test_hub_enhancement_skips_hubs_with_less_than_2_neighbors_line_632 [31mFAILED[0m[31m [ 30%][0m
+tests/unit/consciousness/tig/test_fabric_final_5_lines.py::TestFinal5LinesToPerfection::test_bottleneck_detection_network_x_no_path_exception_lines_789_790 [31mFAILED[0m[31m [ 31%][0m
+tests/unit/consciousness/tig/test_fabric_final_5_lines.py::TestFinal5LinesToPerfection::test_repair_topology_skips_when_neighbors_less_than_2_line_907 [31mFAILED[0m[31m [ 31%][0m
+tests/unit/consciousness/tig/test_fabric_final_9_lines.py::test_line_431_path_length_violation [32mPASSED[0m[31m [ 31%][0m
+tests/unit/consciousness/tig/test_fabric_final_9_lines.py::test_line_632_hub_with_1_neighbor [31mFAILED[0m[31m [ 32%][0m
+tests/unit/consciousness/tig/test_fabric_final_9_lines.py::test_lines_691_693_networkx_no_path_disconnected_graph [31mFAILED[0m[31m [ 32%][0m
+tests/unit/consciousness/tig/test_fabric_final_9_lines.py::test_line_705_algebraic_connectivity_zero_nodes [32mPASSED[0m[31m [ 33%][0m
+tests/unit/consciousness/tig/test_fabric_final_9_lines.py::test_line_747_eci_zero_when_less_than_2_nodes [32mPASSED[0m[31m [ 33%][0m
+tests/unit/consciousness/tig/test_fabric_final_9_lines.py::test_lines_789_790_networkx_no_path_in_detect_bottlenecks [32mPASSED[0m[31m [ 33%][0m
+tests/unit/consciousness/tig/test_fabric_final_9_lines.py::test_final_9_lines_all_covered [32mPASSED[0m[31m [ 34%][0m
+tests/unit/consciousness/tig/test_fabric_final_push.py::test_apply_small_world_rewiring_with_large_graph_hub_enhancement [31mFAILED[0m[31m [ 34%][0m
+tests/unit/consciousness/tig/test_fabric_final_push.py::test_apply_small_world_rewiring_hub_with_less_than_2_neighbors [31mFAILED[0m[31m [ 35%][0m
+tests/unit/consciousness/tig/test_fabric_final_push.py::test_detect_bottlenecks_with_disconnected_nodes_networkx_no_path [32mPASSED[0m[31m [ 35%][0m
+tests/unit/consciousness/tig/test_fabric_final_push.py::test_health_monitoring_reintegration_path [31mFAILED[0m[31m [ 35%][0m
+tests/unit/consciousness/tig/test_fabric_final_push.py::test_health_monitoring_loop_exception_handling [31mFAILED[0m[31m [ 36%][0m
+tests/unit/consciousness/tig/test_fabric_final_push.py::test_repair_topology_with_dead_node_not_found [31mFAILED[0m[31m [ 36%][0m
+tests/unit/consciousness/tig/test_fabric_final_push.py::test_repair_topology_with_less_than_2_neighbors [31mFAILED[0m[31m [ 37%][0m
+tests/unit/consciousness/tig/test_fabric_final_push.py::test_repair_topology_with_existing_bypass_connections [31mFAILED[0m[31m [ 37%][0m
+tests/unit/consciousness/tig/test_fabric_final_push.py::test_repair_topology_bypass_created_print [31mFAILED[0m[31m [ 37%][0m
+tests/unit/consciousness/tig/test_fabric_final_push.py::test_handle_send_failure_circuit_breaker_open_print [31mFAILED[0m[31m [ 38%][0m
+tests/unit/consciousness/tig/test_fabric_final_push.py::test_send_to_node_with_isolated_node [31mFAILED[0m[31m [ 38%][0m
+tests/unit/consciousness/tig/test_fabric_final_push.py::test_send_to_node_timeout_exception [31mFAILED[0m[31m [ 38%][0m
+tests/unit/consciousness/tig/test_fabric_final_push.py::test_send_to_node_runtime_error_node_not_found [32mPASSED[0m[31m [ 39%][0m
+tests/unit/consciousness/tig/test_fabric_final_push.py::test_get_health_metrics_with_zero_total_nodes [31mFAILED[0m[31m [ 39%][0m
+tests/unit/consciousness/tig/test_fabric_final_push.py::test_get_health_metrics_with_degraded_nodes [31mFAILED[0m[31m [ 40%][0m
+tests/unit/consciousness/tig/test_fabric_final_push.py::test_detect_network_partition_with_exception [31mFAILED[0m[31m [ 40%][0m
+tests/unit/consciousness/tig/test_fabric_final_push.py::test_detect_network_partition_with_less_than_2_active_nodes [31mFAILED[0m[31m [ 40%][0m
+tests/unit/consciousness/tig/test_fabric_final_push.py::test_tig_fabric_repr [32mPASSED[0m[31m [ 41%][0m
+tests/unit/consciousness/tig/test_fabric_final_push.py::test_second_push_coverage_targets [32mPASSED[0m[31m [ 41%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestNodeHealthDataclass::test_node_health_initialization_defaults [32mPASSED[0m[31m [ 42%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestNodeHealthDataclass::test_node_health_is_healthy_baseline [32mPASSED[0m[31m [ 42%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestNodeHealthDataclass::test_node_health_is_unhealthy_when_isolated [32mPASSED[0m[31m [ 42%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestNodeHealthDataclass::test_node_health_is_unhealthy_when_degraded [32mPASSED[0m[31m [ 43%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestNodeHealthDataclass::test_node_health_is_unhealthy_at_failure_threshold [32mPASSED[0m[31m [ 43%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestNodeHealthDataclass::test_node_health_combined_unhealthy_states [32mPASSED[0m[31m [ 44%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestCircuitBreakerPattern::test_circuit_breaker_initial_state_closed [32mPASSED[0m[31m [ 44%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestCircuitBreakerPattern::test_circuit_breaker_accumulates_failures [32mPASSED[0m[31m [ 44%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestCircuitBreakerPattern::test_circuit_breaker_opens_at_threshold [32mPASSED[0m[31m [ 45%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestCircuitBreakerPattern::test_circuit_breaker_blocks_when_open [32mPASSED[0m[31m [ 45%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestCircuitBreakerPattern::test_circuit_breaker_transitions_to_half_open [32mPASSED[0m[31m [ 46%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestCircuitBreakerPattern::test_circuit_breaker_closes_on_success_from_half_open [32mPASSED[0m[31m [ 46%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestCircuitBreakerPattern::test_circuit_breaker_reopens_on_failure_from_half_open [32mPASSED[0m[31m [ 46%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestCircuitBreakerPattern::test_circuit_breaker_success_noop_when_closed [32mPASSED[0m[31m [ 47%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestCircuitBreakerPattern::test_circuit_breaker_edge_case_zero_threshold [32mPASSED[0m[31m [ 47%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestCircuitBreakerPattern::test_circuit_breaker_edge_case_zero_recovery_timeout [32mPASSED[0m[31m [ 48%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestTIGFabricHardeningInitialization::test_fabric_has_node_health_dict [31mFAILED[0m[31m [ 48%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestTIGFabricHardeningInitialization::test_fabric_has_node_health_dict [31mERROR[0m[31m [ 48%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestTIGFabricHardeningInitialization::test_fabric_has_circuit_breakers_dict [31mFAILED[0m[31m [ 48%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestTIGFabricHardeningInitialization::test_fabric_has_circuit_breakers_dict [31mERROR[0m[31m [ 48%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestTIGFabricHardeningInitialization::test_fabric_has_health_monitoring_config [31mFAILED[0m[31m [ 49%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestTIGFabricHardeningInitialization::test_fabric_has_health_monitoring_config [31mERROR[0m[31m [ 49%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestTIGFabricHardeningInitialization::test_fabric_has_health_monitoring_task_slot [31mFAILED[0m[31m [ 49%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestTIGFabricHardeningInitialization::test_fabric_has_health_monitoring_task_slot [31mERROR[0m[31m [ 49%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestTIGFabricHardeningInitialization::test_fabric_has_running_flag [31mFAILED[0m[31m [ 50%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestTIGFabricHardeningInitialization::test_fabric_has_running_flag [31mERROR[0m[31m [ 50%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestTIGFabricHardeningInitialization::test_fabric_initializes_node_health_for_all_nodes [31mFAILED[0m[31m [ 50%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestTIGFabricHardeningInitialization::test_fabric_initializes_node_health_for_all_nodes [31mERROR[0m[31m [ 50%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestTIGFabricHardeningInitialization::test_fabric_initializes_circuit_breakers_for_all_nodes [31mFAILED[0m[31m [ 50%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestTIGFabricHardeningInitialization::test_fabric_initializes_circuit_breakers_for_all_nodes [31mERROR[0m[31m [ 50%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestHealthMetricsCollection::test_get_health_metrics_returns_complete_structure [32mPASSED[0m[31m [ 51%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestHealthMetricsCollection::test_get_health_metrics_returns_complete_structure [31mERROR[0m[31m [ 51%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestHealthMetricsCollection::test_get_health_metrics_counts_all_nodes [31mFAILED[0m[31m [ 51%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestHealthMetricsCollection::test_get_health_metrics_counts_all_nodes [31mERROR[0m[31m [ 51%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestHealthMetricsCollection::test_get_health_metrics_baseline_all_healthy [32mPASSED[0m[31m [ 51%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestHealthMetricsCollection::test_get_health_metrics_baseline_all_healthy [31mERROR[0m[31m [ 51%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestHealthMetricsCollection::test_get_health_metrics_detects_isolated_nodes [31mFAILED[0m[31m [ 52%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestHealthMetricsCollection::test_get_health_metrics_detects_isolated_nodes [31mERROR[0m[31m [ 52%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestHealthMetricsCollection::test_get_health_metrics_detects_degraded_nodes [31mFAILED[0m[31m [ 52%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestHealthMetricsCollection::test_get_health_metrics_detects_degraded_nodes [31mERROR[0m[31m [ 52%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestHealthMetricsCollection::test_get_health_metrics_connectivity_calculation [31mFAILED[0m[31m [ 53%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestHealthMetricsCollection::test_get_health_metrics_connectivity_calculation [31mERROR[0m[31m [ 53%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestHealthMetricsCollection::test_get_health_metrics_connectivity_zero_when_all_isolated [31mFAILED[0m[31m [ 53%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestHealthMetricsCollection::test_get_health_metrics_connectivity_zero_when_all_isolated [31mERROR[0m[31m [ 53%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestHealthMonitoringLoop::test_health_monitoring_starts_automatically [31mFAILED[0m[31m [ 53%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestHealthMonitoringLoop::test_health_monitoring_starts_automatically [31mERROR[0m[31m [ 53%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestHealthMonitoringLoop::test_health_monitoring_stops_when_fabric_stops [31mFAILED[0m[31m [ 54%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestHealthMonitoringLoop::test_health_monitoring_stops_when_fabric_stops [31mERROR[0m[31m [ 54%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestHealthMonitoringLoop::test_health_monitoring_detects_dead_node [31mFAILED[0m[31m [ 54%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestHealthMonitoringLoop::test_health_monitoring_detects_dead_node [31mERROR[0m[31m [ 54%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestHealthMonitoringLoop::test_health_monitoring_reintegrates_recovered_node [31mFAILED[0m[31m [ 55%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestHealthMonitoringLoop::test_health_monitoring_reintegrates_recovered_node [31mERROR[0m[31m [ 55%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestHealthMonitoringLoop::test_health_monitoring_continues_despite_exceptions [31mFAILED[0m[31m [ 55%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestHealthMonitoringLoop::test_health_monitoring_continues_despite_exceptions [31mERROR[0m[31m [ 55%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestFaultTolerantSend::test_send_to_node_rejects_isolated_node [31mFAILED[0m[31m [ 55%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestFaultTolerantSend::test_send_to_node_rejects_isolated_node [31mERROR[0m[31m [ 55%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestFaultTolerantSend::test_send_to_node_rejects_open_circuit_breaker [31mFAILED[0m[31m [ 56%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestFaultTolerantSend::test_send_to_node_rejects_open_circuit_breaker [31mERROR[0m[31m [ 56%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestFaultTolerantSend::test_send_to_node_times_out_on_slow_send [31mFAILED[0m[31m [ 56%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestFaultTolerantSend::test_send_to_node_times_out_on_slow_send [31mERROR[0m[31m [ 56%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestFaultTolerantSend::test_send_to_node_updates_last_seen_on_success [31mFAILED[0m[31m [ 57%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestFaultTolerantSend::test_send_to_node_updates_last_seen_on_success [31mERROR[0m[31m [ 57%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestFaultTolerantSend::test_send_to_node_records_failure_on_timeout [31mFAILED[0m[31m [ 57%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestFaultTolerantSend::test_send_to_node_records_failure_on_timeout [31mERROR[0m[31m [ 57%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestCompleteFailureScenarios::test_complete_node_failure_and_isolation [31mFAILED[0m[31m [ 57%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestCompleteFailureScenarios::test_complete_node_failure_and_isolation [31mERROR[0m[31m [ 57%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestCompleteFailureScenarios::test_circuit_breaker_opens_after_repeated_failures [31mFAILED[0m[31m [ 58%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestCompleteFailureScenarios::test_circuit_breaker_opens_after_repeated_failures [31mERROR[0m[31m [ 58%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestCompleteFailureScenarios::test_multiple_node_failures_cascade_protection [31mFAILED[0m[31m [ 58%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestCompleteFailureScenarios::test_multiple_node_failures_cascade_protection [31mERROR[0m[31m [ 58%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestTIGAdvancedBehaviorAndMetrics::test_tig_connection_get_effective_capacity [32mPASSED[0m[31m [ 59%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestTIGAdvancedBehaviorAndMetrics::test_node_clustering_coefficient [32mPASSED[0m[31m [ 59%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestTIGAdvancedBehaviorAndMetrics::test_node_clustering_coefficient [31mERROR[0m[31m [ 59%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestTIGAdvancedBehaviorAndMetrics::test_topology_repair_creates_bypass_connections [31mFAILED[0m[31m [ 59%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestTIGAdvancedBehaviorAndMetrics::test_topology_repair_creates_bypass_connections [31mERROR[0m[31m [ 59%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestTIGAdvancedBehaviorAndMetrics::test_esgt_mode_transition [32mPASSED[0m[31m [ 60%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestTIGAdvancedBehaviorAndMetrics::test_esgt_mode_transition [31mERROR[0m[31m [ 60%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestTIGAdvancedBehaviorAndMetrics::test_iit_compliance_validation_on_good_fabric [32mPASSED[0m[31m [ 60%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestTIGAdvancedBehaviorAndMetrics::test_iit_compliance_validation_on_good_fabric [31mERROR[0m[31m [ 60%][0m
+tests/unit/consciousness/tig/test_fabric_hardening.py::TestTIGAdvancedBehaviorAndMetrics::test_iit_compliance_fails_on_bad_fabric [31mFAILED[0m[31m [ 61%][0m
+tests/unit/consciousness/tig/test_fabric_remaining_19.py::test_line_431_bypass_print [31mFAILED[0m[31m [ 61%][0m
+tests/unit/consciousness/tig/test_fabric_remaining_19.py::test_line_632_hub_less_than_2_neighbors [31mFAILED[0m[31m [ 61%][0m
+tests/unit/consciousness/tig/test_fabric_remaining_19.py::test_lines_691_693_networkx_no_path [32mPASSED[0m[31m [ 62%][0m
+tests/unit/consciousness/tig/test_fabric_remaining_19.py::test_line_705_eci_computation [31mFAILED[0m[31m [ 62%][0m
+tests/unit/consciousness/tig/test_fabric_remaining_19.py::test_line_747_health_monitoring_exception [31mFAILED[0m[31m [ 62%][0m
+tests/unit/consciousness/tig/test_fabric_remaining_19.py::test_lines_789_790_dead_node_not_found [31mFAILED[0m[31m [ 63%][0m
+tests/unit/consciousness/tig/test_fabric_remaining_19.py::test_line_810_broadcast_global_not_initialized [32mPASSED[0m[31m [ 63%][0m
+tests/unit/consciousness/tig/test_fabric_remaining_19.py::test_lines_812_819_broadcast_global_success [32mPASSED[0m[31m [ 64%][0m
+tests/unit/consciousness/tig/test_fabric_remaining_19.py::test_lines_980_981_timeout_error [32mPASSED[0m[31m [ 64%][0m
+tests/unit/consciousness/tig/test_fabric_remaining_19.py::test_all_19_lines_covered [32mPASSED[0m[31m [ 64%][0m
+tests/unit/consciousness/tig/test_sync.py::TestClockOffset::test_clock_offset_creation [32mPASSED[0m[31m [ 65%][0m
+tests/unit/consciousness/tig/test_sync.py::TestClockOffset::test_is_acceptable_for_esgt_pass_simulation_thresholds [32mPASSED[0m[31m [ 65%][0m
+tests/unit/consciousness/tig/test_sync.py::TestClockOffset::test_is_acceptable_for_esgt_fail_high_jitter [32mPASSED[0m[31m [ 66%][0m
+tests/unit/consciousness/tig/test_sync.py::TestClockOffset::test_is_acceptable_for_esgt_fail_low_quality [32mPASSED[0m[31m [ 66%][0m
+tests/unit/consciousness/tig/test_sync.py::TestClockOffset::test_is_acceptable_for_esgt_hardware_thresholds [32mPASSED[0m[31m [ 66%][0m
+tests/unit/consciousness/tig/test_sync.py::TestClockOffset::test_is_acceptable_for_esgt_boundary_jitter [32mPASSED[0m[31m [ 67%][0m
+tests/unit/consciousness/tig/test_sync.py::TestClockOffset::test_is_acceptable_for_esgt_boundary_quality [32mPASSED[0m[31m [ 67%][0m
+tests/unit/consciousness/tig/test_sync.py::TestSyncResult::test_sync_result_success_creation [32mPASSED[0m[31m [ 68%][0m
+tests/unit/consciousness/tig/test_sync.py::TestSyncResult::test_sync_result_failure_creation [32mPASSED[0m[31m [ 68%][0m
+tests/unit/consciousness/tig/test_sync.py::TestSyncResult::test_sync_result_default_values [32mPASSED[0m[31m [ 68%][0m
+tests/unit/consciousness/tig/test_sync.py::TestPTPSynchronizerLifecycle::test_synchronizer_initialization_slave [32mPASSED[0m[31m [ 69%][0m
+tests/unit/consciousness/tig/test_sync.py::TestPTPSynchronizerLifecycle::test_synchronizer_initialization_grand_master [32mPASSED[0m[31m [ 69%][0m
+tests/unit/consciousness/tig/test_sync.py::TestPTPSynchronizerLifecycle::test_start_grand_master [32mPASSED[0m[31m [ 70%][0m
+tests/unit/consciousness/tig/test_sync.py::TestPTPSynchronizerLifecycle::test_start_slave [32mPASSED[0m[31m [ 70%][0m
+tests/unit/consciousness/tig/test_sync.py::TestPTPSynchronizerLifecycle::test_start_idempotent [32mPASSED[0m[31m [ 70%][0m
+tests/unit/consciousness/tig/test_sync.py::TestPTPSynchronizerLifecycle::test_stop_synchronizer [32mPASSED[0m[31m [ 71%][0m
+tests/unit/consciousness/tig/test_sync.py::TestPTPSynchronizerLifecycle::test_update_grand_master_time_loop [32mPASSED[0m[31m [ 71%][0m
+tests/unit/consciousness/tig/test_sync.py::TestSyncToMaster::test_sync_to_master_grand_master_rejects [32mPASSED[0m[31m [ 72%][0m
+tests/unit/consciousness/tig/test_sync.py::TestSyncToMaster::test_sync_to_master_slave_success [32mPASSED[0m[31m [ 72%][0m
+tests/unit/consciousness/tig/test_sync.py::TestSyncToMaster::test_sync_to_master_multiple_iterations_converge [31mFAILED[0m[31m [ 72%][0m
+tests/unit/consciousness/tig/test_sync.py::TestSyncToMaster::test_sync_to_master_offset_calculation [32mPASSED[0m[31m [ 73%][0m
+tests/unit/consciousness/tig/test_sync.py::TestSyncToMaster::test_sync_to_master_state_transitions [32mPASSED[0m[31m [ 73%][0m
+tests/unit/consciousness/tig/test_sync.py::TestSyncToMaster::test_sync_to_master_exception_handling [32mPASSED[0m[31m [ 74%][0m
+tests/unit/consciousness/tig/test_sync.py::TestSyncToMaster::test_sync_to_master_jitter_history_accumulation [32mPASSED[0m[31m [ 74%][0m
+tests/unit/consciousness/tig/test_sync.py::TestSyncToMaster::test_sync_to_master_offset_history_accumulation [32mPASSED[0m[31m [ 74%][0m
+tests/unit/consciousness/tig/test_sync.py::TestSyncToMaster::test_sync_to_master_ema_initialization [32mPASSED[0m[31m [ 75%][0m
+tests/unit/consciousness/tig/test_sync.py::TestSyncToMaster::test_sync_to_master_integral_anti_windup [32mPASSED[0m[31m [ 75%][0m
+tests/unit/consciousness/tig/test_sync.py::TestSyncToMaster::test_sync_to_master_drift_calculation [32mPASSED[0m[31m [ 75%][0m
+tests/unit/consciousness/tig/test_sync.py::TestPTPSynchronizerHelpers::test_calculate_quality_perfect [32mPASSED[0m[31m [ 76%][0m
+tests/unit/consciousness/tig/test_sync.py::TestPTPSynchronizerHelpers::test_calculate_quality_poor [32mPASSED[0m[31m [ 76%][0m
+tests/unit/consciousness/tig/test_sync.py::TestPTPSynchronizerHelpers::test_calculate_quality_insufficient_history [32mPASSED[0m[31m [ 77%][0m
+tests/unit/consciousness/tig/test_sync.py::TestPTPSynchronizerHelpers::test_get_time_ns_grand_master [32mPASSED[0m[31m [ 77%][0m
+tests/unit/consciousness/tig/test_sync.py::TestPTPSynchronizerHelpers::test_get_time_ns_slave [32mPASSED[0m[31m [ 77%][0m
+tests/unit/consciousness/tig/test_sync.py::TestPTPSynchronizerHelpers::test_get_offset [32mPASSED[0m[31m [ 78%][0m
+tests/unit/consciousness/tig/test_sync.py::TestPTPSynchronizerHelpers::test_is_ready_for_esgt [31mFAILED[0m[31m [ 78%][0m
+tests/unit/consciousness/tig/test_sync.py::TestPTPSynchronizerHelpers::test_is_not_ready_for_esgt [31mFAILED[0m[31m [ 79%][0m
+tests/unit/consciousness/tig/test_sync.py::TestPTPSynchronizerHelpers::test_repr [32mPASSED[0m[31m [ 79%][0m
+tests/unit/consciousness/tig/test_sync.py::TestContinuousSync::test_continuous_sync_runs [32mPASSED[0m[31m [ 79%][0m
+tests/unit/consciousness/tig/test_sync.py::TestContinuousSync::test_continuous_sync_handles_failure [32mPASSED[0m[31m [ 80%][0m
+tests/unit/consciousness/tig/test_sync.py::TestContinuousSync::test_continuous_sync_respects_interval [32mPASSED[0m[31m [ 80%][0m
+tests/unit/consciousness/tig/test_sync.py::TestPTPCluster::test_cluster_initialization [32mPASSED[0m[31m [ 81%][0m
+tests/unit/consciousness/tig/test_sync.py::TestPTPCluster::test_add_grand_master [32mPASSED[0m[31m [ 81%][0m
+tests/unit/consciousness/tig/test_sync.py::TestPTPCluster::test_add_grand_master_duplicate_fails [32mPASSED[0m[31m [ 81%][0m
+tests/unit/consciousness/tig/test_sync.py::TestPTPCluster::test_add_slave [32mPASSED[0m[31m [ 82%][0m
+tests/unit/consciousness/tig/test_sync.py::TestPTPCluster::test_synchronize_all [32mPASSED[0m[31m [ 82%][0m
+tests/unit/consciousness/tig/test_sync.py::TestPTPCluster::test_synchronize_all_no_grand_master_fails [32mPASSED[0m[31m [ 83%][0m
+tests/unit/consciousness/tig/test_sync.py::TestPTPCluster::test_is_esgt_ready_true [32mPASSED[0m[31m [ 83%][0m
+tests/unit/consciousness/tig/test_sync.py::TestPTPCluster::test_is_esgt_ready_false_no_grand_master [32mPASSED[0m[31m [ 83%][0m
+tests/unit/consciousness/tig/test_sync.py::TestPTPCluster::test_is_esgt_ready_false_poor_sync [31mFAILED[0m[31m [ 84%][0m
+tests/unit/consciousness/tig/test_sync.py::TestPTPCluster::test_get_cluster_metrics [32mPASSED[0m[31m [ 84%][0m
+tests/unit/consciousness/tig/test_sync.py::TestPTPCluster::test_stop_all [32mPASSED[0m[31m [ 85%][0m
+tests/unit/consciousness/tig/test_sync.py::TestPTPCluster::test_cluster_repr [32mPASSED[0m[31m [ 85%][0m
+tests/unit/consciousness/tig/test_tig.py::test_fabric_initialization [32mPASSED[0m[31m [ 85%][0m
+tests/unit/consciousness/tig/test_tig.py::test_scale_free_topology [32mPASSED[0m[31m [ 86%][0m
+tests/unit/consciousness/tig/test_tig.py::test_small_world_properties [32mPASSED[0m[31m [ 86%][0m
+tests/unit/consciousness/tig/test_tig.py::test_no_isolated_nodes [32mPASSED[0m[31m  [ 87%][0m
+tests/unit/consciousness/tig/test_tig.py::test_iit_structural_compliance [32mPASSED[0m[31m [ 87%][0m
+tests/unit/consciousness/tig/test_tig.py::test_effective_connectivity_index [32mPASSED[0m[31m [ 87%][0m
+tests/unit/consciousness/tig/test_tig.py::test_bottleneck_detection [32mPASSED[0m[31m [ 88%][0m
+tests/unit/consciousness/tig/test_tig.py::test_path_redundancy [32mPASSED[0m[31m    [ 88%][0m
+tests/unit/consciousness/tig/test_tig.py::test_broadcast_performance [32mPASSED[0m[31m [ 88%][0m
+tests/unit/consciousness/tig/test_tig.py::test_esgt_mode_transition [32mPASSED[0m[31m [ 89%][0m
+tests/unit/consciousness/tig/test_tig.py::test_ptp_basic_sync [32mPASSED[0m[31m     [ 89%][0m
+tests/unit/consciousness/tig/test_tig.py::test_ptp_jitter_quality [31mFAILED[0m[31m [ 90%][0m
+tests/unit/consciousness/tig/test_tig.py::test_ptp_cluster_sync [31mFAILED[0m[31m   [ 90%][0m
+tests/unit/consciousness/tig/test_tig.py::test_phi_proxy_computation [32mPASSED[0m[31m [ 90%][0m
+tests/unit/consciousness/tig/test_tig.py::test_phi_proxy_correlation_with_density [32mPASSED[0m[31m [ 91%][0m
+tests/unit/consciousness/tig/test_tig.py::test_compliance_score [32mPASSED[0m[31m   [ 91%][0m
+tests/unit/consciousness/tig/test_tig.py::test_full_consciousness_substrate [31mFAILED[0m[31m [ 92%][0m
+tests/unit/consciousness/tig/test_tig_edge_cases.py::TestPTPMasterFailure::test_grand_master_failure_triggers_election [31mFAILED[0m[31m [ 92%][0m
+tests/unit/consciousness/tig/test_tig_edge_cases.py::TestPTPMasterFailure::test_master_failover_preserves_sync_quality [32mPASSED[0m[31m [ 92%][0m
+tests/unit/consciousness/tig/test_tig_edge_cases.py::TestPTPMasterFailure::test_network_partition_during_sync [32mPASSED[0m[31m [ 93%][0m
+tests/unit/consciousness/tig/test_tig_edge_cases.py::TestPTPMasterFailure::test_clock_drift_exceeds_threshold [32mPASSED[0m[31m [ 93%][0m
+tests/unit/consciousness/tig/test_tig_edge_cases.py::TestPTPMasterFailure::test_jitter_spike_handling [32mPASSED[0m[31m [ 94%][0m
+tests/unit/consciousness/tig/test_tig_edge_cases.py::TestTopologyBreakdown::test_hub_node_failure_cascades [32mPASSED[0m[31m [ 94%][0m
+tests/unit/consciousness/tig/test_tig_edge_cases.py::TestTopologyBreakdown::test_bridge_node_failure_bisects_network [32mPASSED[0m[31m [ 94%][0m
+tests/unit/consciousness/tig/test_tig_edge_cases.py::TestTopologyBreakdown::test_small_world_property_lost [32mPASSED[0m[31m [ 95%][0m
+tests/unit/consciousness/tig/test_tig_edge_cases.py::TestTopologyBreakdown::test_clustering_coefficient_below_threshold [32mPASSED[0m[31m [ 95%][0m
+tests/unit/consciousness/tig/test_tig_edge_cases.py::TestTopologyBreakdown::test_diameter_explosion [32mPASSED[0m[31m [ 96%][0m
+tests/unit/consciousness/tig/test_tig_edge_cases.py::TestECIValidation::test_eci_calculation_degenerate_topology [32mPASSED[0m[31m [ 96%][0m
+tests/unit/consciousness/tig/test_tig_edge_cases.py::TestECIValidation::test_eci_below_consciousness_threshold [32mPASSED[0m[31m [ 96%][0m
+tests/unit/consciousness/tig/test_tig_edge_cases.py::TestECIValidation::test_eci_stability_under_churn [32mPASSED[0m[31m [ 97%][0m
+tests/unit/consciousness/tig/test_tig_edge_cases.py::TestECIValidation::test_eci_theoretical_maximum [32mPASSED[0m[31m [ 97%][0m
+tests/unit/consciousness/tig/test_tig_edge_cases.py::TestECIValidation::test_eci_response_to_node_dropout [32mPASSED[0m[31m [ 98%][0m
+tests/unit/consciousness/tig/test_tig_edge_cases.py::TestESGTIntegration::test_esgt_ignition_with_degraded_ptp [32mPASSED[0m[31m [ 98%][0m
+tests/unit/consciousness/tig/test_tig_edge_cases.py::TestESGTIntegration::test_esgt_phase_coherence_validation [32mPASSED[0m[31m [ 98%][0m
+tests/unit/consciousness/tig/test_tig_edge_cases.py::TestESGTIntegration::test_esgt_broadcast_latency_impact [32mPASSED[0m[31m [ 99%][0m
+tests/unit/consciousness/tig/test_tig_edge_cases.py::TestESGTIntegration::test_tig_esgt_temporal_coordination [32mPASSED[0m[31m [ 99%][0m
+tests/unit/consciousness/tig/test_tig_edge_cases.py::TestESGTIntegration::test_esgt_event_timing_under_jitter [32mPASSED[0m[31m [100%][0m
+
+==================================== ERRORS ====================================
+[31m[1m_ ERROR at teardown of TestTIGFabricHardeningInitialization.test_fabric_has_node_health_dict _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:245: in fabric
+    [0m[94mif[39;49;00m fabric._running:[90m[39;49;00m
+       ^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_running'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m_ ERROR at teardown of TestTIGFabricHardeningInitialization.test_fabric_has_circuit_breakers_dict _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:245: in fabric
+    [0m[94mif[39;49;00m fabric._running:[90m[39;49;00m
+       ^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_running'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m_ ERROR at teardown of TestTIGFabricHardeningInitialization.test_fabric_has_health_monitoring_config _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:245: in fabric
+    [0m[94mif[39;49;00m fabric._running:[90m[39;49;00m
+       ^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_running'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m_ ERROR at teardown of TestTIGFabricHardeningInitialization.test_fabric_has_health_monitoring_task_slot _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:245: in fabric
+    [0m[94mif[39;49;00m fabric._running:[90m[39;49;00m
+       ^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_running'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m_ ERROR at teardown of TestTIGFabricHardeningInitialization.test_fabric_has_running_flag _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:245: in fabric
+    [0m[94mif[39;49;00m fabric._running:[90m[39;49;00m
+       ^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_running'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m_ ERROR at teardown of TestTIGFabricHardeningInitialization.test_fabric_initializes_node_health_for_all_nodes _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:245: in fabric
+    [0m[94mif[39;49;00m fabric._running:[90m[39;49;00m
+       ^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_running'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m_ ERROR at teardown of TestTIGFabricHardeningInitialization.test_fabric_initializes_circuit_breakers_for_all_nodes _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:245: in fabric
+    [0m[94mif[39;49;00m fabric._running:[90m[39;49;00m
+       ^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_running'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m_ ERROR at teardown of TestHealthMetricsCollection.test_get_health_metrics_returns_complete_structure _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:321: in fabric
+    [0m[94mif[39;49;00m fabric._running:[90m[39;49;00m
+       ^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_running'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 6 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.833
+🛡️  Health monitoring active
+[31m[1m_ ERROR at teardown of TestHealthMetricsCollection.test_get_health_metrics_counts_all_nodes _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:321: in fabric
+    [0m[94mif[39;49;00m fabric._running:[90m[39;49;00m
+       ^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_running'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 6 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.833
+🛡️  Health monitoring active
+[31m[1m_ ERROR at teardown of TestHealthMetricsCollection.test_get_health_metrics_baseline_all_healthy _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:321: in fabric
+    [0m[94mif[39;49;00m fabric._running:[90m[39;49;00m
+       ^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_running'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 6 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.833
+🛡️  Health monitoring active
+[31m[1m_ ERROR at teardown of TestHealthMetricsCollection.test_get_health_metrics_detects_isolated_nodes _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:321: in fabric
+    [0m[94mif[39;49;00m fabric._running:[90m[39;49;00m
+       ^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_running'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 6 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.833
+🛡️  Health monitoring active
+[31m[1m_ ERROR at teardown of TestHealthMetricsCollection.test_get_health_metrics_detects_degraded_nodes _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:321: in fabric
+    [0m[94mif[39;49;00m fabric._running:[90m[39;49;00m
+       ^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_running'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 6 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.833
+🛡️  Health monitoring active
+[31m[1m_ ERROR at teardown of TestHealthMetricsCollection.test_get_health_metrics_connectivity_calculation _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:321: in fabric
+    [0m[94mif[39;49;00m fabric._running:[90m[39;49;00m
+       ^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_running'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 6 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.833
+🛡️  Health monitoring active
+[31m[1m_ ERROR at teardown of TestHealthMetricsCollection.test_get_health_metrics_connectivity_zero_when_all_isolated _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:321: in fabric
+    [0m[94mif[39;49;00m fabric._running:[90m[39;49;00m
+       ^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_running'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 6 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.833
+🛡️  Health monitoring active
+[31m[1m_ ERROR at teardown of TestHealthMonitoringLoop.test_health_monitoring_starts_automatically _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:429: in fabric
+    [0m[94mif[39;49;00m fabric._running:[90m[39;49;00m
+       ^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_running'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m_ ERROR at teardown of TestHealthMonitoringLoop.test_health_monitoring_stops_when_fabric_stops _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:429: in fabric
+    [0m[94mif[39;49;00m fabric._running:[90m[39;49;00m
+       ^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_running'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m_ ERROR at teardown of TestHealthMonitoringLoop.test_health_monitoring_detects_dead_node _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:429: in fabric
+    [0m[94mif[39;49;00m fabric._running:[90m[39;49;00m
+       ^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_running'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m_ ERROR at teardown of TestHealthMonitoringLoop.test_health_monitoring_reintegrates_recovered_node _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:429: in fabric
+    [0m[94mif[39;49;00m fabric._running:[90m[39;49;00m
+       ^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_running'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m_ ERROR at teardown of TestHealthMonitoringLoop.test_health_monitoring_continues_despite_exceptions _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:429: in fabric
+    [0m[94mif[39;49;00m fabric._running:[90m[39;49;00m
+       ^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_running'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m_ ERROR at teardown of TestFaultTolerantSend.test_send_to_node_rejects_isolated_node _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:521: in fabric
+    [0m[94mif[39;49;00m fabric._running:[90m[39;49;00m
+       ^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_running'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m_ ERROR at teardown of TestFaultTolerantSend.test_send_to_node_rejects_open_circuit_breaker _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:521: in fabric
+    [0m[94mif[39;49;00m fabric._running:[90m[39;49;00m
+       ^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_running'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m_ ERROR at teardown of TestFaultTolerantSend.test_send_to_node_times_out_on_slow_send _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:521: in fabric
+    [0m[94mif[39;49;00m fabric._running:[90m[39;49;00m
+       ^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_running'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m_ ERROR at teardown of TestFaultTolerantSend.test_send_to_node_updates_last_seen_on_success _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:521: in fabric
+    [0m[94mif[39;49;00m fabric._running:[90m[39;49;00m
+       ^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_running'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m_ ERROR at teardown of TestFaultTolerantSend.test_send_to_node_records_failure_on_timeout _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:521: in fabric
+    [0m[94mif[39;49;00m fabric._running:[90m[39;49;00m
+       ^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_running'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m_ ERROR at teardown of TestCompleteFailureScenarios.test_complete_node_failure_and_isolation _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:619: in fabric
+    [0m[94mif[39;49;00m fabric._running:[90m[39;49;00m
+       ^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_running'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 12 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.917
+🛡️  Health monitoring active
+[31m[1m_ ERROR at teardown of TestCompleteFailureScenarios.test_circuit_breaker_opens_after_repeated_failures _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:619: in fabric
+    [0m[94mif[39;49;00m fabric._running:[90m[39;49;00m
+       ^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_running'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 12 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.917
+🛡️  Health monitoring active
+[31m[1m_ ERROR at teardown of TestCompleteFailureScenarios.test_multiple_node_failures_cascade_protection _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:619: in fabric
+    [0m[94mif[39;49;00m fabric._running:[90m[39;49;00m
+       ^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_running'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 12 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.917
+🛡️  Health monitoring active
+[31m[1m_ ERROR at teardown of TestTIGAdvancedBehaviorAndMetrics.test_node_clustering_coefficient _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:715: in fabric
+    [0m[94mif[39;49;00m fabric._running:[90m[39;49;00m
+       ^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_running'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 16 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 0.963
+   Clustering: 0.931
+   Path Length: 1.07
+   Algebraic Connectivity: 0.688
+🛡️  Health monitoring active
+[31m[1m_ ERROR at teardown of TestTIGAdvancedBehaviorAndMetrics.test_topology_repair_creates_bypass_connections _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:715: in fabric
+    [0m[94mif[39;49;00m fabric._running:[90m[39;49;00m
+       ^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_running'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 16 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 0.963
+   Clustering: 0.931
+   Path Length: 1.07
+   Algebraic Connectivity: 0.688
+🛡️  Health monitoring active
+[31m[1m_ ERROR at teardown of TestTIGAdvancedBehaviorAndMetrics.test_esgt_mode_transition _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:715: in fabric
+    [0m[94mif[39;49;00m fabric._running:[90m[39;49;00m
+       ^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_running'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 16 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 0.963
+   Clustering: 0.931
+   Path Length: 1.07
+   Algebraic Connectivity: 0.688
+🛡️  Health monitoring active
+[31m[1m_ ERROR at teardown of TestTIGAdvancedBehaviorAndMetrics.test_iit_compliance_validation_on_good_fabric _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:715: in fabric
+    [0m[94mif[39;49;00m fabric._running:[90m[39;49;00m
+       ^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_running'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 16 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 0.963
+   Clustering: 0.931
+   Path Length: 1.07
+   Algebraic Connectivity: 0.688
+🛡️  Health monitoring active
+=================================== FAILURES ===================================
+[31m[1m___________________ test_tig_node_send_to_neighbor_exception ___________________[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_100pct.py[0m:262: in test_tig_node_send_to_neighbor_exception
+    [0m[94mwith[39;49;00m patch([33m"[39;49;00m[33mconsciousness.tig.fabric.asyncio.sleep[39;49;00m[33m"[39;49;00m, side_effect=[96mRuntimeError[39;49;00m([33m"[39;49;00m[33mNetwork failure[39;49;00m[33m"[39;49;00m)):[90m[39;49;00m
+[1m[31m/home/juan/.pyenv/versions/3.11.13/lib/python3.11/unittest/mock.py[0m:1430: in __enter__
+    [0m[96mself[39;49;00m.target = [96mself[39;49;00m.getter()[90m[39;49;00m
+                  ^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31m/home/juan/.pyenv/versions/3.11.13/lib/python3.11/pkgutil.py[0m:715: in resolve_name
+    [0mresult = [96mgetattr[39;49;00m(result, p)[90m[39;49;00m
+             ^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: module 'consciousness.tig.fabric' has no attribute 'asyncio'[0m
+[31m[1m_____________ test_apply_small_world_rewiring_with_isolated_nodes ______________[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_100pct.py[0m:329: in test_apply_small_world_rewiring_with_isolated_nodes
+    [0mfabric._generate_scale_free_base()[90m[39;49;00m
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_generate_scale_free_base'[0m
+[31m[1m_ TestSmallWorldRewiringEdgeCases.test_rewiring_skips_hub_enhancement_for_degenerate_graphs _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_coverage_complete.py[0m:273: in test_rewiring_skips_hub_enhancement_for_degenerate_graphs
+    [0mfabric._generate_scale_free_base()[90m[39;49;00m
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_generate_scale_free_base'[0m
+[31m[1m___ TestMetricsComputationEdgeCases.test_metrics_handles_disconnected_graph ____[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_coverage_complete.py[0m:319: in test_metrics_handles_disconnected_graph
+    [0mfabric._generate_scale_free_base()[90m[39;49;00m
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_generate_scale_free_base'[0m
+[31m[1m_ TestBottleneckDetectionEdgeCases.test_bottleneck_detection_handles_no_path_exception _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_coverage_complete.py[0m:385: in test_bottleneck_detection_handles_no_path_exception
+    [0mfabric._generate_scale_free_base()[90m[39;49;00m
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_generate_scale_free_base'[0m
+[31m[1m__ TestTopologyRepairEdgeCases.test_repair_topology_handles_nonexistent_node ___[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_coverage_complete.py[0m:464: in test_repair_topology_handles_nonexistent_node
+    [0m[94mawait[39;49;00m fabric._repair_topology_around_dead_node([33m"[39;49;00m[33mnonexistent-node-id[39;49;00m[33m"[39;49;00m)[90m[39;49;00m
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_repair_topology_around_dead_node'[0m
+----------------------------- Captured stdout call -----------------------------
+🧠 Initializing TIG Fabric with 6 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.833
+🛡️  Health monitoring active
+[31m[1m___________ TestSendFailureHandling.test_send_handles_timeout_error ____________[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_coverage_complete.py[0m:521: in test_send_handles_timeout_error
+    [0m[94massert[39;49;00m fabric.node_health[node_id].failures > [94m0[39;49;00m[90m[39;49;00m
+           ^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute 'node_health'[0m
+----------------------------- Captured stdout call -----------------------------
+🧠 Initializing TIG Fabric with 6 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.833
+🛡️  Health monitoring active
+⚠️  TIG: Send timeout to node tig-node-000
+[31m[1m_ TestSendFailureHandling.test_handle_send_failure_opens_circuit_breaker_at_threshold _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_coverage_complete.py[0m:535: in test_handle_send_failure_opens_circuit_breaker_at_threshold
+    [0mfabric.node_health[node_id].failures = fabric.max_failures_before_isolation - [94m1[39;49;00m[90m[39;49;00m
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute 'max_failures_before_isolation'[0m
+----------------------------- Captured stdout call -----------------------------
+🧠 Initializing TIG Fabric with 6 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.833
+🛡️  Health monitoring active
+[31m[1m_ TestNetworkPartitionDetection.test_detect_network_partition_with_less_than_2_nodes _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_coverage_complete.py[0m:568: in test_detect_network_partition_with_less_than_2_nodes
+    [0mis_partitioned = fabric._detect_network_partition()[90m[39;49;00m
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_detect_network_partition'[0m
+[31m[1m_ TestNetworkPartitionDetection.test_detect_network_partition_handles_exceptions _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_coverage_complete.py[0m:583: in test_detect_network_partition_handles_exceptions
+    [0mis_partitioned = fabric._detect_network_partition()[90m[39;49;00m
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_detect_network_partition'[0m
+----------------------------- Captured stdout call -----------------------------
+🧠 Initializing TIG Fabric with 6 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.833
+🛡️  Health monitoring active
+[31m[1m_ TestNetworkPartitionDetection.test_get_health_metrics_connectivity_zero_when_no_nodes _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_coverage_complete.py[0m:599: in test_get_health_metrics_connectivity_zero_when_no_nodes
+    [0mfabric.node_health.clear()[90m[39;49;00m
+    ^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute 'node_health'[0m
+----------------------------- Captured stdout call -----------------------------
+🧠 Initializing TIG Fabric with 6 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.833
+🛡️  Health monitoring active
+[31m[1m_ TestHealthMonitoringFaultTolerance.test_isolate_and_reintegrate_node_lines_789_823 _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_faith_100pct.py[0m:150: in test_isolate_and_reintegrate_node_lines_789_823
+    [0m[94mawait[39;49;00m fabric._isolate_dead_node(node_id)[90m[39;49;00m
+          ^^^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_isolate_dead_node'[0m
+----------------------------- Captured stdout call -----------------------------
+🧠 Initializing TIG Fabric with 6 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.833
+🛡️  Health monitoring active
+[31m[1m_ TestHealthMonitoringFaultTolerance.test_repair_topology_around_dead_node_lines_825_865 _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_faith_100pct.py[0m:184: in test_repair_topology_around_dead_node_lines_825_865
+    [0m[94mawait[39;49;00m fabric._repair_topology_around_dead_node(dead_node_id)[90m[39;49;00m
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_repair_topology_around_dead_node'[0m
+----------------------------- Captured stdout call -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m_ TestHealthMonitoringFaultTolerance.test_send_to_node_with_circuit_breaker_lines_867_918 _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_faith_100pct.py[0m:206: in test_send_to_node_with_circuit_breaker_lines_867_918
+    [0mfabric.node_health[node_id].isolated = [94mTrue[39;49;00m[90m[39;49;00m
+    ^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute 'node_health'[0m
+----------------------------- Captured stdout call -----------------------------
+🧠 Initializing TIG Fabric with 4 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.750
+🛡️  Health monitoring active
+[31m[1m_ TestHealthMonitoringFaultTolerance.test_handle_send_failure_opens_circuit_breaker_lines_920_938 _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_faith_100pct.py[0m:225: in test_handle_send_failure_opens_circuit_breaker_lines_920_938
+    [0mfabric.node_health[node_id] = NodeHealth(node_id=node_id)[90m[39;49;00m
+    ^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute 'node_health'[0m
+[31m[1m__ TestPartitionDetectionAndESGT.test_detect_network_partition_lines_940_969 ___[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_faith_100pct.py[0m:256: in test_detect_network_partition_lines_940_969
+    [0mfabric.node_health[node_id] = NodeHealth(node_id=node_id)[90m[39;49;00m
+    ^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute 'node_health'[0m
+[31m[1m_____ TestPartitionDetectionAndESGT.test_get_health_metrics_lines_971_1009 _____[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_faith_100pct.py[0m:278: in test_get_health_metrics_lines_971_1009
+    [0mfabric.node_health[node_id] = NodeHealth(node_id=node_id)[90m[39;49;00m
+    ^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute 'node_health'[0m
+[31m[1m_ TestHealthMonitoringDeadNodeIsolation.test_monitoring_loop_isolates_dead_node_lines_843_844 _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_final_100pct.py[0m:146: in test_monitoring_loop_isolates_dead_node_lines_843_844
+    [0mfabric.node_health[node_id].last_seen = time.time() - [94m100.0[39;49;00m[90m[39;49;00m
+    ^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute 'node_health'[0m
+----------------------------- Captured stdout call -----------------------------
+🧠 Initializing TIG Fabric with 4 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.750
+🛡️  Health monitoring active
+[31m[1m_ TestHealthMonitoringReintegration.test_monitoring_loop_reintegrates_recovered_node_lines_848_851 _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_final_100pct.py[0m:170: in test_monitoring_loop_reintegrates_recovered_node_lines_848_851
+    [0mfabric.node_health[node_id].isolated = [94mTrue[39;49;00m[90m[39;49;00m
+    ^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute 'node_health'[0m
+----------------------------- Captured stdout call -----------------------------
+🧠 Initializing TIG Fabric with 4 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.750
+🛡️  Health monitoring active
+[31m[1m__ TestBypassConnectionCreation.test_bypass_connection_creation_lines_918_932 __[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_final_100pct.py[0m:209: in test_bypass_connection_creation_lines_918_932
+    [0m[94mawait[39;49;00m fabric._repair_topology_around_dead_node(dead_node_id)[90m[39;49;00m
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_repair_topology_around_dead_node'[0m
+----------------------------- Captured stdout call -----------------------------
+🧠 Initializing TIG Fabric with 6 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.833
+🛡️  Health monitoring active
+[31m[1m___ TestDetectNetworkPartition.test_partition_detection_with_isolated_nodes ____[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_final_100pct.py[0m:287: in test_partition_detection_with_isolated_nodes
+    [0mfabric.node_health[node_ids[[94m0[39;49;00m]].isolated = [94mTrue[39;49;00m[90m[39;49;00m
+    ^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute 'node_health'[0m
+----------------------------- Captured stdout call -----------------------------
+🧠 Initializing TIG Fabric with 6 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.833
+🛡️  Health monitoring active
+[31m[1m_ TestFinal5LinesToPerfection.test_hub_enhancement_skips_hubs_with_less_than_2_neighbors_line_632 _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_final_5_lines.py[0m:34: in test_hub_enhancement_skips_hubs_with_less_than_2_neighbors_line_632
+    [0mfabric._generate_scale_free_base()[90m[39;49;00m
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_generate_scale_free_base'[0m
+[31m[1m_ TestFinal5LinesToPerfection.test_bottleneck_detection_network_x_no_path_exception_lines_789_790 _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_final_5_lines.py[0m:69: in test_bottleneck_detection_network_x_no_path_exception_lines_789_790
+    [0mfabric._generate_scale_free_base()[90m[39;49;00m
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_generate_scale_free_base'[0m
+[31m[1m_ TestFinal5LinesToPerfection.test_repair_topology_skips_when_neighbors_less_than_2_line_907 _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_final_5_lines.py[0m:121: in test_repair_topology_skips_when_neighbors_less_than_2_line_907
+    [0m[94mawait[39;49;00m fabric._repair_topology_around_dead_node(first_node.id)[90m[39;49;00m
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_repair_topology_around_dead_node'[0m
+----------------------------- Captured stdout call -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 0.982
+   Clustering: 0.964
+   Path Length: 1.04
+   Algebraic Connectivity: 0.750
+🛡️  Health monitoring active
+[31m[1m______________________ test_line_632_hub_with_1_neighbor _______________________[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_final_9_lines.py[0m:65: in test_line_632_hub_with_1_neighbor
+    [0mfabric._generate_scale_free_base()[90m[39;49;00m
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_generate_scale_free_base'[0m
+[31m[1m____________ test_lines_691_693_networkx_no_path_disconnected_graph ____________[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_final_9_lines.py[0m:105: in test_lines_691_693_networkx_no_path_disconnected_graph
+    [0mfabric._generate_scale_free_base()[90m[39;49;00m
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_generate_scale_free_base'[0m
+[31m[1m_______ test_apply_small_world_rewiring_with_large_graph_hub_enhancement _______[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_final_push.py[0m:53: in test_apply_small_world_rewiring_with_large_graph_hub_enhancement
+    [0mfabric._generate_scale_free_base()[90m[39;49;00m
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_generate_scale_free_base'[0m
+[31m[1m________ test_apply_small_world_rewiring_hub_with_less_than_2_neighbors ________[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_final_push.py[0m:70: in test_apply_small_world_rewiring_hub_with_less_than_2_neighbors
+    [0mfabric._generate_scale_free_base()[90m[39;49;00m
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_generate_scale_free_base'[0m
+[31m[1m__________________ test_health_monitoring_reintegration_path ___________________[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_final_push.py[0m:134: in test_health_monitoring_reintegration_path
+    [0mfabric.node_health[node_id].isolated = [94mTrue[39;49;00m[90m[39;49;00m
+    ^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute 'node_health'[0m
+----------------------------- Captured stdout call -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m________________ test_health_monitoring_loop_exception_handling ________________[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_final_push.py[0m:161: in test_health_monitoring_loop_exception_handling
+    [0moriginal_isolate = fabric._isolate_dead_node[90m[39;49;00m
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_isolate_dead_node'[0m
+----------------------------- Captured stdout call -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m________________ test_repair_topology_with_dead_node_not_found _________________[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_final_push.py[0m:195: in test_repair_topology_with_dead_node_not_found
+    [0m[94mawait[39;49;00m fabric._repair_topology_around_dead_node([33m"[39;49;00m[33mnonexistent-node-999[39;49;00m[33m"[39;49;00m)[90m[39;49;00m
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_repair_topology_around_dead_node'[0m
+----------------------------- Captured stdout call -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m_______________ test_repair_topology_with_less_than_2_neighbors ________________[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_final_push.py[0m:221: in test_repair_topology_with_less_than_2_neighbors
+    [0m[94mawait[39;49;00m fabric._repair_topology_around_dead_node(node_id)[90m[39;49;00m
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_repair_topology_around_dead_node'[0m
+----------------------------- Captured stdout call -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m____________ test_repair_topology_with_existing_bypass_connections _____________[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_final_push.py[0m:262: in test_repair_topology_with_existing_bypass_connections
+    [0m[94mawait[39;49;00m fabric._repair_topology_around_dead_node(node_id)[90m[39;49;00m
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_repair_topology_around_dead_node'[0m
+----------------------------- Captured stdout call -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m__________________ test_repair_topology_bypass_created_print ___________________[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_final_push.py[0m:295: in test_repair_topology_bypass_created_print
+    [0m[94mawait[39;49;00m fabric._repair_topology_around_dead_node(node_id)[90m[39;49;00m
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_repair_topology_around_dead_node'[0m
+----------------------------- Captured stdout call -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m_____________ test_handle_send_failure_circuit_breaker_open_print ______________[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_final_push.py[0m:323: in test_handle_send_failure_circuit_breaker_open_print
+    [0mfabric.node_health[node_id].failures = fabric.max_failures_before_isolation - [94m1[39;49;00m[90m[39;49;00m
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute 'max_failures_before_isolation'[0m
+----------------------------- Captured stdout call -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m_____________________ test_send_to_node_with_isolated_node _____________________[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_final_push.py[0m:358: in test_send_to_node_with_isolated_node
+    [0mfabric.node_health[node_id].isolated = [94mTrue[39;49;00m[90m[39;49;00m
+    ^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute 'node_health'[0m
+----------------------------- Captured stdout call -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m_____________________ test_send_to_node_timeout_exception ______________________[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_final_push.py[0m:387: in test_send_to_node_timeout_exception
+    [0m[94mwith[39;49;00m patch([33m"[39;49;00m[33mconsciousness.tig.fabric.asyncio.sleep[39;49;00m[33m"[39;49;00m, side_effect=slow_sleep):[90m[39;49;00m
+[1m[31m/home/juan/.pyenv/versions/3.11.13/lib/python3.11/unittest/mock.py[0m:1430: in __enter__
+    [0m[96mself[39;49;00m.target = [96mself[39;49;00m.getter()[90m[39;49;00m
+                  ^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31m/home/juan/.pyenv/versions/3.11.13/lib/python3.11/pkgutil.py[0m:715: in resolve_name
+    [0mresult = [96mgetattr[39;49;00m(result, p)[90m[39;49;00m
+             ^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: module 'consciousness.tig.fabric' has no attribute 'asyncio'[0m
+----------------------------- Captured stdout call -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m________________ test_get_health_metrics_with_zero_total_nodes _________________[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_final_push.py[0m:424: in test_get_health_metrics_with_zero_total_nodes
+    [0mfabric.node_health.clear()[90m[39;49;00m
+    ^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute 'node_health'[0m
+[31m[1m_________________ test_get_health_metrics_with_degraded_nodes __________________[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_final_push.py[0m:443: in test_get_health_metrics_with_degraded_nodes
+    [0mfabric.node_health[node_id].degraded = [94mTrue[39;49;00m[90m[39;49;00m
+    ^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute 'node_health'[0m
+----------------------------- Captured stdout call -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m_________________ test_detect_network_partition_with_exception _________________[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_final_push.py[0m:468: in test_detect_network_partition_with_exception
+    [0m[94mwith[39;49;00m patch([33m"[39;49;00m[33mconsciousness.tig.fabric.nx.number_connected_components[39;49;00m[33m"[39;49;00m, side_effect=[96mRuntimeError[39;49;00m([33m"[39;49;00m[33mGraph analysis failed[39;49;00m[33m"[39;49;00m)):[90m[39;49;00m
+[1m[31m/home/juan/.pyenv/versions/3.11.13/lib/python3.11/unittest/mock.py[0m:1430: in __enter__
+    [0m[96mself[39;49;00m.target = [96mself[39;49;00m.getter()[90m[39;49;00m
+                  ^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31m/home/juan/.pyenv/versions/3.11.13/lib/python3.11/pkgutil.py[0m:715: in resolve_name
+    [0mresult = [96mgetattr[39;49;00m(result, p)[90m[39;49;00m
+             ^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: module 'consciousness.tig.fabric' has no attribute 'nx'[0m
+----------------------------- Captured stdout call -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m_________ test_detect_network_partition_with_less_than_2_active_nodes __________[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_final_push.py[0m:488: in test_detect_network_partition_with_less_than_2_active_nodes
+    [0mfabric.node_health[node_id].isolated = [94mTrue[39;49;00m[90m[39;49;00m
+    ^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute 'node_health'[0m
+----------------------------- Captured stdout call -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m____ TestTIGFabricHardeningInitialization.test_fabric_has_node_health_dict _____[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:251: in test_fabric_has_node_health_dict
+    [0m[94massert[39;49;00m [96mhasattr[39;49;00m(fabric, [33m"[39;49;00m[33mnode_health[39;49;00m[33m"[39;49;00m)[90m[39;49;00m
+[1m[31mE   AssertionError: assert False[0m
+[1m[31mE    +  where False = hasattr(TIGFabric(nodes=8, ECI=1.000, C=1.000, L=1.00), 'node_health')[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m__ TestTIGFabricHardeningInitialization.test_fabric_has_circuit_breakers_dict __[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:257: in test_fabric_has_circuit_breakers_dict
+    [0m[94massert[39;49;00m [96mhasattr[39;49;00m(fabric, [33m"[39;49;00m[33mcircuit_breakers[39;49;00m[33m"[39;49;00m)[90m[39;49;00m
+[1m[31mE   AssertionError: assert False[0m
+[1m[31mE    +  where False = hasattr(TIGFabric(nodes=8, ECI=1.000, C=1.000, L=1.00), 'circuit_breakers')[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m_ TestTIGFabricHardeningInitialization.test_fabric_has_health_monitoring_config _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:263: in test_fabric_has_health_monitoring_config
+    [0m[94massert[39;49;00m [96mhasattr[39;49;00m(fabric, [33m"[39;49;00m[33mdead_node_timeout[39;49;00m[33m"[39;49;00m)[90m[39;49;00m
+[1m[31mE   AssertionError: assert False[0m
+[1m[31mE    +  where False = hasattr(TIGFabric(nodes=8, ECI=1.000, C=1.000, L=1.00), 'dead_node_timeout')[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m_ TestTIGFabricHardeningInitialization.test_fabric_has_health_monitoring_task_slot _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:271: in test_fabric_has_health_monitoring_task_slot
+    [0m[94massert[39;49;00m [96mhasattr[39;49;00m(fabric, [33m"[39;49;00m[33m_health_monitor_task[39;49;00m[33m"[39;49;00m)[90m[39;49;00m
+[1m[31mE   AssertionError: assert False[0m
+[1m[31mE    +  where False = hasattr(TIGFabric(nodes=8, ECI=1.000, C=1.000, L=1.00), '_health_monitor_task')[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m______ TestTIGFabricHardeningInitialization.test_fabric_has_running_flag _______[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:276: in test_fabric_has_running_flag
+    [0m[94massert[39;49;00m [96mhasattr[39;49;00m(fabric, [33m"[39;49;00m[33m_running[39;49;00m[33m"[39;49;00m)[90m[39;49;00m
+[1m[31mE   AssertionError: assert False[0m
+[1m[31mE    +  where False = hasattr(TIGFabric(nodes=8, ECI=1.000, C=1.000, L=1.00), '_running')[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m_ TestTIGFabricHardeningInitialization.test_fabric_initializes_node_health_for_all_nodes _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:283: in test_fabric_initializes_node_health_for_all_nodes
+    [0m[94massert[39;49;00m [96mlen[39;49;00m(fabric.node_health) > [94m0[39;49;00m[90m[39;49;00m
+               ^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute 'node_health'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m_ TestTIGFabricHardeningInitialization.test_fabric_initializes_circuit_breakers_for_all_nodes _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:295: in test_fabric_initializes_circuit_breakers_for_all_nodes
+    [0m[94massert[39;49;00m [96mlen[39;49;00m(fabric.circuit_breakers) > [94m0[39;49;00m[90m[39;49;00m
+               ^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute 'circuit_breakers'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m_____ TestHealthMetricsCollection.test_get_health_metrics_counts_all_nodes _____[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:342: in test_get_health_metrics_counts_all_nodes
+    [0m[94massert[39;49;00m metrics[[33m"[39;49;00m[33mtotal_nodes[39;49;00m[33m"[39;49;00m] == [96mlen[39;49;00m(fabric.node_health)[90m[39;49;00m
+                                         ^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute 'node_health'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 6 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.833
+🛡️  Health monitoring active
+[31m[1m__ TestHealthMetricsCollection.test_get_health_metrics_detects_isolated_nodes __[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:359: in test_get_health_metrics_detects_isolated_nodes
+    [0mnode_id = [96mlist[39;49;00m(fabric.node_health.keys())[[94m0[39;49;00m][90m[39;49;00m
+                   ^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute 'node_health'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 6 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.833
+🛡️  Health monitoring active
+[31m[1m__ TestHealthMetricsCollection.test_get_health_metrics_detects_degraded_nodes __[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:371: in test_get_health_metrics_detects_degraded_nodes
+    [0mnode_id = [96mlist[39;49;00m(fabric.node_health.keys())[[94m0[39;49;00m][90m[39;49;00m
+                   ^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute 'node_health'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 6 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.833
+🛡️  Health monitoring active
+[31m[1m_ TestHealthMetricsCollection.test_get_health_metrics_connectivity_calculation _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:382: in test_get_health_metrics_connectivity_calculation
+    [0mtotal = [96mlen[39;49;00m(fabric.node_health)[90m[39;49;00m
+                ^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute 'node_health'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 6 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.833
+🛡️  Health monitoring active
+[31m[1m_ TestHealthMetricsCollection.test_get_health_metrics_connectivity_zero_when_all_isolated _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:401: in test_get_health_metrics_connectivity_zero_when_all_isolated
+    [0m[94mfor[39;49;00m node_id [95min[39;49;00m fabric.node_health.keys():[90m[39;49;00m
+                   ^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute 'node_health'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 6 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.833
+🛡️  Health monitoring active
+[31m[1m_____ TestHealthMonitoringLoop.test_health_monitoring_starts_automatically _____[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:436: in test_health_monitoring_starts_automatically
+    [0m[94massert[39;49;00m fabric._running [95mis[39;49;00m [94mTrue[39;49;00m[90m[39;49;00m
+           ^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_running'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m___ TestHealthMonitoringLoop.test_health_monitoring_stops_when_fabric_stops ____[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:444: in test_health_monitoring_stops_when_fabric_stops
+    [0m[94massert[39;49;00m fabric._running [95mis[39;49;00m [94mTrue[39;49;00m[90m[39;49;00m
+           ^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_running'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m______ TestHealthMonitoringLoop.test_health_monitoring_detects_dead_node _______[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:454: in test_health_monitoring_detects_dead_node
+    [0m[94massert[39;49;00m fabric._running [95mis[39;49;00m [94mTrue[39;49;00m[90m[39;49;00m
+           ^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_running'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m_ TestHealthMonitoringLoop.test_health_monitoring_reintegrates_recovered_node __[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:470: in test_health_monitoring_reintegrates_recovered_node
+    [0m[94massert[39;49;00m fabric._running [95mis[39;49;00m [94mTrue[39;49;00m[90m[39;49;00m
+           ^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_running'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m_ TestHealthMonitoringLoop.test_health_monitoring_continues_despite_exceptions _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:491: in test_health_monitoring_continues_despite_exceptions
+    [0m[94massert[39;49;00m fabric._running [95mis[39;49;00m [94mTrue[39;49;00m[90m[39;49;00m
+           ^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_running'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m________ TestFaultTolerantSend.test_send_to_node_rejects_isolated_node _________[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:527: in test_send_to_node_rejects_isolated_node
+    [0mnode_id = [96mlist[39;49;00m(fabric.node_health.keys())[[94m0[39;49;00m][90m[39;49;00m
+                   ^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute 'node_health'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m_____ TestFaultTolerantSend.test_send_to_node_rejects_open_circuit_breaker _____[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:537: in test_send_to_node_rejects_open_circuit_breaker
+    [0mnode_id = [96mlist[39;49;00m(fabric.node_health.keys())[[94m0[39;49;00m][90m[39;49;00m
+                   ^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute 'node_health'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m________ TestFaultTolerantSend.test_send_to_node_times_out_on_slow_send ________[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:550: in test_send_to_node_times_out_on_slow_send
+    [0mnode_id = [96mlist[39;49;00m(fabric.node_health.keys())[[94m0[39;49;00m][90m[39;49;00m
+                   ^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute 'node_health'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m_____ TestFaultTolerantSend.test_send_to_node_updates_last_seen_on_success _____[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:572: in test_send_to_node_updates_last_seen_on_success
+    [0mnode_id = [96mlist[39;49;00m(fabric.node_health.keys())[[94m0[39;49;00m][90m[39;49;00m
+                   ^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute 'node_health'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m______ TestFaultTolerantSend.test_send_to_node_records_failure_on_timeout ______[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:586: in test_send_to_node_records_failure_on_timeout
+    [0mnode_id = [96mlist[39;49;00m(fabric.node_health.keys())[[94m0[39;49;00m][90m[39;49;00m
+                   ^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute 'node_health'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m____ TestCompleteFailureScenarios.test_complete_node_failure_and_isolation _____[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:626: in test_complete_node_failure_and_isolation
+    [0m[94massert[39;49;00m fabric._running [95mis[39;49;00m [94mTrue[39;49;00m[90m[39;49;00m
+           ^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_running'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 12 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.917
+🛡️  Health monitoring active
+[31m[1m_ TestCompleteFailureScenarios.test_circuit_breaker_opens_after_repeated_failures _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:647: in test_circuit_breaker_opens_after_repeated_failures
+    [0mnode_id = [96mlist[39;49;00m(fabric.node_health.keys())[[94m0[39;49;00m][90m[39;49;00m
+                   ^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute 'node_health'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 12 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.917
+🛡️  Health monitoring active
+[31m[1m_ TestCompleteFailureScenarios.test_multiple_node_failures_cascade_protection __[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:670: in test_multiple_node_failures_cascade_protection
+    [0m[94massert[39;49;00m fabric._running [95mis[39;49;00m [94mTrue[39;49;00m[90m[39;49;00m
+           ^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_running'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 12 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.917
+🛡️  Health monitoring active
+[31m[1m_ TestTIGAdvancedBehaviorAndMetrics.test_topology_repair_creates_bypass_connections _[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:782: in test_topology_repair_creates_bypass_connections
+    [0m[94mawait[39;49;00m fabric._isolate_dead_node(node_to_isolate.id)[90m[39;49;00m
+          ^^^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_isolate_dead_node'[0m
+---------------------------- Captured stdout setup -----------------------------
+🧠 Initializing TIG Fabric with 16 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 0.963
+   Clustering: 0.931
+   Path Length: 1.07
+   Algebraic Connectivity: 0.688
+🛡️  Health monitoring active
+[31m[1m__ TestTIGAdvancedBehaviorAndMetrics.test_iit_compliance_fails_on_bad_fabric ___[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_hardening.py[0m:840: in test_iit_compliance_fails_on_bad_fabric
+    [0mbad_fabric._generate_scale_free_base()[90m[39;49;00m
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_generate_scale_free_base'[0m
+[31m[1m__________________________ test_line_431_bypass_print __________________________[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_remaining_19.py[0m:64: in test_line_431_bypass_print
+    [0m[94mawait[39;49;00m fabric._repair_topology_around_dead_node(node_id)[90m[39;49;00m
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_repair_topology_around_dead_node'[0m
+----------------------------- Captured stdout call -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m___________________ test_line_632_hub_less_than_2_neighbors ____________________[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_remaining_19.py[0m:83: in test_line_632_hub_less_than_2_neighbors
+    [0mfabric._generate_scale_free_base()[90m[39;49;00m
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_generate_scale_free_base'[0m
+[31m[1m________________________ test_line_705_eci_computation _________________________[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_remaining_19.py[0m:143: in test_line_705_eci_computation
+    [0mfabric._generate_scale_free_base()[90m[39;49;00m
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_generate_scale_free_base'[0m
+[31m[1m__________________ test_line_747_health_monitoring_exception ___________________[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_remaining_19.py[0m:175: in test_line_747_health_monitoring_exception
+    [0mfabric.node_health[node_id].last_seen = time.time() - [94m100[39;49;00m[90m[39;49;00m
+    ^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute 'node_health'[0m
+----------------------------- Captured stdout call -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m____________________ test_lines_789_790_dead_node_not_found ____________________[0m
+[1m[31mtests/unit/consciousness/tig/test_fabric_remaining_19.py[0m:206: in test_lines_789_790_dead_node_not_found
+    [0m[94mawait[39;49;00m fabric._repair_topology_around_dead_node([33m"[39;49;00m[33mnonexistent-999[39;49;00m[33m"[39;49;00m)[90m[39;49;00m
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   AttributeError: 'TIGFabric' object has no attribute '_repair_topology_around_dead_node'[0m
+----------------------------- Captured stdout call -----------------------------
+🧠 Initializing TIG Fabric with 8 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 1.000
+   Clustering: 1.000
+   Path Length: 1.00
+   Algebraic Connectivity: 0.875
+🛡️  Health monitoring active
+[31m[1m______ TestSyncToMaster.test_sync_to_master_multiple_iterations_converge _______[0m
+[1m[31mtests/unit/consciousness/tig/test_sync.py[0m:420: in test_sync_to_master_multiple_iterations_converge
+    [0m[94massert[39;49;00m late_jitter < early_jitter [95mor[39;49;00m late_jitter < [94m200.0[39;49;00m  [90m# Or below 200ns[39;49;00m[90m[39;49;00m
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   assert (np.float64(1765.9497798193074) < np.float64(334.8515658000728) or np.float64(1765.9497798193074) < 200.0)[0m
+[31m[1m______________ TestPTPSynchronizerHelpers.test_is_ready_for_esgt _______________[0m
+[1m[31mtests/unit/consciousness/tig/test_sync.py[0m:665: in test_is_ready_for_esgt
+    [0m[94massert[39;49;00m ready [95mis[39;49;00m [94mTrue[39;49;00m[90m[39;49;00m
+[1m[31mE   assert np.True_ is True[0m
+[31m[1m____________ TestPTPSynchronizerHelpers.test_is_not_ready_for_esgt _____________[0m
+[1m[31mtests/unit/consciousness/tig/test_sync.py[0m:679: in test_is_not_ready_for_esgt
+    [0m[94massert[39;49;00m ready [95mis[39;49;00m [94mFalse[39;49;00m[90m[39;49;00m
+[1m[31mE   assert np.False_ is False[0m
+[31m[1m______________ TestPTPCluster.test_is_esgt_ready_false_poor_sync _______________[0m
+[1m[31mtests/unit/consciousness/tig/test_sync.py[0m:970: in test_is_esgt_ready_false_poor_sync
+    [0m[94massert[39;49;00m ready [95mis[39;49;00m [94mFalse[39;49;00m[90m[39;49;00m
+[1m[31mE   assert True is False[0m
+----------------------------- Captured stdout call -----------------------------
+⏰ gm-esgt-tight-01: Grand Master clock started
+⏰ slave-esgt-tight-01: Slave mode - waiting for master
+[31m[1m___________________________ test_ptp_jitter_quality ____________________________[0m
+[1m[31mtests/unit/consciousness/tig/test_tig.py[0m:328: in test_ptp_jitter_quality
+    [0m[94massert[39;49;00m offset.jitter_ns < [94m1000.0[39;49;00m, [33mf[39;49;00m[33m"[39;49;00m[33mJitter too high: [39;49;00m[33m{[39;49;00moffset.jitter_ns[33m:[39;49;00m[33m.1f[39;49;00m[33m}[39;49;00m[33mns > 1000ns[39;49;00m[33m"[39;49;00m[90m[39;49;00m
+[1m[31mE   AssertionError: Jitter too high: 3395.8ns > 1000ns[0m
+[1m[31mE   assert np.float64(3395.813758915659) < 1000.0[0m
+[1m[31mE    +  where np.float64(3395.813758915659) = ClockOffset(offset_ns=np.float64(13338.103842495635), jitter_ns=np.float64(3395.813758915659), drift_ppm=100.0, last_sync=1764703884.8064682, quality=np.float64(0.2714512254107889)).jitter_ns[0m
+----------------------------- Captured stdout call -----------------------------
+⏰ master-01: Grand Master clock started
+⏰ slave-01: Slave mode - waiting for master
+[31m[1m____________________________ test_ptp_cluster_sync _____________________________[0m
+[1m[31mtests/unit/consciousness/tig/test_tig.py[0m:370: in test_ptp_cluster_sync
+    [0m[94massert[39;49;00m esgt_ready_count >= [94m1[39;49;00m, [33mf[39;49;00m[33m"[39;49;00m[33mAt least one slave should be ESGT ready: [39;49;00m[33m{[39;49;00mesgt_ready_count[33m}[39;49;00m[33m/[39;49;00m[33m{[39;49;00mslave_count[33m}[39;49;00m[33m"[39;49;00m[90m[39;49;00m
+[1m[31mE   AssertionError: At least one slave should be ESGT ready: 0/3[0m
+[1m[31mE   assert 0 >= 1[0m
+----------------------------- Captured stdout call -----------------------------
+⏰ master-01: Grand Master clock started
+⏰ slave-01: Slave mode - waiting for master
+⏰ slave-02: Slave mode - waiting for master
+⏰ slave-03: Slave mode - waiting for master
+
+Cluster Metrics:
+  ESGT Ready: 0/3
+  Avg Jitter: 189.5ns
+  Max Jitter: 209.8ns
+[31m[1m______________________ test_full_consciousness_substrate _______________________[0m
+[1m[31mtests/unit/consciousness/tig/test_tig.py[0m:484: in test_full_consciousness_substrate
+    [0m[94massert[39;49;00m cluster.is_esgt_ready(), [33m"[39;49;00m[33mCluster must achieve ESGT-quality sync[39;49;00m[33m"[39;49;00m[90m[39;49;00m
+[1m[31mE   AssertionError: Cluster must achieve ESGT-quality sync[0m
+[1m[31mE   assert False[0m
+[1m[31mE    +  where False = is_esgt_ready()[0m
+[1m[31mE    +    where is_esgt_ready = PTPCluster(nodes=9, esgt_ready=0/8, avg_jitter=130.0ns).is_esgt_ready[0m
+----------------------------- Captured stdout call -----------------------------
+
+======================================================================
+ CONSCIOUSNESS SUBSTRATE VALIDATION
+======================================================================
+
+1. Initializing TIG Fabric...
+🧠 Initializing TIG Fabric with 16 nodes...
+   Target: Scale-free (γ=2.5) + Small-world (C≥0.75)
+✅ TIG Fabric initialized successfully
+   ECI: 0.967
+   Clustering: 0.947
+   Path Length: 1.07
+   Algebraic Connectivity: 0.625
+🛡️  Health monitoring active
+
+2. Validating IIT Structural Compliance...
+
+IIT Structural Compliance: ✅ COMPLIANT
+Overall Score: 100.0/100
+
+Individual Criteria:
+  ✓ Effective Connectivity Index (ECI ≥ 0.85)
+  ✓ Clustering Coefficient (C ≥ 0.75)
+  ✓ Average Path Length (L ≤ log(N))
+  ✓ Algebraic Connectivity (λ₂ ≥ 0.3)
+  ✓ No Feed-Forward Bottlenecks
+  ✓ Path Redundancy (≥3 alternative paths)
+
+Warnings:
+  ⚠️  Not a small-world network: σ=0.98 < 1.0
+
+3. Initializing PTP Synchronization...
+⏰ master-01: Grand Master clock started
+⏰ node-00: Slave mode - waiting for master
+⏰ node-01: Slave mode - waiting for master
+⏰ node-02: Slave mode - waiting for master
+⏰ node-03: Slave mode - waiting for master
+⏰ node-04: Slave mode - waiting for master
+⏰ node-05: Slave mode - waiting for master
+⏰ node-06: Slave mode - waiting for master
+⏰ node-07: Slave mode - waiting for master
+
+4. Validating Temporal Coherence...
+[31m[1m_______ TestPTPMasterFailure.test_grand_master_failure_triggers_election _______[0m
+[1m[31mtests/unit/consciousness/tig/test_tig_edge_cases.py[0m:105: in test_grand_master_failure_triggers_election
+    [0m[94massert[39;49;00m offset.is_acceptable_for_esgt(), [33m"[39;49;00m[33mESGT coherence must be preserved[39;49;00m[33m"[39;49;00m[90m[39;49;00m
+[1m[31mE   AssertionError: ESGT coherence must be preserved[0m
+[1m[31mE   assert np.False_[0m
+[1m[31mE    +  where np.False_ = is_acceptable_for_esgt()[0m
+[1m[31mE    +    where is_acceptable_for_esgt = ClockOffset(offset_ns=np.float64(5754.5), jitter_ns=np.float64(1856.25), drift_ppm=0.0, last_sync=1764703889.0613928, quality=np.float64(0.3214512306174564)).is_acceptable_for_esgt[0m
+----------------------------- Captured stdout call -----------------------------
+⏰ gm-01: Grand Master clock started
+⏰ slave-01: Slave mode - waiting for master
+⏰ slave-02: Slave mode - waiting for master
+⏰ slave-01-promoted: Backup Master clock started
+[33m=============================== warnings summary ===============================[0m
+../../../../../../../../home/juan/.pyenv/versions/3.11.13/lib/python3.11/site-packages/testcontainers/core/waiting_utils.py:215
+  /home/juan/.pyenv/versions/3.11.13/lib/python3.11/site-packages/testcontainers/core/waiting_utils.py:215: DeprecationWarning: The @wait_container_is_ready decorator is deprecated and will be removed in a future version. Use structured wait strategies instead: container.waiting_for(HttpWaitStrategy(8080).for_status_code(200)) or container.waiting_for(LogMessageWaitStrategy('ready'))
+    @wait_container_is_ready()
+
+../../../../../../../../home/juan/.pyenv/versions/3.11.13/lib/python3.11/site-packages/testcontainers/redis/__init__.py:46
+  /home/juan/.pyenv/versions/3.11.13/lib/python3.11/site-packages/testcontainers/redis/__init__.py:46: DeprecationWarning: The @wait_container_is_ready decorator is deprecated and will be removed in a future version. Use structured wait strategies instead: container.waiting_for(HttpWaitStrategy(8080).for_status_code(200)) or container.waiting_for(LogMessageWaitStrategy('ready'))
+    @wait_container_is_ready(redis.exceptions.ConnectionError)
+
+../../../../../../../../home/juan/.pyenv/versions/3.11.13/lib/python3.11/site-packages/testcontainers/postgres/__init__.py:90
+  /home/juan/.pyenv/versions/3.11.13/lib/python3.11/site-packages/testcontainers/postgres/__init__.py:90: DeprecationWarning: The @wait_container_is_ready decorator is deprecated and will be removed in a future version. Use structured wait strategies instead: container.waiting_for(HttpWaitStrategy(8080).for_status_code(200)) or container.waiting_for(LogMessageWaitStrategy('ready'))
+    @wait_container_is_ready()
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+[36m[1m=========================== short test summary info ============================[0m
+[31mERROR[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestTIGFabricHardeningInitialization::test_fabric_has_node_health_dict[0m - AttributeError: 'TIGFabric' object has no attribute '_running'
+[31mERROR[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestTIGFabricHardeningInitialization::test_fabric_has_circuit_breakers_dict[0m - AttributeError: 'TIGFabric' object has no attribute '_running'
+[31mERROR[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestTIGFabricHardeningInitialization::test_fabric_has_health_monitoring_config[0m - AttributeError: 'TIGFabric' object has no attribute '_running'
+[31mERROR[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestTIGFabricHardeningInitialization::test_fabric_has_health_monitoring_task_slot[0m - AttributeError: 'TIGFabric' object has no attribute '_running'
+[31mERROR[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestTIGFabricHardeningInitialization::test_fabric_has_running_flag[0m - AttributeError: 'TIGFabric' object has no attribute '_running'
+[31mERROR[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestTIGFabricHardeningInitialization::test_fabric_initializes_node_health_for_all_nodes[0m - AttributeError: 'TIGFabric' object has no attribute '_running'
+[31mERROR[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestTIGFabricHardeningInitialization::test_fabric_initializes_circuit_breakers_for_all_nodes[0m - AttributeError: 'TIGFabric' object has no attribute '_running'
+[31mERROR[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestHealthMetricsCollection::test_get_health_metrics_returns_complete_structure[0m - AttributeError: 'TIGFabric' object has no attribute '_running'
+[31mERROR[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestHealthMetricsCollection::test_get_health_metrics_counts_all_nodes[0m - AttributeError: 'TIGFabric' object has no attribute '_running'
+[31mERROR[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestHealthMetricsCollection::test_get_health_metrics_baseline_all_healthy[0m - AttributeError: 'TIGFabric' object has no attribute '_running'
+[31mERROR[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestHealthMetricsCollection::test_get_health_metrics_detects_isolated_nodes[0m - AttributeError: 'TIGFabric' object has no attribute '_running'
+[31mERROR[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestHealthMetricsCollection::test_get_health_metrics_detects_degraded_nodes[0m - AttributeError: 'TIGFabric' object has no attribute '_running'
+[31mERROR[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestHealthMetricsCollection::test_get_health_metrics_connectivity_calculation[0m - AttributeError: 'TIGFabric' object has no attribute '_running'
+[31mERROR[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestHealthMetricsCollection::test_get_health_metrics_connectivity_zero_when_all_isolated[0m - AttributeError: 'TIGFabric' object has no attribute '_running'
+[31mERROR[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestHealthMonitoringLoop::test_health_monitoring_starts_automatically[0m - AttributeError: 'TIGFabric' object has no attribute '_running'
+[31mERROR[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestHealthMonitoringLoop::test_health_monitoring_stops_when_fabric_stops[0m - AttributeError: 'TIGFabric' object has no attribute '_running'
+[31mERROR[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestHealthMonitoringLoop::test_health_monitoring_detects_dead_node[0m - AttributeError: 'TIGFabric' object has no attribute '_running'
+[31mERROR[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestHealthMonitoringLoop::test_health_monitoring_reintegrates_recovered_node[0m - AttributeError: 'TIGFabric' object has no attribute '_running'
+[31mERROR[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestHealthMonitoringLoop::test_health_monitoring_continues_despite_exceptions[0m - AttributeError: 'TIGFabric' object has no attribute '_running'
+[31mERROR[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestFaultTolerantSend::test_send_to_node_rejects_isolated_node[0m - AttributeError: 'TIGFabric' object has no attribute '_running'
+[31mERROR[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestFaultTolerantSend::test_send_to_node_rejects_open_circuit_breaker[0m - AttributeError: 'TIGFabric' object has no attribute '_running'
+[31mERROR[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestFaultTolerantSend::test_send_to_node_times_out_on_slow_send[0m - AttributeError: 'TIGFabric' object has no attribute '_running'
+[31mERROR[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestFaultTolerantSend::test_send_to_node_updates_last_seen_on_success[0m - AttributeError: 'TIGFabric' object has no attribute '_running'
+[31mERROR[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestFaultTolerantSend::test_send_to_node_records_failure_on_timeout[0m - AttributeError: 'TIGFabric' object has no attribute '_running'
+[31mERROR[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestCompleteFailureScenarios::test_complete_node_failure_and_isolation[0m - AttributeError: 'TIGFabric' object has no attribute '_running'
+[31mERROR[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestCompleteFailureScenarios::test_circuit_breaker_opens_after_repeated_failures[0m - AttributeError: 'TIGFabric' object has no attribute '_running'
+[31mERROR[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestCompleteFailureScenarios::test_multiple_node_failures_cascade_protection[0m - AttributeError: 'TIGFabric' object has no attribute '_running'
+[31mERROR[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestTIGAdvancedBehaviorAndMetrics::test_node_clustering_coefficient[0m - AttributeError: 'TIGFabric' object has no attribute '_running'
+[31mERROR[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestTIGAdvancedBehaviorAndMetrics::test_topology_repair_creates_bypass_connections[0m - AttributeError: 'TIGFabric' object has no attribute '_running'
+[31mERROR[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestTIGAdvancedBehaviorAndMetrics::test_esgt_mode_transition[0m - AttributeError: 'TIGFabric' object has no attribute '_running'
+[31mERROR[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestTIGAdvancedBehaviorAndMetrics::test_iit_compliance_validation_on_good_fabric[0m - AttributeError: 'TIGFabric' object has no attribute '_running'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_100pct.py::[1mtest_tig_node_send_to_neighbor_exception[0m - AttributeError: module 'consciousness.tig.fabric' has no attribute 'asyncio'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_100pct.py::[1mtest_apply_small_world_rewiring_with_isolated_nodes[0m - AttributeError: 'TIGFabric' object has no attribute '_generate_scale_free_base'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_coverage_complete.py::[1mTestSmallWorldRewiringEdgeCases::test_rewiring_skips_hub_enhancement_for_degenerate_graphs[0m - AttributeError: 'TIGFabric' object has no attribute '_generate_scale_free_base'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_coverage_complete.py::[1mTestMetricsComputationEdgeCases::test_metrics_handles_disconnected_graph[0m - AttributeError: 'TIGFabric' object has no attribute '_generate_scale_free_base'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_coverage_complete.py::[1mTestBottleneckDetectionEdgeCases::test_bottleneck_detection_handles_no_path_exception[0m - AttributeError: 'TIGFabric' object has no attribute '_generate_scale_free_base'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_coverage_complete.py::[1mTestTopologyRepairEdgeCases::test_repair_topology_handles_nonexistent_node[0m - AttributeError: 'TIGFabric' object has no attribute '_repair_topology_around_dead_node'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_coverage_complete.py::[1mTestSendFailureHandling::test_send_handles_timeout_error[0m - AttributeError: 'TIGFabric' object has no attribute 'node_health'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_coverage_complete.py::[1mTestSendFailureHandling::test_handle_send_failure_opens_circuit_breaker_at_threshold[0m - AttributeError: 'TIGFabric' object has no attribute 'max_failures_before_isolation'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_coverage_complete.py::[1mTestNetworkPartitionDetection::test_detect_network_partition_with_less_than_2_nodes[0m - AttributeError: 'TIGFabric' object has no attribute '_detect_network_partition'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_coverage_complete.py::[1mTestNetworkPartitionDetection::test_detect_network_partition_handles_exceptions[0m - AttributeError: 'TIGFabric' object has no attribute '_detect_network_partition'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_coverage_complete.py::[1mTestNetworkPartitionDetection::test_get_health_metrics_connectivity_zero_when_no_nodes[0m - AttributeError: 'TIGFabric' object has no attribute 'node_health'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_faith_100pct.py::[1mTestHealthMonitoringFaultTolerance::test_isolate_and_reintegrate_node_lines_789_823[0m - AttributeError: 'TIGFabric' object has no attribute '_isolate_dead_node'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_faith_100pct.py::[1mTestHealthMonitoringFaultTolerance::test_repair_topology_around_dead_node_lines_825_865[0m - AttributeError: 'TIGFabric' object has no attribute '_repair_topology_around_dead_node'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_faith_100pct.py::[1mTestHealthMonitoringFaultTolerance::test_send_to_node_with_circuit_breaker_lines_867_918[0m - AttributeError: 'TIGFabric' object has no attribute 'node_health'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_faith_100pct.py::[1mTestHealthMonitoringFaultTolerance::test_handle_send_failure_opens_circuit_breaker_lines_920_938[0m - AttributeError: 'TIGFabric' object has no attribute 'node_health'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_faith_100pct.py::[1mTestPartitionDetectionAndESGT::test_detect_network_partition_lines_940_969[0m - AttributeError: 'TIGFabric' object has no attribute 'node_health'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_faith_100pct.py::[1mTestPartitionDetectionAndESGT::test_get_health_metrics_lines_971_1009[0m - AttributeError: 'TIGFabric' object has no attribute 'node_health'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_final_100pct.py::[1mTestHealthMonitoringDeadNodeIsolation::test_monitoring_loop_isolates_dead_node_lines_843_844[0m - AttributeError: 'TIGFabric' object has no attribute 'node_health'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_final_100pct.py::[1mTestHealthMonitoringReintegration::test_monitoring_loop_reintegrates_recovered_node_lines_848_851[0m - AttributeError: 'TIGFabric' object has no attribute 'node_health'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_final_100pct.py::[1mTestBypassConnectionCreation::test_bypass_connection_creation_lines_918_932[0m - AttributeError: 'TIGFabric' object has no attribute '_repair_topology_around_dead_node'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_final_100pct.py::[1mTestDetectNetworkPartition::test_partition_detection_with_isolated_nodes[0m - AttributeError: 'TIGFabric' object has no attribute 'node_health'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_final_5_lines.py::[1mTestFinal5LinesToPerfection::test_hub_enhancement_skips_hubs_with_less_than_2_neighbors_line_632[0m - AttributeError: 'TIGFabric' object has no attribute '_generate_scale_free_base'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_final_5_lines.py::[1mTestFinal5LinesToPerfection::test_bottleneck_detection_network_x_no_path_exception_lines_789_790[0m - AttributeError: 'TIGFabric' object has no attribute '_generate_scale_free_base'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_final_5_lines.py::[1mTestFinal5LinesToPerfection::test_repair_topology_skips_when_neighbors_less_than_2_line_907[0m - AttributeError: 'TIGFabric' object has no attribute '_repair_topology_around_dead_node'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_final_9_lines.py::[1mtest_line_632_hub_with_1_neighbor[0m - AttributeError: 'TIGFabric' object has no attribute '_generate_scale_free_base'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_final_9_lines.py::[1mtest_lines_691_693_networkx_no_path_disconnected_graph[0m - AttributeError: 'TIGFabric' object has no attribute '_generate_scale_free_base'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_final_push.py::[1mtest_apply_small_world_rewiring_with_large_graph_hub_enhancement[0m - AttributeError: 'TIGFabric' object has no attribute '_generate_scale_free_base'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_final_push.py::[1mtest_apply_small_world_rewiring_hub_with_less_than_2_neighbors[0m - AttributeError: 'TIGFabric' object has no attribute '_generate_scale_free_base'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_final_push.py::[1mtest_health_monitoring_reintegration_path[0m - AttributeError: 'TIGFabric' object has no attribute 'node_health'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_final_push.py::[1mtest_health_monitoring_loop_exception_handling[0m - AttributeError: 'TIGFabric' object has no attribute '_isolate_dead_node'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_final_push.py::[1mtest_repair_topology_with_dead_node_not_found[0m - AttributeError: 'TIGFabric' object has no attribute '_repair_topology_around_dead_node'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_final_push.py::[1mtest_repair_topology_with_less_than_2_neighbors[0m - AttributeError: 'TIGFabric' object has no attribute '_repair_topology_around_dead_node'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_final_push.py::[1mtest_repair_topology_with_existing_bypass_connections[0m - AttributeError: 'TIGFabric' object has no attribute '_repair_topology_around_dead_node'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_final_push.py::[1mtest_repair_topology_bypass_created_print[0m - AttributeError: 'TIGFabric' object has no attribute '_repair_topology_around_dead_node'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_final_push.py::[1mtest_handle_send_failure_circuit_breaker_open_print[0m - AttributeError: 'TIGFabric' object has no attribute 'max_failures_before_isolation'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_final_push.py::[1mtest_send_to_node_with_isolated_node[0m - AttributeError: 'TIGFabric' object has no attribute 'node_health'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_final_push.py::[1mtest_send_to_node_timeout_exception[0m - AttributeError: module 'consciousness.tig.fabric' has no attribute 'asyncio'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_final_push.py::[1mtest_get_health_metrics_with_zero_total_nodes[0m - AttributeError: 'TIGFabric' object has no attribute 'node_health'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_final_push.py::[1mtest_get_health_metrics_with_degraded_nodes[0m - AttributeError: 'TIGFabric' object has no attribute 'node_health'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_final_push.py::[1mtest_detect_network_partition_with_exception[0m - AttributeError: module 'consciousness.tig.fabric' has no attribute 'nx'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_final_push.py::[1mtest_detect_network_partition_with_less_than_2_active_nodes[0m - AttributeError: 'TIGFabric' object has no attribute 'node_health'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestTIGFabricHardeningInitialization::test_fabric_has_node_health_dict[0m - AssertionError: assert False
+ +  where False = hasattr(TIGFabric(nodes=8, ECI=1.000, C=1.000, L=1.00), 'node_health')
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestTIGFabricHardeningInitialization::test_fabric_has_circuit_breakers_dict[0m - AssertionError: assert False
+ +  where False = hasattr(TIGFabric(nodes=8, ECI=1.000, C=1.000, L=1.00), 'circuit_breakers')
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestTIGFabricHardeningInitialization::test_fabric_has_health_monitoring_config[0m - AssertionError: assert False
+ +  where False = hasattr(TIGFabric(nodes=8, ECI=1.000, C=1.000, L=1.00), 'dead_node_timeout')
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestTIGFabricHardeningInitialization::test_fabric_has_health_monitoring_task_slot[0m - AssertionError: assert False
+ +  where False = hasattr(TIGFabric(nodes=8, ECI=1.000, C=1.000, L=1.00), '_health_monitor_task')
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestTIGFabricHardeningInitialization::test_fabric_has_running_flag[0m - AssertionError: assert False
+ +  where False = hasattr(TIGFabric(nodes=8, ECI=1.000, C=1.000, L=1.00), '_running')
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestTIGFabricHardeningInitialization::test_fabric_initializes_node_health_for_all_nodes[0m - AttributeError: 'TIGFabric' object has no attribute 'node_health'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestTIGFabricHardeningInitialization::test_fabric_initializes_circuit_breakers_for_all_nodes[0m - AttributeError: 'TIGFabric' object has no attribute 'circuit_breakers'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestHealthMetricsCollection::test_get_health_metrics_counts_all_nodes[0m - AttributeError: 'TIGFabric' object has no attribute 'node_health'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestHealthMetricsCollection::test_get_health_metrics_detects_isolated_nodes[0m - AttributeError: 'TIGFabric' object has no attribute 'node_health'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestHealthMetricsCollection::test_get_health_metrics_detects_degraded_nodes[0m - AttributeError: 'TIGFabric' object has no attribute 'node_health'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestHealthMetricsCollection::test_get_health_metrics_connectivity_calculation[0m - AttributeError: 'TIGFabric' object has no attribute 'node_health'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestHealthMetricsCollection::test_get_health_metrics_connectivity_zero_when_all_isolated[0m - AttributeError: 'TIGFabric' object has no attribute 'node_health'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestHealthMonitoringLoop::test_health_monitoring_starts_automatically[0m - AttributeError: 'TIGFabric' object has no attribute '_running'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestHealthMonitoringLoop::test_health_monitoring_stops_when_fabric_stops[0m - AttributeError: 'TIGFabric' object has no attribute '_running'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestHealthMonitoringLoop::test_health_monitoring_detects_dead_node[0m - AttributeError: 'TIGFabric' object has no attribute '_running'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestHealthMonitoringLoop::test_health_monitoring_reintegrates_recovered_node[0m - AttributeError: 'TIGFabric' object has no attribute '_running'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestHealthMonitoringLoop::test_health_monitoring_continues_despite_exceptions[0m - AttributeError: 'TIGFabric' object has no attribute '_running'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestFaultTolerantSend::test_send_to_node_rejects_isolated_node[0m - AttributeError: 'TIGFabric' object has no attribute 'node_health'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestFaultTolerantSend::test_send_to_node_rejects_open_circuit_breaker[0m - AttributeError: 'TIGFabric' object has no attribute 'node_health'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestFaultTolerantSend::test_send_to_node_times_out_on_slow_send[0m - AttributeError: 'TIGFabric' object has no attribute 'node_health'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestFaultTolerantSend::test_send_to_node_updates_last_seen_on_success[0m - AttributeError: 'TIGFabric' object has no attribute 'node_health'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestFaultTolerantSend::test_send_to_node_records_failure_on_timeout[0m - AttributeError: 'TIGFabric' object has no attribute 'node_health'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestCompleteFailureScenarios::test_complete_node_failure_and_isolation[0m - AttributeError: 'TIGFabric' object has no attribute '_running'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestCompleteFailureScenarios::test_circuit_breaker_opens_after_repeated_failures[0m - AttributeError: 'TIGFabric' object has no attribute 'node_health'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestCompleteFailureScenarios::test_multiple_node_failures_cascade_protection[0m - AttributeError: 'TIGFabric' object has no attribute '_running'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestTIGAdvancedBehaviorAndMetrics::test_topology_repair_creates_bypass_connections[0m - AttributeError: 'TIGFabric' object has no attribute '_isolate_dead_node'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_hardening.py::[1mTestTIGAdvancedBehaviorAndMetrics::test_iit_compliance_fails_on_bad_fabric[0m - AttributeError: 'TIGFabric' object has no attribute '_generate_scale_free_base'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_remaining_19.py::[1mtest_line_431_bypass_print[0m - AttributeError: 'TIGFabric' object has no attribute '_repair_topology_around_dead_node'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_remaining_19.py::[1mtest_line_632_hub_less_than_2_neighbors[0m - AttributeError: 'TIGFabric' object has no attribute '_generate_scale_free_base'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_remaining_19.py::[1mtest_line_705_eci_computation[0m - AttributeError: 'TIGFabric' object has no attribute '_generate_scale_free_base'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_remaining_19.py::[1mtest_line_747_health_monitoring_exception[0m - AttributeError: 'TIGFabric' object has no attribute 'node_health'
+[31mFAILED[0m tests/unit/consciousness/tig/test_fabric_remaining_19.py::[1mtest_lines_789_790_dead_node_not_found[0m - AttributeError: 'TIGFabric' object has no attribute '_repair_topology_around_dead_node'
+[31mFAILED[0m tests/unit/consciousness/tig/test_sync.py::[1mTestSyncToMaster::test_sync_to_master_multiple_iterations_converge[0m - assert (np.float64(1765.9497798193074) < np.float64(334.8515658000728) or np.float64(1765.9497798193074) < 200.0)
+[31mFAILED[0m tests/unit/consciousness/tig/test_sync.py::[1mTestPTPSynchronizerHelpers::test_is_ready_for_esgt[0m - assert np.True_ is True
+[31mFAILED[0m tests/unit/consciousness/tig/test_sync.py::[1mTestPTPSynchronizerHelpers::test_is_not_ready_for_esgt[0m - assert np.False_ is False
+[31mFAILED[0m tests/unit/consciousness/tig/test_sync.py::[1mTestPTPCluster::test_is_esgt_ready_false_poor_sync[0m - assert True is False
+[31mFAILED[0m tests/unit/consciousness/tig/test_tig.py::[1mtest_ptp_jitter_quality[0m - AssertionError: Jitter too high: 3395.8ns > 1000ns
+assert np.float64(3395.813758915659) < 1000.0
+ +  where np.float64(3395.813758915659) = ClockOffset(offset_ns=np.float64(13338.103842495635), jitter_ns=np.float64(3395.813758915659), drift_ppm=100.0, last_sync=1764703884.8064682, quality=np.float64(0.2714512254107889)).jitter_ns
+[31mFAILED[0m tests/unit/consciousness/tig/test_tig.py::[1mtest_ptp_cluster_sync[0m - AssertionError: At least one slave should be ESGT ready: 0/3
+assert 0 >= 1
+[31mFAILED[0m tests/unit/consciousness/tig/test_tig.py::[1mtest_full_consciousness_substrate[0m - AssertionError: Cluster must achieve ESGT-quality sync
+assert False
+ +  where False = is_esgt_ready()
+ +    where is_esgt_ready = PTPCluster(nodes=9, esgt_ready=0/8, avg_jitter=130.0ns).is_esgt_ready
+[31mFAILED[0m tests/unit/consciousness/tig/test_tig_edge_cases.py::[1mTestPTPMasterFailure::test_grand_master_failure_triggers_election[0m - AssertionError: ESGT coherence must be preserved
+assert np.False_
+ +  where np.False_ = is_acceptable_for_esgt()
+ +    where is_acceptable_for_esgt = ClockOffset(offset_ns=np.float64(5754.5), jitter_ns=np.float64(1856.25), drift_ppm=0.0, last_sync=1764703889.0613928, quality=np.float64(0.3214512306174564)).is_acceptable_for_esgt
+[31m============ [31m[1m81 failed[0m, [32m173 passed[0m, [33m3 warnings[0m, [31m[1m31 errors[0m[31m in 34.62s[0m[31m ============[0m

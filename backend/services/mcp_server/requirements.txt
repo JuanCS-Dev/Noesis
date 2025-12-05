@@ -1,0 +1,33 @@
+# MAXIMUS MCP Server - Dependencies
+# Python 3.12+
+
+# Core framework
+fastapi==0.115.0
+uvicorn[standard]==0.32.0
+pydantic==2.9.2
+pydantic-settings==2.6.0
+
+# HTTP client with retry and pooling
+httpx==0.27.2
+tenacity==9.0.0
+
+# Circuit breaker pattern
+pybreaker==1.2.0
+
+# Structured logging
+python-json-logger==3.1.0
+
+# Optional: FastMCP (when released)
+# fastmcp==0.1.0
+
+# Optional: OpenTelemetry
+# opentelemetry-api==1.27.0
+# opentelemetry-sdk==1.27.0
+# opentelemetry-instrumentation-fastapi==0.48b0
+
+# Development dependencies
+pytest==8.3.3
+pytest-asyncio==0.24.0
+pytest-cov==6.0.0
+httpx-mock==0.7.0
+mypy==1.11.2
