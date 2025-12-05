@@ -52,6 +52,7 @@ class CoordinationSettings(BaseSettings):  # pylint: disable=too-few-public-meth
         """Pydantic config."""
         env_file = ".env"
         populate_by_name = True
+        extra = "ignore"
 
 
 class ServiceSettings(BaseSettings):  # pylint: disable=too-few-public-methods
@@ -76,6 +77,39 @@ class ServiceSettings(BaseSettings):  # pylint: disable=too-few-public-methods
         """Pydantic config."""
         env_file = ".env"
         populate_by_name = True
+        extra = "ignore"
+
+
+class LLMSettings(BaseSettings):
+    """
+    Configuration for Large Language Model integration.
+    
+    Targets Gemini 3.0 Pro capabilities.
+    """
+    api_key: str = Field(
+        default="",
+        validation_alias="GEMINI_API_KEY"
+    )
+    model: str = Field(
+        default="gemini-3.0-pro-001",
+        validation_alias="GEMINI_MODEL"
+    )
+    temperature: float = 0.7
+    max_tokens: int = 8192
+    timeout: int = 60
+    
+    # New Thinking Capabilities (Dec 2025)
+    thinking_level: str = Field(
+        default="HIGH",
+        validation_alias="GEMINI_THINKING_LEVEL"
+    )
+    enable_thought_signatures: bool = True
+
+    class Config:
+        """Pydantic config."""
+        env_file = ".env"
+        populate_by_name = True
+        extra = "ignore"
 
 
 class Settings(BaseSettings):  # pylint: disable=too-few-public-methods
@@ -85,6 +119,7 @@ class Settings(BaseSettings):  # pylint: disable=too-few-public-methods
     Attributes:
         coordination: Coordination settings
         service: Service settings
+        llm: LLM settings
     """
 
     coordination: CoordinationSettings = Field(
@@ -93,10 +128,14 @@ class Settings(BaseSettings):  # pylint: disable=too-few-public-methods
     service: ServiceSettings = Field(
         default_factory=create_service_settings
     )
+    llm: LLMSettings = Field(
+        default_factory=LLMSettings
+    )
 
     class Config:
         """Pydantic config."""
         env_file = ".env"
+        extra = "ignore"
 
 
 @lru_cache()

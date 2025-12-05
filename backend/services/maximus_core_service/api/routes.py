@@ -17,8 +17,11 @@ from ..core.health_aggregator import HealthAggregator  # type: ignore
 from ..models.system import SystemStatus  # type: ignore  # type: ignore
 from .dependencies import get_coordinator, get_health_aggregator
 
-router = APIRouter()
+# FLORESCIMENTO: Introspection API
+from ..consciousness.florescimento import florescimento_router
 
+router = APIRouter()
+router.include_router(florescimento_router)
 
 @router.get("/health", response_model=dict)
 async def health_check() -> dict[str, str]:

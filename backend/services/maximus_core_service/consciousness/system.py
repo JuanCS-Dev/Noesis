@@ -46,6 +46,9 @@ from motor_integridade_processual.arbiter.decision import DecisionArbiter
 # REACTIVE FABRIC: Sprint 3 - Data collection and orchestration
 from consciousness.reactive_fabric.orchestration import DataOrchestrator
 
+# FLORESCIMENTO: Auto-Perception Module
+from consciousness.florescimento import UnifiedSelfConcept, ConsciousnessBridge
+
 # Prometheus Metrics
 consciousness_tig_node_count = Gauge(
     "consciousness_tig_node_count", "Number of nodes in the TIG fabric"
@@ -155,6 +158,10 @@ class ConsciousnessSystem:
         # REACTIVE FABRIC: Data orchestration (Sprint 3)
         self.orchestrator: DataOrchestrator | None = None
 
+        # FLORESCIMENTO: Auto-Perception
+        self.self_concept: UnifiedSelfConcept | None = None
+        self.consciousness_bridge: ConsciousnessBridge | None = None
+
     async def start(self) -> None:
         """Start consciousness system.
 
@@ -225,6 +232,20 @@ class ConsciousnessSystem:
             )
             await self.esgt_coordinator.start()
             logger.info("  ✅ ESGT Coordinator started (with PFC integration)")
+
+            # 3a. FLORESCIMENTO: Initialize Auto-Perception
+            logger.info("  ├─ Creating Unified Self & Bridge...")
+            self.self_concept = UnifiedSelfConcept(
+                self_model=None, # TODO: Wire MEA SelfModel if needed
+                esgt=self.esgt_coordinator
+            )
+            await self.self_concept.update() # Initial hydration
+            
+            self.consciousness_bridge = ConsciousnessBridge(
+                unified_self=self.self_concept,
+                llm_client=None # TODO: Inject real Gemini client later
+            )
+            logger.info("  ✅ Unified Self & Consciousness Bridge active")
 
             # 4. Initialize Arousal Controller
             logger.info("  ├─ Creating Arousal Controller...")

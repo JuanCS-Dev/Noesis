@@ -48,6 +48,8 @@ if TYPE_CHECKING:  # pragma: no cover
     from consciousness.mea.attention_schema import AttentionState
     from consciousness.mea.boundary_detector import BoundaryAssessment
     from consciousness.mea.self_model import IntrospectiveSummary
+    # FLORESCIMENTO: Type hint only
+    from consciousness.florescimento.consciousness_bridge import ConsciousnessBridge
 
 
 class ESGTCoordinator(
@@ -74,12 +76,16 @@ class ESGTCoordinator(
         kuramoto_config: OscillatorConfig | None = None,
         coordinator_id: str = "esgt-coordinator",
         prefrontal_cortex: Any | None = None,
+        consciousness_bridge: "ConsciousnessBridge | None" = None,  # FLORESCIMENTO
     ):
         self.coordinator_id = coordinator_id
         self.tig = tig_fabric
         self.ptp = ptp_cluster
         self.triggers = triggers or TriggerConditions()
         self.kuramoto_config = kuramoto_config or OscillatorConfig()
+        
+        # FLORESCIMENTO: Bridge to introspection
+        self.consciousness_bridge = consciousness_bridge
 
         # Kuramoto network for phase synchronization
         self.kuramoto = KuramotoNetwork(self.kuramoto_config)
@@ -246,7 +252,7 @@ class ESGTCoordinator(
                 topology=topology,
                 duration_ms=300.0,  # Max 300ms to achieve sync
                 target_coherence=target_coherence,
-                dt=0.005,
+                dt=0.001,
             )
 
             event.sync_latency_ms = (time.time() - sync_start) * 1000
@@ -323,6 +329,12 @@ class ESGTCoordinator(
                 event.achieved_coherence = max(event.coherence_history)
             event.transition_phase(ESGTPhase.COMPLETE)
             event.finalize(success=True)
+
+            # FLORESCIMENTO: Trigger introspection on successful ignition
+            if self.consciousness_bridge:
+                asyncio.create_task(
+                    self.consciousness_bridge.process_conscious_event(event)
+                )
 
             # Record
             self.event_history.append(event)
