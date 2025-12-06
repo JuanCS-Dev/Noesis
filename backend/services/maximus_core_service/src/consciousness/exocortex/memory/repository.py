@@ -14,13 +14,13 @@ from typing import List
 from dataclasses import asdict
 from datetime import datetime
 
-from services.maximus_core_service.src.consciousness.exocortex.constitution_guardian import (
+from src.consciousness.exocortex.constitution_guardian import (
     PersonalConstitution,
     ConstitutionRule,
     OverrideRecord,
     ViolationSeverity
 )
-from services.maximus_core_service.src.consciousness.exocortex.confrontation_engine import (
+from src.consciousness.exocortex.confrontation_engine import (
     ConfrontationTurn
 )
 

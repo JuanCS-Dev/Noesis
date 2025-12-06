@@ -8,10 +8,10 @@ Dependency injection for FastAPI endpoints.
 from __future__ import annotations
 
 
-from ..config import Settings, get_settings
-from ..core.coordinator import SystemCoordinator
-from ..core.health_aggregator import HealthAggregator
-from ..utils.logging_config import get_logger, setup_logging
+from config import Settings, get_settings
+from core.coordinator import SystemCoordinator
+from core.health_aggregator import HealthAggregator
+from utils.logging_config import get_logger, setup_logging
 
 logger = get_logger(__name__)
 

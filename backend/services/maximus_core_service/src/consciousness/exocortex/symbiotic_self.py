@@ -20,7 +20,7 @@ from typing import Dict, List, Optional, Any
 import logging
 import json
 
-from services.maximus_core_service.utils.gemini_client import GeminiClient
+from utils.gemini_client import GeminiClient
 
 logger = logging.getLogger(__name__)
 
@@ -175,7 +175,7 @@ class SymbioticSelfConcept(UnifiedSelfConcept): # pylint: disable=too-many-insta
     def _register_subscribers(self) -> None:
         """Subscribes to relevant workspace events."""
         # Avoid circular import
-        from services.maximus_core_service.src.consciousness.exocortex.global_workspace import ( # pylint: disable=import-outside-toplevel
+        from src.consciousness.exocortex.global_workspace import ( # pylint: disable=import-outside-toplevel
             EventType
         )
         if self.workspace:
@@ -285,7 +285,7 @@ class SymbioticSelfConcept(UnifiedSelfConcept): # pylint: disable=too-many-insta
             # Broadcast update
             if self.workspace:
                 # pylint: disable=import-outside-toplevel
-                from services.maximus_core_service.src.consciousness.exocortex \
+                from src.consciousness.exocortex \
                     .global_workspace import ConsciousEvent, EventType
                 await self.workspace.broadcast(ConsciousEvent(
                     id=f"perc_{int(datetime.now().timestamp())}",

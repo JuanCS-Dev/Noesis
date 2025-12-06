@@ -8,10 +8,10 @@ FastAPI dependency injection functions.
 from functools import lru_cache
 from typing import Generator
 
-from ..config import Settings, get_settings
-from ..core.executor import ActionExecutor
-from ..core.k8s import KubernetesController
-from ..utils.logging_config import get_logger, setup_logging
+from config import Settings, get_settings
+from core.executor import ActionExecutor
+from core.k8s import KubernetesController
+from utils.logging_config import get_logger, setup_logging
 
 logger = get_logger(__name__)
 

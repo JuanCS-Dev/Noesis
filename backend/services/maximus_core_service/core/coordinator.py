@@ -10,8 +10,8 @@ from __future__ import annotations
 
 from typing import List
 
-from ..config import CoordinationSettings
-from ..utils.logging_config import get_logger
+from config import CoordinationSettings
+from utils.logging_config import get_logger
 
 logger = get_logger(__name__)
 

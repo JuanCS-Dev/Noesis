@@ -5,9 +5,9 @@ HCL Monitor Service - API Dependencies
 Dependency injection for FastAPI endpoints.
 """
 
-from ..config import Settings, get_settings
-from ..core.collector import SystemMetricsCollector
-from ..utils.logging_config import get_logger, setup_logging
+from config import Settings, get_settings
+from core.collector import SystemMetricsCollector
+from utils.logging_config import get_logger, setup_logging
 
 logger = get_logger(__name__)
 

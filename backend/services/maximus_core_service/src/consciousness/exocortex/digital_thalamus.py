@@ -13,7 +13,7 @@ from typing import Dict, Any, Optional
 from dataclasses import dataclass, field
 from datetime import datetime
 
-from services.maximus_core_service.utils.gemini_client import GeminiClient
+from utils.gemini_client import GeminiClient
 
 logger = logging.getLogger(__name__)
 
@@ -191,7 +191,7 @@ class DigitalThalamus:
         """Transmite evento para o Global Workspace."""
         # Avoid circular dependency if any (checking runtime)
         # But safest is top level if no cycle. keeping local for now but fixing lint
-        from services.maximus_core_service.src.consciousness.exocortex.global_workspace import ( # pylint: disable=import-outside-toplevel
+        from src.consciousness.exocortex.global_workspace import ( # pylint: disable=import-outside-toplevel
             ConsciousEvent, EventType
         )
 

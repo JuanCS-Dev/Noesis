@@ -9,8 +9,8 @@ from typing import List, Optional, Any, Dict
 from datetime import datetime
 from fastapi import APIRouter, HTTPException, Depends, status
 from pydantic import BaseModel
-from services.maximus_core_service.src.consciousness.exocortex.factory import ExocortexFactory
-from services.maximus_core_service.src.consciousness.exocortex.api.schemas import (
+from src.consciousness.exocortex.factory import ExocortexFactory
+from src.consciousness.exocortex.api.schemas import (
     AuditRequest, AuditResponse,
     OverrideRequest, OverrideResponse,
     ConfrontationRequest, ConfrontationResponse,
@@ -19,25 +19,25 @@ from services.maximus_core_service.src.consciousness.exocortex.api.schemas impor
     ImpulseCheckRequest, InterventionResponse,
     JournalRequest, JournalResponse
 )
-from services.maximus_core_service.src.consciousness.exocortex.memory.knowledge_engine import get_knowledge_engine
-from services.maximus_core_service.src.consciousness.exocortex.prompts import (
-    EXOCORTEX_SYSTEM_PROMPT, 
+from src.consciousness.exocortex.memory.knowledge_engine import get_knowledge_engine
+from src.consciousness.exocortex.prompts import (
+    EXOCORTEX_SYSTEM_PROMPT,
     SHADOW_ANALYSIS_TEMPLATE
 )
-from services.maximus_core_service.src.consciousness.exocortex.confrontation_engine import (
+from src.consciousness.exocortex.confrontation_engine import (
     ConfrontationContext,
     ConfrontationStyle,
     ConfrontationTurn
 )
-from services.maximus_core_service.src.consciousness.exocortex.constitution_guardian import (
+from src.consciousness.exocortex.constitution_guardian import (
     AuditResult, ViolationSeverity
 )
 
-from services.maximus_core_service.src.consciousness.exocortex.digital_thalamus import (
+from src.consciousness.exocortex.digital_thalamus import (
     Stimulus, StimulusType, AttentionStatus
 )
 
-from services.maximus_core_service.src.consciousness.exocortex.impulse_inhibitor import (
+from src.consciousness.exocortex.impulse_inhibitor import (
     ImpulseContext
 )
 
@@ -318,8 +318,12 @@ Action: INHIBIT OUTPUT. Trigger Cooling Protocol."""
         }
         response_text = f"I hear you. This reflects a deep part of your current state. Let's explore why '{req.content}' resonates with you right now."
 
+    elif req.content.lower().strip() in ["oi", "ola", "olá", "hello", "hi", "bom dia", "boa noite"]:
+        response_text = "Saudações. O Exocórtex está online e a Memória Mnemosyne está ativa. Sobre o que você deseja refletir hoje?"
+        thinking_trace = "[System 1] Greeting detected. [System 2] Retrieving Protocol: Open-Ended Inquiry. Goal: Initiate symbiotic dialogue."
+
     else:
-        response_text = f"Recebido. Processando entrada: '{req.content}'..."
+        response_text = f"Estou ouvindo. Você disse: '{req.content}'. Como isso se conecta com seus objetivos atuais?"
 
     # 3. Resposta do Daimon (Default se não sobrescrito)
     # response_text já definido acima

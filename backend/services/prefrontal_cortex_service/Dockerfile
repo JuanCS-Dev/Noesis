@@ -13,4 +13,4 @@ ENV PYTHONPATH=/app:/app/shared:$PYTHONPATH
 
 HEALTHCHECK --interval=30s --timeout=5s --retries=3 --start-period=40s CMD exit 0
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["python", "-m", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

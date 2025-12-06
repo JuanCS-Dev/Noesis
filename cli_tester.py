@@ -11,7 +11,7 @@ from rich.layout import Layout
 from rich.live import Live
 
 # Configuração
-API_URL = "http://localhost:8001"
+API_URL = "http://localhost:8000"
 console = Console()
 
 async def send_journal_entry(client, content):
@@ -24,8 +24,8 @@ async def send_journal_entry(client, content):
             "analysis_mode": "deep_shadow_work" 
         }
         
-        # ATUALIZADO: Rota corrigida para a estrutura do Exocortex
-        response = await client.post(f"{API_URL}/v1/exocortex/journal", json=payload, timeout=60.0)
+        # ATUALIZADO: Rota corrigida para a estrutura do Exocortex e Gateway
+        response = await client.post(f"{API_URL}/maximus_core_service/v1/exocortex/journal", json=payload, timeout=60.0)
         response.raise_for_status()
         return response.json()
     except Exception as e:

@@ -12,7 +12,7 @@ from dataclasses import dataclass
 from typing import Dict, Any, Optional
 from datetime import datetime
 
-from services.maximus_core_service.utils.gemini_client import GeminiClient
+from utils.gemini_client import GeminiClient
 
 logger = logging.getLogger(__name__)
 
@@ -80,7 +80,7 @@ class ImpulseInhibitor:
         analysis: Dict[str, Any]
     ) -> None:
         """Transmite evento de impulso detectado."""
-        from services.maximus_core_service.src.consciousness.exocortex.global_workspace import ( # pylint: disable=import-outside-toplevel
+        from src.consciousness.exocortex.global_workspace import ( # pylint: disable=import-outside-toplevel
             ConsciousEvent, EventType
         )
 

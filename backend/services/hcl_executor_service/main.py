@@ -11,9 +11,9 @@ from typing import Dict, Any
 from fastapi import FastAPI
 from fastapi.responses import PlainTextResponse
 
-from .config import get_settings
-from .api.routes import router as api_router
-from .api.dependencies import initialize_service
+from config import get_settings
+from api.routes import router as api_router
+from api.dependencies import initialize_service
 
 # Initialize settings
 settings = get_settings()

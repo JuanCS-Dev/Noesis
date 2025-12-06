@@ -1,58 +1,109 @@
 #!/bin/bash
+set -euo pipefail
 
 # Configuration
 PROJECT_DIR="/home/maximus/Área de trabalho/Digital Daimon"
-BACKEND_DIR="$PROJECT_DIR/backend"
+SERVICES_DIR="$PROJECT_DIR/backend/services"
 VENV_PYTHON="$PROJECT_DIR/.venv/bin/python"
-VENV_UVICORN="$PROJECT_DIR/../.venv/bin/uvicorn" # Backend uses parent venv relative to its dir? No, wait.
-                                                 # Let's verify paths.
-                                                 # Backend runs with ../.venv/bin/uvicorn from backend dir in previous commands.
-                                                 # So from PROJECT_DIR, it is .venv/bin/uvicorn (if we are in backend dir, .. is project dir).
+VENV_PIP="$PROJECT_DIR/.venv/bin/pip"
+LOG_DIR="/tmp/daimon"
+
+# Initialize PYTHONPATH if not set
+export PYTHONPATH="${PYTHONPATH:-}"
 
 # Colors
 CYAN='\033[0;36m'
 GREEN='\033[0;32m'
-NC='\033[0m' # No Color
+RED='\033[0;31m'
+YELLOW='\033[1;33m'
+NC='\033[0m'
 
 echo -e "${CYAN}⚡ Waking the Daimon...${NC}"
 
-cd "$PROJECT_DIR" || exit
+# Create log directory
+mkdir -p "$LOG_DIR"
 
-# 1. Start Backend (if not running)
-if ! lsof -i :8001 > /dev/null; then
-    echo -e "Starting Neural Core (Backend)..."
-    cd "$BACKEND_DIR"
-    # Backend runs from its directory, using the venv in project root (../.venv)
-    ../.venv/bin/uvicorn services.maximus_core_service.main:app --host 0.0.0.0 --port 8001 > /dev/null 2>&1 &
-    BACKEND_PID=$!
+# Function to install service if needed (for src/ layout packages)
+install_service() {
+    local service_dir="$1"
+    local service_name="$2"
+
+    if [ -f "$service_dir/pyproject.toml" ] && [ -d "$service_dir/src" ]; then
+        # New src/ layout - install as package
+        if ! "$VENV_PYTHON" -c "import $service_name" 2>/dev/null; then
+            echo -e "${YELLOW}Installing $service_name...${NC}"
+            "$VENV_PIP" install -e "$service_dir" -q
+        fi
+    fi
+}
+
+# Function to start a service
+start_service() {
+    local name="$1"
+    local port="$2"
+    local module_path="$3"
+    local service_dir="$SERVICES_DIR/$name"
+
+    if ! lsof -i :"$port" > /dev/null 2>&1; then
+        echo -e "Starting $name on :$port..."
+
+        # Install if it's a src/ layout package
+        install_service "$service_dir" "$name"
+
+        # Start using package path (works because package is installed)
+        "$VENV_PYTHON" -m uvicorn "$module_path" \
+            --host 0.0.0.0 --port "$port" \
+            > "$LOG_DIR/${name}.log" 2>&1 &
+
+        # Wait for health check
+        echo -n "Waiting for $name"
+        count=0
+        while ! curl -s "http://localhost:$port/health" > /dev/null 2>&1; do
+            echo -n "."
+            sleep 1
+            ((count++))
+            if [ $count -ge 15 ]; then
+                echo -e "\n${RED}Failed to start $name. Check $LOG_DIR/${name}.log${NC}"
+                tail -20 "$LOG_DIR/${name}.log"
+                exit 1
+            fi
+        done
+        echo -e " ${GREEN}Online.${NC}"
+    else
+        echo -e "$name is ${GREEN}Active${NC} on :$port"
+    fi
+}
+
+# Start maximus_core_service (Tier 4 - still using old layout, needs PYTHONPATH)
+if ! lsof -i :8001 > /dev/null 2>&1; then
+    echo -e "Starting Neural Core (Backend on :8001)..."
+    cd "$SERVICES_DIR/maximus_core_service"
+    export PYTHONPATH="$SERVICES_DIR/maximus_core_service:$PYTHONPATH"
+    "$VENV_PYTHON" -m uvicorn main:app --host 0.0.0.0 --port 8001 > "$LOG_DIR/maximus_core_service.log" 2>&1 &
     cd "$PROJECT_DIR"
-    
-    # Wait for health check
-    echo -n "Waiting for Synapse Connection"
+
+    echo -n "Waiting for Neural Core"
     count=0
-    while ! curl -s http://localhost:8001/health > /dev/null; do
+    while ! curl -s http://localhost:8001/v1/health > /dev/null 2>&1; do
         echo -n "."
         sleep 1
         ((count++))
         if [ $count -ge 15 ]; then
-            echo -e "\n${RED}Failed to connect to backend.${NC}"
+            echo -e "\n${RED}Failed to start backend. Check $LOG_DIR/maximus_core_service.log${NC}"
+            tail -20 "$LOG_DIR/maximus_core_service.log"
             exit 1
         fi
     done
     echo -e " ${GREEN}Online.${NC}"
 else
-    echo -e "Neural Core is ${GREEN}Active${NC}."
+    echo -e "Neural Core is ${GREEN}Active${NC} on :8001"
 fi
 
-# 2. Start Display (if not running)
-if ! lsof -i :8501 > /dev/null; then
-    echo -e "Opening Portal (Streamlit)..."
-    "$VENV_PYTHON" -m streamlit run display_server.py --server.port 8501 > /dev/null 2>&1 &
-    echo -e "Portal ${GREEN}Opened${NC}."
-else
-    echo -e "Portal is ${GREEN}Open${NC}."
-fi
+# Start API Gateway (Tier 1 - migrated to src/ layout)
+start_service "api_gateway" 8000 "api_gateway.api.routes:app"
 
-# 3. Launch CLI
+echo -e "${GREEN}System ready.${NC} Backend :8001 | Gateway :8000"
+
+# Launch CLI
 echo -e "${CYAN}Entering Consciousness Stream...${NC}"
-"$VENV_PYTHON" cli_tester.py
+"$VENV_PYTHON" "$PROJECT_DIR/cli_tester.py"

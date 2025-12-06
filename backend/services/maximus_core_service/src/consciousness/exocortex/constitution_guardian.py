@@ -20,7 +20,7 @@ from datetime import datetime
 from typing import List, Dict, Any, Optional
 from enum import Enum
 
-from services.maximus_core_service.utils.gemini_client import GeminiClient
+from utils.gemini_client import GeminiClient
 
 logger = logging.getLogger(__name__)
 
@@ -98,7 +98,7 @@ class ConstitutionGuardian:
     def _register_subscribers(self) -> None:
         """Registra interesse em eventos relevantes."""
         # Avoid circular import
-        from services.maximus_core_service.src.consciousness.exocortex.global_workspace import ( # pylint: disable=import-outside-toplevel
+        from src.consciousness.exocortex.global_workspace import ( # pylint: disable=import-outside-toplevel
             EventType
         )
         # Escutar impulsos detectados (que podem ser violações)
@@ -137,7 +137,7 @@ class ConstitutionGuardian:
 
     async def _broadcast_violation(self, trigger_event: Any, audit: AuditResult) -> None:
         """Publica violação no Workspace."""
-        from services.maximus_core_service.src.consciousness.exocortex.global_workspace import ( # pylint: disable=import-outside-toplevel
+        from src.consciousness.exocortex.global_workspace import ( # pylint: disable=import-outside-toplevel
             ConsciousEvent, EventType
         )
 

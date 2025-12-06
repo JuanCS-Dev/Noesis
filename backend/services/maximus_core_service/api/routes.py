@@ -12,13 +12,13 @@ from typing import List
 
 from fastapi import APIRouter, Depends
 
-from ..core.coordinator import SystemCoordinator  # type: ignore
-from ..core.health_aggregator import HealthAggregator  # type: ignore
-from ..models.system import SystemStatus  # type: ignore  # type: ignore
-from .dependencies import get_coordinator, get_health_aggregator
+from core.coordinator import SystemCoordinator
+from core.health_aggregator import HealthAggregator
+from models.system import SystemStatus
+from api.dependencies import get_coordinator, get_health_aggregator
 
 # FLORESCIMENTO: Introspection API
-from ..consciousness.florescimento import florescimento_router
+from consciousness.florescimento import florescimento_router
 
 router = APIRouter()
 router.include_router(florescimento_router)

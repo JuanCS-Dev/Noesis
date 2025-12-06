@@ -1,0 +1,413 @@
+@import "tailwindcss";
+
+/* ============================================
+   DAIMON - NEURAL CONSCIOUSNESS DESIGN SYSTEM
+   ============================================
+   Visual Identity: Cyberpunk Neural Interface
+   Philosophy: Mind meets Machine
+   ============================================ */
+
+/* === CORE DESIGN TOKENS === */
+:root {
+  /* Neural Color Palette */
+  --neural-black: #030712;
+  --neural-void: #0a0a0f;
+  --neural-surface: #111827;
+
+  /* Primary: Consciousness Cyan */
+  --cyan-glow: #00fff2;
+  --cyan-bright: #22d3ee;
+  --cyan-muted: #0891b2;
+  --cyan-dark: #164e63;
+
+  /* Secondary: Shadow Purple */
+  --purple-glow: #c084fc;
+  --purple-bright: #a855f7;
+  --purple-muted: #7c3aed;
+  --purple-dark: #4c1d95;
+
+  /* Accent: Energy Amber */
+  --amber-glow: #fde047;
+  --amber-bright: #fbbf24;
+  --amber-muted: #f59e0b;
+
+  /* System Colors */
+  --success: #10b981;
+  --warning: #f59e0b;
+  --error: #ef4444;
+
+  /* Text */
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+
+  /* Glass Effect */
+  --glass-bg: rgba(17, 24, 39, 0.7);
+  --glass-border: rgba(0, 255, 242, 0.15);
+  --glass-blur: 16px;
+}
+
+/* === BASE STYLES === */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+  background: var(--neural-black);
+  color: var(--text-primary);
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+/* === GLASSMORPHISM PANELS === */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  box-shadow:
+    0 0 30px rgba(0, 255, 242, 0.05),
+    inset 0 0 30px rgba(0, 255, 242, 0.02);
+}
+
+.glass-panel-purple {
+  background: rgba(76, 29, 149, 0.3);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  box-shadow:
+    0 0 30px rgba(168, 85, 247, 0.1),
+    inset 0 0 30px rgba(168, 85, 247, 0.02);
+}
+
+/* === NEON GLOW EFFECTS === */
+.neon-text {
+  text-shadow:
+    0 0 5px var(--cyan-glow),
+    0 0 10px var(--cyan-glow),
+    0 0 20px var(--cyan-glow),
+    0 0 40px var(--cyan-bright);
+}
+
+.neon-text-purple {
+  text-shadow:
+    0 0 5px var(--purple-glow),
+    0 0 10px var(--purple-glow),
+    0 0 20px var(--purple-glow);
+}
+
+.neon-border {
+  box-shadow:
+    0 0 5px var(--cyan-glow),
+    0 0 10px var(--cyan-glow),
+    inset 0 0 5px rgba(0, 255, 242, 0.1);
+}
+
+/* === SCANLINE EFFECT === */
+.scanlines::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 255, 242, 0.015) 2px,
+    rgba(0, 255, 242, 0.015) 4px
+  );
+  pointer-events: none;
+  z-index: 100;
+  animation: scanline-move 8s linear infinite;
+}
+
+@keyframes scanline-move {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(100px); }
+}
+
+/* === NEURAL PULSE ANIMATION === */
+@keyframes neural-pulse {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes energy-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+/* === THINKING ANIMATION === */
+@keyframes thinking-pulse {
+  0%, 100% {
+    box-shadow: 0 0 5px var(--cyan-glow);
+  }
+  50% {
+    box-shadow: 0 0 20px var(--cyan-glow), 0 0 40px var(--purple-glow);
+  }
+}
+
+.thinking-indicator {
+  animation: thinking-pulse 1.5s ease-in-out infinite;
+}
+
+/* === STREAMING TEXT EFFECT === */
+@keyframes cursor-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.streaming-cursor::after {
+  content: '▊';
+  color: var(--cyan-glow);
+  animation: cursor-blink 0.8s infinite;
+  margin-left: 2px;
+}
+
+/* === GLITCH EFFECT === */
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+@keyframes glitch-skew {
+  0% { transform: skew(0deg); }
+  20% { transform: skew(2deg); }
+  40% { transform: skew(-1deg); }
+  60% { transform: skew(1deg); }
+  80% { transform: skew(-2deg); }
+  100% { transform: skew(0deg); }
+}
+
+.glitch-text {
+  animation: glitch-skew 0.5s infinite;
+}
+
+/* === ENERGY GRADIENT === */
+.energy-gradient {
+  background: linear-gradient(
+    90deg,
+    var(--cyan-dark),
+    var(--cyan-glow),
+    var(--purple-glow),
+    var(--cyan-glow),
+    var(--cyan-dark)
+  );
+  background-size: 200% 100%;
+  animation: energy-flow 3s linear infinite;
+}
+
+/* === MESSAGE STYLES === */
+.message-user {
+  background: linear-gradient(135deg, rgba(76, 29, 149, 0.4), rgba(124, 58, 237, 0.2));
+  border-left: 3px solid var(--purple-glow);
+}
+
+.message-daimon {
+  background: linear-gradient(135deg, rgba(22, 78, 99, 0.4), rgba(8, 145, 178, 0.2));
+  border-left: 3px solid var(--cyan-glow);
+}
+
+.message-thinking {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(51, 65, 85, 0.5));
+  border-left: 3px solid var(--amber-muted);
+  animation: thinking-pulse 2s ease-in-out infinite;
+}
+
+/* === REASONING TRACE === */
+.reasoning-trace {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  border-left: 2px solid var(--amber-muted);
+  padding-left: 0.75rem;
+  margin-top: 0.5rem;
+  opacity: 0.8;
+}
+
+.reasoning-trace::before {
+  content: '🧠 ';
+}
+
+/* === SCROLLBAR === */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--neural-void);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--cyan-dark);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--cyan-muted);
+}
+
+/* === INPUT STYLES === */
+.neural-input {
+  background: rgba(17, 24, 39, 0.8);
+  border: 1px solid var(--glass-border);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+.neural-input:focus {
+  outline: none;
+  border-color: var(--cyan-glow);
+  box-shadow:
+    0 0 10px rgba(0, 255, 242, 0.3),
+    inset 0 0 10px rgba(0, 255, 242, 0.05);
+}
+
+.neural-input::placeholder {
+  color: var(--text-muted);
+}
+
+/* === BUTTON STYLES === */
+.neural-button {
+  background: linear-gradient(135deg, var(--cyan-dark), var(--cyan-muted));
+  border: 1px solid var(--cyan-glow);
+  color: var(--text-primary);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.neural-button:hover {
+  background: linear-gradient(135deg, var(--cyan-muted), var(--cyan-bright));
+  box-shadow: 0 0 20px rgba(0, 255, 242, 0.4);
+  transform: translateY(-2px);
+}
+
+.neural-button:active {
+  transform: translateY(0);
+}
+
+.neural-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* === STATUS INDICATORS === */
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.status-online {
+  background: var(--success);
+  box-shadow: 0 0 10px var(--success);
+}
+
+.status-thinking {
+  background: var(--amber-bright);
+  box-shadow: 0 0 10px var(--amber-bright);
+  animation: neural-pulse 1s infinite;
+}
+
+.status-error {
+  background: var(--error);
+  box-shadow: 0 0 10px var(--error);
+}
+
+/* === FLOATING PARTICLES === */
+@keyframes float-up {
+  0% {
+    transform: translateY(100vh) scale(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) scale(1);
+    opacity: 0;
+  }
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--cyan-glow);
+  border-radius: 50%;
+  animation: float-up 10s linear infinite;
+  pointer-events: none;
+}
+
+/* === INTEGRITY METER === */
+.integrity-bar {
+  height: 4px;
+  background: linear-gradient(90deg, var(--cyan-glow), var(--success));
+  border-radius: 2px;
+  box-shadow: 0 0 10px var(--cyan-glow);
+  transition: width 0.5s ease;
+}
+
+/* === UTILITY CLASSES === */
+.text-glow-cyan {
+  text-shadow: 0 0 10px var(--cyan-glow);
+}
+
+.text-glow-purple {
+  text-shadow: 0 0 10px var(--purple-glow);
+}
+
+.text-glow-amber {
+  text-shadow: 0 0 10px var(--amber-glow);
+}
+
+.border-glow {
+  box-shadow: 0 0 15px rgba(0, 255, 242, 0.2);
+}
+
+/* === FADE IN ANIMATION === */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in-up 0.5s ease-out forwards;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .glass-panel {
+    backdrop-filter: blur(8px);
+  }
+}

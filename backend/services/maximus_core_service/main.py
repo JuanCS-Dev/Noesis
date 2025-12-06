@@ -13,11 +13,11 @@ from typing import AsyncGenerator
 
 from fastapi import FastAPI
 
-from .api.dependencies import initialize_service
-from .api.routes import router as api_router
-from .src.consciousness.exocortex.api.exocortex_router import router as exocortex_router
-from .src.consciousness.exocortex.factory import ExocortexFactory
-from .config import get_settings
+from api.dependencies import initialize_service
+from api.routes import router as api_router
+from src.consciousness.exocortex.api.exocortex_router import router as exocortex_router
+from src.consciousness.exocortex.factory import ExocortexFactory
+from config import get_settings
 
 settings = get_settings()
 

@@ -13,9 +13,9 @@ from typing import AsyncGenerator
 
 from fastapi import FastAPI
 
-from .api.dependencies import initialize_service
-from .api.routes import router as api_router
-from .config import get_settings
+from api.dependencies import initialize_service
+from api.routes import router as api_router
+from config import get_settings
 
 logger = logging.getLogger(__name__)
 settings = get_settings()

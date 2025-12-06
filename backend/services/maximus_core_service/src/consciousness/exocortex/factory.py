@@ -11,30 +11,30 @@ from pathlib import Path
 from typing import Optional
 
 from datetime import datetime
-from services.maximus_core_service.utils.gemini_client import GeminiClient
+from gemini_client import GeminiClient
 
 
-from services.maximus_core_service.src.consciousness.exocortex.memory.repository import (
+from src.consciousness.exocortex.memory.repository import (
     ConstitutionRepository,
     ConfrontationRepository
 )
-from services.maximus_core_service.src.consciousness.exocortex.constitution_guardian import (
+from src.consciousness.exocortex.constitution_guardian import (
     ConstitutionGuardian,
     PersonalConstitution
 )
-from services.maximus_core_service.src.consciousness.exocortex.confrontation_engine import (
+from src.consciousness.exocortex.confrontation_engine import (
     ConfrontationEngine
 )
-from services.maximus_core_service.src.consciousness.exocortex.digital_thalamus import (
+from src.consciousness.exocortex.digital_thalamus import (
     DigitalThalamus
 )
-from services.maximus_core_service.src.consciousness.exocortex.impulse_inhibitor import (
+from src.consciousness.exocortex.impulse_inhibitor import (
     ImpulseInhibitor
 )
-from services.maximus_core_service.src.consciousness.exocortex.global_workspace import (
+from src.consciousness.exocortex.global_workspace import (
     GlobalWorkspace
 )
-from services.maximus_core_service.src.consciousness.exocortex.symbiotic_self import (
+from src.consciousness.exocortex.symbiotic_self import (
     SymbioticSelfConcept
 )
 
