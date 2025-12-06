@@ -3,11 +3,14 @@
 from __future__ import annotations
 
 import asyncio
+import logging
 import time
 from collections.abc import Callable, Coroutine
 from typing import Any
 
 import numpy as np
+
+logger = logging.getLogger(__name__)
 
 from consciousness.mmei.goal_manager import GoalManager
 from consciousness.mmei.models import (

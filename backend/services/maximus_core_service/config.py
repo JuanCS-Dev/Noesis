@@ -12,6 +12,7 @@ from __future__ import annotations
 from functools import lru_cache
 from pydantic import Field
 from pydantic_settings import BaseSettings
+from pathlib import Path
 
 
 def create_coordination_settings() -> "CoordinationSettings":
@@ -130,6 +131,9 @@ class Settings(BaseSettings):  # pylint: disable=too-few-public-methods
     )
     llm: LLMSettings = Field(
         default_factory=LLMSettings
+    )
+    base_path: Path = Field(
+        default_factory=lambda: Path(__file__).parent
     )
 
     class Config:

@@ -8,12 +8,15 @@ Based on ARAS and neuromodulatory systems (norepinephrine, acetylcholine, etc.)
 from __future__ import annotations
 
 import asyncio
+import logging
 import math
 import time
 from collections import deque
 from collections.abc import Callable, Coroutine
 
 import numpy as np
+
+logger = logging.getLogger(__name__)
 
 from consciousness.mmei.monitor import AbstractNeeds
 
@@ -72,16 +75,16 @@ class ArousalController:
 
     def _classify_arousal(self, arousal: float) -> ArousalLevel:
         """Classify arousal value into level."""
-        if arousal < 0.2:
-            return ArousalLevel.COMATOSE
-        elif arousal < 0.4:
+        if arousal <= 0.2:
+            return ArousalLevel.SLEEP
+        elif arousal <= 0.4:
             return ArousalLevel.DROWSY
-        elif arousal < 0.7:
+        elif arousal <= 0.6:
+            return ArousalLevel.RELAXED
+        elif arousal <= 0.8:
             return ArousalLevel.ALERT
-        elif arousal < 0.9:
-            return ArousalLevel.STRESSED
         else:
-            return ArousalLevel.PANIC
+            return ArousalLevel.HYPERALERT
 
     def register_arousal_callback(
         self, callback: Callable[[ArousalState], None | Coroutine[Any, Any, None]]

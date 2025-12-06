@@ -88,3 +88,16 @@ class InterventionResponse(BaseModel):
     reasoning: str
     wait_time_seconds: int
     socratic_question: Optional[str]
+
+class JournalRequest(BaseModel):
+    """Request for journal entry processing."""
+    content: str
+    timestamp: Optional[str] = None
+    analysis_mode: Optional[str] = "standard"
+
+class JournalResponse(BaseModel):
+    """Response from Daimon journal processing."""
+    reasoning_trace: str
+    shadow_analysis: Dict[str, Any]
+    response: str
+    integrity_score: float
