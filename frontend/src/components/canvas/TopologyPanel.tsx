@@ -25,38 +25,50 @@ export default function TopologyPanel({ activityLevel = 0.3 }: TopologyPanelProp
         }}
         className="absolute inset-0"
       >
-        <PerspectiveCamera makeDefault position={[0, 0, 3]} fov={50} />
+        <PerspectiveCamera makeDefault position={[0, 0, 2.5]} fov={45} />
         <OrbitControls
           enableZoom={true}
           enablePan={false}
           autoRotate
-          autoRotateSpeed={0.3}
-          minDistance={2}
-          maxDistance={8}
+          autoRotateSpeed={0.4}
+          minDistance={1.5}
+          maxDistance={6}
+          target={[0, 0, 0]} // Centraliza rotação no cérebro
+          enableDamping
+          dampingFactor={0.05}
         />
 
-        {/* Iluminação ambiente */}
-        <ambientLight intensity={0.3} />
+        {/* Iluminação ambiente - mais forte para ver neurônios */}
+        <ambientLight intensity={0.5} />
 
         {/* Luz principal - frontal */}
         <pointLight
-          position={[5, 5, 5]}
-          intensity={1}
+          position={[3, 3, 3]}
+          intensity={1.2}
           color="#ffffff"
         />
 
         {/* Luz secundária - roxa para profundidade */}
         <pointLight
-          position={[-5, -5, -5]}
-          intensity={0.6}
+          position={[-3, -2, -3]}
+          intensity={0.8}
           color="#7c3aed"
         />
 
-        {/* Luz de destaque - cyan */}
+        {/* Luz de destaque - cyan de cima */}
         <pointLight
-          position={[0, 5, 0]}
-          intensity={0.4}
+          position={[0, 3, 0]}
+          intensity={0.6}
           color="#00fff2"
+        />
+
+        {/* Luz interna - para iluminar neurônios */}
+        <pointLight
+          position={[0, 0, 0]}
+          intensity={0.3}
+          color="#22d3ee"
+          distance={2}
+          decay={2}
         />
 
         {/* Cérebro 3D com topologia neural */}
