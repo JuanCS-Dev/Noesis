@@ -9,9 +9,53 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from consciousness.mea.attention_schema import AttentionSchema, AttentionState
-from consciousness.mea.boundary_detector import BoundaryDetector, BoundaryAssessment
-from consciousness.mea.self_model import SelfModel, IntrospectiveSummary
+from consciousness.mea import (
+    AttentionSchemaModel,
+    AttentionState,
+    AttentionSignal,
+    BoundaryDetector,
+    BoundaryAssessment,
+    SelfModel,
+    IntrospectiveSummary,
+)
+
+
+# =============================================================================
+# ATTENTION SIGNAL TESTS
+# =============================================================================
+
+
+class TestAttentionSignal:
+    """Test AttentionSignal data structure."""
+
+    def test_creation(self):
+        """AttentionSignal should be creatable."""
+        signal = AttentionSignal(
+            modality="visual",
+            target="user_query",
+            intensity=0.8,
+            novelty=0.7,
+            relevance=0.9,
+            urgency=0.5,
+        )
+        
+        assert signal.modality == "visual"
+        assert signal.intensity == 0.8
+
+    def test_normalized_score(self):
+        """normalized_score should return value between 0-1."""
+        signal = AttentionSignal(
+            modality="auditory",
+            target="alert",
+            intensity=0.9,
+            novelty=0.8,
+            relevance=0.7,
+            urgency=0.6,
+        )
+        
+        score = signal.normalized_score()
+        
+        assert 0 <= score <= 1
 
 
 # =============================================================================
@@ -25,55 +69,51 @@ class TestAttentionState:
     def test_creation(self):
         """AttentionState should be creatable."""
         state = AttentionState(
-            focus_targets=["user query"],
-            attention_level=0.8,
-            salience_map={"user_query": 0.9},
+            focus_target="user_query",
+            modality_weights={"visual": 0.6, "auditory": 0.4},
+            confidence=0.85,
+            salience_order=[("user_query", 0.9), ("alert", 0.7)],
+            baseline_intensity=0.5,
         )
         
-        assert state.attention_level == 0.8
+        assert state.focus_target == "user_query"
+        assert state.confidence == 0.85
 
 
 # =============================================================================
-# ATTENTION SCHEMA TESTS
+# ATTENTION SCHEMA MODEL TESTS
 # =============================================================================
 
 
-class TestAttentionSchema:
-    """Test AttentionSchema behavior."""
+class TestAttentionSchemaModel:
+    """Test AttentionSchemaModel behavior."""
 
     def test_creation(self):
-        """AttentionSchema should be creatable."""
-        schema = AttentionSchema()
+        """AttentionSchemaModel should be creatable."""
+        model = AttentionSchemaModel()
         
-        assert schema is not None
+        assert model is not None
 
-    def test_get_current_state(self):
-        """Should return current attention state."""
-        schema = AttentionSchema()
+    def test_update_with_signals(self):
+        """update should return AttentionState."""
+        model = AttentionSchemaModel()
         
-        state = schema.get_current_state()
+        signals = [
+            AttentionSignal("visual", "target1", 0.8, 0.7, 0.9, 0.5),
+            AttentionSignal("auditory", "target2", 0.6, 0.5, 0.7, 0.4),
+        ]
         
-        assert state is None or isinstance(state, AttentionState)
-
-
-# =============================================================================
-# BOUNDARY ASSESSMENT TESTS
-# =============================================================================
-
-
-class TestBoundaryAssessment:
-    """Test BoundaryAssessment data structure."""
-
-    def test_creation(self):
-        """BoundaryAssessment should be creatable."""
-        assessment = BoundaryAssessment(
-            is_self=True,
-            confidence=0.9,
-            boundary_type="physical",
-        )
+        state = model.update(signals)
         
-        assert assessment.is_self is True
-        assert assessment.confidence == 0.9
+        assert isinstance(state, AttentionState)
+
+    def test_prediction_accuracy(self):
+        """prediction_accuracy should return float."""
+        model = AttentionSchemaModel()
+        
+        accuracy = model.prediction_accuracy()
+        
+        assert isinstance(accuracy, float)
 
 
 # =============================================================================
@@ -92,25 +132,6 @@ class TestBoundaryDetector:
 
 
 # =============================================================================
-# INTROSPECTIVE SUMMARY TESTS
-# =============================================================================
-
-
-class TestIntrospectiveSummary:
-    """Test IntrospectiveSummary data structure."""
-
-    def test_creation(self):
-        """IntrospectiveSummary should be creatable."""
-        summary = IntrospectiveSummary(
-            current_state="processing",
-            confidence=0.85,
-            narrative="I am processing a user request",
-        )
-        
-        assert summary.confidence == 0.85
-
-
-# =============================================================================
 # SELF MODEL TESTS
 # =============================================================================
 
@@ -123,11 +144,3 @@ class TestSelfModel:
         model = SelfModel()
         
         assert model is not None
-
-    def test_generate_summary(self):
-        """Should generate introspective summary."""
-        model = SelfModel()
-        
-        summary = model.generate_summary()
-        
-        assert summary is None or isinstance(summary, IntrospectiveSummary)

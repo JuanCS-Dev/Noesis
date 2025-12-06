@@ -5,7 +5,7 @@ Comprehensive Tests for Reactive Fabric - Event Collection
 Tests for consciousness event collection and processing.
 """
 
-from unittest.mock import MagicMock
+from unittest.mock import MagicMock, AsyncMock
 
 import pytest
 
@@ -107,24 +107,25 @@ class TestEventCollectorInit:
         
         collector = EventCollector(mock_system, max_events=500)
         
-        assert collector._max_events == 500 or collector.max_events == 500
+        assert collector.max_events == 500
 
 
 class TestEventCollectorCollection:
     """Test event collection."""
 
-    def test_collect_events(self):
+    @pytest.mark.asyncio
+    async def test_collect_events(self):
         """Should collect events."""
         mock_system = MagicMock()
-        mock_system.esgt = None
-        mock_system.pfc = None
+        mock_system.esgt_coordinator = None
+        mock_system.prefrontal_cortex = None
         mock_system.tom_engine = None
-        mock_system.safety = None
-        mock_system.arousal = None
+        mock_system.safety_protocol = None
+        mock_system.arousal_controller = None
         
         collector = EventCollector(mock_system)
         
-        events = collector.collect_events()
+        events = await collector.collect_events()
         
         assert isinstance(events, list)
 
@@ -158,6 +159,7 @@ class TestEventCollectorStats:
         stats = collector.get_collection_stats()
         
         assert isinstance(stats, dict)
+        assert "total_events_collected" in stats
 
 
 class TestEventCollectorRepr:

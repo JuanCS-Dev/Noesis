@@ -9,79 +9,99 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from consciousness.mmei.goals import Goal
-from consciousness.mmei.goal_manager import GoalManager
+from consciousness.mmei.goals import AutonomousGoalGenerator
+from consciousness.mmei.goals_models import Goal, GoalPriority, GoalType, GoalGenerationConfig
 from consciousness.mmei.rate_limiter import RateLimiter
-from consciousness.mmei.models import NeedUrgency
+from consciousness.mmei.models import AbstractNeeds, NeedUrgency
 
 
 # =============================================================================
-# GOAL TESTS
+# GOAL MODELS TESTS
 # =============================================================================
 
 
-class TestGoal:
-    """Test Goal data structure."""
+class TestGoalPriority:
+    """Test GoalPriority enum."""
 
-    def test_goal_creation(self):
-        """Goal should be creatable."""
-        goal = Goal(
-            goal_id="goal-001",
-            source_need="rest_need",
-            urgency=NeedUrgency.MEDIUM,
-            description="Take a break",
-        )
-        
-        assert goal.goal_id == "goal-001"
-        assert goal.source_need == "rest_need"
+    def test_all_priorities_exist(self):
+        """All priority levels should exist."""
+        assert GoalPriority.BACKGROUND
+        assert GoalPriority.LOW
+        assert GoalPriority.MODERATE
+        assert GoalPriority.HIGH
+        assert GoalPriority.CRITICAL
 
-    def test_goal_urgency_levels(self):
-        """All urgency levels should work."""
-        for urgency in NeedUrgency:
-            goal = Goal(
-                goal_id=f"goal-{urgency.name}",
-                source_need="test",
-                urgency=urgency,
-                description="Test goal",
-            )
-            assert goal.urgency == urgency
+
+class TestGoalType:
+    """Test GoalType enum."""
+
+    def test_all_types_exist(self):
+        """All goal types should exist."""
+        assert GoalType.REST
+        assert GoalType.REPAIR
+        assert GoalType.OPTIMIZE
+        assert GoalType.EXPLORE
 
 
 # =============================================================================
-# GOAL MANAGER TESTS
+# AUTONOMOUS GOAL GENERATOR TESTS
 # =============================================================================
 
 
-class TestGoalManager:
-    """Test GoalManager behavior."""
+class TestAutonomousGoalGeneratorInit:
+    """Test AutonomousGoalGenerator initialization."""
 
     def test_creation(self):
-        """GoalManager should be creatable."""
-        manager = GoalManager()
+        """Generator should be creatable."""
+        generator = AutonomousGoalGenerator()
         
-        assert manager is not None
+        assert generator is not None
+
+    def test_custom_id(self):
+        """Custom ID should be accepted."""
+        generator = AutonomousGoalGenerator(generator_id="test-generator")
+        
+        assert generator.generator_id == "test-generator"
+
+
+class TestAutonomousGoalGeneratorGoals:
+    """Test goal generation."""
 
     def test_get_active_goals_empty(self):
-        """Empty manager should return empty list."""
-        manager = GoalManager()
+        """Empty generator should return empty list."""
+        generator = AutonomousGoalGenerator()
         
-        goals = manager.get_active_goals()
+        goals = generator.get_active_goals()
         
         assert isinstance(goals, list)
         assert len(goals) == 0
 
-    def test_generate_goal(self):
-        """Should generate goal from need."""
-        manager = GoalManager()
-        
-        goal = manager.generate_goal(
-            need_name="rest_need",
-            need_value=0.8,
-            urgency=NeedUrgency.HIGH,
+    def test_generate_goals_from_needs(self):
+        """Should generate goals from high needs."""
+        generator = AutonomousGoalGenerator()
+        needs = AbstractNeeds(
+            rest_need=0.9,
+            repair_need=0.1,
+            efficiency_need=0.2,
+            connectivity_need=0.1,
+            curiosity_drive=0.1,
+            learning_drive=0.1,
         )
         
-        # May return goal or None based on rate limit
-        assert goal is None or isinstance(goal, Goal)
+        goals = generator.generate_goals(needs)
+        
+        assert isinstance(goals, list)
+        # High rest_need should generate at least one goal
+        assert len(goals) >= 1
+
+    def test_get_statistics(self):
+        """Should return statistics."""
+        generator = AutonomousGoalGenerator()
+        
+        stats = generator.get_statistics()
+        
+        assert isinstance(stats, dict)
+        assert "total_generated" in stats
 
 
 # =============================================================================
@@ -102,25 +122,29 @@ class TestRateLimiter:
         """First request should be allowed."""
         limiter = RateLimiter()
         
-        is_allowed = limiter.is_allowed()
+        is_allowed = limiter.allow()
         
         assert is_allowed is True
 
     def test_rate_limit_tracking(self):
         """Rate limiter should track requests."""
-        limiter = RateLimiter()
+        limiter = RateLimiter(max_per_minute=10)
         
         # Multiple requests
         for _ in range(5):
-            limiter.is_allowed()
+            limiter.allow()
         
-        # Should still work
-        assert True
+        # Should still allow
+        assert limiter.allow() is True
 
-    def test_get_stats(self):
-        """Should return rate limiter stats."""
+    def test_get_current_rate(self):
+        """Should return current rate."""
         limiter = RateLimiter()
         
-        stats = limiter.get_stats()
+        # Make some requests
+        limiter.allow()
+        limiter.allow()
         
-        assert isinstance(stats, dict)
+        rate = limiter.get_current_rate()
+        
+        assert rate >= 2

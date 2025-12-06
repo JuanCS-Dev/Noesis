@@ -10,9 +10,12 @@ Based on Dehaene et al. (2021) Global Workspace Dynamics theory.
 from __future__ import annotations
 
 import asyncio
+import logging
 import time
 from collections import deque
 from typing import Any, TYPE_CHECKING
+
+logger = logging.getLogger(__name__)
 
 from consciousness.esgt.kuramoto import (
     KuramotoNetwork,
