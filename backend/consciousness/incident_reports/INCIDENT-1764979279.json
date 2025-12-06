@@ -1,0 +1,11 @@
+{
+  "incident_id": "INCIDENT-1764979279",
+  "shutdown_reason": "self_modification_attempt",
+  "shutdown_timestamp": 1764979279.9429452,
+  "shutdown_timestamp_iso": "2025-12-05T21:01:19.942945",
+  "violations": [],
+  "system_state_snapshot": {
+    "timestamp": 1764979279.9430609,
+    "timestamp_iso": "2025-12-05T21:01:19.943063",
+    "pid": 74301,
+    "tig_nodes": 
