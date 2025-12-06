@@ -1,0 +1,63 @@
+"""
+Ethical Audit Service - Main Application
+========================================
+
+Entry point for the Guardian Agent service.
+"""
+
+from __future__ import annotations
+
+
+from contextlib import asynccontextmanager
+from typing import AsyncGenerator
+
+from fastapi import FastAPI
+
+from ethical_audit_service.api.dependencies import initialize_service
+from ethical_audit_service.api.routes import router as api_router
+from ethical_audit_service.config import get_settings
+
+settings = get_settings()
+
+
+@asynccontextmanager
+async def lifespan(_: FastAPI) -> AsyncGenerator[None, None]:
+    """
+    Manage application lifespan.
+
+    Args:
+        _: FastAPI application instance (unused)
+
+    Yields:
+        None during application lifetime
+    """
+    # Startup
+    initialize_service()
+
+    yield
+
+    # Shutdown (cleanup if needed)
+
+
+app = FastAPI(
+    title=settings.service.name,  # pylint: disable=no-member
+    description="Ethical Audit Service - Guardian Agent",
+    version="2.0.0",
+    lifespan=lifespan
+)
+
+app.include_router(api_router, prefix="/v1")
+
+
+@app.get("/")
+async def root() -> dict[str, str]:
+    """
+    Root endpoint.
+
+    Returns:
+        Service information
+    """
+    return {
+        "message": "Guardian Agent Operational - Constitutional Compliance Enforced",
+        "service": settings.service.name  # pylint: disable=no-member
+    }

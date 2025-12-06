@@ -8,6 +8,9 @@ VENV_PYTHON="$PROJECT_DIR/.venv/bin/python"
 VENV_PIP="$PROJECT_DIR/.venv/bin/pip"
 LOG_DIR="/tmp/daimon"
 
+# Portas do Daimon
+PORTS=(8000 8001 3000)
+
 # Initialize PYTHONPATH if not set
 export PYTHONPATH="${PYTHONPATH:-}"
 
@@ -20,8 +23,27 @@ NC='\033[0m'
 
 echo -e "${CYAN}⚡ Waking the Daimon...${NC}"
 
+# Função para limpar portas
+clean_ports() {
+    echo -e "${YELLOW}🧹 Limpando portas...${NC}"
+    for port in "${PORTS[@]}"; do
+        pid=$(lsof -t -i :"$port" 2>/dev/null || true)
+        if [ -n "$pid" ]; then
+            echo -e "  Matando processo na porta $port (PID: $pid)"
+            kill -9 $pid 2>/dev/null || true
+            sleep 0.5
+        fi
+    done
+    # Também mata containers Docker que podem estar bloqueando
+    docker stop api_gateway 2>/dev/null || true
+    echo -e "${GREEN}✓ Portas limpas${NC}"
+}
+
 # Create log directory
 mkdir -p "$LOG_DIR"
+
+# Limpar portas antes de iniciar
+clean_ports
 
 # Function to install service if needed (for src/ layout packages)
 install_service() {

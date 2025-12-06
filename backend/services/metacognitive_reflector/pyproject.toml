@@ -1,29 +1,29 @@
 [build-system]
-requires = ["setuptools>=64", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [project]
 name = "metacognitive-reflector"
-version = "2.0.0"
-description = "MAXIMUS 2.0 Metacognitive Reflector Service"
+version = "3.0.0"
+description = "MAXIMUS Metacognitive Reflector Service - Tribunal evaluation"
 requires-python = ">=3.11"
 dependencies = [
-    "fastapi>=0.100.0",
-    "pydantic>=2.0.0",
+    "fastapi>=0.115.0",
+    "pydantic>=2.9.0",
     "pydantic-settings>=2.0.0",
-    "httpx>=0.24.0",
-    "uvicorn[standard]>=0.20.0",
+    "httpx>=0.27.0",
+    "uvicorn[standard]>=0.32.0",
 ]
 
 [project.optional-dependencies]
 dev = [
-    "pytest>=7.0.0",
-    "pytest-asyncio>=0.21.0",
+    "pytest>=8.3.0",
+    "pytest-asyncio>=0.24.0",
+    "pytest-cov>=6.0.0",
 ]
 
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["metacognitive_reflector*"]
+[tool.hatch.build.targets.wheel]
+packages = ["src/metacognitive_reflector"]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
