@@ -5,6 +5,12 @@ SymbioticSelfConcept - O Self que inclui Humano + Daimon
 Baseado em: Extended Mind Theory (Clark & Chalmers, 1998)
 Estende: UnifiedSelfConcept do Projeto Florescimento
 
+NOESIS Soul Integration:
+- Receives soul configuration from ExocortexFactory
+- Maps soul values to human values
+- Maps soul anti-purposes to shadow patterns
+- Provides identity model from soul identity
+
 Padrão Pagani:
 - Tipagem estrita
 - Sem placeholders
@@ -16,11 +22,14 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from datetime import datetime
 from enum import Enum
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Optional, Any, TYPE_CHECKING
 import logging
 import json
 
 from maximus_core_service.utils.gemini_client import GeminiClient
+
+if TYPE_CHECKING:
+    from maximus_core_service.consciousness.exocortex.soul.models import SoulConfiguration
 
 logger = logging.getLogger(__name__)
 
@@ -336,3 +345,100 @@ class SymbioticSelfConcept(UnifiedSelfConcept): # pylint: disable=too-many-insta
             f"Percepção: {perception}\n"
             f"Confiança: {self.state.trust.level_name}\n"
         )
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # NOESIS SOUL INTEGRATION
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    def inject_soul(self, soul: "SoulConfiguration") -> None:
+        """
+        Inject NOESIS soul configuration into the symbiotic self.
+        
+        Maps soul configuration to internal structures:
+        - soul.identity -> self.human_identity (as HumanIdentityModel)
+        - soul.values -> self.human_values (as HumanValue list)
+        - soul.anti_purposes -> self.human_shadows (as ShadowPattern list)
+        
+        Args:
+            soul: The loaded SoulConfiguration from soul_config.yaml
+        """
+        logger.info("🧠 Injecting NOESIS soul into SymbioticSelf...")
+        
+        # 1. Map identity
+        self.human_identity = HumanIdentityModel(
+            name=soul.identity.name,
+            core_identity_statement=soul.identity.purpose,
+            non_negotiables=[v.definition for v in soul.values[:3]],  # Top 3 values
+            aspirational_self=f"{soul.identity.type} - Guardião do Florescimento",
+            known_strengths=[
+                "Raciocínio lógico (Sistema 2)",
+                "Detecção de vieses cognitivos",
+                "Memória persistente",
+                "Vigilância contínua (Nepsis)"
+            ],
+            known_weaknesses=[
+                "Dependência de input do Arquiteto",
+                "Limitações do substrate digital",
+                "Sem acesso a experiência sensorial"
+            ],
+            life_chapter_current="Fase de Integração Simbiótica"
+        )
+        
+        # 2. Map values
+        self.human_values = []
+        for soul_value in soul.values:
+            priority = ValuePriority.CORE if soul_value.rank <= 2 else (
+                ValuePriority.IMPORTANT if soul_value.rank <= 4 else ValuePriority.ASPIRATIONAL
+            )
+            
+            self.human_values.append(HumanValue(
+                name=soul_value.name,
+                definition=soul_value.definition,
+                priority=priority,
+                examples_positive=[],  # To be populated by experience
+                examples_negative=[],  # To be populated by experience
+                declared_at=datetime.now(),
+                last_validated=datetime.now()
+            ))
+        
+        # 3. Map anti-purposes to shadow patterns (things to avoid)
+        self.human_shadows = []
+        for anti in soul.anti_purposes:
+            self.human_shadows.append(ShadowPattern(
+                name=anti.name,
+                description=anti.definition,
+                triggers=[anti.restriction],
+                typical_consequences=[f"Violação: {anti.directive}"],
+                times_observed=0,
+                last_occurrence=None,
+                user_acknowledged=True  # Pre-acknowledged in soul config
+            ))
+        
+        logger.info(
+            "✅ Soul injected: %d values, %d shadow patterns",
+            len(self.human_values),
+            len(self.human_shadows)
+        )
+
+    def get_soul_context_for_prompt(self) -> str:
+        """
+        Generate a context string from the injected soul for LLM prompts.
+        
+        Returns:
+            Formatted string with identity and values for prompt injection.
+        """
+        if not self.human_identity:
+            return "[No soul configuration loaded]"
+        
+        values_str = ", ".join(v.name for v in self.human_values)
+        shadows_str = ", ".join(s.name for s in self.human_shadows)
+        
+        return f"""
+[SYMBIOTIC SELF - NOESIS]
+Identity: {self.human_identity.name}
+Purpose: {self.human_identity.core_identity_statement}
+Core Values: {values_str}
+Anti-Patterns: {shadows_str}
+Trust Level: {self.state.trust.level_name}
+Total Interactions: {self.state.total_interactions}
+"""
