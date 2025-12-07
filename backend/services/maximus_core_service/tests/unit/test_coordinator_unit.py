@@ -128,7 +128,7 @@ class TestESGTEvent:
     def test_init_default(self):
         """Test default initialization."""
         # Arrange & Act
-        obj = ESGTEvent()
+        obj = ESGTEvent(event_id="test-event-1", timestamp_start=1000.0)
         
         # Assert
         assert obj is not None

@@ -4,6 +4,7 @@ import { useRef, useMemo, Suspense } from "react";
 import { useFrame } from "@react-three/fiber";
 import { useGLTF, Line } from "@react-three/drei";
 import * as THREE from "three";
+import { useConsciousnessStore } from "@/stores/consciousnessStore";
 
 /**
  * Neurônio interno - pulsa quando ativo, com glow
@@ -239,38 +240,104 @@ function BrainModel({ activityLevel = 0.3 }: { activityLevel?: number }) {
 
 /**
  * Brain3D - Cérebro 3D real com topologia neural interna
+ * Reage à coerência Kuramoto em tempo real (MAXIMUS Consciousness)
  */
 export default function Brain3D({
-  activityLevel = 0.3,
+  activityLevel: propActivityLevel = 0.3,
 }: {
   activityLevel?: number;
 }) {
   const groupRef = useRef<THREE.Group>(null);
+  const glowRef = useRef<THREE.Mesh>(null);
+  const innerGlowRef = useRef<THREE.Mesh>(null);
+  const ringRef = useRef<THREE.Mesh>(null);
+
+  // MAXIMUS: Get real-time coherence from consciousness store
+  const { coherence, currentPhase, isStreaming } = useConsciousnessStore();
+
+  // Use coherence as activity level when streaming, otherwise use prop
+  const activityLevel = isStreaming || coherence > 0 ? coherence : propActivityLevel;
 
   // Gerar neurônios e conexões dentro do cérebro
   const neurons = useMemo(() => generateNeuralPoints(60), []);
   const connections = useMemo(
-    () => generateConnections(neurons, 0.35), // Distância menor para conexões mais localizadas
+    () => generateConnections(neurons, 0.35),
     [neurons]
   );
 
-  // Quais neurônios estão ativos
+  // Quais neurônios estão ativos - recalcula baseado na coerência
   const activeNeurons = useMemo(() => {
     const active = new Set<number>();
     const count = Math.floor(neurons.length * activityLevel);
-    while (active.size < count) {
-      active.add(Math.floor(Math.random() * neurons.length));
+    // Deterministic selection based on activity level for smooth transitions
+    for (let i = 0; i < count; i++) {
+      active.add(i % neurons.length);
     }
     return active;
   }, [neurons.length, activityLevel]);
 
-  // Animação de pulso (sem rotação - deixa o OrbitControls controlar)
+  // Animação reativa à fase ESGT
   useFrame((state) => {
     if (groupRef.current) {
-      // Breathing effect sutil - apenas escala, sem rotação
       const t = state.clock.getElapsedTime();
-      const breathe = 1 + Math.sin(t * 0.5) * 0.015;
+
+      // Breathing intensity based on phase
+      let breathIntensity = 0.015;
+      let breathSpeed = 0.5;
+
+      if (currentPhase === "synchronize") {
+        breathIntensity = 0.04;
+        breathSpeed = 2;
+      } else if (currentPhase === "broadcast") {
+        breathIntensity = 0.06;
+        breathSpeed = 4;
+      } else if (currentPhase === "sustain") {
+        breathIntensity = 0.03;
+        breathSpeed = 1;
+      }
+
+      const breathe = 1 + Math.sin(t * breathSpeed) * breathIntensity;
       groupRef.current.scale.setScalar(breathe);
+    }
+
+    // Animate outer glow based on coherence
+    if (glowRef.current) {
+      const mat = glowRef.current.material as THREE.MeshBasicMaterial;
+      const baseOpacity = 0.02 + coherence * 0.08;
+      const pulse = currentPhase === "broadcast" ? Math.sin(state.clock.getElapsedTime() * 8) * 0.05 : 0;
+      mat.opacity = baseOpacity + pulse;
+
+      // Color shift: cyan → purple at high coherence
+      if (coherence >= 0.7) {
+        mat.color.setHex(0xa855f7); // Purple
+      } else if (coherence >= 0.5) {
+        mat.color.setHex(0x22d3ee); // Cyan
+      } else {
+        mat.color.setHex(0x0891b2); // Dark cyan
+      }
+    }
+
+    // Inner glow pulsing during sync
+    if (innerGlowRef.current) {
+      const mat = innerGlowRef.current.material as THREE.MeshBasicMaterial;
+      if (currentPhase === "synchronize" || currentPhase === "broadcast") {
+        const pulse = Math.sin(state.clock.getElapsedTime() * 6) * 0.02;
+        mat.opacity = 0.03 + coherence * 0.05 + pulse;
+      } else {
+        mat.opacity = 0.02;
+      }
+    }
+
+    // Ring rotation and intensity
+    if (ringRef.current) {
+      ringRef.current.rotation.z += 0.01 * (1 + coherence);
+      const mat = ringRef.current.material as THREE.MeshBasicMaterial;
+      mat.opacity = 0.15 + coherence * 0.35;
+      if (coherence >= 0.95) {
+        mat.color.setHex(0xa855f7); // Purple at peak
+      } else {
+        mat.color.setHex(0x00fff2); // Cyan normally
+      }
     }
   });
 
@@ -281,8 +348,8 @@ export default function Brain3D({
         <BrainModel activityLevel={activityLevel} />
       </Suspense>
 
-      {/* Glow externo - envelope luminoso ao redor do cérebro */}
-      <mesh>
+      {/* Glow externo - envelope luminoso ao redor do cérebro (reativo à coerência) */}
+      <mesh ref={glowRef}>
         <sphereGeometry args={[0.8, 32, 32]} />
         <meshBasicMaterial
           color="#00fff2"
@@ -294,8 +361,8 @@ export default function Brain3D({
         />
       </mesh>
 
-      {/* Glow interno mais intenso */}
-      <mesh>
+      {/* Glow interno mais intenso (pulsa durante sync) */}
+      <mesh ref={innerGlowRef}>
         <sphereGeometry args={[0.65, 32, 32]} />
         <meshBasicMaterial
           color="#06b6d4"
@@ -332,8 +399,8 @@ export default function Brain3D({
         );
       })}
 
-      {/* Anel de energia horizontal - menor para caber no cérebro */}
-      <mesh rotation={[Math.PI / 2, 0, 0]}>
+      {/* Anel de energia horizontal - roda e intensifica com coerência */}
+      <mesh ref={ringRef} rotation={[Math.PI / 2, 0, 0]}>
         <ringGeometry args={[0.55, 0.57, 64]} />
         <meshBasicMaterial
           color="#00fff2"

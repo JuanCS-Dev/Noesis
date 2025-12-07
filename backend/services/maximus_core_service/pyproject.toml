@@ -93,10 +93,6 @@ test = [
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["*"]
-exclude = []
 
 # ============================================================================
 # UV Configuration
@@ -166,15 +162,15 @@ ignore = [
 # Relaxar regras em testes
 "tests/*" = ["S101", "ANN", "T20"]
 "**/test_*.py" = ["S101", "ANN", "T20"]
-"consciousness/test_*.py" = ["S101", "ANN", "T20"]
-"consciousness/*/test_*.py" = ["S101", "ANN", "T20"]
+"src/maximus_core_service/consciousness/test_*.py" = ["S101", "ANN", "T20"]
+"src/maximus_core_service/consciousness/*/test_*.py" = ["S101", "ANN", "T20"]
 
 # Relaxar em arquivos de exemplo/docs
 "example_*.py" = ["T20", "S"]
 "**/examples/*.py" = ["T20", "S"]
 
 [tool.ruff.lint.isort]
-known-first-party = ["consciousness", "governance", "privacy", "fairness", "xai", "federated_learning"]
+known-first-party = ["maximus_core_service"]
 section-order = ["future", "standard-library", "third-party", "first-party", "local-folder"]
 
 [tool.ruff.lint.mccabe]
@@ -192,7 +188,7 @@ docstring-code-format = true  # Format code in docstrings
 # ============================================================================
 [tool.pytest.ini_options]
 # Test discovery
-testpaths = ["tests", "consciousness"]
+testpaths = ["tests", "src/maximus_core_service/consciousness"]
 python_files = "test_*.py"
 python_classes = "Test*"
 python_functions = "test_*"
@@ -212,7 +208,7 @@ addopts = [
 
 # Coverage configuration
 [tool.coverage.run]
-source = ["."]
+source = ["src/maximus_core_service"]
 omit = [
     "*/tests/*",
     "*/test_*.py",
@@ -287,7 +283,7 @@ warn_unused_ignores = true
 warn_no_return = true
 strict_equality = true
 exclude = ["transformers", "_demonstration", "tests", ".*/tests/.*", "test_.*\\.py"]
-mypy_path = "backend/services/maximus_core_service"
+mypy_path = "src"
 explicit_package_bases = true
 namespace_packages = true
 
@@ -317,14 +313,7 @@ ignore_missing_imports = true
 follow_imports = "skip"
 
 # ============================================================================
-# Hatchling Build Configuration
+# Hatchling Build Configuration (PEP 517/518 src/ layout)
 # ============================================================================
 [tool.hatch.build.targets.wheel]
-packages = [
-    "consciousness",
-    "governance",
-    "privacy",
-    "fairness",
-    "xai",
-    "federated_learning",
-]
+packages = ["src/maximus_core_service"]

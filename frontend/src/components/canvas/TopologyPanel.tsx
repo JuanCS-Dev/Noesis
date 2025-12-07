@@ -30,7 +30,7 @@ export default function TopologyPanel({ activityLevel = 0.3 }: TopologyPanelProp
           enableZoom={true}
           enablePan={false}
           autoRotate
-          autoRotateSpeed={0.4}
+          autoRotateSpeed={1.5}
           minDistance={1.5}
           maxDistance={6}
           target={[0, 0, 0]} // Centraliza rotação no cérebro

@@ -4,11 +4,18 @@ Episodic Memory: API Routes
 
 FastAPI application for the Episodic Memory service.
 Exposes endpoints for storing, retrieving, and managing memories.
+
+Production-ready with:
+- Qdrant vector database for semantic search
+- JSON file backup for resilience
+- Gemini embeddings generation
+- Automatic persistence between restarts
 """
 
 from __future__ import annotations
 
 import logging
+import os
 from datetime import datetime
 from typing import Dict, Any, Optional
 
@@ -16,7 +23,7 @@ from fastapi import FastAPI, HTTPException, Path
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
-from episodic_memory.core.memory_store import MemoryStore
+from episodic_memory.core.persistent_store import PersistentMemoryStore
 from episodic_memory.core.context_builder import ContextBuilder
 from episodic_memory.models.memory import Memory, MemoryQuery, MemorySearchResult, MemoryType
 
@@ -29,13 +36,23 @@ logger = logging.getLogger(__name__)
 # Initialize FastAPI app
 app = FastAPI(
     title="Episodic Memory Service",
-    description="Service for long-term agent memory storage and retrieval",
-    version="1.0.0"
+    description="Production-ready memory service with Qdrant + Gemini embeddings",
+    version="2.0.0"
 )
 
 
-# Global state
-store: MemoryStore = MemoryStore()
+# Configuration from environment
+QDRANT_URL = os.environ.get("QDRANT_URL", "http://localhost:6333")
+DATA_DIR = os.environ.get("MEMORY_DATA_DIR", "data/memory")
+USE_QDRANT = os.environ.get("USE_QDRANT", "true").lower() == "true"
+
+
+# Global state - now with REAL persistence
+store: PersistentMemoryStore = PersistentMemoryStore(
+    qdrant_url=QDRANT_URL,
+    data_dir=DATA_DIR,
+    use_qdrant=USE_QDRANT
+)
 
 
 class StoreMemoryRequest(BaseModel):
@@ -46,17 +63,24 @@ class StoreMemoryRequest(BaseModel):
 
 
 @app.get("/health")
-async def health_check() -> Dict[str, str]:
+async def health_check() -> Dict[str, Any]:
     """
-    Service health check.
+    Service health check with persistence status.
 
     Returns:
-        Status dictionary.
+        Status dictionary including Qdrant and embeddings availability.
     """
+    stats = await store.get_stats()
     return {
         "status": "healthy",
         "service": "episodic_memory",
-        "timestamp": datetime.now().isoformat()
+        "version": "2.0.0",
+        "timestamp": datetime.now().isoformat(),
+        "persistence": {
+            "qdrant_available": stats.get("qdrant_available", False),
+            "embeddings_enabled": stats.get("embeddings_enabled", False),
+            "total_memories": stats.get("total_memories", 0),
+        }
     }
 
 
@@ -242,6 +266,62 @@ async def get_task_context(request: ContextRequest) -> Dict[str, Any]:
         return context.to_dict()
     except Exception as e:
         logger.error("Context retrieval failed: %s", e, exc_info=True)
+        raise HTTPException(status_code=500, detail=str(e)) from e
+
+
+@app.post("/v1/memories/sync")
+async def sync_to_qdrant() -> Dict[str, Any]:
+    """
+    Sync all cached memories to Qdrant for disaster recovery.
+
+    Use this endpoint if Qdrant was restored from backup and needs
+    to be re-populated from the JSON backup file.
+
+    Returns:
+        Count of synced memories
+    """
+    try:
+        synced = await store.sync_to_qdrant()
+        return {"success": True, "synced": synced}
+    except Exception as e:
+        logger.error("Sync failed: %s", e, exc_info=True)
+        raise HTTPException(status_code=500, detail=str(e)) from e
+
+
+@app.get("/v1/memories/type/{memory_type}")
+async def get_memories_by_type(
+    memory_type: MemoryType,
+    limit: int = 10
+) -> Dict[str, Any]:
+    """
+    Get memories by type, sorted by importance.
+
+    Args:
+        memory_type: MIRIX memory type (core, episodic, semantic, etc.)
+        limit: Maximum number of results
+
+    Returns:
+        List of memories of the specified type
+    """
+    try:
+        memories = await store.get_memories_by_type(memory_type, limit)
+        return {
+            "success": True,
+            "type": memory_type.value,
+            "count": len(memories),
+            "memories": [
+                {
+                    "memory_id": m.memory_id,
+                    "content": m.content,
+                    "importance": m.importance,
+                    "access_count": m.access_count,
+                    "timestamp": m.timestamp.isoformat()
+                }
+                for m in memories
+            ]
+        }
+    except Exception as e:
+        logger.error("Get by type failed: %s", e, exc_info=True)
         raise HTTPException(status_code=500, detail=str(e)) from e
 
 

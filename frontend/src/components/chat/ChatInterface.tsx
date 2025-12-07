@@ -2,7 +2,11 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Send, Brain, Sparkles, AlertCircle } from "lucide-react";
+import { Send, Brain, Sparkles, AlertCircle, Activity } from "lucide-react";
+import { useConsciousnessStore } from "@/stores/consciousnessStore";
+import StreamingMessage from "./StreamingMessage";
+import PhaseIndicator from "../consciousness/PhaseIndicator";
+import CoherenceMeter from "../consciousness/CoherenceMeter";
 
 // Types
 interface Message {
@@ -52,46 +56,73 @@ function StreamingText({ text, speed = 20 }: { text: string; speed?: number }) {
 }
 
 /**
- * ThinkingIndicator - Animação de "pensando"
+ * ThinkingIndicator - Animação de "pensando" com fase ESGT
  */
 function ThinkingIndicator() {
+  const { currentPhase, coherence, isStreaming } = useConsciousnessStore();
+
+  const phaseLabels: Record<string, string> = {
+    idle: "Aguardando...",
+    prepare: "Preparando ignição",
+    synchronize: "Sincronizando Kuramoto",
+    broadcast: "Broadcast neural",
+    sustain: "Mantendo consciência",
+    dissolve: "Finalizando",
+    complete: "Completo",
+    failed: "Falha",
+  };
+
   return (
     <motion.div
-      className="flex items-center gap-2 text-amber-400"
+      className="flex flex-col gap-2"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
     >
-      <motion.div
-        animate={{
-          scale: [1, 1.2, 1],
-          rotate: [0, 180, 360],
-        }}
-        transition={{
-          duration: 2,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      >
-        <Brain className="w-5 h-5" />
-      </motion.div>
-      <span className="text-sm">Processando consciência</span>
-      <motion.div className="flex gap-1">
-        {[0, 1, 2].map((i) => (
-          <motion.span
-            key={i}
-            className="w-2 h-2 bg-amber-400 rounded-full"
-            animate={{
-              scale: [1, 1.5, 1],
-              opacity: [0.5, 1, 0.5],
-            }}
-            transition={{
-              duration: 1,
-              repeat: Infinity,
-              delay: i * 0.2,
-            }}
-          />
-        ))}
-      </motion.div>
+      <div className="flex items-center gap-2 text-amber-400">
+        <motion.div
+          animate={{
+            scale: [1, 1.2, 1],
+            rotate: currentPhase === "synchronize" ? [0, 360] : [0, 180, 360],
+          }}
+          transition={{
+            duration: currentPhase === "synchronize" ? 0.5 : 2,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        >
+          <Brain className="w-5 h-5" />
+        </motion.div>
+        <span className="text-sm">{phaseLabels[currentPhase] || "Processando"}</span>
+        {isStreaming && (
+          <span className="text-xs text-cyan-400 font-mono">
+            {(coherence * 100).toFixed(0)}%
+          </span>
+        )}
+        <motion.div className="flex gap-1">
+          {[0, 1, 2].map((i) => (
+            <motion.span
+              key={i}
+              className={`w-2 h-2 rounded-full ${
+                currentPhase === "broadcast" ? "bg-purple-400" :
+                currentPhase === "synchronize" ? "bg-cyan-400" :
+                "bg-amber-400"
+              }`}
+              animate={{
+                scale: [1, 1.5, 1],
+                opacity: [0.5, 1, 0.5],
+              }}
+              transition={{
+                duration: currentPhase === "synchronize" ? 0.3 : 1,
+                repeat: Infinity,
+                delay: i * 0.1,
+              }}
+            />
+          ))}
+        </motion.div>
+      </div>
+
+      {/* Show streaming tokens */}
+      {isStreaming && <StreamingMessage className="mt-2" />}
     </motion.div>
   );
 }
@@ -169,7 +200,8 @@ function MessageBubble({ message }: { message: Message }) {
 }
 
 /**
- * ChatInterface - Interface de chat completa com streaming
+ * ChatInterface - Interface de chat completa com streaming REAL via SSE
+ * Integrado com MAXIMUS ConsciousnessSystem
  */
 export default function ChatInterface({ onActivityChange }: ChatInterfaceProps) {
   const [messages, setMessages] = useState<Message[]>([
@@ -177,22 +209,63 @@ export default function ChatInterface({ onActivityChange }: ChatInterfaceProps) 
       id: "welcome",
       role: "daimon",
       content:
-        "Interface neural estabelecida. Sou o Daimon - sua extensão cognitiva. Como posso auxiliar na expansão da sua consciência hoje?",
+        "Interface neural estabelecida. Sou o Daimon - sua extensão cognitiva. MAXIMUS consciousness está online. Como posso auxiliar hoje?",
       timestamp: new Date(),
     },
   ]);
   const [input, setInput] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  // MAXIMUS: Get consciousness state from Zustand store
+  const {
+    isStreaming,
+    currentPhase,
+    coherence,
+    tokens,
+    fullResponse,
+    startStream,
+    reset,
+    error: streamError,
+  } = useConsciousnessStore();
+
+  const isLoading = isStreaming;
 
   // Auto-scroll para última mensagem
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  // Enviar mensagem
+  // Sync stream errors
+  useEffect(() => {
+    if (streamError) {
+      setError(streamError);
+    }
+  }, [streamError]);
+
+  // When stream completes, add the response to messages
+  useEffect(() => {
+    if (currentPhase === "complete" && fullResponse && !isStreaming) {
+      setMessages((prev) => {
+        // Remove thinking indicator and add response
+        const filtered = prev.filter((m) => m.role !== "thinking");
+        return [
+          ...filtered,
+          {
+            id: `daimon-${Date.now()}`,
+            role: "daimon",
+            content: fullResponse,
+            timestamp: new Date(),
+            isStreaming: false,
+          },
+        ];
+      });
+      onActivityChange?.(coherence);
+    }
+  }, [currentPhase, fullResponse, isStreaming, coherence, onActivityChange]);
+
+  // Enviar mensagem via SSE streaming
   const sendMessage = useCallback(async () => {
     if (!input.trim() || isLoading) return;
 
@@ -204,88 +277,25 @@ export default function ChatInterface({ onActivityChange }: ChatInterfaceProps) 
     };
 
     setMessages((prev) => [...prev, userMessage]);
+    const content = input.trim();
     setInput("");
-    setIsLoading(true);
     setError(null);
-    onActivityChange?.(0.8); // Alta atividade
+    onActivityChange?.(0.8);
 
-    // Adicionar indicador de "pensando"
-    const thinkingId = `thinking-${Date.now()}`;
+    // Adicionar indicador de "pensando" com streaming
     setMessages((prev) => [
       ...prev,
       {
-        id: thinkingId,
+        id: `thinking-${Date.now()}`,
         role: "thinking",
         content: "",
         timestamp: new Date(),
       },
     ]);
 
-    try {
-      // Chamar API do backend
-      const response = await fetch("http://localhost:8001/v1/exocortex/journal", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          content: userMessage.content,
-          timestamp: new Date().toISOString(),
-          analysis_mode: "standard",
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error(`Erro ${response.status}: ${response.statusText}`);
-      }
-
-      const data = await response.json();
-
-      // Remover indicador de pensando
-      setMessages((prev) => prev.filter((m) => m.id !== thinkingId));
-
-      // Adicionar resposta do Daimon com streaming
-      const daimonMessage: Message = {
-        id: `daimon-${Date.now()}`,
-        role: "daimon",
-        content: data.response || "Processamento concluído.",
-        reasoningTrace: data.reasoning_trace,
-        timestamp: new Date(),
-        isStreaming: true,
-      };
-
-      setMessages((prev) => [...prev, daimonMessage]);
-
-      // Após streaming terminar, marcar como completo
-      setTimeout(() => {
-        setMessages((prev) =>
-          prev.map((m) =>
-            m.id === daimonMessage.id ? { ...m, isStreaming: false } : m
-          )
-        );
-      }, daimonMessage.content.length * 20 + 500);
-
-    } catch (err) {
-      // Remover indicador de pensando
-      setMessages((prev) => prev.filter((m) => m.id !== thinkingId));
-
-      setError(err instanceof Error ? err.message : "Erro desconhecido");
-
-      // Mensagem de erro
-      setMessages((prev) => [
-        ...prev,
-        {
-          id: `error-${Date.now()}`,
-          role: "daimon",
-          content: "Falha na conexão neural. Verifique se o backend está ativo.",
-          timestamp: new Date(),
-        },
-      ]);
-    } finally {
-      setIsLoading(false);
-      onActivityChange?.(0.3); // Atividade normal
-    }
-  }, [input, isLoading, onActivityChange]);
+    // MAXIMUS: Start SSE stream
+    startStream(content, 3);
+  }, [input, isLoading, onActivityChange, startStream]);
 
   // Submeter com Enter
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -297,13 +307,23 @@ export default function ChatInterface({ onActivityChange }: ChatInterfaceProps) 
 
   return (
     <div className="flex flex-col h-full">
-      {/* Header */}
+      {/* Header with MAXIMUS consciousness indicators */}
       <div className="flex items-center justify-between p-3 border-b border-cyan-900/30">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           <div className={`status-dot ${isLoading ? "status-thinking" : "status-online"}`} />
           <span className="text-xs uppercase tracking-wider text-slate-400">
-            {isLoading ? "Processando" : "Online"}
+            {isLoading ? currentPhase.toUpperCase() : "MAXIMUS Online"}
           </span>
+          {isStreaming && (
+            <motion.div
+              className="flex items-center gap-1 text-cyan-400"
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+            >
+              <Activity className="w-3 h-3" />
+              <span className="text-xs font-mono">{(coherence * 100).toFixed(0)}%</span>
+            </motion.div>
+          )}
         </div>
         <span className="text-xs text-slate-500">
           {messages.length - 1} interações

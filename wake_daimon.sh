@@ -100,8 +100,10 @@ start_service() {
 if ! lsof -i :8001 > /dev/null 2>&1; then
     echo -e "Starting Neural Core (Backend on :8001)..."
     cd "$SERVICES_DIR/maximus_core_service"
-    export PYTHONPATH="$SERVICES_DIR/maximus_core_service:$PYTHONPATH"
-    "$VENV_PYTHON" -m uvicorn main:app --host 0.0.0.0 --port 8001 > "$LOG_DIR/maximus_core_service.log" 2>&1 &
+    # FIXED: Point PYTHONPATH to src/ directory specifically for the new layout
+    export PYTHONPATH="$SERVICES_DIR/maximus_core_service/src:$PYTHONPATH"
+    # FIXED: Run the module from the src root
+    "$VENV_PYTHON" -m uvicorn maximus_core_service.main:app --host 0.0.0.0 --port 8001 > "$LOG_DIR/maximus_core_service.log" 2>&1 &
     cd "$PROJECT_DIR"
 
     echo -n "Waiting for Neural Core"
