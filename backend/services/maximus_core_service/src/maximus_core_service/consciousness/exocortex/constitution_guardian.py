@@ -140,7 +140,7 @@ class ConstitutionGuardian:
             if level in ["PAUSE", "LOCKOUT", "NOTICE"]:
                 return True
             return False
-            
+
         return False # Default to conservative
 
     async def _broadcast_violation(self, trigger_event: Any, audit: AuditResult) -> None:
@@ -307,15 +307,15 @@ class ConstitutionGuardian:
     def inject_principles(self, soul_values: List["SoulValue"]) -> None:
         """
         Inject NOESIS soul values into the constitution as core principles.
-        
+
         Maps soul values (ranked) to constitution principles, enriching
         the guardian's ability to detect violations.
-        
+
         Args:
             soul_values: List of SoulValue from soul_config.yaml
         """
         logger.info("⚖️  Injecting NOESIS soul values into ConstitutionGuardian...")
-        
+
         # Build rich principles from soul values
         new_principles = []
         for value in sorted(soul_values, key=lambda v: v.rank):
@@ -325,16 +325,16 @@ class ConstitutionGuardian:
                 terms.append(value.term_greek)
             if value.term_hebrew:
                 terms.append(value.term_hebrew)
-            
+
             term_str = f" ({', '.join(terms)})" if terms else ""
             principle = f"{value.name}{term_str}: {value.definition}"
             new_principles.append(principle)
-        
+
         # Update constitution
         self.constitution.core_principles = new_principles
         self.constitution.last_updated = datetime.now()
         self.constitution.version = "2.0.0-noesis"
-        
+
         # Also create rules from the top 3 values (most critical)
         for i, value in enumerate(sorted(soul_values, key=lambda v: v.rank)[:3]):
             rule = ConstitutionRule(
@@ -347,7 +347,7 @@ class ConstitutionGuardian:
             # Avoid duplicates
             if not any(r.id == rule.id for r in self.constitution.rules):
                 self.constitution.rules.append(rule)
-        
+
         logger.info(
             "✅ Constitution updated with %d principles, %d rules",
             len(self.constitution.core_principles),
@@ -357,19 +357,19 @@ class ConstitutionGuardian:
     def get_principles_for_prompt(self) -> str:
         """
         Generate a formatted string of principles for LLM prompts.
-        
+
         Returns:
             Formatted principles string for context injection.
         """
         principles_lines = [
-            f"  {i+1}. {p}" 
+            f"  {i+1}. {p}"
             for i, p in enumerate(self.constitution.core_principles)
         ]
         rules_lines = [
             f"  - [{r.id}] ({r.severity.value}): {r.statement}"
             for r in self.constitution.rules if r.active
         ]
-        
+
         return f"""
 [CONSTITUTION v{self.constitution.version}]
 Core Principles:

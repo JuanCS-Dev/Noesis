@@ -15,6 +15,7 @@ Adheres to the "Neuro-Symbolic" persona:
 - Jungian analysis (Shadow Work)
 - Cognitive bias detection (Kahneman)
 """
+# pylint: disable=line-too-long
 
 from typing import Optional, TYPE_CHECKING
 
@@ -117,16 +118,16 @@ DISPLAY PROTOCOL:
 def build_noesis_system_prompt(soul: Optional["SoulConfiguration"] = None) -> str:
     """
     Build the NOESIS system prompt with soul configuration.
-    
+
     Args:
         soul: Optional SoulConfiguration. If None, uses defaults.
-        
+
     Returns:
         Formatted system prompt string.
     """
     if not soul:
         return EXOCORTEX_SYSTEM_PROMPT  # Fallback to legacy
-    
+
     # Build values section
     values_lines = []
     for v in sorted(soul.values, key=lambda x: x.rank):
@@ -136,15 +137,15 @@ def build_noesis_system_prompt(soul: Optional["SoulConfiguration"] = None) -> st
         elif v.term_hebrew:
             term = f" ({v.term_hebrew})"
         values_lines.append(f"  {v.rank}. {v.name}{term}: {v.definition}")
-    
+
     # Build anti-purposes section
     anti_lines = []
     for ap in soul.anti_purposes:
         anti_lines.append(f"  - NOT {ap.name}: {ap.definition}")
-    
+
     # Build ontological status
     onto_lines = [f"  - {s}" for s in soul.identity.ontological_status]
-    
+
     return NOESIS_SYSTEM_PROMPT_TEMPLATE.format(
         identity_name=soul.identity.name,
         identity_type=soul.identity.type,

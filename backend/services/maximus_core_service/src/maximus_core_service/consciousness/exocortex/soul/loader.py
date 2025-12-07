@@ -9,12 +9,13 @@ Follows Code Constitution:
 - Explicit error handling
 - No silent failures
 """
+# pylint: disable=no-member
 
 from __future__ import annotations
 
 import logging
 from pathlib import Path
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional
 
 import yaml
 from pydantic import ValidationError
@@ -35,7 +36,6 @@ from .models import (
 
 logger = logging.getLogger(__name__)
 
-# Default path relative to this module
 DEFAULT_CONFIG_PATH = Path(__file__).parent / "config" / "soul_config.yaml"
 
 
@@ -46,7 +46,7 @@ class SoulLoadError(Exception):
 class SoulLoader:
     """
     Loads NOESIS soul configuration from YAML.
-    
+
     Usage:
         soul = SoulLoader.load()  # Uses default path
         soul = SoulLoader.load("/custom/path/soul_config.yaml")
@@ -62,51 +62,41 @@ class SoulLoader:
     ) -> SoulConfiguration:
         """
         Load soul configuration from YAML file.
-        
+
         Args:
             config_path: Path to soul_config.yaml. Uses default if not provided.
             force_reload: If True, bypasses cache and reloads from disk.
-            
+
         Returns:
             Validated SoulConfiguration instance.
-            
+
         Raises:
             SoulLoadError: If file cannot be read or validation fails.
         """
-        # Return cached if available and not forcing reload
         if cls._cached_soul is not None and not force_reload:
             logger.debug("Returning cached soul configuration")
             return cls._cached_soul
 
-        # Resolve path
         path = Path(config_path) if config_path else DEFAULT_CONFIG_PATH
-        
+
         if not path.exists():
             raise SoulLoadError(f"Soul configuration not found: {path}")
-        
+
         logger.info("Loading soul configuration from: %s", path)
-        
+
         try:
-            # Load YAML
             raw_data = cls._load_yaml(path)
-            
-            # Transform and validate
             soul = cls._parse_config(raw_data)
-            
-            # Cache for future use
             cls._cached_soul = soul
-            
+
             logger.info(
-                "Soul configuration loaded: %s v%s (%d values, %d biases, %d protocols)",
-                soul.identity.name,
-                soul.version,
-                len(soul.values),
-                len(soul.biases),
-                len(soul.protocols)
+                "Soul loaded: %s v%s (%d values, %d biases, %d protocols)",
+                soul.identity.name, soul.version,
+                len(soul.values), len(soul.biases), len(soul.protocols)
             )
-            
+
             return soul
-            
+
         except yaml.YAMLError as e:
             raise SoulLoadError(f"Invalid YAML syntax: {e}") from e
         except ValidationError as e:
@@ -123,32 +113,46 @@ class SoulLoader:
     @classmethod
     def _parse_config(cls, data: Dict[str, Any]) -> SoulConfiguration:
         """Transform raw YAML data into validated SoulConfiguration."""
-        
-        # Parse identity
-        identity_data = data.get("identity", {})
-        identity = SoulIdentity(
-            name=identity_data.get("name", "NOESIS"),
-            type=identity_data.get("type", "Exocórtex Ético"),
-            substrate=identity_data.get("substrate", "Digital"),
-            purpose=identity_data.get("purpose", ""),
-            ontological_status=identity_data.get("ontological_status", [])
+        return SoulConfiguration(
+            version=data.get("version", "1.0"),
+            identity=cls._parse_identity(data.get("identity", {})),
+            values=cls._parse_values(data.get("values", [])),
+            biases=cls._parse_biases(data.get("biases", [])),
+            anti_purposes=cls._parse_anti_purposes(data.get("anti_purposes", [])),
+            protocols=cls._parse_protocols(data.get("protocols", {})),
+            metacognition=cls._parse_metacognition(data.get("metacognition", {}))
         )
-        
-        # Parse values
-        values = []
-        for v in data.get("values", []):
-            values.append(SoulValue(
+
+    @classmethod
+    def _parse_identity(cls, data: Dict[str, Any]) -> SoulIdentity:
+        """Parse identity section."""
+        return SoulIdentity(
+            name=data.get("name", "NOESIS"),
+            type=data.get("type", "Exocórtex Ético"),
+            substrate=data.get("substrate", "Digital"),
+            purpose=data.get("purpose", ""),
+            ontological_status=data.get("ontological_status", [])
+        )
+
+    @classmethod
+    def _parse_values(cls, data: List[Dict[str, Any]]) -> List[SoulValue]:
+        """Parse values section."""
+        return [
+            SoulValue(
                 rank=ValueRank(v.get("rank", 5)),
                 name=v.get("name", ""),
                 term_greek=v.get("term_greek"),
                 term_hebrew=v.get("term_hebrew"),
                 definition=v.get("definition", "")
-            ))
-        
-        # Parse biases
-        biases = []
-        for b in data.get("biases", []):
-            biases.append(BiasEntry(
+            )
+            for v in data
+        ]
+
+    @classmethod
+    def _parse_biases(cls, data: List[Dict[str, Any]]) -> List[BiasEntry]:
+        """Parse biases section."""
+        return [
+            BiasEntry(
                 id=b.get("id", ""),
                 name=b.get("name", ""),
                 category=BiasCategory(b.get("category", "judgment")),
@@ -156,65 +160,64 @@ class SoulLoader:
                 triggers=b.get("triggers", []),
                 intervention=b.get("intervention", ""),
                 severity=b.get("severity", 0.5)
-            ))
-        
-        # Parse anti-purposes
-        anti_purposes = []
-        for ap in data.get("anti_purposes", []):
-            anti_purposes.append(AntiPurpose(
+            )
+            for b in data
+        ]
+
+    @classmethod
+    def _parse_anti_purposes(cls, data: List[Dict[str, Any]]) -> List[AntiPurpose]:
+        """Parse anti-purposes section."""
+        return [
+            AntiPurpose(
                 id=ap.get("id", ""),
                 name=ap.get("name", ""),
                 definition=ap.get("definition", ""),
                 restriction=ap.get("restriction", ""),
                 directive=ap.get("directive", "")
-            ))
-        
-        # Parse protocols
-        protocols = {}
-        for proto_id, proto_data in data.get("protocols", {}).items():
-            thresholds_data = proto_data.get("thresholds", {})
-            thresholds = ThresholdConfig(
-                fragmentation=thresholds_data.get("fragmentation", 3),
-                stress_error_rate=thresholds_data.get("stress_error_rate", 0.15),
-                late_hour=thresholds_data.get("late_hour", 23),
-                minimum_thinking_time=thresholds_data.get("minimum_thinking_time", 2.0)
             )
-            
-            interventions = []
-            for interv in proto_data.get("interventions", []):
-                interventions.append(InterventionConfig(
-                    trigger=interv.get("trigger", ""),
-                    threshold=interv.get("threshold", ""),
-                    action=interv.get("action", "")
-                ))
-            
+            for ap in data
+        ]
+
+    @classmethod
+    def _parse_protocols(
+        cls, data: Dict[str, Dict[str, Any]]
+    ) -> Dict[str, ProtocolConfig]:
+        """Parse protocols section."""
+        protocols = {}
+        for proto_id, proto_data in data.items():
+            thresholds_data = proto_data.get("thresholds", {})
             protocols[proto_id] = ProtocolConfig(
                 id=proto_data.get("id", proto_id),
                 name=proto_data.get("name", ""),
                 description=proto_data.get("description", ""),
-                thresholds=thresholds,
-                interventions=interventions
+                thresholds=ThresholdConfig(
+                    fragmentation=thresholds_data.get("fragmentation", 3),
+                    stress_error_rate=thresholds_data.get("stress_error_rate", 0.15),
+                    late_hour=thresholds_data.get("late_hour", 23),
+                    minimum_thinking_time=thresholds_data.get(
+                        "minimum_thinking_time", 2.0
+                    )
+                ),
+                interventions=[
+                    InterventionConfig(
+                        trigger=i.get("trigger", ""),
+                        threshold=i.get("threshold", ""),
+                        action=i.get("action", "")
+                    )
+                    for i in proto_data.get("interventions", [])
+                ]
             )
-        
-        # Parse metacognition
-        meta_data = data.get("metacognition", {})
-        metacognition = MetacognitionConfig(
-            confidence_target=meta_data.get("confidence_target", 0.999),
-            coherence_target=meta_data.get("coherence_target", 1.0),
-            integrity_target=meta_data.get("integrity_target", 1.0),
-            latency_threshold=meta_data.get("latency_threshold", 2.0),
-            epistemic_humility=meta_data.get("epistemic_humility", True)
-        )
-        
-        # Build final configuration
-        return SoulConfiguration(
-            version=data.get("version", "1.0"),
-            identity=identity,
-            values=values,
-            biases=biases,
-            anti_purposes=anti_purposes,
-            protocols=protocols,
-            metacognition=metacognition
+        return protocols
+
+    @classmethod
+    def _parse_metacognition(cls, data: Dict[str, Any]) -> MetacognitionConfig:
+        """Parse metacognition section."""
+        return MetacognitionConfig(
+            confidence_target=data.get("confidence_target", 0.999),
+            coherence_target=data.get("coherence_target", 1.0),
+            integrity_target=data.get("integrity_target", 1.0),
+            latency_threshold=data.get("latency_threshold", 2.0),
+            epistemic_humility=data.get("epistemic_humility", True)
         )
 
     @classmethod
@@ -227,4 +230,3 @@ class SoulLoader:
         """Clear the cached soul configuration."""
         cls._cached_soul = None
         logger.debug("Soul configuration cache cleared")
-
