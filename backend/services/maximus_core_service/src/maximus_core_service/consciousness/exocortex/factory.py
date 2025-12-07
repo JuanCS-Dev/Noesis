@@ -52,7 +52,7 @@ logger = logging.getLogger(__name__)
 class ExocortexFactory:
     """
     Factory Singleton para o subsistema Exocortex.
-    
+
     Integrates NOESIS soul configuration into all exocortex modules,
     providing unified identity, values, biases, and protocols.
     """
@@ -98,7 +98,7 @@ class ExocortexFactory:
         # ═══════════════════════════════════════════════════════════════════
         # Build core principles from soul values if available
         core_principles = self._build_core_principles()
-        
+
         self.guardian = ConstitutionGuardian(
             constitution=PersonalConstitution(
                 owner_id="user_001",
@@ -109,7 +109,7 @@ class ExocortexFactory:
             gemini_client=self.gemini_client,
             workspace=self.workspace
         )
-        
+
         # Inject soul values into guardian
         if self.soul:
             self.guardian.inject_principles(self.soul.values)
@@ -137,7 +137,7 @@ class ExocortexFactory:
             gemini_client=self.gemini_client,
             workspace=self.workspace
         )
-        
+
         # Inject bias catalog into inhibitor
         if self.soul:
             self.inhibitor.inject_biases(self.soul.biases)
@@ -150,13 +150,16 @@ class ExocortexFactory:
             gemini_client=self.gemini_client,
             workspace=self.workspace
         )
-        
+
         # Inject complete soul configuration
         if self.soul:
             self.symbiotic_self.inject_soul(self.soul)
 
         # Log successful initialization
-        soul_status = f"with NOESIS soul v{self.soul.version}" if self.soul else "without soul config"
+        soul_status = (
+            f"with NOESIS soul v{self.soul.version}" if self.soul
+            else "without soul config"
+        )
         logger.info("✅ Exocortex Factory initialized successfully (%s).", soul_status)
 
     def _build_core_principles(self) -> list[str]:

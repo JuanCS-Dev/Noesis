@@ -59,7 +59,7 @@ class ImpulseInhibitor:
     """
     Sistema de Frenagem Cognitiva.
     Analisa a 'velocidade' e o 'risco' de uma ação antes de ela ser executada.
-    
+
     NOESIS Integration:
     - Uses bias catalog for enhanced detection
     - Provides bias-specific socratic questions
@@ -118,7 +118,7 @@ class ImpulseInhibitor:
         """Usa Gemini para estimar risco emocional e financeiro."""
         # Build bias catalog section for prompt
         bias_section = self._build_bias_prompt_section()
-        
+
         prompt = f"""
         Analyze this user action for IMPULSIVITY, RISK, and COGNITIVE BIASES.
 
@@ -175,12 +175,12 @@ class ImpulseInhibitor:
         """Build the bias catalog section for the analysis prompt."""
         if not self.bias_catalog:
             return "[No bias catalog loaded]"
-        
+
         lines = ["[COGNITIVE BIAS CATALOG - Detect if any apply]"]
         for bias_id, bias in self.bias_catalog.items():
             triggers_str = ", ".join(bias.triggers) if bias.triggers else "various"
             lines.append(f"  - {bias_id}: {bias.name} - Triggers: {triggers_str}")
-        
+
         return "\n".join(lines)
 
     def _decide_intervention(self, analysis: Dict[str, Any]) -> Intervention:
@@ -197,11 +197,11 @@ class ImpulseInhibitor:
         if impulse == "COGNITIVE_BIAS" or detected_biases:
             question = self._get_bias_intervention_question(detected_biases)
             bias_names = ", ".join(
-                self.bias_catalog[b].name 
-                for b in detected_biases 
+                self.bias_catalog[b].name
+                for b in detected_biases
                 if b in self.bias_catalog
             ) or "viés não catalogado"
-            
+
             return Intervention(
                 level=InterventionLevel.PAUSE,
                 reasoning=f"Viés cognitivo detectado: {bias_names}. {reason}",
@@ -241,18 +241,18 @@ class ImpulseInhibitor:
         """Get the socratic intervention question for detected biases."""
         if not bias_ids:
             return "Você está certo dessa análise?"
-        
+
         # Use the first detected bias's intervention
         first_bias_id = bias_ids[0]
         if first_bias_id in self.bias_catalog:
             return self.bias_catalog[first_bias_id].intervention
-        
+
         return "Você considerou todas as perspectivas?"
 
     async def get_status(self) -> Dict[str, Any]:
         """Retorna status do inibidor."""
         return {
-            "active": True, 
+            "active": True,
             "interventions_count": 0,
             "biases_loaded": len(self.bias_catalog),
             "biases_injected": self._biases_injected
@@ -265,24 +265,24 @@ class ImpulseInhibitor:
     def inject_biases(self, biases: List["BiasEntry"]) -> None:
         """
         Inject NOESIS bias catalog into the impulse inhibitor.
-        
+
         Enables bias-aware detection and intervention using the
         catalog from soul_config.yaml.
-        
+
         Args:
             biases: List of BiasEntry from soul configuration
         """
         logger.info("🧠 Injecting NOESIS bias catalog into ImpulseInhibitor...")
-        
+
         self.bias_catalog = {bias.id: bias for bias in biases}
         self._biases_injected = True
-        
+
         # Log summary by category
         categories = {}
         for bias in biases:
             cat = bias.category.value if hasattr(bias.category, 'value') else str(bias.category)
             categories[cat] = categories.get(cat, 0) + 1
-        
+
         logger.info(
             "✅ Bias catalog loaded: %d biases (%s)",
             len(self.bias_catalog),
@@ -292,18 +292,18 @@ class ImpulseInhibitor:
     def get_bias_for_prompt(self) -> str:
         """
         Generate a formatted bias catalog for LLM prompts.
-        
+
         Returns:
             Formatted bias catalog string for context injection.
         """
         if not self.bias_catalog:
             return "[No bias catalog]"
-        
+
         lines = ["[NOESIS COGNITIVE BIAS CATALOG]"]
         for bias_id, bias in self.bias_catalog.items():
             lines.append(
                 f"  {bias.name} ({bias_id}): {bias.description}\n"
                 f"    → Intervention: {bias.intervention}"
             )
-        
+
         return "\n".join(lines)

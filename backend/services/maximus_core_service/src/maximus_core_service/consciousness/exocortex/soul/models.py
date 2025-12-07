@@ -11,6 +11,7 @@ Follows Code Constitution:
 - No placeholders
 - Explicit validation
 """
+# pylint: disable=no-member
 
 from __future__ import annotations
 
@@ -55,7 +56,7 @@ class SoulIdentity(BaseModel):
     purpose: str = Field(description="Primary purpose statement")
     ontological_status: List[str] = Field(
         default_factory=list,
-        description="Ontological declarations (e.g., 'Sou criatura, não criador')"
+        description="Ontological declarations"
     )
 
     class Config:
@@ -116,7 +117,10 @@ class ThresholdConfig(BaseModel):
     fragmentation: int = Field(default=3, description="Max concurrent tasks")
     stress_error_rate: float = Field(default=0.15, description="Error rate threshold")
     late_hour: int = Field(default=23, description="Hour after which to warn")
-    minimum_thinking_time: float = Field(default=2.0, description="Min seconds for critical decisions")
+    minimum_thinking_time: float = Field(
+        default=2.0,
+        description="Min seconds for critical decisions"
+    )
 
     class Config:
         """Pydantic config."""
@@ -152,21 +156,15 @@ class ProtocolConfig(BaseModel):
 class MetacognitionConfig(BaseModel):
     """Metacognition and self-monitoring configuration."""
     confidence_target: float = Field(
-        default=0.999,
-        ge=0.0,
-        le=1.0,
+        default=0.999, ge=0.0, le=1.0,
         description="Target confidence calibration"
     )
     coherence_target: float = Field(
-        default=1.0,
-        ge=0.0,
-        le=1.0,
+        default=1.0, ge=0.0, le=1.0,
         description="Target coherence (zero contradictions)"
     )
     integrity_target: float = Field(
-        default=1.0,
-        ge=0.0,
-        le=1.0,
+        default=1.0, ge=0.0, le=1.0,
         description="Target integrity (zero violations)"
     )
     latency_threshold: float = Field(
@@ -203,41 +201,29 @@ class AntiPurpose(BaseModel):
 class SoulConfiguration(BaseModel):
     """
     Complete NOESIS Soul Configuration.
-    
+
     This is the root model that encompasses all soul data.
     Loaded from soul_config.yaml and validated on startup.
     """
     version: str = Field(description="Configuration version (e.g., '2.0')")
     last_updated: datetime = Field(default_factory=datetime.now)
-    
-    # Core Identity
     identity: SoulIdentity = Field(description="Core identity configuration")
-    
-    # Values Hierarchy
     values: List[SoulValue] = Field(
         default_factory=list,
         description="Ranked list of inviolable values"
     )
-    
-    # Cognitive Biases Catalog
     biases: List[BiasEntry] = Field(
         default_factory=list,
         description="Catalog of detectable cognitive biases"
     )
-    
-    # Anti-Purposes (Non-Goals)
     anti_purposes: List[AntiPurpose] = Field(
         default_factory=list,
         description="What NOESIS explicitly is NOT"
     )
-    
-    # Operational Protocols
     protocols: Dict[str, ProtocolConfig] = Field(
         default_factory=dict,
         description="Named operational protocols"
     )
-    
-    # Metacognition Settings
     metacognition: MetacognitionConfig = Field(
         default_factory=MetacognitionConfig
     )
@@ -262,10 +248,15 @@ class SoulConfiguration(BaseModel):
 
     def to_prompt_context(self) -> str:
         """Generate context string for LLM prompts."""
-        values_str = ", ".join(f"{v.name} ({v.term_greek or ''})" for v in self.values)
+        values_str = ", ".join(
+            f"{v.name} ({v.term_greek or ''})" for v in self.values
+        )
         identity_str = f"{self.identity.name} - {self.identity.type}"
         purpose_str = self.identity.purpose
-        
+        onto_lines = "\n".join(
+            "- " + s for s in self.identity.ontological_status
+        )
+
         return f"""
 [SOUL IDENTITY]
 Name: {identity_str}
@@ -273,7 +264,7 @@ Purpose: {purpose_str}
 Core Values (ranked): {values_str}
 
 [ONTOLOGICAL STATUS]
-{chr(10).join('- ' + s for s in self.identity.ontological_status)}
+{onto_lines}
 
 [METACOGNITION TARGETS]
 - Confidence Calibration: {self.metacognition.confidence_target}
@@ -283,5 +274,4 @@ Core Values (ranked): {values_str}
 
     class Config:
         """Pydantic config."""
-        frozen = False  # Allow updates during runtime
-
+        frozen = False
