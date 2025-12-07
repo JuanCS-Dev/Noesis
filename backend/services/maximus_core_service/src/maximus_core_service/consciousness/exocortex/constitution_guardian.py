@@ -5,6 +5,11 @@ ConstitutionGuardian - Guardião da Constituição Pessoal
 Módulo responsável por validar ações do usuário contra sua Constituição Pessoal.
 Atua como o "Superego" do Exocórtex.
 
+NOESIS Soul Integration:
+- Receives soul values from ExocortexFactory
+- Maps soul values to constitution principles
+- Uses values for violation detection prompts
+
 Padrões Técnicos:
 - Gemini 3.0 "Thinking" para análise de violação.
 - JSON Schema para output estruturado.
@@ -17,10 +22,13 @@ import logging
 import json
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any, Optional, TYPE_CHECKING
 from enum import Enum
 
 from maximus_core_service.utils.gemini_client import GeminiClient
+
+if TYPE_CHECKING:
+    from maximus_core_service.consciousness.exocortex.soul.models import SoulValue
 
 logger = logging.getLogger(__name__)
 
@@ -291,3 +299,82 @@ class ConstitutionGuardian:
         )
         self._override_log.append(record)
         return record
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # NOESIS SOUL INTEGRATION
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    def inject_principles(self, soul_values: List["SoulValue"]) -> None:
+        """
+        Inject NOESIS soul values into the constitution as core principles.
+        
+        Maps soul values (ranked) to constitution principles, enriching
+        the guardian's ability to detect violations.
+        
+        Args:
+            soul_values: List of SoulValue from soul_config.yaml
+        """
+        logger.info("⚖️  Injecting NOESIS soul values into ConstitutionGuardian...")
+        
+        # Build rich principles from soul values
+        new_principles = []
+        for value in sorted(soul_values, key=lambda v: v.rank):
+            # Format: "VALUE_NAME (Greek/Hebrew): Definition"
+            terms = []
+            if value.term_greek:
+                terms.append(value.term_greek)
+            if value.term_hebrew:
+                terms.append(value.term_hebrew)
+            
+            term_str = f" ({', '.join(terms)})" if terms else ""
+            principle = f"{value.name}{term_str}: {value.definition}"
+            new_principles.append(principle)
+        
+        # Update constitution
+        self.constitution.core_principles = new_principles
+        self.constitution.last_updated = datetime.now()
+        self.constitution.version = "2.0.0-noesis"
+        
+        # Also create rules from the top 3 values (most critical)
+        for i, value in enumerate(sorted(soul_values, key=lambda v: v.rank)[:3]):
+            rule = ConstitutionRule(
+                id=f"SOUL_VALUE_{i+1}",
+                statement=f"Não violar o valor de {value.name}",
+                rationale=value.definition,
+                severity=ViolationSeverity.CRITICAL if i == 0 else ViolationSeverity.HIGH,
+                active=True
+            )
+            # Avoid duplicates
+            if not any(r.id == rule.id for r in self.constitution.rules):
+                self.constitution.rules.append(rule)
+        
+        logger.info(
+            "✅ Constitution updated with %d principles, %d rules",
+            len(self.constitution.core_principles),
+            len(self.constitution.rules)
+        )
+
+    def get_principles_for_prompt(self) -> str:
+        """
+        Generate a formatted string of principles for LLM prompts.
+        
+        Returns:
+            Formatted principles string for context injection.
+        """
+        principles_lines = [
+            f"  {i+1}. {p}" 
+            for i, p in enumerate(self.constitution.core_principles)
+        ]
+        rules_lines = [
+            f"  - [{r.id}] ({r.severity.value}): {r.statement}"
+            for r in self.constitution.rules if r.active
+        ]
+        
+        return f"""
+[CONSTITUTION v{self.constitution.version}]
+Core Principles:
+{chr(10).join(principles_lines)}
+
+Active Rules:
+{chr(10).join(rules_lines) if rules_lines else "  (No explicit rules defined)"}
+"""
