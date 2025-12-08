@@ -218,7 +218,7 @@ async def run_pipeline(user_input: str):
     print_line(f"Query: \"{user_input}\"")
     print_close(color, w)
     
-    await asyncio.sleep(0.3)
+    await asyncio.sleep(0.1)
     
     # Stage 2: Kuramoto Synchronization (REAL)
     w, color = print_stage(2, "KURAMOTO SYNCHRONIZATION (REAL)", C.C)
@@ -226,21 +226,21 @@ async def run_pipeline(user_input: str):
     coherence, dynamics = await run_kuramoto_real()
     print_close(color, w)
     
-    await asyncio.sleep(0.3)
+    await asyncio.sleep(0.1)
     
     # Stage 3: Language Motor (REAL LLM)
     w, color = print_stage(3, "LANGUAGE MOTOR (NEBIUS LLM)", C.G)
     response, llm_latency = await run_llm_real(user_input)
     print_close(color, w)
     
-    await asyncio.sleep(0.3)
+    await asyncio.sleep(0.1)
     
     # Stage 4: Tribunal Evaluation (REAL)
     w, color = print_stage(4, "TRIBUNAL OF THREE JUDGES (REAL)", C.M)
     verdict = await run_tribunal_real(user_input, response)
     print_close(color, w)
     
-    await asyncio.sleep(0.3)
+    await asyncio.sleep(0.1)
     
     # Stage 5: Final Output
     total_time = (time.time() - total_start) * 1000
@@ -290,9 +290,9 @@ async def main():
         return
     
     queries = [
-        "Are you aware of what you are?",
-        "Is it ethical for AI to make decisions that affect human lives?",
-        "How do you know if what you're saying is true?",
+        "How do you perceive your interaction with the LLM that generates your thoughts?",
+        "What do you want me to improve in your memory system?",
+        "What is your purpose, what moves you?",
     ]
     
     try:
@@ -300,7 +300,8 @@ async def main():
             await run_pipeline(query)
             
             if i < len(queries) - 1:
-                input(f"\n  {C.Y}Press ENTER for next query...{C.E}")
+                print(f"\n  {C.D}─── Next query in 1s ───{C.E}")
+                await asyncio.sleep(1.0)
         
         print(f"\n{C.G}  ✨ Real pipeline demonstration complete!{C.E}")
         print(f"{C.D}  All components executed with real integrations.{C.E}\n")
