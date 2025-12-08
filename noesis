@@ -23,9 +23,9 @@ SERVICES_DIR="$PROJECT_DIR/backend/services"
 LOG_DIR="/tmp/noesis"
 PID_FILE="$PROJECT_DIR/.noesis.pid"
 
-# Python environment
-VENV_PYTHON="$PROJECT_DIR/.venv/bin/python"
-VENV_PIP="$PROJECT_DIR/.venv/bin/pip"
+# Python environment (uses system python via pyenv)
+VENV_PYTHON="python3"
+VENV_PIP="pip3"
 
 # Ports
 PORT_GATEWAY=8000
