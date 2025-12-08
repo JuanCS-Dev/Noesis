@@ -23,7 +23,8 @@ from datetime import datetime, timedelta
 from typing import Any, Dict, List, Optional
 
 from .base_handler import PunishmentHandler, PunishmentOutcome, PunishmentResult
-from .penal_registry import OffenseType, PenalRegistry, PenalStatus
+from .models import OffenseType, PenalStatus
+from .penal_registry import PenalRegistry
 
 
 class ReEducationHandler(PunishmentHandler):

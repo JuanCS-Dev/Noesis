@@ -13,11 +13,14 @@ Execution and persistence of punishments:
 from __future__ import annotations
 
 
-from .penal_registry import (
+from .models import (
     OffenseType,
     PenalRecord,
-    PenalRegistry,
     PenalStatus,
+    WriteStrategy,
+)
+from .penal_registry import (
+    PenalRegistry,
     check_agent_punishment,
 )
 from .storage_backends import (
@@ -39,11 +42,13 @@ from .handlers import (
 from .executor import PunishmentExecutor
 
 __all__ = [
-    # Registry
+    # Models
     "OffenseType",
     "PenalRecord",
-    "PenalRegistry",
     "PenalStatus",
+    "WriteStrategy",
+    # Registry
+    "PenalRegistry",
     "check_agent_punishment",
     # Backends
     "InMemoryBackend",

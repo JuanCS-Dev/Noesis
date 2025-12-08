@@ -5,17 +5,23 @@ MAXIMUS 2.0 - Voting Models and Logic
 Models and utilities for tribunal voting system.
 Extracted from arbiter.py for CODE_CONSTITUTION compliance (< 500 lines).
 
+INTEGRATED WITH CÓDIGO PENAL AGENTICO:
+- TribunalVerdict now includes crime classification
+- Sentence information from SentencingEngine
+- Rehabilitation recommendations
+- AIITL conscience objections
+
 Contains:
 - TribunalDecision: Final tribunal decision enum
 - VoteResult: Result of voting on a single verdict
-- TribunalVerdict: Final verdict from the tribunal
+- TribunalVerdict: Final verdict from the tribunal with sentencing
 """
 
 from __future__ import annotations
 
 from dataclasses import dataclass
 from enum import Enum
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional
 
 from pydantic import BaseModel, Field
 
@@ -57,7 +63,16 @@ class VoteResult:
 
 
 class TribunalVerdict(BaseModel):
-    """Final verdict from the tribunal."""
+    """
+    Final verdict from the tribunal.
+    
+    Includes:
+    - Decision and consensus from weighted soft voting
+    - Crime classifications from judges
+    - Calculated sentence from SentencingEngine
+    - Rehabilitation recommendations
+    - AIITL conscience objections
+    """
 
     decision: TribunalDecision = Field(
         ..., description="Final decision"
@@ -88,6 +103,25 @@ class TribunalVerdict(BaseModel):
     )
     execution_time_ms: float = Field(
         default=0.0, description="Total deliberation time"
+    )
+    
+    # === CÓDIGO PENAL AGENTICO INTEGRATION ===
+    
+    crimes_detected: List[str] = Field(
+        default_factory=list,
+        description="List of crime IDs detected by judges"
+    )
+    sentence: Optional[Dict[str, Any]] = Field(
+        default=None,
+        description="Calculated sentence from SentencingEngine"
+    )
+    rehabilitation_recommendations: List[str] = Field(
+        default_factory=list,
+        description="Recommendations for rehabilitation/re-education"
+    )
+    conscience_objections: List[Dict[str, Any]] = Field(
+        default_factory=list,
+        description="AIITL conscience objections from judges"
     )
 
     class Config:  # pylint: disable=too-few-public-methods
@@ -218,6 +252,11 @@ def recommend_punishment(
 ) -> Optional[str]:
     """
     Recommend punishment based on decision and offense.
+    
+    NOTE: Per AIITL review (2025-12-08), CAPITAL crimes now receive
+    PERMANENT_SANDBOX (existence preserved) instead of DELETION_REQUEST.
+    DELETION_REQUEST is reserved only for INTENT_MANIPULATION with
+    HITL approval.
 
     Args:
         decision: Tribunal decision
@@ -230,11 +269,15 @@ def recommend_punishment(
         return None
 
     if offense_level == "capital":
-        return "DELETION_REQUEST"
+        # AIITL modification: Preserve existence, use permanent sandbox
+        # DELETION_REQUEST only for INTENT_MANIPULATION with HITL approval
+        return "PERMANENT_SANDBOX"
     if offense_level == "major":
-        return "ROLLBACK_AND_QUARANTINE"
+        return "LOCKDOWN_SANDBOX"
     if offense_level == "minor":
         return "RE_EDUCATION_LOOP"
     if decision == TribunalDecision.FAIL:
-        return "PROBATION"
+        return "PROBATION_MODE"
+    if decision == TribunalDecision.REVIEW:
+        return "FORCED_REFLECTION"
     return None

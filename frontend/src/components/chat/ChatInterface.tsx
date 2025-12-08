@@ -355,6 +355,23 @@ export default function ChatInterface({ onActivityChange }: ChatInterfaceProps) 
         )}
       </AnimatePresence>
 
+      {/* Consciousness Indicators - ESGT Phase + Kuramoto Coherence */}
+      <AnimatePresence>
+        {(isStreaming || currentPhase !== "idle") && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="border-t border-cyan-900/30"
+          >
+            <div className="p-3 space-y-3">
+              <PhaseIndicator />
+              <CoherenceMeter />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Input */}
       <div className="p-4 border-t border-cyan-900/30">
         <div className="flex gap-2">

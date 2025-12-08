@@ -14,7 +14,7 @@ from metacognitive_reflector.core.punishment.storage_backends import (
     RedisBackend,
     HAS_REDIS,
 )
-from metacognitive_reflector.core.punishment.penal_registry import (
+from metacognitive_reflector.core.punishment.models import (
     PenalRecord,
     PenalStatus,
     OffenseType,

@@ -1,6 +1,6 @@
 """
-MAXIMUS 2.0 - Memory Models
-===========================
+NOESIS Memory Fortress - Memory Models
+=======================================
 
 Data models for memory client operations.
 """
@@ -16,10 +16,10 @@ from typing import Any, Dict, List, Optional
 class MemoryType(str, Enum):
     """Types of memories supported."""
 
-    SEMANTIC = "semantic"       # Facts and concepts
-    EPISODIC = "episodic"       # Events and experiences
-    PROCEDURAL = "procedural"   # How-to knowledge
-    REFLECTION = "reflection"   # Metacognitive insights
+    SEMANTIC = "semantic"
+    EPISODIC = "episodic"
+    PROCEDURAL = "procedural"
+    REFLECTION = "reflection"
 
 
 @dataclass
@@ -42,3 +42,4 @@ class SearchResult:
     memories: List[MemoryEntry]
     total_found: int
     query_time_ms: float = 0.0
+

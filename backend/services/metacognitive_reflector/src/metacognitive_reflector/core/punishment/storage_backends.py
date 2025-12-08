@@ -1,21 +1,25 @@
 """
-MAXIMUS 2.0 - Penal Registry Storage Backends
-==============================================
+NOESIS Memory Fortress - Penal Registry Storage Backends
+=========================================================
 
 Storage backend implementations for punishment persistence.
-Extracted from penal_registry.py for CODE_CONSTITUTION compliance (< 500 lines).
+Part of the Memory Fortress 4-tier architecture.
 
 Contains:
 - StorageBackend: Abstract base class
 - InMemoryBackend: For testing/development
-- RedisBackend: Production storage
+- RedisBackend: Production storage (L2)
+- JSONBackend: Disaster recovery (L4 Vault)
 """
 
 from __future__ import annotations
 
+import hashlib
 import json
+import logging
 from abc import ABC, abstractmethod
 from datetime import datetime
+from pathlib import Path
 from typing import TYPE_CHECKING, Any, Dict, List, Optional
 
 try:
@@ -25,7 +29,9 @@ except ImportError:
     HAS_REDIS = False
 
 if TYPE_CHECKING:
-    from .penal_registry import PenalRecord
+    from .models import PenalRecord
+
+logger = logging.getLogger(__name__)
 
 
 class StorageBackend(ABC):
@@ -108,7 +114,7 @@ class InMemoryBackend(StorageBackend):
     def __init__(self) -> None:
         """Initialize empty storage."""
         # pylint: disable=import-outside-toplevel
-        from .penal_registry import PenalRecord
+        from .models import PenalRecord
         self._record_class = PenalRecord
         self._records: Dict[str, "PenalRecord"] = {}
 
@@ -175,7 +181,7 @@ class RedisBackend(StorageBackend):
             default_ttl: Default TTL in seconds (7 days)
         """
         # pylint: disable=import-outside-toplevel
-        from .penal_registry import PenalRecord
+        from .models import PenalRecord
         self._record_class = PenalRecord
         self._redis_url = redis_url
         self._default_ttl = default_ttl
@@ -267,5 +273,193 @@ class RedisBackend(StorageBackend):
             return {
                 "healthy": False,
                 "backend": "redis",
+                "error": str(e),
+            }
+
+
+class JSONBackend(StorageBackend):
+    """
+    JSON file storage backend for disaster recovery (L4 Vault).
+
+    Features:
+    - SHA-256 checksums for data integrity
+    - Atomic writes (write to temp, then rename)
+    - Human-readable JSON format
+    - Backup rotation
+
+    Note: Slower than Redis but survives complete infrastructure failure.
+    Use as backup tier, not primary.
+    """
+
+    def __init__(
+        self,
+        file_path: str = "data/penal_registry.json",
+        backup_count: int = 3,
+    ) -> None:
+        """
+        Initialize JSON backend.
+
+        Args:
+            file_path: Path to JSON file
+            backup_count: Number of backup copies to keep
+        """
+        # pylint: disable=import-outside-toplevel
+        from .models import PenalRecord
+        self._record_class = PenalRecord
+        self._file_path = Path(file_path)
+        self._file_path.parent.mkdir(parents=True, exist_ok=True)
+        self._backup_count = backup_count
+        self._cache: Dict[str, "PenalRecord"] = {}
+        self._loaded = False
+
+    def _calculate_checksum(self, data: Dict[str, Any]) -> str:
+        """Calculate SHA-256 checksum for integrity verification."""
+        # Exclude checksum field from calculation
+        data_copy = {k: v for k, v in data.items() if k != "_checksum"}
+        json_str = json.dumps(data_copy, sort_keys=True)
+        return hashlib.sha256(json_str.encode()).hexdigest()
+
+    def _load(self) -> Dict[str, Any]:
+        """Load data from JSON file with integrity check."""
+        if not self._file_path.exists():
+            return {"records": {}, "_version": "1.0"}
+
+        try:
+            with open(self._file_path, "r") as f:
+                data = json.load(f)
+
+            # Verify checksum if present
+            stored_checksum = data.get("_checksum")
+            if stored_checksum:
+                calculated = self._calculate_checksum(data)
+                if calculated != stored_checksum:
+                    logger.error(
+                        f"JSON backend checksum mismatch! "
+                        f"Expected {stored_checksum}, got {calculated}"
+                    )
+                    # Try to recover from backup
+                    return self._recover_from_backup()
+
+            return data
+        except (json.JSONDecodeError, IOError) as e:
+            logger.error(f"Failed to load JSON backend: {e}")
+            return self._recover_from_backup()
+
+    def _recover_from_backup(self) -> Dict[str, Any]:
+        """Attempt recovery from backup files."""
+        for i in range(1, self._backup_count + 1):
+            backup_path = self._file_path.with_suffix(f".json.bak{i}")
+            if backup_path.exists():
+                try:
+                    with open(backup_path, "r") as f:
+                        data = json.load(f)
+                    logger.info(f"Recovered from backup: {backup_path}")
+                    return data
+                except (json.JSONDecodeError, IOError):
+                    continue
+
+        logger.warning("No valid backup found, starting fresh")
+        return {"records": {}, "_version": "1.0"}
+
+    def _save(self, data: Dict[str, Any]) -> None:
+        """Save data to JSON file with checksum and atomic write."""
+        # Rotate backups
+        self._rotate_backups()
+
+        # Add checksum
+        data["_checksum"] = self._calculate_checksum(data)
+        data["_updated_at"] = datetime.now().isoformat()
+
+        # Atomic write: write to temp file, then rename
+        temp_path = self._file_path.with_suffix(".json.tmp")
+        with open(temp_path, "w") as f:
+            json.dump(data, f, indent=2)
+
+        # Rename (atomic on most systems)
+        temp_path.rename(self._file_path)
+
+    def _rotate_backups(self) -> None:
+        """Rotate backup files."""
+        if not self._file_path.exists():
+            return
+
+        # Shift existing backups
+        for i in range(self._backup_count - 1, 0, -1):
+            src = self._file_path.with_suffix(f".json.bak{i}")
+            dst = self._file_path.with_suffix(f".json.bak{i + 1}")
+            if src.exists():
+                src.rename(dst)
+
+        # Create new backup from current file
+        backup_path = self._file_path.with_suffix(".json.bak1")
+        import shutil
+        shutil.copy2(self._file_path, backup_path)
+
+    def _ensure_loaded(self) -> None:
+        """Ensure data is loaded from disk."""
+        if not self._loaded:
+            data = self._load()
+            for agent_id, record_data in data.get("records", {}).items():
+                self._cache[agent_id] = self._record_class.from_dict(record_data)
+            self._loaded = True
+
+    async def get(self, agent_id: str) -> Optional["PenalRecord"]:
+        """Get penal record from JSON file."""
+        self._ensure_loaded()
+        record = self._cache.get(agent_id)
+        if record and not record.is_active:
+            # Auto-clear expired records
+            del self._cache[agent_id]
+            self._persist()
+            return None
+        return record
+
+    async def set(self, record: "PenalRecord") -> bool:
+        """Store penal record to JSON file."""
+        self._ensure_loaded()
+        self._cache[record.agent_id] = record
+        self._persist()
+        return True
+
+    async def delete(self, agent_id: str) -> bool:
+        """Delete penal record from JSON file."""
+        self._ensure_loaded()
+        if agent_id in self._cache:
+            del self._cache[agent_id]
+            self._persist()
+            return True
+        return False
+
+    async def list_active(self) -> List["PenalRecord"]:
+        """List all active punishments from JSON file."""
+        self._ensure_loaded()
+        return [r for r in self._cache.values() if r.is_active]
+
+    def _persist(self) -> None:
+        """Persist cache to disk."""
+        data = {
+            "records": {
+                agent_id: record.to_dict()
+                for agent_id, record in self._cache.items()
+            },
+            "_version": "1.0",
+        }
+        self._save(data)
+
+    async def health_check(self) -> Dict[str, Any]:
+        """Check JSON backend health."""
+        try:
+            self._ensure_loaded()
+            return {
+                "healthy": True,
+                "backend": "json",
+                "file_path": str(self._file_path),
+                "record_count": len(self._cache),
+                "file_exists": self._file_path.exists(),
+            }
+        except Exception as e:
+            return {
+                "healthy": False,
+                "backend": "json",
                 "error": str(e),
             }

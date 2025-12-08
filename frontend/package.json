@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "validate": "node scripts/validate-integration.js",
+    "smoke-test": "bash scripts/smoke-test.sh",
+    "pre-demo": "npm run validate && echo '\\n✓ Validation passed! Run npm run dev to start frontend'"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",

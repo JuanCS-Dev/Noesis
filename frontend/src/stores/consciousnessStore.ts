@@ -13,6 +13,9 @@ export type ESGTPhase =
   | "complete"
   | "failed";
 
+// WebSocket connection status
+export type WSConnectionStatus = "disconnected" | "connecting" | "connected" | "reconnecting";
+
 // Stream event types from SSE
 export interface StreamEvent {
   type: "start" | "phase" | "coherence" | "token" | "complete" | "error";
@@ -20,11 +23,27 @@ export interface StreamEvent {
   timestamp: string;
 }
 
+// WebSocket event from backend
+export interface WSEvent {
+  type: string;
+  timestamp?: string;
+  arousal?: number;
+  events_count?: number;
+  esgt_active?: boolean;
+  [key: string]: unknown;
+}
+
 // Consciousness state interface
 interface ConsciousnessState {
-  // Connection state
+  // SSE Connection state
   isConnected: boolean;
   isStreaming: boolean;
+
+  // WebSocket state
+  wsStatus: WSConnectionStatus;
+  wsArousal: number | null;
+  wsEsgtActive: boolean;
+  wsEventsCount: number;
 
   // ESGT state (real-time from backend)
   currentPhase: ESGTPhase;
@@ -41,7 +60,7 @@ interface ConsciousnessState {
   // Error handling
   error: string | null;
 
-  // Actions
+  // SSE Actions
   startStream: (content: string, depth?: number) => void;
   stopStream: () => void;
   updatePhase: (phase: ESGTPhase) => void;
@@ -49,13 +68,19 @@ interface ConsciousnessState {
   addToken: (token: string) => void;
   setError: (error: string | null) => void;
   reset: () => void;
+
+  // WebSocket Actions
+  setWSStatus: (status: WSConnectionStatus) => void;
+  handleWSEvent: (event: WSEvent) => void;
+  setWSArousal: (arousal: number | null) => void;
+  setWSEsgtActive: (active: boolean) => void;
 }
 
 // EventSource instance (module-level for cleanup)
 let eventSource: EventSource | null = null;
 
 export const useConsciousnessStore = create<ConsciousnessState>((set, get) => ({
-  // Initial state
+  // Initial SSE state
   isConnected: false,
   isStreaming: false,
   currentPhase: "idle",
@@ -65,6 +90,12 @@ export const useConsciousnessStore = create<ConsciousnessState>((set, get) => ({
   fullResponse: "",
   events: [],
   error: null,
+
+  // Initial WebSocket state
+  wsStatus: "disconnected",
+  wsArousal: null,
+  wsEsgtActive: false,
+  wsEventsCount: 0,
 
   // Start streaming from backend
   startStream: (content: string, depth: number = 3) => {
@@ -203,4 +234,63 @@ export const useConsciousnessStore = create<ConsciousnessState>((set, get) => ({
       error: null,
     });
   },
+
+  // =========================================================================
+  // WebSocket Actions for Real-Time State
+  // =========================================================================
+
+  setWSStatus: (status: WSConnectionStatus) => set({ wsStatus: status }),
+
+  handleWSEvent: (event: WSEvent) => {
+    const updates: Partial<ConsciousnessState> = {};
+
+    // Update arousal from WS event
+    if (event.arousal !== undefined) {
+      updates.wsArousal = event.arousal;
+    }
+
+    // Update ESGT active status
+    if (event.esgt_active !== undefined) {
+      updates.wsEsgtActive = event.esgt_active;
+    }
+
+    // Update events count
+    if (event.events_count !== undefined) {
+      updates.wsEventsCount = event.events_count;
+    }
+
+    // Handle specific event types
+    switch (event.type) {
+      case "initial_state":
+        // Full state on connection
+        if (event.arousal !== undefined) updates.wsArousal = event.arousal;
+        if (event.esgt_active !== undefined) updates.wsEsgtActive = event.esgt_active;
+        if (event.events_count !== undefined) updates.wsEventsCount = event.events_count;
+        break;
+
+      case "state_snapshot":
+        // Periodic state update - already handled above
+        break;
+
+      case "arousal_change":
+        // Specific arousal update
+        if (event.arousal !== undefined) updates.wsArousal = event.arousal;
+        break;
+
+      case "esgt_event":
+        // ESGT event notification
+        if (event.phase !== undefined) {
+          updates.currentPhase = event.phase as ESGTPhase;
+        }
+        break;
+    }
+
+    if (Object.keys(updates).length > 0) {
+      set(updates);
+    }
+  },
+
+  setWSArousal: (arousal: number | null) => set({ wsArousal: arousal }),
+
+  setWSEsgtActive: (active: boolean) => set({ wsEsgtActive: active }),
 }));

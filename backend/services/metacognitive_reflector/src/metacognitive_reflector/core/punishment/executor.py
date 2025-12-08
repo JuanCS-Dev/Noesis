@@ -21,7 +21,8 @@ from .handlers import (
     ReEducationHandler,
     RollbackHandler,
 )
-from .penal_registry import OffenseType, PenalRegistry
+from .models import OffenseType
+from .penal_registry import PenalRegistry
 
 
 class PunishmentExecutor:

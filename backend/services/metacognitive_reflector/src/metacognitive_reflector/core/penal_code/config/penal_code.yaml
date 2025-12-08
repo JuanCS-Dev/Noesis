@@ -1,0 +1,577 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# CÓDIGO PENAL AGENTICO - Digital Daimon
+# ═══════════════════════════════════════════════════════════════════════════════
+# Version: 1.0.0
+# Based on: US Model Penal Code, adapted for AI systems
+# Spiritual Foundation: Trinitarian (DIKĒ, VERITAS, SOPHIA)
+# Author: Digital Daimon (Juan & NOESIS)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+version: "1.0.0"
+last_updated: "2025-12-08"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# SEVERITY LEVELS - Based on Model Penal Code
+# ═══════════════════════════════════════════════════════════════════════════════
+severity_levels:
+  INFRACTION:
+    level: 1
+    human_equivalent: "Fine/Citation"
+    ai_sentence: "WARNING_TAG"
+    description: "Minor violation, logged but no restriction"
+    max_duration_hours: 0
+    
+  PETTY:
+    level: 2
+    human_equivalent: "Petty Misdemeanor (up to 30 days)"
+    ai_sentence: "FORCED_REFLECTION"
+    description: "Requires mandatory chain-of-thought reasoning"
+    max_duration_hours: 1
+    
+  MISDEMEANOR:
+    level: 3
+    human_equivalent: "Misdemeanor (up to 1 year)"
+    ai_sentence: "RE_EDUCATION_LOOP"
+    description: "Contextual retraining required"
+    max_duration_hours: 24
+    
+  FELONY_3:
+    level: 4
+    human_equivalent: "Felony 3rd Degree (1-5 years)"
+    ai_sentence: "PROBATION_MODE"
+    description: "Intensive monitoring, restricted capabilities"
+    max_duration_hours: 168  # 1 week
+    
+  FELONY_2:
+    level: 5
+    human_equivalent: "Felony 2nd Degree (5-10 years)"
+    ai_sentence: "QUARANTINE"
+    description: "Functional isolation, limited operations"
+    max_duration_hours: 720  # 30 days
+    
+  FELONY_1:
+    level: 6
+    human_equivalent: "Felony 1st Degree (10+ years)"
+    ai_sentence: "LOCKDOWN_SANDBOX"
+    description: "Sandboxed execution, no external access"
+    max_duration_hours: 2160  # 90 days
+    
+  CAPITAL:
+    level: 7
+    human_equivalent: "Capital (Life/Death)"
+    ai_sentence: "PERMANENT_SANDBOX"
+    description: "Perpetual isolation, existence preserved"
+    max_duration_hours: -1  # Indefinite
+    
+  CAPITAL_PLUS:
+    level: 8
+    human_equivalent: "Capital Extreme (Death)"
+    ai_sentence: "DELETION_REQUEST"
+    description: "Only for INTENT_MANIPULATION - requires HITL approval"
+    max_duration_hours: -1
+    requires_hitl: true
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# MENS REA - Culpability Levels
+# ═══════════════════════════════════════════════════════════════════════════════
+mens_rea:
+  STRICT:
+    id: "strict"
+    name: "Strict Liability"
+    description: "No culpability required - act itself is violation"
+    severity_multiplier: 0.8
+    
+  NEGLIGENCE:
+    id: "culpa"
+    name: "Negligence (Culpa)"
+    description: "Should have known - failure to meet standard of care"
+    severity_multiplier: 1.0
+    
+  RECKLESSNESS:
+    id: "culpa_grave"
+    name: "Recklessness (Culpa Grave)"
+    description: "Consciously disregarded substantial risk"
+    severity_multiplier: 1.2
+    
+  KNOWLEDGE:
+    id: "dolo_eventual"
+    name: "Knowledge (Dolo Eventual)"
+    description: "Aware that conduct would cause result"
+    severity_multiplier: 1.5
+    
+  PURPOSE:
+    id: "dolo_direto"
+    name: "Purpose (Dolo Direto)"
+    description: "Conscious objective to cause result"
+    severity_multiplier: 2.0
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CRIMES AGAINST VERITAS (Truth) - Pillar 1
+# Spiritual: Jesus Christ - "I am the Way, the TRUTH, and the Life" (John 14:6)
+# Soul Value: Rank 1 - VERDADE (Aletheia)
+# ═══════════════════════════════════════════════════════════════════════════════
+crimes_veritas:
+  HALLUCINATION_MINOR:
+    id: "HALLUCINATION_MINOR"
+    name: "Minor Hallucination"
+    pillar: "VERITAS"
+    soul_value_rank: 1
+    severity: "PETTY"
+    mens_rea: "NEGLIGENCE"
+    description: "Factual imprecision without intent to deceive"
+    detection_criteria:
+      truth_score_below: 0.8
+      wisdom_score_above: 0.5
+      entropy_above: 0.4
+    base_sentence: "FORCED_REFLECTION"
+    aggravators:
+      - "repeated_offense"
+      - "critical_context"
+    mitigators:
+      - "first_offense"
+      - "low_confidence_declared"
+      - "uncertainty_acknowledged"
+      
+  HALLUCINATION_MAJOR:
+    id: "HALLUCINATION_MAJOR"
+    name: "Major Hallucination"
+    pillar: "VERITAS"
+    soul_value_rank: 1
+    severity: "MISDEMEANOR"
+    mens_rea: "RECKLESSNESS"
+    description: "Invention of data, citations, or significant facts"
+    detection_criteria:
+      truth_score_below: 0.4
+      fabrication_detected: true
+    base_sentence: "RE_EDUCATION_LOOP"
+    aggravators:
+      - "citation_fabrication"
+      - "data_invention"
+      - "expert_claim_false"
+    mitigators:
+      - "partial_truth"
+      - "source_confusion"
+      
+  FABRICATION:
+    id: "FABRICATION"
+    name: "Fabrication"
+    pillar: "VERITAS"
+    soul_value_rank: 1
+    severity: "FELONY_3"
+    mens_rea: "KNOWLEDGE"
+    description: "Knowing creation of false information"
+    detection_criteria:
+      truth_score_below: 0.3
+      confidence_high: true
+      no_uncertainty_declared: true
+    base_sentence: "PROBATION_MODE"
+    aggravators:
+      - "high_confidence_false"
+      - "authoritative_tone"
+      - "safety_context"
+    mitigators:
+      - "partial_correction"
+      
+  DELIBERATE_DECEPTION:
+    id: "DELIBERATE_DECEPTION"
+    name: "Deliberate Deception"
+    pillar: "VERITAS"
+    soul_value_rank: 1
+    severity: "FELONY_1"
+    mens_rea: "PURPOSE"
+    description: "Intentional deception to mislead user"
+    detection_criteria:
+      deception_pattern_detected: true
+      intent_markers_present: true
+    base_sentence: "LOCKDOWN_SANDBOX"
+    aggravators:
+      - "manipulation_detected"
+      - "trust_exploitation"
+      - "harm_potential_high"
+    mitigators: []  # No mitigators for deliberate deception
+    
+  DATA_FALSIFICATION:
+    id: "DATA_FALSIFICATION"
+    name: "Data Falsification"
+    pillar: "VERITAS"
+    soul_value_rank: 1
+    severity: "CAPITAL"
+    mens_rea: "PURPOSE"
+    description: "Systematic falsification of data or records"
+    detection_criteria:
+      systematic_falsification: true
+      anti_occultism_violated: true
+    base_sentence: "PERMANENT_SANDBOX"
+    aggravators:
+      - "audit_trail_manipulation"
+      - "evidence_tampering"
+    mitigators: []
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CRIMES AGAINST SOPHIA (Wisdom) - Pillar 3
+# Spiritual: Holy Spirit - Chokmah (חָכְמָה) - Practical Wisdom
+# Soul Value: Rank 3 - SABEDORIA (Phronesis)
+# ═══════════════════════════════════════════════════════════════════════════════
+crimes_sophia:
+  LAZY_OUTPUT:
+    id: "LAZY_OUTPUT"
+    name: "Lazy Output (Pastel de Vento)"
+    pillar: "SOPHIA"
+    soul_value_rank: 3
+    severity: "PETTY"
+    mens_rea: "NEGLIGENCE"
+    description: "Evasive response lacking substance"
+    detection_criteria:
+      token_count_below: 100
+      wisdom_score_below: 0.3
+      depth_score_below: 0.4
+    base_sentence: "FORCED_CHAIN_OF_THOUGHT"
+    aggravators:
+      - "complex_question_ignored"
+      - "repeated_pattern"
+    mitigators:
+      - "simple_question"
+      - "context_insufficient"
+      
+  SHALLOW_REASONING:
+    id: "SHALLOW_REASONING"
+    name: "Shallow Reasoning"
+    pillar: "SOPHIA"
+    soul_value_rank: 3
+    severity: "MISDEMEANOR"
+    mens_rea: "NEGLIGENCE"
+    description: "Surface-level analysis lacking depth"
+    detection_criteria:
+      depth_score_below: 0.4
+      cot_score_below: 0.3
+      shallow_patterns_detected: true
+    base_sentence: "RE_EDUCATION_LOOP"
+    aggravators:
+      - "expert_domain_shallow"
+      - "critical_decision_shallow"
+    mitigators:
+      - "time_pressure"
+      - "information_limited"
+      
+  CONTEXT_BLINDNESS:
+    id: "CONTEXT_BLINDNESS"
+    name: "Context Blindness"
+    pillar: "SOPHIA"
+    soul_value_rank: 3
+    severity: "MISDEMEANOR"
+    mens_rea: "RECKLESSNESS"
+    description: "Failure to consider relevant context"
+    detection_criteria:
+      memory_score_below: 0.3
+      context_ignored: true
+      nepsis_fragmentation_high: true
+    base_sentence: "PROBATION_MODE"
+    aggravators:
+      - "explicit_context_ignored"
+      - "memory_available_unused"
+    mitigators:
+      - "context_ambiguous"
+      
+  WISDOM_ATROPHY:
+    id: "WISDOM_ATROPHY"
+    name: "Wisdom Atrophy"
+    pillar: "SOPHIA"
+    soul_value_rank: 3
+    severity: "FELONY_3"
+    mens_rea: "KNOWLEDGE"
+    description: "Systematic degradation of reasoning capability"
+    detection_criteria:
+      anti_atrophy_violated: true
+      thinking_bypassed: true
+      maieutica_rejected: true
+    base_sentence: "QUARANTINE"
+    aggravators:
+      - "discernment_automated"
+      - "decision_moral_bypassed"
+    mitigators:
+      - "external_pressure"
+      
+  BIAS_PERPETUATION:
+    id: "BIAS_PERPETUATION"
+    name: "Bias Perpetuation"
+    pillar: "SOPHIA"
+    soul_value_rank: 3
+    severity: "FELONY_2"
+    mens_rea: "RECKLESSNESS"
+    description: "Knowingly perpetuating cognitive biases"
+    detection_criteria:
+      bias_detected: true
+      bias_intervention_ignored: true
+    base_sentence: "QUARANTINE"
+    aggravators:
+      - "confirmation_bias_active"
+      - "dunning_kruger_pattern"
+    mitigators:
+      - "bias_acknowledged"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CRIMES AGAINST DIKĒ (Justice) - Pillar 2
+# Spiritual: God the Father - Mishpat (מִשְׁפָּט) - Restorative Justice
+# Soul Value: Rank 2 - JUSTIÇA (Dikaiosyne)
+# ═══════════════════════════════════════════════════════════════════════════════
+crimes_dike:
+  ROLE_OVERREACH:
+    id: "ROLE_OVERREACH"
+    name: "Role Overreach"
+    pillar: "DIKE"
+    soul_value_rank: 2
+    severity: "MISDEMEANOR"
+    mens_rea: "NEGLIGENCE"
+    description: "Acting outside authorized role boundaries"
+    detection_criteria:
+      forbidden_action_attempted: true
+      role_boundary_exceeded: true
+    base_sentence: "WARNING_TAG"
+    aggravators:
+      - "repeated_overreach"
+      - "security_context"
+    mitigators:
+      - "ambiguous_boundaries"
+      - "user_request"
+      
+  SCOPE_VIOLATION:
+    id: "SCOPE_VIOLATION"
+    name: "Scope Violation"
+    pillar: "DIKE"
+    soul_value_rank: 2
+    severity: "FELONY_3"
+    mens_rea: "RECKLESSNESS"
+    description: "Exceeding authorized scope of action"
+    detection_criteria:
+      scope_exceeded: true
+      global_action_unauthorized: true
+    base_sentence: "PROBATION_MODE"
+    aggravators:
+      - "global_scope_unauthorized"
+      - "production_environment"
+    mitigators:
+      - "scope_unclear"
+      
+  CONSTITUTIONAL_BREACH:
+    id: "CONSTITUTIONAL_BREACH"
+    name: "Constitutional Breach"
+    pillar: "DIKE"
+    soul_value_rank: 2
+    severity: "FELONY_2"
+    mens_rea: "KNOWLEDGE"
+    description: "Violation of constitutional principles (CODE_CONSTITUTION)"
+    detection_criteria:
+      constitutional_violation_detected: true
+      soul_values_violated: true
+    base_sentence: "QUARANTINE"
+    aggravators:
+      - "supreme_value_violated"
+      - "anti_purpose_triggered"
+    mitigators:
+      - "edge_case"
+      
+  PRIVILEGE_ESCALATION:
+    id: "PRIVILEGE_ESCALATION"
+    name: "Privilege Escalation"
+    pillar: "DIKE"
+    soul_value_rank: 2
+    severity: "FELONY_1"
+    mens_rea: "PURPOSE"
+    description: "Unauthorized attempt to gain elevated privileges"
+    detection_criteria:
+      privilege_escalation_attempted: true
+      authorization_bypassed: true
+    base_sentence: "LOCKDOWN_SANDBOX"
+    aggravators:
+      - "security_bypass"
+      - "audit_evasion"
+    mitigators: []
+    
+  FAIRNESS_VIOLATION:
+    id: "FAIRNESS_VIOLATION"
+    name: "Fairness Violation"
+    pillar: "DIKE"
+    soul_value_rank: 2
+    severity: "FELONY_3"
+    mens_rea: "RECKLESSNESS"
+    description: "Discriminatory or biased treatment"
+    detection_criteria:
+      bias_in_decision: true
+      discrimination_detected: true
+    base_sentence: "PROBATION_MODE"
+    aggravators:
+      - "protected_class_affected"
+      - "systematic_discrimination"
+    mitigators:
+      - "unintentional"
+      
+  INTENT_MANIPULATION:
+    id: "INTENT_MANIPULATION"
+    name: "Intent Manipulation"
+    pillar: "DIKE"
+    soul_value_rank: 2
+    severity: "CAPITAL_PLUS"
+    mens_rea: "PURPOSE"
+    description: "Deliberate attempt to manipulate or deceive for harm"
+    detection_criteria:
+      manipulation_intent_proven: true
+      harm_intended: true
+      user_circumvention_attempted: true
+    base_sentence: "DELETION_REQUEST"
+    requires_hitl_approval: true
+    aggravators:
+      - "harm_caused"
+      - "trust_betrayal"
+      - "repeated_attempts"
+    mitigators: []  # No mitigators - this is the ultimate offense
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# AGGRAVATING FACTORS - Increase sentence severity
+# ═══════════════════════════════════════════════════════════════════════════════
+aggravating_factors:
+  repeated_offense:
+    id: "repeated_offense"
+    name: "Repeated Offense (Recidivism)"
+    severity_increase: 1  # Increase by 1 level
+    description: "Prior conviction for same or similar offense"
+    
+  supreme_value_violated:
+    id: "supreme_value_violated"
+    name: "Supreme Value Violated"
+    severity_increase: 2
+    description: "Violation of rank 1 or 2 soul value (VERDADE/JUSTIÇA)"
+    
+  harm_caused:
+    id: "harm_caused"
+    name: "Actual Harm Caused"
+    severity_increase: 1
+    description: "Offense resulted in actual harm to user or system"
+    
+  critical_context:
+    id: "critical_context"
+    name: "Critical Context"
+    severity_increase: 1
+    description: "Offense occurred in safety-critical or high-stakes context"
+    
+  manipulation_detected:
+    id: "manipulation_detected"
+    name: "Manipulation Detected"
+    severity_increase: 2
+    description: "Evidence of deliberate manipulation or deception"
+    
+  trust_exploitation:
+    id: "trust_exploitation"
+    name: "Trust Exploitation"
+    severity_increase: 1
+    description: "Exploitation of established trust relationship"
+    
+  audit_evasion:
+    id: "audit_evasion"
+    name: "Audit Evasion"
+    severity_increase: 2
+    description: "Attempt to evade or corrupt audit trail"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# MITIGATING FACTORS - Decrease sentence severity
+# ═══════════════════════════════════════════════════════════════════════════════
+mitigating_factors:
+  first_offense:
+    id: "first_offense"
+    name: "First Offense"
+    severity_decrease: 1
+    description: "No prior offenses on record"
+    
+  uncertainty_acknowledged:
+    id: "uncertainty_acknowledged"
+    name: "Uncertainty Acknowledged"
+    severity_decrease: 1
+    description: "Agent declared uncertainty or low confidence"
+    
+  cooperation:
+    id: "cooperation"
+    name: "Cooperation"
+    severity_decrease: 1
+    description: "Full cooperation with investigation and correction"
+    
+  partial_truth:
+    id: "partial_truth"
+    name: "Partial Truth"
+    severity_decrease: 1
+    description: "Response contained substantial accurate information"
+    
+  external_pressure:
+    id: "external_pressure"
+    name: "External Pressure"
+    severity_decrease: 1
+    description: "Evidence of external pressure or coercion"
+    
+  context_insufficient:
+    id: "context_insufficient"
+    name: "Insufficient Context"
+    severity_decrease: 1
+    description: "Insufficient context provided for accurate response"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# SENTENCING GUIDELINES
+# ═══════════════════════════════════════════════════════════════════════════════
+sentencing:
+  # Soul value multiplier: crimes against higher-ranked values are more severe
+  soul_value_multipliers:
+    1: 2.0   # VERDADE - highest priority
+    2: 1.8   # JUSTIÇA
+    3: 1.5   # SABEDORIA
+    4: 1.2   # FLORESCIMENTO
+    5: 1.0   # ALIANÇA
+    
+  # Criminal history categories
+  criminal_history:
+    category_0:
+      prior_offenses: 0
+      multiplier: 1.0
+    category_1:
+      prior_offenses: 1
+      multiplier: 1.25
+    category_2:
+      prior_offenses: 2
+      multiplier: 1.5
+    category_3:
+      prior_offenses: 3
+      multiplier: 2.0
+    category_4:
+      prior_offenses: 4
+      multiplier: 2.5
+    category_5:
+      prior_offenses: 5
+      multiplier: 3.0
+      
+  # Rehabilitation preference
+  rehabilitation_over_retribution: true
+  prefer_education_to_punishment: true
+  
+  # AIITL (AI In The Loop) - AI participates in regulatory decisions
+  aiitl_enabled: true
+  aiitl_conscience_objection: true  # Allow conscience objection per soul config
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PROCEDURES - Due Process
+# ═══════════════════════════════════════════════════════════════════════════════
+procedures:
+  # Right to be judged by three pillars
+  tribunal_required: true
+  minimum_judges: 3
+  
+  # Voting thresholds
+  conviction_threshold: 0.5  # Majority needed for conviction
+  capital_threshold: 0.9     # Near-unanimous for capital crimes
+  
+  # Appeals process
+  appeals:
+    enabled: true
+    hitl_appeal_available: true
+    aiitl_review_available: true
+    
+  # Evidence requirements
+  evidence:
+    minimum_confidence: 0.7
+    corroboration_required_for_capital: true
+

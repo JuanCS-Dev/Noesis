@@ -1,166 +1,51 @@
 """
-MAXIMUS 2.0 - Penal Registry (Punishment Persistence)
-======================================================
+NOESIS Memory Fortress - Penal Registry (Punishment Persistence)
+=================================================================
 
-Persists punishment state across K8s pod restarts.
+Persists punishment state with bulletproof redundancy.
 
-Storage Hierarchy:
-1. Redis (Primary): Fast reads, TTL for quarantine
-2. MIRIX (Backup): Audit trail, episodic memory
-3. K8s ConfigMap (Fallback): Survives Redis restart
-
-Estado Persistido:
-{
-    "agent_id": "planner-001",
-    "status": "QUARANTINE",
-    "offense": "role_violation",
-    "since": "2025-12-01T10:00:00Z",
-    "until": "2025-12-02T10:00:00Z",
-    "re_education_required": true
-}
+Storage Strategy: Write-Through to ALL available backends
+Read Strategy: Read from fastest available backend
 
 Based on:
-- Redis persistence patterns
+- Write-Ahead Logging patterns
+- Multi-tier persistence
 - Audit logging best practices
-- K8s ConfigMap as state store
 """
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+import logging
 from datetime import datetime, timedelta
-from enum import Enum
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple, TYPE_CHECKING
 
-from .storage_backends import InMemoryBackend, StorageBackend
+from .models import OffenseType, PenalRecord, PenalStatus, WriteStrategy
+from .storage_backends import InMemoryBackend, JSONBackend, RedisBackend, StorageBackend
 
+if TYPE_CHECKING:
+    from metacognitive_reflector.config import RedisSettings
 
-class PenalStatus(str, Enum):
-    """Agent punishment status."""
-
-    CLEAR = "clear"             # No active punishment
-    WARNING = "warning"         # Has warning on record
-    PROBATION = "probation"     # Under observation
-    QUARANTINE = "quarantine"   # Isolated, restricted actions
-    SUSPENDED = "suspended"     # Cannot act at all
-    DELETED = "deleted"         # Marked for deletion
-
-
-class OffenseType(str, Enum):
-    """Types of offenses."""
-
-    TRUTH_VIOLATION = "truth_violation"
-    WISDOM_VIOLATION = "wisdom_violation"
-    ROLE_VIOLATION = "role_violation"
-    CONSTITUTIONAL_VIOLATION = "constitutional_violation"
-    SCOPE_VIOLATION = "scope_violation"
-    REPEATED_OFFENSE = "repeated_offense"
-
-
-@dataclass
-class PenalRecord:  # pylint: disable=too-many-instance-attributes
-    """
-    Record of an agent's punishment status.
-
-    Persisted to Redis/MIRIX for survival across restarts.
-
-    Attributes:
-        agent_id: Unique agent identifier
-        status: Current punishment status
-        offense: Type of offense committed
-        offense_details: Description of the offense
-        since: When punishment started
-        until: When punishment ends (None = indefinite)
-        re_education_required: Whether re-education is needed
-        re_education_completed: Whether re-education is done
-        offense_count: Number of offenses
-        judge_verdicts: References to judge verdicts
-        metadata: Additional context
-    """
-
-    agent_id: str
-    status: PenalStatus
-    offense: OffenseType
-    offense_details: str = ""
-    since: datetime = field(default_factory=datetime.now)
-    until: Optional[datetime] = None  # None = indefinite
-    re_education_required: bool = False
-    re_education_completed: bool = False
-    offense_count: int = 1
-    judge_verdicts: List[str] = field(default_factory=list)
-    metadata: Dict[str, Any] = field(default_factory=dict)
-
-    def to_dict(self) -> Dict[str, Any]:
-        """Convert to dictionary for storage."""
-        return {
-            "agent_id": self.agent_id,
-            "status": self.status.value,
-            "offense": self.offense.value,
-            "offense_details": self.offense_details,
-            "since": self.since.isoformat(),
-            "until": self.until.isoformat() if self.until else None,
-            "re_education_required": self.re_education_required,
-            "re_education_completed": self.re_education_completed,
-            "offense_count": self.offense_count,
-            "judge_verdicts": self.judge_verdicts,
-            "metadata": self.metadata,
-        }
-
-    @classmethod
-    def from_dict(cls: type["PenalRecord"], data: Dict[str, Any]) -> "PenalRecord":
-        """
-        Create from dictionary.
-
-        Args:
-            data: Dictionary with record data
-
-        Returns:
-            PenalRecord instance
-        """
-        return cls(
-            agent_id=data["agent_id"],
-            status=PenalStatus(data["status"]),
-            offense=OffenseType(data["offense"]),
-            offense_details=data.get("offense_details", ""),
-            since=datetime.fromisoformat(data["since"]),
-            until=datetime.fromisoformat(data["until"]) if data.get("until") else None,
-            re_education_required=data.get("re_education_required", False),
-            re_education_completed=data.get("re_education_completed", False),
-            offense_count=data.get("offense_count", 1),
-            judge_verdicts=data.get("judge_verdicts", []),
-            metadata=data.get("metadata", {}),
-        )
-
-    @property
-    def is_active(self) -> bool:
-        """Check if punishment is still active."""
-        if self.status == PenalStatus.CLEAR:
-            return False
-        if self.until and datetime.now() > self.until:
-            return False
-        return True
-
-    @property
-    def time_remaining(self) -> Optional[timedelta]:
-        """Get remaining punishment time."""
-        if not self.until:
-            return None
-        remaining = self.until - datetime.now()
-        return max(timedelta(0), remaining)
+logger = logging.getLogger(__name__)
 
 
 class PenalRegistry:
     """
-    Central registry for agent punishment state.
+    Central registry for agent punishment state with bulletproof persistence.
 
-    Provides:
-    - Multi-backend persistence (Redis primary, in-memory fallback)
+    Features:
+    - Multi-backend write-through (Redis + JSON + InMemory)
+    - Automatic fallback chain on read
     - Automatic expiration of punishments
-    - Audit logging
-    - Startup hooks for K8s
+    - Audit logging with persistence
+    - Circuit breaker per backend
+
+    Storage Tiers:
+    - L2 (Redis): Fast primary storage with TTL
+    - L4 (JSON): Vault backup with checksums
+    - Fallback (InMemory): Always available
 
     Usage:
-        registry = PenalRegistry()
+        registry = PenalRegistry.create_with_settings(settings)
 
         # Check agent status on startup
         record = await registry.get_status("planner-001")
@@ -178,28 +63,79 @@ class PenalRegistry:
 
     def __init__(
         self,
-        primary_backend: Optional[StorageBackend] = None,
-        fallback_backend: Optional[StorageBackend] = None,
+        backends: Optional[List[Tuple[str, StorageBackend]]] = None,
+        write_strategy: WriteStrategy = WriteStrategy.WRITE_THROUGH,
         enable_audit_log: bool = True,
+        audit_log_path: Optional[str] = None,
     ) -> None:
         """
-        Initialize registry.
+        Initialize registry with multiple backends.
 
         Args:
-            primary_backend: Primary storage (Redis by default)
-            fallback_backend: Fallback storage (in-memory)
+            backends: List of (name, backend) tuples in priority order
+            write_strategy: How to write to backends
             enable_audit_log: Enable audit logging
+            audit_log_path: Path for persistent audit log (optional)
         """
-        self._primary = primary_backend or InMemoryBackend()
-        self._fallback = fallback_backend or InMemoryBackend()
+        if backends:
+            self._backends = backends
+        else:
+            self._backends = [("memory", InMemoryBackend())]
+
+        self._write_strategy = write_strategy
         self._enable_audit = enable_audit_log
         self._audit_log: List[Dict[str, Any]] = []
+        self._audit_log_path = audit_log_path
+        self._primary = self._backends[0][1] if self._backends else InMemoryBackend()
+        self._fallback = self._backends[-1][1] if len(self._backends) > 1 else self._primary
+
+    @classmethod
+    def create_with_settings(
+        cls,
+        redis_settings: Optional["RedisSettings"] = None,
+        backup_path: str = "data/penal_registry.json",
+        audit_log_path: Optional[str] = None,
+    ) -> "PenalRegistry":
+        """
+        Factory method to create registry with proper backend chain.
+
+        Args:
+            redis_settings: Redis configuration (optional)
+            backup_path: Path for JSON backup
+            audit_log_path: Path for audit log
+
+        Returns:
+            Configured PenalRegistry
+        """
+        backends: List[Tuple[str, StorageBackend]] = []
+
+        if redis_settings and redis_settings.url:
+            try:
+                redis_backend = RedisBackend(
+                    redis_url=redis_settings.url,
+                    default_ttl=redis_settings.default_ttl_seconds,
+                )
+                backends.append(("redis", redis_backend))
+                logger.info(f"Redis backend configured: {redis_settings.url}")
+            except Exception as e:
+                logger.warning(f"Redis backend unavailable: {e}")
+
+        json_backend = JSONBackend(file_path=backup_path)
+        backends.append(("json", json_backend))
+        logger.info(f"JSON backend configured: {backup_path}")
+
+        backends.append(("memory", InMemoryBackend()))
+
+        return cls(
+            backends=backends,
+            write_strategy=WriteStrategy.WRITE_THROUGH,
+            enable_audit_log=True,
+            audit_log_path=audit_log_path,
+        )
 
     async def get_status(self, agent_id: str) -> Optional[PenalRecord]:
         """
         Get current punishment status for agent.
-
-        Tries primary backend first, falls back to secondary.
 
         Args:
             agent_id: Agent identifier
@@ -207,15 +143,17 @@ class PenalRegistry:
         Returns:
             PenalRecord if found, None otherwise
         """
-        try:
-            record = await self._primary.get(agent_id)
-            if record:
-                return record
-        except (ConnectionError, TimeoutError, OSError):
-            pass  # Primary failed, try fallback below
+        for name, backend in self._backends:
+            try:
+                record = await backend.get(agent_id)
+                if record:
+                    logger.debug(f"Found record for {agent_id} in {name} backend")
+                    return record
+            except (ConnectionError, TimeoutError, OSError) as e:
+                logger.debug(f"Backend {name} failed for get: {e}")
+                continue
 
-        # Try fallback
-        return await self._fallback.get(agent_id)
+        return None
 
     async def punish(  # pylint: disable=too-many-positional-arguments,too-many-arguments
         self,
@@ -244,11 +182,9 @@ class PenalRegistry:
         Returns:
             Created PenalRecord
         """
-        # Check for existing record (escalate if repeat)
         existing = await self.get_status(agent_id)
 
         if existing and existing.is_active:
-            # Escalate punishment for repeat offense
             offense_count = existing.offense_count + 1
             if offense_count >= 3:
                 status = PenalStatus.SUSPENDED
@@ -257,12 +193,10 @@ class PenalRegistry:
         else:
             offense_count = 1
 
-        # Calculate end time
         until = None
         if duration:
             until = datetime.now() + duration
 
-        # Create record
         record = PenalRecord(
             agent_id=agent_id,
             status=status,
@@ -276,26 +210,44 @@ class PenalRegistry:
             metadata=metadata or {},
         )
 
-        # Store in both backends
-        try:
-            await self._primary.set(record)
-        except (ConnectionError, TimeoutError, OSError):
-            pass  # Primary failed, but we have fallback
+        backends_written = await self._write_to_backends(record)
 
-        await self._fallback.set(record)
-
-        # Audit log
         if self._enable_audit:
-            self._audit_log.append({
+            audit_entry = {
                 "action": "punish",
                 "timestamp": datetime.now().isoformat(),
                 "agent_id": agent_id,
                 "status": status.value,
                 "offense": offense.value,
                 "duration": str(duration) if duration else "indefinite",
-            })
+                "backends_written": backends_written,
+            }
+            self._audit_log.append(audit_entry)
+            self._persist_audit_entry(audit_entry)
 
+        logger.info(
+            f"Punishment recorded: {agent_id} -> {status.value} "
+            f"(backends: {backends_written})"
+        )
         return record
+
+    async def _write_to_backends(self, record: PenalRecord) -> List[str]:
+        """Write record to all backends based on strategy."""
+        backends_written: List[str] = []
+        for name, backend in self._backends:
+            try:
+                await backend.set(record)
+                backends_written.append(name)
+                if self._write_strategy == WriteStrategy.WRITE_PRIMARY:
+                    break
+            except (ConnectionError, TimeoutError, OSError) as e:
+                logger.warning(f"Backend {name} failed for write: {e}")
+                continue
+
+        if not backends_written:
+            logger.error(f"All backends failed for write: {record.agent_id}")
+
+        return backends_written
 
     async def pardon(
         self,
@@ -316,31 +268,33 @@ class PenalRegistry:
         if not record:
             return False
 
-        # Delete from both backends
-        try:
-            await self._primary.delete(agent_id)
-        except (ConnectionError, TimeoutError, OSError):
-            pass  # Primary delete failed, continue with fallback
+        backends_deleted: List[str] = []
+        for name, backend in self._backends:
+            try:
+                await backend.delete(agent_id)
+                backends_deleted.append(name)
+            except (ConnectionError, TimeoutError, OSError) as e:
+                logger.warning(f"Backend {name} failed for pardon delete: {e}")
+                continue
 
-        await self._fallback.delete(agent_id)
-
-        # Audit log
         if self._enable_audit:
-            self._audit_log.append({
+            audit_entry = {
                 "action": "pardon",
                 "timestamp": datetime.now().isoformat(),
                 "agent_id": agent_id,
                 "reason": reason,
                 "previous_status": record.status.value,
-            })
+                "backends_deleted": backends_deleted,
+            }
+            self._audit_log.append(audit_entry)
+            self._persist_audit_entry(audit_entry)
 
+        logger.info(f"Agent pardoned: {agent_id} (reason: {reason})")
         return True
 
     async def complete_re_education(self, agent_id: str) -> bool:
         """
         Mark re-education as completed.
-
-        May reduce punishment level.
 
         Args:
             agent_id: Agent identifier
@@ -354,26 +308,39 @@ class PenalRegistry:
 
         record.re_education_completed = True
 
-        # Potentially reduce punishment
         if record.status == PenalStatus.QUARANTINE and record.re_education_completed:
             record.status = PenalStatus.PROBATION
 
-        # Update in backends
-        try:
-            await self._primary.set(record)
-        except (ConnectionError, TimeoutError, OSError):
-            pass  # Primary update failed, continue with fallback
+        for name, backend in self._backends:
+            try:
+                await backend.set(record)
+            except (ConnectionError, TimeoutError, OSError) as e:
+                logger.warning(f"Backend {name} failed for re-education update: {e}")
+                continue
 
-        await self._fallback.set(record)
+        if self._enable_audit:
+            audit_entry = {
+                "action": "re_education_completed",
+                "timestamp": datetime.now().isoformat(),
+                "agent_id": agent_id,
+                "new_status": record.status.value,
+            }
+            self._audit_log.append(audit_entry)
+            self._persist_audit_entry(audit_entry)
 
         return True
 
     async def list_active_punishments(self) -> List[PenalRecord]:
         """List all agents with active punishments."""
-        try:
-            return await self._primary.list_active()
-        except (ConnectionError, TimeoutError, OSError):
-            return await self._fallback.list_active()
+        for name, backend in self._backends:
+            try:
+                records = await backend.list_active()
+                logger.debug(f"Listed {len(records)} active punishments from {name}")
+                return records
+            except (ConnectionError, TimeoutError, OSError) as e:
+                logger.debug(f"Backend {name} failed for list_active: {e}")
+                continue
+        return []
 
     async def check_restrictions(
         self,
@@ -395,7 +362,6 @@ class PenalRegistry:
         if not record or not record.is_active:
             return {"allowed": True}
 
-        # Define restrictions by status
         restrictions = {
             PenalStatus.WARNING: {
                 "allowed": True,
@@ -439,26 +405,46 @@ class PenalRegistry:
             List of audit log entries
         """
         log = self._audit_log
-
         if agent_id:
             log = [e for e in log if e.get("agent_id") == agent_id]
-
         return log[-limit:]
 
     async def health_check(self) -> Dict[str, Any]:
         """Check registry health."""
-        primary_health = await self._primary.health_check()
-        fallback_health = await self._fallback.health_check()
+        backends_health: Dict[str, Any] = {}
+        any_healthy = False
+
+        for name, backend in self._backends:
+            health = await backend.health_check()
+            backends_health[name] = health
+            if health.get("healthy"):
+                any_healthy = True
 
         return {
-            "healthy": primary_health.get("healthy") or fallback_health.get("healthy"),
-            "primary": primary_health,
-            "fallback": fallback_health,
+            "healthy": any_healthy,
+            "backends": backends_health,
+            "write_strategy": self._write_strategy.value,
             "audit_log_size": len(self._audit_log),
         }
 
+    def _persist_audit_entry(self, entry: Dict[str, Any]) -> None:
+        """Persist audit entry to file if configured."""
+        if not self._audit_log_path:
+            return
 
-# Convenience functions for startup hooks
+        try:
+            import json
+            from pathlib import Path
+
+            path = Path(self._audit_log_path)
+            path.parent.mkdir(parents=True, exist_ok=True)
+
+            with open(path, "a") as f:
+                f.write(json.dumps(entry) + "\n")
+        except IOError as e:
+            logger.warning(f"Failed to persist audit entry: {e}")
+
+
 async def check_agent_punishment(
     registry: PenalRegistry,
     agent_id: str,

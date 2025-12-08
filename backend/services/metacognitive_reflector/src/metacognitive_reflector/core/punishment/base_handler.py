@@ -18,7 +18,7 @@ from dataclasses import dataclass, field
 from enum import Enum
 from typing import Any, Dict, List, Optional
 
-from .penal_registry import OffenseType
+from .models import OffenseType
 
 
 class PunishmentResult(str, Enum):
