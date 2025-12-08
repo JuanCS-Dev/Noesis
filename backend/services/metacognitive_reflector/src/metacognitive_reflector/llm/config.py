@@ -52,11 +52,27 @@ class NebiusConfig:
     )
     base_url: str = "https://api.tokenfactory.nebius.com/v1/"
     
-    # DeepSeek-R1 is optimal for metacognitive reasoning
+    # Default model - Llama for fast Language Motor tasks
     model: str = field(
         default_factory=lambda: os.getenv(
             "NEBIUS_MODEL",
-            "deepseek-ai/DeepSeek-R1-0528"
+            "meta-llama/Llama-3.3-70B-Instruct-fast"
+        )
+    )
+    
+    # Reasoning model - DeepSeek-R1 for Tribunal/Judges
+    model_reasoning: str = field(
+        default_factory=lambda: os.getenv(
+            "NEBIUS_MODEL_REASONING",
+            "deepseek-ai/DeepSeek-R1-0528-fast"
+        )
+    )
+    
+    # Deep analysis model - for complex tasks
+    model_deep: str = field(
+        default_factory=lambda: os.getenv(
+            "NEBIUS_MODEL_DEEP",
+            "Qwen/Qwen3-235B-A22B-Thinking-2507"
         )
     )
     
@@ -202,25 +218,43 @@ class LLMConfig:
 
 
 # Available Nebius models (Dec 2025)
+# Benchmarked for Noesis pipeline
 NEBIUS_MODELS = {
-    # Reasoning models (best for metacognition)
-    "deepseek-r1": "deepseek-ai/DeepSeek-R1-0528",
+    # ===== FAST VARIANTS (Optimized for speed) =====
+    # Use -fast suffix for production
+    "llama-3.3-70b-fast": "meta-llama/Llama-3.3-70B-Instruct-fast",  # 1135ms ⚡
+    "deepseek-v3-fast": "deepseek-ai/DeepSeek-V3-0324-fast",          # 1201ms
+    "qwen3-32b-fast": "Qwen/Qwen3-32B-fast",                          # 1807ms, 83 tok/s
+    "deepseek-r1-fast": "deepseek-ai/DeepSeek-R1-0528-fast",          # 1930ms 🧠
+    "gemma-3-27b-fast": "google/gemma-3-27b-it-fast",                 # 2318ms
+    
+    # ===== REASONING MODELS (Explicit thinking) =====
+    "deepseek-r1": "deepseek-ai/DeepSeek-R1-0528",                    # 4516ms
+    "qwen3-thinking": "Qwen/Qwen3-30B-A3B-Thinking-2507",             # 3776ms
+    "qwen3-235b-thinking": "Qwen/Qwen3-235B-A22B-Thinking-2507",      # Deep analysis
+    
+    # ===== STANDARD MODELS =====
     "deepseek-v3": "deepseek-ai/DeepSeek-V3-0324",
-    
-    # Large context models
-    "qwen3-235b": "Qwen/Qwen3-235B-A22B",
-    "qwen2.5-72b": "Qwen/Qwen2.5-72B-Instruct",
-    "qwen2.5-32b": "Qwen/Qwen2.5-32B-Instruct",
-    
-    # Fast inference models
     "llama-3.3-70b": "meta-llama/Llama-3.3-70B-Instruct",
-    "llama-3.1-70b": "meta-llama/Meta-Llama-3.1-70B-Instruct",
-    "llama-3.1-8b": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+    "qwen3-32b": "Qwen/Qwen3-32B",
+    "gemma-3-27b": "google/gemma-3-27b-it",
     
-    # Code models
-    "qwen2.5-coder": "Qwen/Qwen2.5-Coder-32B-Instruct",
-    
-    # Multimodal
-    "qwen2-vl-72b": "Qwen/Qwen2-VL-72B-Instruct",
+    # ===== SPECIAL PURPOSE =====
+    "qwen3-coder": "Qwen/Qwen3-Coder-30B-A3B-Instruct",
+    "qwen2.5-vl": "Qwen/Qwen2.5-VL-72B-Instruct",  # Multimodal
+    "hermes-405b": "NousResearch/Hermes-4-405B",   # Large
+}
+
+# Model tiers for automatic routing
+class ModelTier(str, Enum):
+    """Model tiers for task-based routing."""
+    FAST = "fast"           # Language Motor, formatting (~1s)
+    REASONING = "reasoning"  # Tribunal, judges (~2s)
+    DEEP = "deep"           # Complex analysis (~4s+)
+
+TIER_DEFAULTS = {
+    ModelTier.FAST: "meta-llama/Llama-3.3-70B-Instruct-fast",
+    ModelTier.REASONING: "deepseek-ai/DeepSeek-R1-0528-fast",
+    ModelTier.DEEP: "Qwen/Qwen3-235B-A22B-Thinking-2507",
 }
 

@@ -38,6 +38,8 @@ from .config import (
     NebiusConfig,
     GeminiConfig,
     NEBIUS_MODELS,
+    ModelTier,
+    TIER_DEFAULTS,
 )
 
 __all__ = [
@@ -52,5 +54,7 @@ __all__ = [
     "NebiusConfig",
     "GeminiConfig",
     "NEBIUS_MODELS",
+    "ModelTier",
+    "TIER_DEFAULTS",
 ]
 
