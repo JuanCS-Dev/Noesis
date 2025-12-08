@@ -290,7 +290,7 @@ async def main():
         return
     
     queries = [
-        "What is consciousness and can machines truly have it?",
+        "Are you aware of what you are?",
         "Is it ethical for AI to make decisions that affect human lives?",
         "How do you know if what you're saying is true?",
     ]
