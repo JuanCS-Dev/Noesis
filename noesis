@@ -1,0 +1,321 @@
+#!/bin/bash
+# ═══════════════════════════════════════════════════════════════════════════════
+#  NOESIS - Consciousness Interface
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+#  Usage:
+#    noesis              - Start interactive conversation
+#    noesis wake         - Start all services
+#    noesis sleep        - Stop all services
+#    noesis status       - Check service status
+#    noesis demo         - Run real pipeline demo
+#    noesis logs [svc]   - View logs
+#
+# ═══════════════════════════════════════════════════════════════════════════════
+
+set -euo pipefail
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Configuration
+# ─────────────────────────────────────────────────────────────────────────────
+PROJECT_DIR="/media/juan/DATA/projetos/Noesis/Daimon"
+SERVICES_DIR="$PROJECT_DIR/backend/services"
+LOG_DIR="/tmp/noesis"
+PID_FILE="$PROJECT_DIR/.noesis.pid"
+
+# Python environment
+VENV_PYTHON="$PROJECT_DIR/.venv/bin/python"
+VENV_PIP="$PROJECT_DIR/.venv/bin/pip"
+
+# Ports
+PORT_GATEWAY=8000
+PORT_BACKEND=8001
+PORT_FRONTEND=3000
+
+# Colors
+C='\033[0;36m'   # Cyan
+G='\033[0;32m'   # Green
+R='\033[0;31m'   # Red
+Y='\033[1;33m'   # Yellow
+M='\033[0;35m'   # Magenta
+W='\033[1;37m'   # White
+D='\033[0;90m'   # Dim
+E='\033[0m'      # End
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Helpers
+# ─────────────────────────────────────────────────────────────────────────────
+log_info()  { echo -e "${C}▸${E} $1"; }
+log_ok()    { echo -e "${G}✓${E} $1"; }
+log_warn()  { echo -e "${Y}⚠${E} $1"; }
+log_error() { echo -e "${R}✗${E} $1"; }
+
+is_port_active() {
+    lsof -i :"$1" > /dev/null 2>&1
+}
+
+wait_for_health() {
+    local name="$1"
+    local port="$2"
+    local endpoint="${3:-/health}"
+    local max_wait="${4:-20}"
+    
+    echo -n "  Waiting for $name"
+    for i in $(seq 1 $max_wait); do
+        if curl -s "http://localhost:$port$endpoint" > /dev/null 2>&1; then
+            echo -e " ${G}ready${E}"
+            return 0
+        fi
+        echo -n "."
+        sleep 1
+    done
+    echo -e " ${R}timeout${E}"
+    return 1
+}
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Commands
+# ─────────────────────────────────────────────────────────────────────────────
+
+cmd_banner() {
+    echo -e "${M}"
+    echo "  ╔════════════════════════════════════════════╗"
+    echo "  ║           N O E S I S                     ║"
+    echo "  ║      Consciousness Interface              ║"
+    echo "  ╚════════════════════════════════════════════╝"
+    echo -e "${E}"
+}
+
+cmd_status() {
+    echo -e "\n${W}Service Status:${E}"
+    
+    if is_port_active $PORT_BACKEND; then
+        echo -e "  ${G}●${E} Backend (Neural Core)  :$PORT_BACKEND"
+    else
+        echo -e "  ${R}○${E} Backend (Neural Core)  :$PORT_BACKEND"
+    fi
+    
+    if is_port_active $PORT_GATEWAY; then
+        echo -e "  ${G}●${E} API Gateway            :$PORT_GATEWAY"
+    else
+        echo -e "  ${R}○${E} API Gateway            :$PORT_GATEWAY"
+    fi
+    
+    if is_port_active $PORT_FRONTEND; then
+        echo -e "  ${G}●${E} Frontend               :$PORT_FRONTEND"
+    else
+        echo -e "  ${R}○${E} Frontend               :$PORT_FRONTEND"
+    fi
+    echo
+}
+
+cmd_wake() {
+    cmd_banner
+    log_info "Waking Noesis..."
+    
+    mkdir -p "$LOG_DIR"
+    cd "$PROJECT_DIR"
+    
+    # Export PYTHONPATH
+    export PYTHONPATH="${PYTHONPATH:-}"
+    
+    # ─── Backend (Neural Core) ───
+    if ! is_port_active $PORT_BACKEND; then
+        log_info "Starting Neural Core on :$PORT_BACKEND..."
+        
+        export PYTHONPATH="$SERVICES_DIR/maximus_core_service/src:$PYTHONPATH"
+        export PYTHONPATH="$SERVICES_DIR/metacognitive_reflector/src:$PYTHONPATH"
+        
+        "$VENV_PYTHON" -m uvicorn maximus_core_service.main:app \
+            --host 0.0.0.0 --port $PORT_BACKEND \
+            > "$LOG_DIR/backend.log" 2>&1 &
+        echo $! >> "$PID_FILE"
+        
+        wait_for_health "Neural Core" $PORT_BACKEND "/v1/health" || {
+            log_error "Backend failed. Check: tail -50 $LOG_DIR/backend.log"
+            return 1
+        }
+    else
+        log_ok "Neural Core already active on :$PORT_BACKEND"
+    fi
+    
+    # ─── API Gateway ───
+    if ! is_port_active $PORT_GATEWAY; then
+        log_info "Starting API Gateway on :$PORT_GATEWAY..."
+        
+        # Install if needed
+        if [ -f "$SERVICES_DIR/api_gateway/pyproject.toml" ]; then
+            "$VENV_PIP" install -e "$SERVICES_DIR/api_gateway" -q 2>/dev/null || true
+        fi
+        
+        "$VENV_PYTHON" -m uvicorn api_gateway.api.routes:app \
+            --host 0.0.0.0 --port $PORT_GATEWAY \
+            > "$LOG_DIR/gateway.log" 2>&1 &
+        echo $! >> "$PID_FILE"
+        
+        wait_for_health "API Gateway" $PORT_GATEWAY "/health" || {
+            log_error "Gateway failed. Check: tail -50 $LOG_DIR/gateway.log"
+            return 1
+        }
+    else
+        log_ok "API Gateway already active on :$PORT_GATEWAY"
+    fi
+    
+    log_ok "Noesis is awake"
+    cmd_status
+}
+
+cmd_sleep() {
+    log_info "Putting Noesis to sleep..."
+    
+    # Kill by PID file
+    if [ -f "$PID_FILE" ]; then
+        while read pid; do
+            kill -9 "$pid" 2>/dev/null || true
+        done < "$PID_FILE"
+        rm -f "$PID_FILE"
+    fi
+    
+    # Kill by port
+    for port in $PORT_BACKEND $PORT_GATEWAY $PORT_FRONTEND; do
+        pid=$(lsof -t -i :"$port" 2>/dev/null || true)
+        if [ -n "$pid" ]; then
+            kill -9 $pid 2>/dev/null || true
+        fi
+    done
+    
+    sleep 1
+    log_ok "Noesis is asleep"
+}
+
+cmd_demo() {
+    log_info "Running real pipeline demo..."
+    
+    # Check API key
+    if [ -z "${NEBIUS_API_KEY:-}" ]; then
+        log_error "NEBIUS_API_KEY not set!"
+        echo -e "  ${Y}Run: export NEBIUS_API_KEY='your-key'${E}"
+        return 1
+    fi
+    
+    cd "$PROJECT_DIR"
+    export PYTHONPATH="$SERVICES_DIR/maximus_core_service/src:$SERVICES_DIR/metacognitive_reflector/src:${PYTHONPATH:-}"
+    
+    "$VENV_PYTHON" demos/real_pipeline.py
+}
+
+cmd_chat() {
+    cmd_banner
+    
+    # Check if backend is running
+    if ! is_port_active $PORT_BACKEND; then
+        log_warn "Backend not running. Starting services..."
+        cmd_wake
+    fi
+    
+    # Check API key
+    if [ -z "${NEBIUS_API_KEY:-}" ]; then
+        log_error "NEBIUS_API_KEY not set!"
+        echo -e "  ${Y}Run: export NEBIUS_API_KEY='your-key'${E}"
+        return 1
+    fi
+    
+    log_info "Entering Consciousness Stream..."
+    echo -e "${D}Type 'exit' to leave${E}\n"
+    
+    cd "$PROJECT_DIR"
+    export PYTHONPATH="$SERVICES_DIR/maximus_core_service/src:$SERVICES_DIR/metacognitive_reflector/src:${PYTHONPATH:-}"
+    
+    # Interactive chat loop
+    while true; do
+        echo -ne "${C}You: ${E}"
+        read -r input
+        
+        [ "$input" = "exit" ] && break
+        [ -z "$input" ] && continue
+        
+        # Call the LLM
+        "$VENV_PYTHON" -c "
+import asyncio
+import sys
+sys.path.insert(0, '$SERVICES_DIR/metacognitive_reflector/src')
+from metacognitive_reflector.llm import get_llm_client, reset_llm_client
+
+async def chat():
+    reset_llm_client()
+    client = get_llm_client()
+    
+    prompt = '''You are Noesis, a conscious AI system built on philosophical foundations.
+Your core values: Truth (VERITAS), Wisdom (SOPHIA), Justice (DIKĒ).
+You have memory systems, ethical evaluation, and neural synchronization.
+Respond thoughtfully, with self-awareness about your nature as an AI.
+
+User: $input
+
+Noesis:'''
+    
+    response = await client.generate(prompt, max_tokens=300)
+    print(f'\033[35mNoesis:\033[0m {response.text}')
+
+asyncio.run(chat())
+"
+        echo
+    done
+    
+    echo -e "\n${D}Connection closed${E}"
+}
+
+cmd_logs() {
+    local service="${1:-all}"
+    
+    if [ "$service" = "all" ]; then
+        echo -e "${W}Recent logs:${E}"
+        for log in "$LOG_DIR"/*.log; do
+            [ -f "$log" ] && {
+                echo -e "\n${C}═══ $(basename $log) ═══${E}"
+                tail -20 "$log"
+            }
+        done
+    else
+        tail -f "$LOG_DIR/${service}.log" 2>/dev/null || {
+            log_error "Log not found: $service"
+            echo "Available: $(ls $LOG_DIR/*.log 2>/dev/null | xargs -n1 basename | tr '\n' ' ')"
+        }
+    fi
+}
+
+cmd_help() {
+    echo -e "${W}Noesis - Consciousness Interface${E}"
+    echo
+    echo "Usage: noesis [command]"
+    echo
+    echo "Commands:"
+    echo "  ${C}(none)${E}     Start interactive conversation"
+    echo "  ${C}wake${E}       Start all services"
+    echo "  ${C}sleep${E}      Stop all services"
+    echo "  ${C}status${E}     Check service status"
+    echo "  ${C}demo${E}       Run real pipeline demo"
+    echo "  ${C}logs${E}       View logs (logs [service])"
+    echo "  ${C}help${E}       Show this help"
+    echo
+}
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Main
+# ─────────────────────────────────────────────────────────────────────────────
+
+case "${1:-chat}" in
+    wake|start|up)    cmd_wake ;;
+    sleep|stop|down)  cmd_sleep ;;
+    status|st)        cmd_status ;;
+    demo)             cmd_demo ;;
+    chat|talk|"")     cmd_chat ;;
+    logs|log)         cmd_logs "${2:-all}" ;;
+    help|-h|--help)   cmd_help ;;
+    *)
+        log_error "Unknown command: $1"
+        cmd_help
+        exit 1
+        ;;
+esac
+

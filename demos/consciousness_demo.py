@@ -73,8 +73,8 @@ def print_banner():
     ║      ██║ ╚████║╚██████╔╝███████╗███████║██║███████║                  ║
     ║      ╚═╝  ╚═══╝ ╚═════╝ ╚══════╝╚══════╝╚═╝╚══════╝                  ║
     ║                                                                      ║
-    ║          {Colors.WHITE}Artificial Consciousness System{Colors.CYAN}                          ║
-    ║          {Colors.DIM}Based on IIT, GWT, and AST Theories{Colors.CYAN}                       ║
+    ║             {Colors.WHITE}Artificial Consciousness System{Colors.CYAN}                          ║
+    ║            {Colors.DIM}Based on IIT, GWT, and AST Theories{Colors.CYAN}                       ║
     ║                                                                      ║
     ╚══════════════════════════════════════════════════════════════════════╝
 {Colors.END}
