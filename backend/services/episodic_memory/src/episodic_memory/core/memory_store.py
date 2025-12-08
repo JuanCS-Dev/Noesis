@@ -7,6 +7,7 @@ Implements MIRIX-compatible memory operations including:
 - consolidate_to_vault: Move high-importance memories to long-term storage
 - decay_importance: Apply Ebbinghaus forgetting curve
 - Vector search integration (via Qdrant)
+- Entity extraction and indexing for associative retrieval
 
 Based on: MIRIX (arXiv:2507.07957) + Mem0 (arXiv:2504.19413)
 """
@@ -16,13 +17,35 @@ from __future__ import annotations
 import logging
 import uuid
 from collections import defaultdict
-from typing import List, Dict, Optional, Any
+from typing import List, Dict, Optional, Any, Tuple
 from datetime import datetime, timedelta
 
 from episodic_memory.models.memory import Memory, MemoryQuery, MemorySearchResult, MemoryType
 
 
 logger = logging.getLogger(__name__)
+
+# Lazy import entity index to avoid circular imports
+_entity_extractor = None
+_entity_index = None
+
+
+def _get_entity_extractor():
+    """Lazy load entity extractor."""
+    global _entity_extractor
+    if _entity_extractor is None:
+        from episodic_memory.core.entity_index import EntityExtractor
+        _entity_extractor = EntityExtractor()
+    return _entity_extractor
+
+
+def _get_entity_index():
+    """Lazy load entity index."""
+    global _entity_index
+    if _entity_index is None:
+        from episodic_memory.core.entity_index import EntityIndex
+        _entity_index = EntityIndex.load_from_disk() or EntityIndex()
+    return _entity_index
 
 
 class MemoryStore:
@@ -45,7 +68,7 @@ class MemoryStore:
         context: Optional[Dict[str, Any]] = None
     ) -> Memory:
         """
-        Store a new memory.
+        Store a new memory with automatic entity extraction.
 
         Args:
             content: The memory content
@@ -56,17 +79,90 @@ class MemoryStore:
             The created Memory object
         """
         memory_id = str(uuid.uuid4())
+        
+        # Extract entities from content
+        extractor = _get_entity_extractor()
+        entities = extractor.extract(content)
+        
+        # Add entities to context
+        ctx = context.copy() if context else {}
+        ctx["entities"] = entities
+        
         memory = Memory(
             memory_id=memory_id,
             type=memory_type,
             content=content,
-            context=context or {},
+            context=ctx,
             timestamp=datetime.now()
         )
 
         self._storage[memory_id] = memory
-        logger.info("Stored memory: %s (type=%s)", memory_id, memory_type)
+        
+        # Index entities for associative retrieval
+        if entities:
+            index = _get_entity_index()
+            index.add_memory(memory_id, entities)
+            logger.debug("Indexed %d entities for memory %s", len(entities), memory_id[:8])
+        
+        logger.info("Stored memory: %s (type=%s, entities=%d)", 
+                    memory_id, memory_type, len(entities))
         return memory
+    
+    async def get_related_memories(
+        self,
+        memory_id: str,
+        max_results: int = 5
+    ) -> List[Tuple[Memory, List[str]]]:
+        """
+        Find memories related to a given memory through shared entities.
+
+        Uses the entity index to find associative connections.
+
+        Args:
+            memory_id: Memory to find connections for
+            max_results: Maximum connections to return
+
+        Returns:
+            List of (related_memory, shared_entities) tuples
+        """
+        index = _get_entity_index()
+        connections = index.get_connections(memory_id, max_results)
+        
+        results = []
+        for related_id, shared_entities in connections:
+            memory = self._storage.get(related_id)
+            if memory:
+                results.append((memory, shared_entities))
+        
+        return results
+    
+    async def search_by_entities(
+        self,
+        entities: List[str],
+        min_overlap: int = 1,
+        limit: int = 10
+    ) -> List[Memory]:
+        """
+        Search memories by entity overlap.
+
+        Args:
+            entities: Entities to search for
+            min_overlap: Minimum entity overlap required
+            limit: Maximum results
+
+        Returns:
+            List of memories sorted by entity overlap
+        """
+        index = _get_entity_index()
+        related = index.get_related_memories(entities, min_overlap=min_overlap)
+        
+        results = []
+        for memory_id, _ in related[:limit]:
+            memory = self._storage.get(memory_id)
+            if memory:
+                results.append(memory)
+        
+        return results
 
     async def retrieve(self, query: MemoryQuery) -> MemorySearchResult:
         """

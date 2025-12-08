@@ -13,6 +13,8 @@ Tiers:
 Components:
 - Reflector: Main orchestrator
 - MemoryClient: 4-tier memory storage
+- SessionMemory: Conversation context management
+- SelfReflector: Metacognitive learning loop
 - PenalRegistry: Punishment persistence
 - CriminalHistoryProvider: Recidivism tracking
 - SoulTracker: Consciousness evolution
@@ -21,7 +23,16 @@ Components:
 
 from __future__ import annotations
 
-from .memory import MemoryClient, MemoryEntry, MemoryType, SearchResult
+from .memory import (
+    MemoryClient, 
+    MemoryEntry, 
+    MemoryType, 
+    SearchResult,
+    SessionMemory,
+    Turn,
+    create_session,
+    get_or_create_session,
+)
 from .resilience import (
     CircuitBreakerConfig,
     CircuitOpenError,
@@ -40,6 +51,13 @@ from .health import (
     run_memory_fortress_health_check,
 )
 from .reflector import Reflector
+from .self_reflection import (
+    SelfReflector,
+    ReflectionResult,
+    ReflectionQuality,
+    Insight,
+    create_self_reflector,
+)
 
 __all__ = [
     # Main
@@ -49,6 +67,17 @@ __all__ = [
     "MemoryEntry",
     "MemoryType",
     "SearchResult",
+    # Session Memory
+    "SessionMemory",
+    "Turn",
+    "create_session",
+    "get_or_create_session",
+    # Self-Reflection
+    "SelfReflector",
+    "ReflectionResult",
+    "ReflectionQuality",
+    "Insight",
+    "create_self_reflector",
     # Resilience
     "MemoryCircuitBreaker",
     "CircuitBreakerConfig",
