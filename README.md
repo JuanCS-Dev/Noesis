@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/diagrams/Gemini_Generated_Image_h8227ph8227ph822.png" alt="NOESIS Logo" width="800"/>
+  <img src="assets/diagrams/noesis_banner.gif" alt="NOESIS Interface" width="100%"/>
 </p>
 
 <h1 align="center">NOESIS — Digital Daimon</h1>
