@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Documentation
+    url: https://github.com/JuanCS-Dev/Daimon/tree/main/docs
+    about: Check the documentation before opening an issue
+  - name: Discussions
+    url: https://github.com/JuanCS-Dev/Daimon/discussions
+    about: Ask questions and discuss ideas
+  - name: Code Constitution
+    url: https://github.com/JuanCS-Dev/Daimon/blob/main/docs/CODE_CONSTITUTION.md
+    about: Review the code standards and constitutional guidelines

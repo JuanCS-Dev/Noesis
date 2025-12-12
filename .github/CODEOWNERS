@@ -1,0 +1,61 @@
+# CODEOWNERS for NOESIS - Digital Daimon
+# These owners will be requested for review when someone opens a pull request.
+#
+# Learn more: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# =============================================================================
+# Global Owners (default for all files)
+# =============================================================================
+*                                           @JuanCS-Dev
+
+# =============================================================================
+# Consciousness Core (Critical - requires careful review)
+# =============================================================================
+/backend/services/maximus_core_service/src/maximus_core_service/consciousness/   @JuanCS-Dev
+/backend/services/maximus_core_service/src/maximus_core_service/consciousness/esgt/   @JuanCS-Dev
+/backend/services/maximus_core_service/src/maximus_core_service/consciousness/florescimento/   @JuanCS-Dev
+
+# =============================================================================
+# Free Will & Ethics (Sensitive - philosophical implications)
+# =============================================================================
+/backend/services/maximus_core_service/src/maximus_core_service/consciousness/free_will_engine.py   @JuanCS-Dev
+/backend/services/ethical_audit_service/   @JuanCS-Dev
+
+# =============================================================================
+# Memory Systems
+# =============================================================================
+/backend/services/episodic_memory/   @JuanCS-Dev
+/backend/services/metacognitive_reflector/src/metacognitive_reflector/core/memory/   @JuanCS-Dev
+
+# =============================================================================
+# Soul Configuration (Constitutional - requires architect approval)
+# =============================================================================
+/backend/services/maximus_core_service/src/maximus_core_service/consciousness/exocortex/soul/   @JuanCS-Dev
+/docs/SOUL_CONFIGURATION.md   @JuanCS-Dev
+/docs/CODE_CONSTITUTION.md   @JuanCS-Dev
+
+# =============================================================================
+# Frontend
+# =============================================================================
+/frontend/   @JuanCS-Dev
+
+# =============================================================================
+# Infrastructure & CI/CD
+# =============================================================================
+/.github/   @JuanCS-Dev
+/docker-compose.yml   @JuanCS-Dev
+/.gitignore   @JuanCS-Dev
+
+# =============================================================================
+# Documentation
+# =============================================================================
+/docs/   @JuanCS-Dev
+/README.md   @JuanCS-Dev
+/CONTRIBUTING.md   @JuanCS-Dev
+/SECURITY.md   @JuanCS-Dev
+
+# =============================================================================
+# Security (Sensitive files)
+# =============================================================================
+/backend/services/reactive_fabric_core/   @JuanCS-Dev
+/.env.example   @JuanCS-Dev

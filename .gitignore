@@ -1,3 +1,8 @@
+# =============================================================================
+# NOESIS - Digital Daimon
+# Artificial Consciousness System
+# =============================================================================
+
 # Python
 __pycache__/
 *.py[cod]
@@ -9,23 +14,32 @@ env/
 .env
 .env.*
 !.env.example
+*.egg-info/
+dist/
+build/
+.eggs/
 
 # IDE
 .vscode/
 .idea/
+*.swp
+*.swo
+*~
 
 # Docker
 *.log
+docker-compose.override.yml
 
 # OS
 .DS_Store
 Thumbs.db
+.directory
 
-# Maximus
+# Maximus/Legacy
 legacy/
 backups/
 
-# Security
+# Security (NEVER commit these)
 *.key
 *.pem
 *.p12
@@ -33,3 +47,52 @@ backups/
 secrets/
 .secrets/
 *.secret.*
+credentials*.json
+
+# Noesis Data (permanent storage - sensitive, not committed)
+data/sessions/*.json
+data/memory/*.json
+data/vault/*.json
+data/wal/*.json
+data/entity_index.json
+!data/**/.gitkeep
+
+# Qdrant local data
+.qdrant_data/
+
+# Coverage reports
+.coverage
+coverage.xml
+htmlcov/
+.pytest_cache/
+
+# Node.js
+node_modules/
+.next/
+.turbo/
+*.tsbuildinfo
+
+# Debug artifacts
+debug_screenshot.png
+*.debug.log
+
+# Temporary files
+*.tmp
+*.temp
+.noesis.pid
+
+# Generated documentation
+docs/_build/
+
+# Model artifacts (large files)
+models/
+*.onnx
+*.pt
+*.pth
+*.h5
+*.ckpt
+
+# Training artifacts
+training_output/
+wandb/
+mlruns/
