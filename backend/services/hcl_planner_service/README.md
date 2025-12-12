@@ -20,7 +20,7 @@
                                    │
                                    ▼
 ┌──────────────────────────────────────────────────────────┐
-│              HCL Planner Service (Port 8003)             │
+│              HCL Planner Service (Port 8000)             │
 │                                                           │
 │  ┌─────────────────────────────────────────────────┐    │
 │  │           Kafka Consumer Loop                    │    │
@@ -146,13 +146,13 @@ cp .env.example .env
 python main.py
 ```
 
-Service runs on **port 8003**
+Service runs on **port 8000**
 
 ### Docker
 
 ```bash
 docker build -t hcl-planner .
-docker run -p 8003:8003 \
+docker run -p 8000:8000 \
   -e KB_API_URL=http://hcl-kb-service:8000 \
   -e KAFKA_BROKERS=kafka:9092 \
   -v $(pwd)/models:/app/models \
@@ -166,7 +166,7 @@ docker run -p 8003:8003 \
 Health check with component status
 
 ```bash
-curl http://localhost:8003/health
+curl http://localhost:8000/health
 ```
 
 Response:
@@ -186,7 +186,7 @@ Response:
 Make decision based on current state
 
 ```bash
-curl -X POST http://localhost:8003/decide \
+curl -X POST http://localhost:8000/decide \
   -H "Content-Type: application/json" \
   -d '{
     "state": {
@@ -242,7 +242,7 @@ Response:
 Test fuzzy controller with specific inputs
 
 ```bash
-curl "http://localhost:8003/fuzzy/test?cpu=85&memory=78&error_rate=12&latency=450"
+curl "http://localhost:8000/fuzzy/test?cpu=85&memory=78&error_rate=12&latency=450"
 ```
 
 Response:
@@ -265,7 +265,7 @@ Response:
 Train RL agent (background task)
 
 ```bash
-curl -X POST "http://localhost:8003/train/rl?timesteps=50000"
+curl -X POST "http://localhost:8000/train/rl?timesteps=50000"
 ```
 
 Response:
@@ -284,7 +284,7 @@ Response:
 Get recent decision history
 
 ```bash
-curl "http://localhost:8003/history?limit=10"
+curl "http://localhost:8000/history?limit=10"
 ```
 
 ### POST /mode/set
@@ -292,7 +292,7 @@ curl "http://localhost:8003/history?limit=10"
 Manually override operational mode
 
 ```bash
-curl -X POST "http://localhost:8003/mode/set?mode=HIGH_PERFORMANCE"
+curl -X POST "http://localhost:8000/mode/set?mode=HIGH_PERFORMANCE"
 ```
 
 Modes: `ENERGY_EFFICIENT`, `BALANCED`, `HIGH_PERFORMANCE`
@@ -302,7 +302,7 @@ Modes: `ENERGY_EFFICIENT`, `BALANCED`, `HIGH_PERFORMANCE`
 Get detailed service status
 
 ```bash
-curl http://localhost:8003/status
+curl http://localhost:8000/status
 ```
 
 ## Fuzzy Logic Rules
@@ -396,7 +396,7 @@ if cpu < 40 and latency < 150:
 
 ```bash
 # Train new model
-curl -X POST "http://localhost:8003/train/rl?timesteps=50000"
+curl -X POST "http://localhost:8000/train/rl?timesteps=50000"
 
 # Models are saved to: /app/models/sac_agent.zip
 ```
@@ -555,7 +555,7 @@ for step in range(10):
 
 ```bash
 # Test decision endpoint
-curl -X POST http://localhost:8003/decide \
+curl -X POST http://localhost:8000/decide \
   -H "Content-Type: application/json" \
   -d @test_state.json
 ```

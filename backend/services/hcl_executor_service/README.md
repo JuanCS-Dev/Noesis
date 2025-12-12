@@ -21,7 +21,7 @@
                │
                ▼
 ┌──────────────────────────────────────────────┐
-│    HCL Executor Service (Port 8004)          │
+│    HCL Executor Service (Port 8001)          │
 │                                               │
 │  ┌─────────────────────────────────────┐    │
 │  │   Kafka Consumer Loop               │    │
@@ -71,7 +71,7 @@ cp .env.example .env
 python main.py
 ```
 
-Service runs on **port 8004**
+Service runs on **port 8001**
 
 **Prerequisites:**
 - `kubectl` installed and configured
@@ -82,7 +82,7 @@ Service runs on **port 8004**
 
 ```bash
 docker build -t hcl-executor .
-docker run -p 8004:8004 \
+docker run -p 8001:8001 \
   -e KB_API_URL=http://hcl-kb-service:8000 \
   -e KAFKA_BROKERS=kafka:9092 \
   -e K8S_NAMESPACE=default \
@@ -262,7 +262,7 @@ Set `DRY_RUN=true` to:
 Execute action plan manually
 
 ```bash
-curl -X POST http://localhost:8004/execute \
+curl -X POST http://localhost:8001/execute \
   -H "Content-Type: application/json" \
   -d '{
     "decision_id": "decision_123",
@@ -302,7 +302,7 @@ Response:
 Scale service directly
 
 ```bash
-curl -X POST http://localhost:8004/scale \
+curl -X POST http://localhost:8001/scale \
   -H "Content-Type: application/json" \
   -d '{
     "service": "maximus_core",
@@ -315,7 +315,7 @@ curl -X POST http://localhost:8004/scale \
 Update resource limits directly
 
 ```bash
-curl -X POST http://localhost:8004/resources \
+curl -X POST http://localhost:8001/resources \
   -H "Content-Type: application/json" \
   -d '{
     "service": "maximus_core",
@@ -329,7 +329,7 @@ curl -X POST http://localhost:8004/resources \
 Create/update HorizontalPodAutoscaler
 
 ```bash
-curl -X POST http://localhost:8004/hpa \
+curl -X POST http://localhost:8001/hpa \
   -H "Content-Type: application/json" \
   -d '{
     "service": "maximus_core",
@@ -344,7 +344,7 @@ curl -X POST http://localhost:8004/hpa \
 Delete HorizontalPodAutoscaler
 
 ```bash
-curl -X DELETE http://localhost:8004/hpa/maximus_core
+curl -X DELETE http://localhost:8001/hpa/maximus_core
 ```
 
 ### GET /deployments
@@ -352,7 +352,7 @@ curl -X DELETE http://localhost:8004/hpa/maximus_core
 List all deployments
 
 ```bash
-curl http://localhost:8004/deployments
+curl http://localhost:8001/deployments
 ```
 
 Response:
@@ -374,7 +374,7 @@ Response:
 Get deployment status
 
 ```bash
-curl http://localhost:8004/deployments/maximus-core/status
+curl http://localhost:8001/deployments/maximus-core/status
 ```
 
 Response:
@@ -409,7 +409,7 @@ Response:
 Rollback deployment
 
 ```bash
-curl -X POST "http://localhost:8004/rollback/maximus_core?revision=2"
+curl -X POST "http://localhost:8001/rollback/maximus_core?revision=2"
 ```
 
 ### GET /history
@@ -417,7 +417,7 @@ curl -X POST "http://localhost:8004/rollback/maximus_core?revision=2"
 Get execution history
 
 ```bash
-curl "http://localhost:8004/history?limit=10"
+curl "http://localhost:8001/history?limit=10"
 ```
 
 ### GET /health
@@ -425,7 +425,7 @@ curl "http://localhost:8004/history?limit=10"
 Health check
 
 ```bash
-curl http://localhost:8004/health
+curl http://localhost:8001/health
 ```
 
 ### GET /status
@@ -433,7 +433,7 @@ curl http://localhost:8004/health
 Detailed service status
 
 ```bash
-curl http://localhost:8004/status
+curl http://localhost:8001/status
 ```
 
 ## Service Mapping
@@ -571,18 +571,18 @@ spec:
             memory: "512Mi"
             cpu: "500m"
         ports:
-        - containerPort: 8004
+        - containerPort: 8001
           name: http
         livenessProbe:
           httpGet:
             path: /health
-            port: 8004
+            port: 8001
           initialDelaySeconds: 10
           periodSeconds: 30
         readinessProbe:
           httpGet:
             path: /health
-            port: 8004
+            port: 8001
           initialDelaySeconds: 5
           periodSeconds: 10
 ```
@@ -647,7 +647,7 @@ asyncio.run(test())
 kubectl create deployment test-app --image=nginx --replicas=2
 
 # Test scaling
-curl -X POST http://localhost:8004/scale \
+curl -X POST http://localhost:8001/scale \
   -H "Content-Type: application/json" \
   -d '{"service": "test-app", "target_replicas": 4}'
 

@@ -311,6 +311,94 @@ spec:
 
 ---
 
+## 🔌 API Endpoints
+
+### Consciousness State (`/api/consciousness/`)
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/state` | Complete consciousness state (ESGT, arousal, TIG metrics) |
+| GET | `/arousal` | Current arousal level and classification |
+| GET | `/metrics` | System metrics (TIG, ESGT, events) |
+
+### ESGT Control (`/api/consciousness/`)
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/esgt/events` | Recent ESGT ignition events (limit: 1-500) |
+| POST | `/esgt/trigger` | Manual ESGT ignition with salience input |
+| POST | `/arousal/adjust` | Adjust arousal level (source, delta, duration) |
+
+### Safety Protocol (`/api/consciousness/`)
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/safety/status` | Safety protocol status and thresholds |
+| GET | `/safety/violations` | Recent safety violations (limit: 1-1000) |
+| POST | `/safety/emergency-shutdown` | Kill switch (HITL authorization required) |
+
+### Streaming (Real-time) (`/api/consciousness/`)
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/stream/sse` | SSE stream for cockpit/frontend |
+| GET | `/stream/process` | **AURORA STREAMING**: Main consciousness processing |
+| WS | `/ws` | WebSocket real-time state updates |
+
+**AURORA STREAMING Events** (`/stream/process`):
+```
+- start: Processing initiated
+- phase: ESGT phase transition (prepare→synchronize→broadcast→sustain→dissolve)
+- coherence: Kuramoto coherence updates
+- token: Response narrative tokens (word-by-word)
+- complete: Processing finished
+- error: Error occurred
+```
+
+### Reactive Fabric (`/api/consciousness/`)
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/reactive-fabric/metrics` | TIG, ESGT, arousal, PFC, ToM, safety metrics |
+| GET | `/reactive-fabric/events` | Recent Reactive Fabric events |
+| GET | `/reactive-fabric/orchestration` | Orchestration status and decisions |
+
+### Exocortex (`/v1/exocortex/`)
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/audit` | Audit action against Constitution |
+| POST | `/override` | Record conscious override with justification |
+| POST | `/confront` | Trigger Socratic confrontation |
+| POST | `/reply` | Evaluate user response to confrontation |
+| POST | `/inhibitor/check` | Check if action is impulsive/risky |
+| POST | `/journal` | **Main entry point**: Process journal via ConsciousnessSystem |
+
+### Quick Examples
+
+```bash
+# Get consciousness state
+curl http://localhost:8001/api/consciousness/state
+
+# Stream consciousness processing (AURORA)
+curl "http://localhost:8001/api/consciousness/stream/process?content=Hello&depth=3"
+
+# Trigger ESGT manually
+curl -X POST http://localhost:8001/api/consciousness/esgt/trigger \
+  -H "Content-Type: application/json" \
+  -d '{"novelty": 0.8, "relevance": 0.9, "urgency": 0.7, "context": "test"}'
+
+# Process journal entry
+curl -X POST http://localhost:8001/v1/exocortex/journal \
+  -H "Content-Type: application/json" \
+  -d '{"content": "My thoughts today...", "analysis_mode": "deep"}'
+
+# WebSocket connection
+websocat ws://localhost:8001/api/consciousness/ws
+```
+
+---
+
 ## 📖 Documentation
 
 ### Quick Links
