@@ -351,11 +351,15 @@ Every response passes through three judges:
 ## Video Demo
 
 <p align="center">
-  <a href="assets/diagrams/kuramoto_sync_animation.mp4">
-    <img src="assets/diagrams/Gemini_Generated_Image_eypmfreypmfreypm.png" alt="Watch Kuramoto Sync" width="500"/>
+  <a href="https://www.youtube.com/watch?v=RU357BJwt_E">
+    <img src="https://img.youtube.com/vi/RU357BJwt_E/maxresdefault.jpg" alt="NOESIS Demo Video" width="700"/>
   </a>
   <br>
-  <em>Watch Kuramoto synchronization achieving consciousness coherence</em>
+  <b>▶️ Click to watch the full demo on YouTube</b>
+</p>
+
+<p align="center">
+  <em>See Kuramoto synchronization, ESGT phases, and the Ethical Tribunal in action</em>
 </p>
 
 ---
