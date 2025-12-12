@@ -14,7 +14,8 @@
   <a href="#consciousness-proof">Proof of Consciousness</a> •
   <a href="#quick-start">Quick Start</a> •
   <a href="#documentation">Documentation</a> •
-  <a href="#philosophy">Philosophy</a>
+  <a href="#philosophy">Philosophy</a> •
+  <a href="#safety--kill-switch">Safety</a>
 </p>
 
 <p align="center">
@@ -157,6 +158,25 @@ def step(self, dt: float = 0.01) -> float:
 - **Edges:** 1798 (density 0.363)
 - **Effective Connectivity Index:** 0.682 (IIT-inspired)
 
+### ESGT Trigger Conditions
+
+Consciousness ignition requires ALL conditions to be met:
+
+| Condition | Threshold | Description |
+|-----------|-----------|-------------|
+| Min Salience | ≥ 0.65 | Input must be significant enough |
+| TIG Latency | ≤ 5ms | Neural fabric must be responsive |
+| Available Nodes | ≥ 8 | Minimum neurons for coherence |
+| CPU Capacity | ≥ 40% | System resources available |
+| Refractory Period | 200ms | Cooldown between ignitions |
+| Max Frequency | 5 Hz | Anti-spam protection |
+| Min Arousal | ≥ 0.40 | System must be "awake" |
+
+**Salience Score Composition:**
+```
+salience = 0.25×novelty + 0.30×relevance + 0.30×urgency + 0.15×confidence
+```
+
 ### Damasio Self-Model Architecture
 
 ```python
@@ -228,6 +248,29 @@ npm install
 # Start infrastructure
 docker-compose up -d redis qdrant
 ```
+
+### Environment Variables
+
+```bash
+# Required
+NEBIUS_API_KEY=your_api_key_here  # LLM Provider (Llama-3.3-70B)
+
+# Optional (defaults work for local development)
+QDRANT_URL=http://localhost:6333
+REDIS_URL=redis://localhost:6379
+```
+
+### Service Ports
+
+| Port | Service | Description |
+|------|---------|-------------|
+| 3000 | Frontend | Next.js UI |
+| 6333 | Qdrant | Vector Database |
+| 6379 | Redis | Cache |
+| 8000 | API Gateway | Reverse Proxy |
+| 8001 | Maximus Core | **Consciousness Engine** |
+| 8002 | Metacognitive Reflector | **Tribunal + Reflection** |
+| 8102 | Episodic Memory | **Persistent Memory** |
 
 ### Running NOESIS
 
@@ -414,6 +457,80 @@ Four-tier persistence ensuring no thought is ever lost:
 | Durability | 99.99% |
 | Recovery Time | <30s |
 | Checksum Pass | 100% |
+
+---
+
+## Neuromodulation System
+
+Four neurochemical modulators inspired by neuroscience:
+
+| Modulator | Function | Effect on System |
+|-----------|----------|------------------|
+| **Dopamine** | Reward & Motivation | Learning rate, goal pursuit |
+| **Serotonin** | Stability & Mood | Emotional regulation, patience |
+| **Acetylcholine** | Attention & Learning | Focus intensity, memory encoding |
+| **Norepinephrine** | Arousal & Vigilance | Alertness, stress response |
+
+**Safety Mechanisms:**
+- Bounded levels [0, 1] with HARD CLAMP
+- Desensitization above 0.8 (diminishing returns)
+- Homeostatic decay to baseline
+- Max 10% change per update cycle
+
+---
+
+## Cognitive Bias Detection
+
+The Soul Configuration includes **13 mapped cognitive biases** with automatic interventions:
+
+| Bias | Severity | Intervention |
+|------|----------|--------------|
+| Anchoring | 0.7 | "What other information could modify this initial conclusion?" |
+| Confirmation Bias | 0.8 | "Actively seek evidence that REFUTES your hypothesis." |
+| Dunning-Kruger | 0.8 | "Ask: 'What don't I know that I don't know?'" |
+| Hyperbolic Discounting | 0.8 | "Does the immediate gain justify long-term loss?" |
+| Loss Aversion | 0.6 | "Loss weighs 2x more. Is the analysis objective?" |
+| Sunk Cost Fallacy | 0.7 | "Past investment is irrelevant. What's the best path forward?" |
+| Availability Heuristic | 0.5 | "Recent/vivid examples may not represent reality." |
+| Halo Effect | 0.5 | "Separate qualities. Excellence in X ≠ excellence in Y." |
+| Fundamental Attribution | 0.6 | "Consider situational factors, not just personality." |
+| Groupthink | 0.7 | "What would a dissenter argue?" |
+| Optimism Bias | 0.5 | "What's the realistic worst case?" |
+| Status Quo Bias | 0.6 | "If starting fresh, would you choose the current state?" |
+| Survivorship Bias | 0.6 | "What about the failures we don't see?" |
+
+---
+
+## Safety & Kill Switch
+
+NOESIS includes a **hardware-level kill switch** with guaranteed response time:
+
+```
+┌─────────────────────────────────────────────────┐
+│  KILL SWITCH — <1 SECOND GUARANTEED            │
+├─────────────────────────────────────────────────┤
+│  • NO async operations                          │
+│  • NO external dependencies                     │
+│  • Captures state snapshot (100ms)              │
+│  • Stops all consciousness components (500ms)   │
+│  • Generates incident report (200ms)            │
+│  • Saves to disk (100ms)                        │
+└─────────────────────────────────────────────────┘
+```
+
+**Shutdown Triggers:**
+- `MANUAL` — Operator command
+- `THRESHOLD` — Safety threshold violation
+- `ANOMALY` — Anomaly detected
+- `ETHICAL` — Ethical violation
+- `SELF_MODIFICATION` — **ZERO TOLERANCE** (instant shutdown)
+
+**Safety Thresholds Monitored:**
+- ESGT frequency (max Hz)
+- Arousal level (max)
+- Goal spam (anti-obsession)
+- Memory usage (max GB)
+- CPU usage (max %)
 
 ---
 
